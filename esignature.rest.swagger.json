@@ -22378,6 +22378,33 @@
       "description": "",
       "x-ms-summary": ""
     },
+    "completeSignRequest": {
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "description": "",
+          "type": "string"
+        },
+        "documentUpdateInfos": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/documentUpdateInfo"
+          }
+        },
+        "signingLocation": {
+          "description": "Specifies the physical location where the signing takes place. It can have two enumeration values; InPerson and Online. The default value is Online.",
+          "type": "string"
+        },
+        "transactionId": {
+          "description": "Specifies the Transaction ID from the AppStore.",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "completeSignRequest",
+      "description": "",
+      "x-ms-summary": ""
+    },
     "compositeTemplate": {
       "type": "object",
       "properties": {
@@ -23057,6 +23084,22 @@
         }
       },
       "x-ds-definition-name": "country",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "credential": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the user. Valid values: type_owner, type_participant.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Specifies the value of the tab. ",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "credential",
       "description": "",
       "x-ms-summary": ""
     },
@@ -24213,6 +24256,35 @@
       "description": "",
       "x-ms-summary": ""
     },
+    "documentSecurityStore": {
+      "type": "object",
+      "properties": {
+        "certificates": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "crls": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ocsps": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ds-definition-name": "documentSecurityStore",
+      "description": "",
+      "x-ms-summary": ""
+    },
     "documentTemplate": {
       "type": "object",
       "properties": {
@@ -24253,6 +24325,45 @@
         }
       },
       "x-ds-definition-name": "documentTemplateList",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "documentUpdateInfo": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "",
+          "type": "string"
+        },
+        "documentId": {
+          "description": "The ID of the document being accessed.",
+          "type": "string"
+        },
+        "documentSecurityStore": {
+          "$ref": "#/definitions/documentSecurityStore",
+          "description": ""
+        },
+        "name": {
+          "description": "",
+          "type": "string"
+        },
+        "returnFormat": {
+          "description": "",
+          "type": "string"
+        },
+        "signatureDataInfos": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/signatureDataInfo"
+          }
+        },
+        "timeStampField": {
+          "$ref": "#/definitions/timeStampField",
+          "description": ""
+        }
+      },
+      "x-ds-definition-name": "documentUpdateInfo",
       "description": "",
       "x-ms-summary": ""
     },
@@ -31791,6 +31902,34 @@
       "description": "The request body for the EnvelopeViews: createSender method.",
       "x-ms-summary": "The request body for the EnvelopeViews: createSender method."
     },
+    "revision": {
+      "type": "object",
+      "properties": {
+        "endData": {
+          "description": "",
+          "type": "string"
+        },
+        "fieldName": {
+          "description": "",
+          "type": "string"
+        },
+        "maxSignatureLength": {
+          "description": "",
+          "type": "string"
+        },
+        "signatureType": {
+          "description": "",
+          "type": "string"
+        },
+        "startData": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "revision",
+      "description": "",
+      "x-ms-summary": ""
+    },
     "samlAssertionAttribute": {
       "type": "object",
       "properties": {
@@ -32045,6 +32184,22 @@
       "description": "",
       "x-ms-summary": ""
     },
+    "sender": {
+      "type": "object",
+      "properties": {
+        "accountIdGuid": {
+          "description": "The GUID associated with the account ID.",
+          "type": "string"
+        },
+        "companyName": {
+          "description": "The name of the user's Company.",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "sender",
+      "description": "",
+      "x-ms-summary": ""
+    },
     "senderEmailNotifications": {
       "type": "object",
       "properties": {
@@ -32211,6 +32366,26 @@
         }
       },
       "x-ds-definition-name": "sharedItem",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "signatureDataInfo": {
+      "type": "object",
+      "properties": {
+        "documentSecurityStore": {
+          "$ref": "#/definitions/documentSecurityStore",
+          "description": ""
+        },
+        "signatureData": {
+          "description": "",
+          "type": "string"
+        },
+        "signatureFieldName": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "signatureDataInfo",
       "description": "",
       "x-ms-summary": ""
     },
@@ -32711,6 +32886,84 @@
       "x-ds-definition-name": "signerEmailNotifications",
       "x-ms-summary": "An array of email notifications that specifies the email the user receives when they are a sender. When the specific email notification is set to true, the user receives those types of email notifications from DocuSign. The user inherits the default account sender email notification settings when the user is created."
     },
+    "signHashDocument": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "",
+          "type": "string"
+        },
+        "documentId": {
+          "description": "The ID of the document being accessed.",
+          "type": "string"
+        },
+        "format": {
+          "description": "",
+          "type": "string"
+        },
+        "name": {
+          "description": "",
+          "type": "string"
+        },
+        "remainingSignatures": {
+          "description": "",
+          "type": "string"
+        },
+        "revisions": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/revision"
+          }
+        },
+        "signatureType": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "signHashDocument",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "signHashSessionInfoResponse": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "description": "Complex element contains the details on the documents in the envelope.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/signHashDocument"
+          }
+        },
+        "envelopeId": {
+          "description": "The envelope's GUID. Eg 93be49ab-afa0-4adf-933c-f752070d71ec ",
+          "type": "string"
+        },
+        "language": {
+          "description": "Specifies the language for the Certificate of Completion in the response. The supported languages, with the language value shown in parenthesis, are: Chinese Simplified (zh_CN), , Chinese Traditional (zh_TW), Dutch (nl), English US (en), French (fr), German (de), Italian (it), Japanese (ja), Korean (ko), Portuguese (pt), Portuguese (Brazil) (pt_BR), Russian (ru), Spanish (es). ",
+          "type": "string"
+        },
+        "redirectionUrl": {
+          "description": "",
+          "type": "string"
+        },
+        "remainingSignatureRequests": {
+          "description": "",
+          "type": "string"
+        },
+        "seal": {
+          "$ref": "#/definitions/seal",
+          "description": ""
+        },
+        "user": {
+          "$ref": "#/definitions/user",
+          "description": ""
+        }
+      },
+      "x-ds-definition-name": "signHashSessionInfoResponse",
+      "description": "",
+      "x-ms-summary": ""
+    },
     "signHere": {
       "type": "object",
       "properties": {
@@ -32938,6 +33191,26 @@
         }
       },
       "x-ds-definition-name": "signingGroupUsers",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "signSessionInfoRequest": {
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "description": "When set to **false**, the envelope signing certificate is removed from the download.",
+          "type": "string"
+        },
+        "returnFormat": {
+          "description": "",
+          "type": "string"
+        },
+        "signingLocation": {
+          "description": "Specifies the physical location where the signing takes place. It can have two enumeration values; InPerson and Online. The default value is Online.",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "signSessionInfoRequest",
       "description": "",
       "x-ms-summary": ""
     },
@@ -34596,6 +34869,26 @@
       "description": "",
       "x-ms-summary": ""
     },
+    "timeStampField": {
+      "type": "object",
+      "properties": {
+        "documentSecurityStore": {
+          "$ref": "#/definitions/documentSecurityStore",
+          "description": ""
+        },
+        "maxTimeStampSignatureLength": {
+          "description": "",
+          "type": "string"
+        },
+        "timeStampFieldName": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "timeStampField",
+      "description": "",
+      "x-ms-summary": ""
+    },
     "title": {
       "type": "object",
       "properties": {
@@ -34766,6 +35059,101 @@
       "description": "A tab that displays the recipient's title.\n",
       "x-ms-summary": "A tab that displays the recipient's title.\n"
     },
+    "tspHealthCheckRequest": {
+      "type": "object",
+      "properties": {
+        "appVersion": {
+          "description": "",
+          "type": "string"
+        },
+        "description": {
+          "description": "A sender-defined description of the line item.\n",
+          "type": "string"
+        },
+        "error": {
+          "description": "The error that caused the Connect post to fail.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Indicates the envelope status. Valid values are: \n\n* completed - The envelope has been completed and all tags have been signed.\n* created - The envelope is created as a draft. It can be modified and sent later.\n* declined - The envelope has been declined by the recipients.\n* delivered - The envelope has been delivered to the recipients.\n* sent - The envelope is sent to the recipients.\n* signed - The envelope has been signed by the recipients.\n* voided - The envelope is no longer valid and recipients cannot access or sign the envelope.\n",
+          "type": "string"
+        },
+        "statusDescription": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/tspHealthCheckStatusDescription"
+          }
+        }
+      },
+      "x-ds-definition-name": "tspHealthCheckRequest",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "tspHealthCheckStatusDescription": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "A sender-defined description of the line item.\n",
+          "type": "string"
+        },
+        "error": {
+          "description": "The error that caused the Connect post to fail.",
+          "type": "string"
+        },
+        "hostname": {
+          "description": "",
+          "type": "string"
+        },
+        "responseSeconds": {
+          "description": "",
+          "type": "string"
+        },
+        "status": {
+          "description": "Indicates the envelope status. Valid values are: \n\n* completed - The envelope has been completed and all tags have been signed.\n* created - The envelope is created as a draft. It can be modified and sent later.\n* declined - The envelope has been declined by the recipients.\n* delivered - The envelope has been delivered to the recipients.\n* sent - The envelope is sent to the recipients.\n* signed - The envelope has been signed by the recipients.\n* voided - The envelope is no longer valid and recipients cannot access or sign the envelope.\n",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the user. Valid values: type_owner, type_participant.",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "tspHealthCheckStatusDescription",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "updateTransactionRequest": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "",
+          "type": "string"
+        },
+        "message": {
+          "description": "",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state or province associated with the address.",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "updateTransactionRequest",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "updateTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "redirectionUrl": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "updateTransactionResponse",
+      "description": "",
+      "x-ms-summary": ""
+    },
     "usageHistory": {
       "description": "A complex element consisting of: \n\n* lastSentDateTime - the date and time the user last sent an envelope. \n* lastSignedDateTime - the date and time the user last signed an envelope.\n* sentCount - the number of envelopes the user has sent.\n* signedCount - the number of envelopes the user has signed.",
       "type": "object",
@@ -34791,6 +35179,33 @@
       },
       "x-ds-definition-name": "usageHistory",
       "x-ms-summary": "A complex element consisting of: \n\n* lastSentDateTime - the date and time the user last sent an envelope. \n* lastSignedDateTime - the date and time the user last signed an envelope.\n* sentCount - the number of envelopes the user has sent.\n* signedCount - the number of envelopes the user has signed."
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "description": "",
+          "type": "string"
+        },
+        "credentials": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/credential"
+          }
+        },
+        "displayName": {
+          "description": "",
+          "type": "string"
+        },
+        "email": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "user",
+      "description": "",
+      "x-ms-summary": ""
     },
     "userAccountManagementGranularInformation": {
       "type": "object",
@@ -34924,6 +35339,34 @@
         }
       },
       "x-ds-definition-name": "userInfoList",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "userInfoResponse": {
+      "type": "object",
+      "properties": {
+        "envelopeId": {
+          "description": "The envelope's GUID. Eg 93be49ab-afa0-4adf-933c-f752070d71ec ",
+          "type": "string"
+        },
+        "language": {
+          "description": "Specifies the language for the Certificate of Completion in the response. The supported languages, with the language value shown in parenthesis, are: Chinese Simplified (zh_CN), , Chinese Traditional (zh_TW), Dutch (nl), English US (en), French (fr), German (de), Italian (it), Japanese (ja), Korean (ko), Portuguese (pt), Portuguese (Brazil) (pt_BR), Russian (ru), Spanish (es). ",
+          "type": "string"
+        },
+        "seal": {
+          "$ref": "#/definitions/seal",
+          "description": ""
+        },
+        "sender": {
+          "$ref": "#/definitions/sender",
+          "description": ""
+        },
+        "user": {
+          "$ref": "#/definitions/user",
+          "description": ""
+        }
+      },
+      "x-ds-definition-name": "userInfoResponse",
       "description": "",
       "x-ms-summary": ""
     },
@@ -39461,6 +39904,10 @@
         },
         "isAdmin": {
           "description": "Determines if the feature set is actively set as part of the plan.",
+          "type": "string"
+        },
+        "jobTitle": {
+          "description": "",
           "type": "string"
         },
         "lastLogin": {
