@@ -1488,7 +1488,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Specifies which entries are included in the response. Multiple entries can be included by using commas in the query string (example: ?include=\"failed,queued\") \n\nValid values: \n* all - Returns all entries. If present, overrides all other query settings. This is the default if no query string is provided.\n* failed - Entries with a failed status.\n* processing - Entries with a processing status.\n* queued - Entries with a queued status.\n* sent - Entries with a sent status. \n"
+            "description": "Specifies which entries are included in the response. You can include multiple entries by using commas in the query string. \n\nExample: `?include=\"failed,queued\"`\n\nValid values: \n* `all`: Returns all entries. If present, overrides all other query settings.\n* `failed`: Returns entries with a `failed` status.\n* `processing`: Returns entries with a `processing` status.\n* `queued`: Returns entries with a `queued` status.\n* `sent`: Returns entries with a `sent` status. \n\n**Note**: If you do not provide a query string, no envelopes are included."
           },
           {
             "name": "start_position",
@@ -1543,7 +1543,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": ""
+            "description": "Specifies the id of the batch."
           },
           {
             "name": "count",
@@ -1555,7 +1555,7 @@
           {
             "name": "include",
             "in": "query",
-            "description": "Specifies which entries are included in the response. Multiple entries can be included by using commas in the query string (example: ?include=\"failed,queued\") \n\nValid values: \n* all - Returns all entries. If present, overrides all other query settings. This is the default if no query string is provided.\n* failed - Entries with a failed status.\n* processing - Entries with a processing status.\n* queued - Entries with a queued status.\n* sent - Entries with a sent status. \n",
+            "description": "Specifies which entries are included in the response. You can include multiple entries by using commas in the query string. \n\nExample: `?include=\"failed,queued\"`\n\nValid values: \n* `all`: Returns all entries. If present, overrides all other query settings. This is the default if no query string is provided.\n* `failed`: Entries with a failed status.\n* `processing`: Entries with a processing status.\n* `queued`: Entries with a queued status.\n* `sent`: Entries with a sent status. \n",
             "required": false,
             "type": "string"
           },
@@ -3400,7 +3400,7 @@
           "Envelopes"
         ],
         "summary": "Creates an envelope.",
-        "description": "Creates and sends an envelope or creates a draft envelope.\nEnvelopes are fundamental resources in the DocuSign platform.\n\nWith this method you can:\n\n* Create and send an envelope\n  with [documents][], [recipients][], and [tabs][].\n* Create and send an envelope from a template.\n* Create and send an envelope from\n  a combination of documents and templates.\n* Create a draft envelope.\n\n\nWhen you use this method\nto create and send an envelope\nin a single request,\nthe following parameters in the request body (an [`envelopeDefinition`][envelopeDefinition]) are required:\n\n| Parameter      | Description |\n| :--------      | :---------- |\n| `status`       | Set to `sent` to send the envelope to recipients.<br>Set to `created` (or don't set at all) to save the envelope as a draft. |\n| `emailSubject` | The subject of the email used to send the envelope. |\n| `documents`    | The [documents][] to be signed. |\n| `recipients`   | The email addresses of the envelope [recipients][]. |\n\n\nThere are many ways to use envelopes.\nYou can create and send an envelope\nwith a single API request,\nor you can use several API requests\nto create, populate, and send envelopes.\n\n\n| See…                     | To learn about…                                                                                                                    |\n| :----------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |\n| [Envelopes][envelopes]   | Envelopes, [adding documents][addingdocs], [tracking][], [locking][], [deleting][], [templates][]                                  |\n| [Documents][documents]   | Documents, [attachments][], [supplemental documents][supdocs], [authoritative copies][authcopies], [purging][]                     |\n| [Recipients][recipients] | Recipients, [recipient types][reciptypes], [recipient status][recipstatus]                                                         |\n| [Tabs][tabs]             | Tabs, [tab types][tabtypes], [anchoring tabs][tabanchor], [auto-populating tabs][tabauto],  [custom tabs][tabcustom], [payments][] |\n\n\n[addingdocs]:           https://developers.docusign.com/esign-rest-api/guides/concepts/envelopes#adding-documents-to-an-envelope\n[attachments]:          https://developers.docusign.com/esign-rest-api/guides/concepts/documents#attachments\n[authcopies]:           https://developers.docusign.com/esign-rest-api/guides/concepts/documents#authoritative-copies\n[conoverview]:          https://developers.docusign.com/esign-rest-api/guides/concepts/overview\n[deleting]:             https://developers.docusign.com/esign-rest-api/guides/concepts/envelopes#deleting-envelopes\n[documents]:            https://developers.docusign.com/esign-rest-api/guides/concepts/documents\n[envelopeDefinition]:   https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create#envelopeDefinition\n[envelopes]:            https://developers.docusign.com/esign-rest-api/guides/concepts/envelopes\n[locking]:              https://developers.docusign.com/esign-rest-api/guides/concepts/envelopes#locking-envelopes\n[payments]:             https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#requesting-payments\n[purging]:              https://developers.docusign.com/esign-rest-api/guides/concepts/documents#purging-documents\n[recipients]:           https://developers.docusign.com/esign-rest-api/guides/concepts/recipients\n[recipstatus]:          https://developers.docusign.com/esign-rest-api/guides/concepts/recipients#recipient-status\n[reciptypes]:           https://developers.docusign.com/esign-rest-api/guides/concepts/recipients#recipient-types\n[supdocs]:              https://developers.docusign.com/esign-rest-api/guides/concepts/documents#supplemental-documents\n[tabanchor]:            https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#anchoring-tabs\n[tabauto]:              https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#automatically-populating-tabs\n[tabcustom]:            https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#using-custom-tabs-in-envelopes-and-templates\n[tabs]:                 https://developers.docusign.com/esign-rest-api/guides/concepts/tabs\n[tabtypes]:             https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#tab-types\n[templates]:            https://developers.docusign.com/esign-rest-api/guides/concepts/envelopes#working-with-templates\n[tracking]:             https://developers.docusign.com/esign-rest-api/guides/concepts/envelopes#tracking-envelope-status\n",
+        "description": "Creates and sends an envelope or creates a draft envelope.\nEnvelopes are fundamental resources in the DocuSign platform.\n\nWith this method you can:\n\n* Create and send an envelope\n  with [documents][], [recipients][], and [tabs][].\n* Create and send an envelope from a template.\n* Create and send an envelope from\n  a combination of documents and templates.\n* Create a draft envelope.\n\n\nWhen you use this method\nto create and send an envelope\nin a single request,\nthe following parameters in the request body (an [`envelopeDefinition`][envelopeDefinition]) are required:\n\n| Parameter      | Description |\n| :--------      | :---------- |\n| `status`       | Set to `sent` to send the envelope to recipients.<br>Set to `created` (or don't set at all) to save the envelope as a draft. |\n| `emailSubject` | The subject of the email used to send the envelope. |\n| `documents`    | The [documents][] to be signed. |\n| `recipients`   | The email addresses of the envelope [recipients][]. |\n\n\nThere are many ways to use envelopes.\nYou can create and send an envelope\nwith a single API request,\nor you can use several API requests\nto create, populate, and send envelopes.\n\n\n| See                     | To learn about                                                                                                                    |\n| :----------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |\n| [Envelopes][envelopes]   | Envelopes, [adding documents][addingdocs], [tracking][], [locking][], [deleting][], [templates][]                                  |\n| [Documents][documents]   | Documents, [attachments][], [supplemental documents][supdocs], [authoritative copies][authcopies], [purging][]                     |\n| [Recipients][recipients] | Recipients, [recipient types][reciptypes], [recipient status][recipstatus]                                                         |\n| [Tabs][tabs]             | Tabs, [tab types][tabtypes], [anchoring tabs][tabanchor], [auto-populating tabs][tabauto],  [custom tabs][tabcustom], [payments][] |\n\n\n[addingdocs]:           https://developers.docusign.com/esign-rest-api/guides/concepts/envelopes#adding-documents-to-an-envelope\n[attachments]:          https://developers.docusign.com/esign-rest-api/guides/concepts/documents#attachments\n[authcopies]:           https://developers.docusign.com/esign-rest-api/guides/concepts/documents#authoritative-copies\n[conoverview]:          https://developers.docusign.com/esign-rest-api/guides/concepts/overview\n[deleting]:             https://developers.docusign.com/esign-rest-api/guides/concepts/envelopes#deleting-envelopes\n[documents]:            https://developers.docusign.com/esign-rest-api/guides/concepts/documents\n[envelopeDefinition]:   https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create#envelopeDefinition\n[envelopes]:            https://developers.docusign.com/esign-rest-api/guides/concepts/envelopes\n[locking]:              https://developers.docusign.com/esign-rest-api/guides/concepts/envelopes#locking-envelopes\n[payments]:             https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#requesting-payments\n[purging]:              https://developers.docusign.com/esign-rest-api/guides/concepts/documents#purging-documents\n[recipients]:           https://developers.docusign.com/esign-rest-api/guides/concepts/recipients\n[recipstatus]:          https://developers.docusign.com/esign-rest-api/guides/concepts/recipients#recipient-status\n[reciptypes]:           https://developers.docusign.com/esign-rest-api/guides/concepts/recipients#recipient-types\n[supdocs]:              https://developers.docusign.com/esign-rest-api/guides/concepts/documents#supplemental-documents\n[tabanchor]:            https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#anchoring-tabs\n[tabauto]:              https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#automatically-populating-tabs\n[tabcustom]:            https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#using-custom-tabs-in-envelopes-and-templates\n[tabs]:                 https://developers.docusign.com/esign-rest-api/guides/concepts/tabs\n[tabtypes]:             https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#tab-types\n[templates]:            https://developers.docusign.com/esign-rest-api/guides/concepts/envelopes#working-with-templates\n[tracking]:             https://developers.docusign.com/esign-rest-api/guides/concepts/envelopes#tracking-envelope-status\n\n**Note**: When you create an envelope by using a [composite template](https://developers.docusign.com/esign-rest-api/guides/concepts/templates#composite-templates), you should specify the envelope custom fields in the inline template. Any custom fields that you specify at the root level are ignored.\n",
         "operationId": "Envelopes_PostEnvelopes",
         "consumes": [],
         "produces": [],
@@ -3439,6 +3439,13 @@
             "description": "When set to **true**, template roles will be merged, and empty recipients will be removed. This parameter applies when you create a draft envelope with multiple templates. (To create a draft envelope, the `status` field is set to `created`.)\n\n###### Note: DocuSign recommends that this parameter should be set to **true** whenever you create a draft envelope with multiple templates.",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "tab_label_exact_matches",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Reserved for DocuSign.\n\n<!--\nNote from Kate Dougherty: This functionality has not been released yet. When it is (contact Alia Paddock with any questions), use the following description:\n\n\"When set to **true**, each tab in the inline template is matched and collapsed with all qualified tabs in the server template. When set to **false** (default), each tab in the inline template is matched and collapsed with at most one qualified tab in the server template.\n\nThis parameter applies when you create an envelope from a composite template.\"\n-->\n"
           },
           {
             "name": "envelopeDefinition",
@@ -4430,7 +4437,6 @@
         },
         "deprecated": false,
         "x-ds-methodname": "getCommentsTranscript",
-        "x-ds-api-status": "beta",
         "x-ds-method": "get",
         "x-ds-service": "Uncategorized",
         "description": "",
@@ -7249,9 +7255,10 @@
           {
             "name": "bulkRecipientsRequest",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/bulkRecipientsRequest"
+              "type": "string",
+              "format": "binary"
             },
             "description": ""
           }
@@ -19173,6 +19180,14 @@
           "$ref": "#/definitions/settingsMetadata",
           "description": ""
         },
+        "allowAutoTagging": {
+          "description": "",
+          "type": "string"
+        },
+        "allowAutoTaggingMetadata": {
+          "$ref": "#/definitions/settingsMetadata",
+          "description": ""
+        },
         "allowBulkSending": {
           "description": "",
           "type": "string"
@@ -20200,6 +20215,10 @@
           "description": ""
         },
         "googleResult": {
+          "$ref": "#/definitions/eventResult",
+          "description": ""
+        },
+        "identityVerificationResult": {
           "$ref": "#/definitions/eventResult",
           "description": ""
         },
@@ -22408,33 +22427,6 @@
       "description": "",
       "x-ms-summary": ""
     },
-    "completeSignRequest": {
-      "type": "object",
-      "properties": {
-        "correlationId": {
-          "description": "",
-          "type": "string"
-        },
-        "documentUpdateInfos": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/documentUpdateInfo"
-          }
-        },
-        "signingLocation": {
-          "description": "Specifies the physical location where the signing takes place. It can have two enumeration values; InPerson and Online. The default value is Online.",
-          "type": "string"
-        },
-        "transactionId": {
-          "description": "Specifies the Transaction ID from the AppStore.",
-          "type": "string"
-        }
-      },
-      "x-ds-definition-name": "completeSignRequest",
-      "description": "",
-      "x-ms-summary": ""
-    },
     "compositeTemplate": {
       "type": "object",
       "properties": {
@@ -23118,22 +23110,6 @@
         }
       },
       "x-ds-definition-name": "country",
-      "description": "",
-      "x-ms-summary": ""
-    },
-    "credential": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of the user. Valid values: type_owner, type_participant.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Specifies the value of the tab. ",
-          "type": "string"
-        }
-      },
-      "x-ds-definition-name": "credential",
       "description": "",
       "x-ms-summary": ""
     },
@@ -24311,35 +24287,6 @@
       "description": "",
       "x-ms-summary": ""
     },
-    "documentSecurityStore": {
-      "type": "object",
-      "properties": {
-        "certificates": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "crls": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ocsps": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ds-definition-name": "documentSecurityStore",
-      "description": "",
-      "x-ms-summary": ""
-    },
     "documentTemplate": {
       "type": "object",
       "properties": {
@@ -24380,45 +24327,6 @@
         }
       },
       "x-ds-definition-name": "documentTemplateList",
-      "description": "",
-      "x-ms-summary": ""
-    },
-    "documentUpdateInfo": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "description": "",
-          "type": "string"
-        },
-        "documentId": {
-          "description": "The ID of the document being accessed.",
-          "type": "string"
-        },
-        "documentSecurityStore": {
-          "$ref": "#/definitions/documentSecurityStore",
-          "description": ""
-        },
-        "name": {
-          "description": "",
-          "type": "string"
-        },
-        "returnFormat": {
-          "description": "",
-          "type": "string"
-        },
-        "signatureDataInfos": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/signatureDataInfo"
-          }
-        },
-        "timeStampField": {
-          "$ref": "#/definitions/timeStampField",
-          "description": ""
-        }
-      },
-      "x-ds-definition-name": "documentUpdateInfo",
       "description": "",
       "x-ms-summary": ""
     },
@@ -25138,6 +25046,10 @@
           "description": "Reserved: For DocuSign use only.",
           "type": "string"
         },
+        "disableResponsiveDocument": {
+          "description": "",
+          "type": "string"
+        },
         "documentsCombinedUri": {
           "description": "",
           "type": "string"
@@ -25458,6 +25370,10 @@
         },
         "deliveredDateTime": {
           "description": "Reserved: For DocuSign use only.",
+          "type": "string"
+        },
+        "disableResponsiveDocument": {
+          "description": "",
           "type": "string"
         },
         "documents": {
@@ -26108,6 +26024,10 @@
           "description": "Reserved: For DocuSign use only.",
           "type": "string"
         },
+        "disableResponsiveDocument": {
+          "description": "",
+          "type": "string"
+        },
         "documents": {
           "description": "Complex element contains the details on the documents in the envelope.",
           "type": "array",
@@ -26406,6 +26326,10 @@
         },
         "description": {
           "description": "A sender-defined description of the line item.\n",
+          "type": "string"
+        },
+        "disableResponsiveDocument": {
+          "description": "",
           "type": "string"
         },
         "documents": {
@@ -26761,6 +26685,10 @@
         },
         "includeEnvelopeVoidReason": {
           "description": "When set to **true**, if the envelope is voided, the Connect Service notification will include the void reason, as entered by the person that voided the envelope. ",
+          "type": "string"
+        },
+        "includeHMAC": {
+          "description": "",
           "type": "string"
         },
         "includeSenderAccountAsCustomField": {
@@ -30660,6 +30588,18 @@
           "description": "Specifies the three-letter\n[ISO 4217][ISO4217] currency code for the payment.\n\nSupported currencies are:\n\n* AUD Australian dollar\n* CAD Canadian dollar\n* EUR Euro\n* GBP Great Britain pound\n* USD United States dollar\n\nSpecifying any other ISO 4217 code for payments is an error.\n\n[ISO4217]:          https://en.wikipedia.org/wiki/ISO_4217\n",
           "type": "string"
         },
+        "customerId": {
+          "description": "",
+          "type": "string"
+        },
+        "customMetadata": {
+          "description": "",
+          "type": "string"
+        },
+        "customMetadataRequired": {
+          "description": "",
+          "type": "boolean"
+        },
         "gatewayAccountId": {
           "description": "A GUID that identifies the payment gateway\nconnected to the sender's DocuSign account.\n\nThere is no public API\nfor connecting payment gateway accounts\nYou must connect and manage payment gateway accounts\nthrough the DocuSign Admin console\nand through your chosen payment gateway.\n\nYou can get the gateway account ID\nin the Payments section\nof the DocuSign Admin console.\n\n\n[paymentgateways]:  https://support.docusign.com/en/guides/managing-payment-gateways\n",
           "type": "string"
@@ -30680,6 +30620,10 @@
           }
         },
         "paymentOption": {
+          "description": "",
+          "type": "string"
+        },
+        "paymentSourceId": {
           "description": "",
           "type": "string"
         },
@@ -31591,6 +31535,18 @@
       "description": "",
       "x-ms-summary": ""
     },
+    "recipientIdentityVerification": {
+      "type": "object",
+      "properties": {
+        "workflowId": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "x-ds-definition-name": "recipientIdentityVerification",
+      "description": "",
+      "x-ms-summary": ""
+    },
     "recipientNamesResponse": {
       "type": "object",
       "properties": {
@@ -32048,34 +32004,6 @@
       "description": "The request body for the EnvelopeViews: createSender method.",
       "x-ms-summary": "The request body for the EnvelopeViews: createSender method."
     },
-    "revision": {
-      "type": "object",
-      "properties": {
-        "endData": {
-          "description": "",
-          "type": "string"
-        },
-        "fieldName": {
-          "description": "",
-          "type": "string"
-        },
-        "maxSignatureLength": {
-          "description": "",
-          "type": "string"
-        },
-        "signatureType": {
-          "description": "",
-          "type": "string"
-        },
-        "startData": {
-          "description": "",
-          "type": "string"
-        }
-      },
-      "x-ds-definition-name": "revision",
-      "description": "",
-      "x-ms-summary": ""
-    },
     "samlAssertionAttribute": {
       "type": "object",
       "properties": {
@@ -32330,22 +32258,6 @@
       "description": "",
       "x-ms-summary": ""
     },
-    "sender": {
-      "type": "object",
-      "properties": {
-        "accountIdGuid": {
-          "description": "The GUID associated with the account ID.",
-          "type": "string"
-        },
-        "companyName": {
-          "description": "The name of the user's Company.",
-          "type": "string"
-        }
-      },
-      "x-ds-definition-name": "sender",
-      "description": "",
-      "x-ms-summary": ""
-    },
     "senderEmailNotifications": {
       "type": "object",
       "properties": {
@@ -32515,26 +32427,6 @@
       "description": "Information about the shared item.",
       "x-ms-summary": "Information about the shared item."
     },
-    "signatureDataInfo": {
-      "type": "object",
-      "properties": {
-        "documentSecurityStore": {
-          "$ref": "#/definitions/documentSecurityStore",
-          "description": ""
-        },
-        "signatureData": {
-          "description": "",
-          "type": "string"
-        },
-        "signatureFieldName": {
-          "description": "",
-          "type": "string"
-        }
-      },
-      "x-ds-definition-name": "signatureDataInfo",
-      "description": "",
-      "x-ms-summary": ""
-    },
     "signatureProviderRequiredOption": {
       "type": "object",
       "properties": {
@@ -32689,6 +32581,10 @@
         "idCheckInformationInput": {
           "$ref": "#/definitions/idCheckInformationInput",
           "description": "A complex element that contains input information related to a recipient ID check. It can include the following information.\n\naddressInformationInput: Used to set recipient address information and consists of:\n\n* addressInformation: consists of six elements, with stree2 and zipPlus4 being optional. The elements are: street1, street2, city, state, zip, zipPlus4. The maximum length of each element is: street1/street2 = 150 characters, city = 50 characters, state = 2 characters, and zip/zipPlus4 = 20 characters.\n* displayLevelCode: Specifies the display level for the recipient. Values are: ReadOnly, Editable, or DoNotDisplay.\n* receiveInResponse: A Boolean element that specifies if the information needs to be returned in the response.\n\ndobInformationInput: Used to set recipient date of birth information and consists of:\n\n* dateOfBirth: Specifies the recipient's date, month and year of birth.\n* displayLevelCode: Specifies the display level for the recipient. Values are: ReadOnly, Editable, or DoNotDisplay.\n* receiveInResponse: A Boolean element that specifies if the information needs to be returned in the response.\n\nssn4InformationInput: Used to set the last four digits of the recipient's SSN information and consists of:\n\n* ssn4: Specifies the last four digits of the recipient's SSN.\n* displayLevelCode: Specifies the display level for the recipient. Values are: ReadOnly, Editable, or DoNotDisplay.\n* receiveInResponse: A Boolean element that specifies if the information needs to be returned in the response.\n\nssn9InformationInput: Used to set the recipient's SSN information. Note that the ssn9 information can never be returned in the response. The ssn9 input consists of: \n* ssn9: Specifies the recipient's SSN.\n* displayLevelCode: Specifies the display level for the recipient. Values are: ReadOnly, Editable, or DoNotDisplay.\n "
+        },
+        "identityVerification": {
+          "$ref": "#/definitions/recipientIdentityVerification",
+          "description": ""
         },
         "inheritEmailNotificationConfiguration": {
           "description": "When set to **true** and the envelope recipient creates a DocuSign account after signing, the Manage Account Email Notification settings are used as the default settings for the recipient's account. ",
@@ -33039,84 +32935,6 @@
       "x-ds-definition-name": "signerEmailNotifications",
       "x-ms-summary": "An array of email notifications that specifies the email the user receives when they are a sender. When the specific email notification is set to true, the user receives those types of email notifications from DocuSign. The user inherits the default account sender email notification settings when the user is created."
     },
-    "signHashDocument": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "description": "",
-          "type": "string"
-        },
-        "documentId": {
-          "description": "The ID of the document being accessed.",
-          "type": "string"
-        },
-        "format": {
-          "description": "",
-          "type": "string"
-        },
-        "name": {
-          "description": "",
-          "type": "string"
-        },
-        "remainingSignatures": {
-          "description": "",
-          "type": "string"
-        },
-        "revisions": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/revision"
-          }
-        },
-        "signatureType": {
-          "description": "",
-          "type": "string"
-        }
-      },
-      "x-ds-definition-name": "signHashDocument",
-      "description": "",
-      "x-ms-summary": ""
-    },
-    "signHashSessionInfoResponse": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "description": "Complex element contains the details on the documents in the envelope.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/signHashDocument"
-          }
-        },
-        "envelopeId": {
-          "description": "The envelope's GUID. Eg 93be49ab-afa0-4adf-933c-f752070d71ec ",
-          "type": "string"
-        },
-        "language": {
-          "description": "Specifies the language for the Certificate of Completion in the response. The supported languages, with the language value shown in parenthesis, are: Chinese Simplified (zh_CN), , Chinese Traditional (zh_TW), Dutch (nl), English US (en), French (fr), German (de), Italian (it), Japanese (ja), Korean (ko), Portuguese (pt), Portuguese (Brazil) (pt_BR), Russian (ru), Spanish (es). ",
-          "type": "string"
-        },
-        "redirectionUrl": {
-          "description": "",
-          "type": "string"
-        },
-        "remainingSignatureRequests": {
-          "description": "",
-          "type": "string"
-        },
-        "seal": {
-          "$ref": "#/definitions/seal",
-          "description": "Set of information related to the electronic seal used by the Trust Service Provider (TSP)"
-        },
-        "user": {
-          "$ref": "#/definitions/user",
-          "description": ""
-        }
-      },
-      "x-ds-definition-name": "signHashSessionInfoResponse",
-      "description": "",
-      "x-ms-summary": ""
-    },
     "signHere": {
       "type": "object",
       "properties": {
@@ -33351,26 +33169,6 @@
         }
       },
       "x-ds-definition-name": "signingGroupUsers",
-      "description": "",
-      "x-ms-summary": ""
-    },
-    "signSessionInfoRequest": {
-      "type": "object",
-      "properties": {
-        "certificate": {
-          "description": "When set to **false**, the envelope signing certificate is removed from the download.",
-          "type": "string"
-        },
-        "returnFormat": {
-          "description": "",
-          "type": "string"
-        },
-        "signingLocation": {
-          "description": "Specifies the physical location where the signing takes place. It can have two enumeration values; InPerson and Online. The default value is Online.",
-          "type": "string"
-        }
-      },
-      "x-ds-definition-name": "signSessionInfoRequest",
       "description": "",
       "x-ms-summary": ""
     },
@@ -35332,26 +35130,6 @@
       "description": "",
       "x-ms-summary": ""
     },
-    "timeStampField": {
-      "type": "object",
-      "properties": {
-        "documentSecurityStore": {
-          "$ref": "#/definitions/documentSecurityStore",
-          "description": ""
-        },
-        "maxTimeStampSignatureLength": {
-          "description": "",
-          "type": "string"
-        },
-        "timeStampFieldName": {
-          "description": "",
-          "type": "string"
-        }
-      },
-      "x-ds-definition-name": "timeStampField",
-      "description": "",
-      "x-ms-summary": ""
-    },
     "title": {
       "type": "object",
       "properties": {
@@ -35529,101 +35307,6 @@
       "description": "A tab that displays the recipient's title.\n",
       "x-ms-summary": "A tab that displays the recipient's title.\n"
     },
-    "tspHealthCheckRequest": {
-      "type": "object",
-      "properties": {
-        "appVersion": {
-          "description": "",
-          "type": "string"
-        },
-        "description": {
-          "description": "A sender-defined description of the line item.\n",
-          "type": "string"
-        },
-        "error": {
-          "description": "The error that caused the Connect post to fail.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Item status. <!-- TODO -->",
-          "type": "string"
-        },
-        "statusDescription": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/tspHealthCheckStatusDescription"
-          }
-        }
-      },
-      "x-ds-definition-name": "tspHealthCheckRequest",
-      "description": "",
-      "x-ms-summary": ""
-    },
-    "tspHealthCheckStatusDescription": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "A sender-defined description of the line item.\n",
-          "type": "string"
-        },
-        "error": {
-          "description": "The error that caused the Connect post to fail.",
-          "type": "string"
-        },
-        "hostname": {
-          "description": "",
-          "type": "string"
-        },
-        "responseSeconds": {
-          "description": "",
-          "type": "string"
-        },
-        "status": {
-          "description": "Item status. <!-- TODO -->",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the user. Valid values: type_owner, type_participant.",
-          "type": "string"
-        }
-      },
-      "x-ds-definition-name": "tspHealthCheckStatusDescription",
-      "description": "",
-      "x-ms-summary": ""
-    },
-    "updateTransactionRequest": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "",
-          "type": "string"
-        },
-        "message": {
-          "description": "",
-          "type": "string"
-        },
-        "state": {
-          "description": "The state or province associated with the address.",
-          "type": "string"
-        }
-      },
-      "x-ds-definition-name": "updateTransactionRequest",
-      "description": "",
-      "x-ms-summary": ""
-    },
-    "updateTransactionResponse": {
-      "type": "object",
-      "properties": {
-        "redirectionUrl": {
-          "description": "",
-          "type": "string"
-        }
-      },
-      "x-ds-definition-name": "updateTransactionResponse",
-      "description": "",
-      "x-ms-summary": ""
-    },
     "usageHistory": {
       "description": "A complex element consisting of: \n\n* lastSentDateTime - the date and time the user last sent an envelope. \n* lastSignedDateTime - the date and time the user last signed an envelope.\n* sentCount - the number of envelopes the user has sent.\n* signedCount - the number of envelopes the user has signed.",
       "type": "object",
@@ -35649,33 +35332,6 @@
       },
       "x-ds-definition-name": "usageHistory",
       "x-ms-summary": "A complex element consisting of: \n\n* lastSentDateTime - the date and time the user last sent an envelope. \n* lastSignedDateTime - the date and time the user last signed an envelope.\n* sentCount - the number of envelopes the user has sent.\n* signedCount - the number of envelopes the user has signed."
-    },
-    "user": {
-      "type": "object",
-      "properties": {
-        "countryCode": {
-          "description": "",
-          "type": "string"
-        },
-        "credentials": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/credential"
-          }
-        },
-        "displayName": {
-          "description": "",
-          "type": "string"
-        },
-        "email": {
-          "description": "",
-          "type": "string"
-        }
-      },
-      "x-ds-definition-name": "user",
-      "description": "",
-      "x-ms-summary": ""
     },
     "userAccountManagementGranularInformation": {
       "type": "object",
@@ -35809,34 +35465,6 @@
         }
       },
       "x-ds-definition-name": "userInfoList",
-      "description": "",
-      "x-ms-summary": ""
-    },
-    "userInfoResponse": {
-      "type": "object",
-      "properties": {
-        "envelopeId": {
-          "description": "The envelope's GUID. Eg 93be49ab-afa0-4adf-933c-f752070d71ec ",
-          "type": "string"
-        },
-        "language": {
-          "description": "Specifies the language for the Certificate of Completion in the response. The supported languages, with the language value shown in parenthesis, are: Chinese Simplified (zh_CN), , Chinese Traditional (zh_TW), Dutch (nl), English US (en), French (fr), German (de), Italian (it), Japanese (ja), Korean (ko), Portuguese (pt), Portuguese (Brazil) (pt_BR), Russian (ru), Spanish (es). ",
-          "type": "string"
-        },
-        "seal": {
-          "$ref": "#/definitions/seal",
-          "description": "Set of information related to the electronic seal used by the Trust Service Provider (TSP)."
-        },
-        "sender": {
-          "$ref": "#/definitions/sender",
-          "description": ""
-        },
-        "user": {
-          "$ref": "#/definitions/user",
-          "description": ""
-        }
-      },
-      "x-ds-definition-name": "userInfoResponse",
       "description": "",
       "x-ms-summary": ""
     },
@@ -36719,6 +36347,10 @@
         "idCheckInformationInput": {
           "$ref": "#/definitions/idCheckInformationInput",
           "description": "A complex element that contains input information related to a recipient ID check. It can include the following information.\n\naddressInformationInput: Used to set recipient address information and consists of:\n\n* addressInformation: consists of six elements, with stree2 and zipPlus4 being optional. The elements are: street1, street2, city, state, zip, zipPlus4. The maximum length of each element is: street1/street2 = 150 characters, city = 50 characters, state = 2 characters, and zip/zipPlus4 = 20 characters.\n* displayLevelCode: Specifies the display level for the recipient. Values are: ReadOnly, Editable, or DoNotDisplay.\n* receiveInResponse: A Boolean element that specifies if the information needs to be returned in the response.\n\ndobInformationInput: Used to set recipient date of birth information and consists of:\n\n* dateOfBirth: Specifies the recipient's date, month and year of birth.\n* displayLevelCode: Specifies the display level for the recipient. Values are: ReadOnly, Editable, or DoNotDisplay.\n* receiveInResponse: A Boolean element that specifies if the information needs to be returned in the response.\n\nssn4InformationInput: Used to set the last four digits of the recipient's SSN information and consists of:\n\n* ssn4: Specifies the last four digits of the recipient's SSN.\n* displayLevelCode: Specifies the display level for the recipient. Values are: ReadOnly, Editable, or DoNotDisplay.\n* receiveInResponse: A Boolean element that specifies if the information needs to be returned in the response.\n\nssn9InformationInput: Used to set the recipient's SSN information. Note that the ssn9 information can never be returned in the response. The ssn9 input consists of: \n* ssn9: Specifies the recipient's SSN.\n* displayLevelCode: Specifies the display level for the recipient. Values are: ReadOnly, Editable, or DoNotDisplay.\n "
+        },
+        "identityVerification": {
+          "$ref": "#/definitions/recipientIdentityVerification",
+          "description": ""
         },
         "inheritEmailNotificationConfiguration": {
           "description": "When set to **true** and the envelope recipient creates a DocuSign account after signing, the Manage Account Email Notification settings are used as the default settings for the recipient's account. ",
@@ -39564,6 +39196,10 @@
           "description": "Reserved: For DocuSign use only.",
           "type": "string"
         },
+        "disableResponsiveDocument": {
+          "description": "",
+          "type": "string"
+        },
         "documentsCombinedUri": {
           "description": "",
           "type": "string"
@@ -40215,6 +39851,10 @@
           "description": "Reserved: For DocuSign use only.",
           "type": "string"
         },
+        "disableResponsiveDocument": {
+          "description": "",
+          "type": "string"
+        },
         "documents": {
           "description": "Complex element contains the details on the documents in the envelope.",
           "type": "array",
@@ -40715,10 +40355,6 @@
         },
         "isAdmin": {
           "description": "Determines if the feature set is actively set as part of the plan.",
-          "type": "string"
-        },
-        "jobTitle": {
-          "description": "",
           "type": "string"
         },
         "lastLogin": {
@@ -42077,7 +41713,7 @@
     },
     {
       "name": "BulkEnvelopes",
-      "description": "The BulkEnvelope resource provides methods that allow you to send the same document to a large number of recipients and get the status of the envelope. \n\nGeneral steps to use Bulk Send:\n\n* Create the bulk recipient CSV (Comma Separated Value) file that contains the list of recipient names and email addresses.\nThe required and optional information that can be included the file is described in the [ML: BulkEnvelope: updateRecipients] method.\n* Create draft envelope by calling the Envelopes: createEnvelope method and add a bulk recipient signer. The envelope can be created from a template that has a bulk recipient.\nA bulk recipient signer is a Signer recipient type where `isBulkRecipient` property is set to true. There can only be one bulk recipient signer per envelope.\nTemplates and draft envelopes can be saved with a bulk recipient signer, but a bulk recipient file must be uploaded before an envelope with a bulk recipient signer can be sent.\n* Add the bulk recipient file to the envelope by calling the BulkEnvelope: updateRecipients method.\n* Send the draft envelope by setting the `status` property on the envelope to `sent` and call the Envelopes:update method.\nTransitioning an envelope with a bulk recipient signer from `created` to `sent` triggers the sending of an envelope for each recipient in the associated bulk recipient file. The original (draft) envelope is discarded. The response returned from sending the envelope includes the following properties:\n   * bulkRecipientsBatchId: Contains the batch identifier used to query the status of the entire bulk send operation.\n   * bulkRecipientTransactions: Contains an array with identifying information about each envelope sent. The information included in this response:\n      * transactionId: The ID used to reference the queued envelope transaction.\n      * name: The name of the recipient assigned to this envelope transaction.\n      * email: The email address of the recipient assigned to this envelope transaction.\n\nOnce you send an envelope with a bulk recipient file, DocuSign creates a separate envelope for each recipient in the bulk recipient file - eliminating the need to separately create and send an envelope for each signer. You can get the status of the bulk send by calling BulkEnvelopes: get or BulkEnvelopes: list methods.\n\nYou can customize authentication (access code, ID check, phone authentication, or social network IDs), add notes and other custom information for each recipient in the list by adding the information to the file.\n\nBulk Send Limitations:\n\n* Bulk send must be enabled for your account (`accountSettings enableBulkRecipient` is set to **true**) and for the user sending the envelopes (the `allowBulkRecipients` property in `userSettings`  is set to **true**.)\n* Bulk send can only be used with Signer recipient types and there can only be one bulk recipient in an envelope or template. An envelope or template can have other Signers and recipient types that are added to the envelope or template normally. When a bulk recipient file is added to an envelope, the single bulk recipient Signer is replaced with all recipients in the bulk recipient file. There can only be one bulk recipient file associated with an envelope when it is sent.\n* When an envelope with bulk recipients is sent, the envelopes are added to a bulk recipient queue and sent in a metered fashion. There is a limit of 2,000 envelopes in the bulk recipient queue and an error message is shown to the sender if this limit is reached. If you receive this error, you should wait and resend the envelope at a later time.\n\nIf you frequently run into queue limits, you can contact your account manage to discuss modifying the queue limits for your account."
+      "description": "The BulkEnvelope resource provides methods that allow you to send the same document to a large number of recipients and get the status of the envelope. \n\nGeneral steps to use Bulk Send:\n\n* Create the bulk recipient CSV (Comma Separated Value) file that contains the list of recipient names and email addresses.\nThe required and optional information that can be included the file is described in the [ML: BulkEnvelope: updateRecipients] method.\n* Create draft envelope by calling the Envelopes: createEnvelope method and add a bulk recipient signer. The envelope can be created from a template that has a bulk recipient.\nA bulk recipient signer is a Signer recipient type where `isBulkRecipient` property is set to true. There can only be one bulk recipient signer per envelope.\nTemplates and draft envelopes can be saved with a bulk recipient signer, but a bulk recipient file must be uploaded before an envelope with a bulk recipient signer can be sent.\n* Add the bulk recipient file to the envelope by calling the BulkEnvelope: updateRecipients method.\n* Send the draft envelope by setting the `status` property on the envelope to `sent` and call the Envelopes:update method.\nTransitioning an envelope with a bulk recipient signer from `created` to `sent` triggers the sending of an envelope for each recipient in the associated bulk recipient file. The original (draft) envelope is discarded. The response returned from sending the envelope includes the following properties:\n   * bulkRecipientsBatchId: Contains the batch identifier used to query the status of the entire bulk send operation.\n   * bulkRecipientTransactions: Contains an array with identifying information about each envelope sent. The information included in this response:\n      * transactionId: The ID used to reference the queued envelope transaction.\n      * name: The name of the recipient assigned to this envelope transaction.\n      * email: The email address of the recipient assigned to this envelope transaction.\n\nOnce you send an envelope with a bulk recipient file, DocuSign creates a separate envelope for each recipient in the bulk recipient file - eliminating the need to separately create and send an envelope for each signer. You can get the status of the bulk send by calling BulkEnvelopes: get or BulkEnvelopes: list methods.\n\nYou can customize authentication (access code, ID check, phone authentication, or social network IDs), add notes and other custom information for each recipient in the list by adding the information to the file.\n\nBulk Send Limitations:\n\n* Bulk send must be enabled for your account (`accountSettings enableBulkRecipient` is set to **true**) and for the user sending the envelopes (the `allowBulkRecipients` property in `userSettings`  is set to **true**.)\n* Bulk send can only be used with Signer recipient types and there can only be one bulk recipient in an envelope or template. An envelope or template can have other Signers and recipient types that are added to the envelope or template normally. When a bulk recipient file is added to an envelope, the single bulk recipient Signer is replaced with all recipients in the bulk recipient file. There can only be one bulk recipient file associated with an envelope when it is sent.\n* When an envelope with bulk recipients is sent, the envelopes are added to a bulk recipient queue and sent in a metered fashion. There is a limit of 2,000 envelopes in the bulk recipient queue and an error message is shown to the sender if this limit is reached. If you receive this error, you should wait and resend the envelope at a later time.\n\nIf you frequently run into queue limits, you can contact your account manager to discuss modifying the queue limits for your account."
     },
     {
       "name": "CloudStorage",
