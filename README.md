@@ -6,7 +6,8 @@ DocuSign uses the OpenAPI (OAI) Specification - formerly known as "Swagger" - to
 
 ## The Swagger file
 
-`esignature.rest.swagger.json` - the full swagger file for DocuSign's eSignature REST API 
+![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/eSign-OpenAPI-Specification/master/esignature.rest.swagger-v2.1.json) `esignature.rest.swagger-v2.1.json` - the full swagger file for DocuSign's eSignature REST API v2.1
+![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/eSign-OpenAPI-Specification/master/esignature.rest.swagger-v2.json) `esignature.rest.swagger-v2.json` - the full swagger file for DocuSign's eSignature REST API v2
 
 ## What can I do with a Swagger file? 
 
