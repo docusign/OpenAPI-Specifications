@@ -11,7 +11,7 @@ DocuSign uses the OpenAPI (OAI) Specification - formerly known as "Swagger" - to
 
 ## What can I do with a Swagger file? 
 
-We use OpenAPI/Swagger files to build many of our developer tools including our [client SDKs](https://www.docusign.com/developer-center/api-overview#sdk-docusign-supported) using `swagger-codegen`. We also use the OAI specification to build our [API Docs](https://docs.docusign.com/esign/) and [API Explorer](https://apiexplorer.docusign.com/#/) tools.  What will you build?  Let us know by filing an issue in this repository.
+We use OpenAPI/Swagger files to build many of our developer tools including our [client SDKs](https://developers.docusign.com/docs/esign-rest-api/sdk-tools) using `swagger-codegen`. We also use the OAI specification to build our [API Docs](https://docs.docusign.com/esign/) and [API Explorer](https://apiexplorer.docusign.com/#/) tools.  What will you build?  Let us know by filing an issue in this repository.
 
 ### Vendor-specific extensions
 
@@ -19,7 +19,7 @@ Some post-processing is performed on our eSignature Swagger spec which includes 
 
 ### Releases
 
-The DocuSign eSignature REST API is updated monthly. The Swagger file in this repository is also updated monthly. See the "Releases" tab for version information. The current release information is available from the [demo/developer sandbox](https://demo.docusign.net/restapi/service_information) and [production](https://www.docusign.net/restapi/service_information) platforms.
+The DocuSign eSignature REST API is updated monthly. The Swagger file in this repository is also updated monthly. See the "Releases" tab for version information. The current release information is available from the [Developer Account (demo)](https://demo.docusign.net/restapi/service_information) and [production](https://www.docusign.net/restapi/service_information) platforms.
 
 ## Support
 
