@@ -1410,7 +1410,9 @@
         ],
         "summary": "Uploads a branding resource file.",
         "operationId": "BrandResources_PutBrandResources",
-        "consumes": [],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "produces": [],
         "parameters": [
           {
@@ -1433,6 +1435,13 @@
             "required": true,
             "type": "string",
             "description": ""
+          },
+          {
+            "name": "file.xml",
+            "in": "formData",
+            "description": "Brand resource XML file.",
+            "required": true,
+            "type": "file"
           }
         ],
         "responses": {
@@ -1482,13 +1491,6 @@
             "description": "The number of results to return. This can be 1 to 20.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "include",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Specifies which entries are included in the response. You can include multiple entries by using commas in the query string. \n\nExample: `?include=\"failed,queued\"`\n\nValid values: \n* `all`: Returns all entries. If present, overrides all other query settings.\n* `failed`: Returns entries with a `failed` status.\n* `processing`: Returns entries with a `processing` status.\n* `queued`: Returns entries with a `queued` status.\n* `sent`: Returns entries with a `sent` status. \n\n**Note**: If you do not provide a query string, no envelopes are included."
           },
           {
             "name": "start_position",
@@ -8404,6 +8406,57 @@
         "x-ds-methodname": "createCorrectView",
         "x-ds-method": "createCorrect",
         "x-ds-service": "Envelopes",
+        "x-ds-in-sdk": true
+      },
+      "delete": {
+        "tags": [
+          "EnvelopeViews"
+        ],
+        "summary": "",
+        "operationId": "Views_DeleteEnvelopeCorrectView",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The external account number (int) or account id GUID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "envelopeId",
+            "in": "path",
+            "description": "The envelope's GUID. Eg 93be49ab-afa0-4adf-933c-f752070d71ec ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correctViewRequest",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/correctViewRequest"
+            },
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          },
+          "400": {
+            "description": "Error encountered.",
+            "schema": {
+              "$ref": "#/definitions/errorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ds-methodname": "deleteEnvelopeCorrectView",
+        "x-ds-method": "deleteEnvelopeCorrectView",
+        "x-ds-service": "Uncategorized",
+        "description": "",
         "x-ds-in-sdk": true
       },
       "parameters": []
@@ -23095,6 +23148,10 @@
         "suppressNavigation": {
           "description": "Specifies whether the window is displayed with or without dressing.",
           "type": "string"
+        },
+        "viewUrl": {
+          "description": "",
+          "type": "string"
         }
       },
       "x-ds-definition-name": "correctViewRequest",
@@ -29625,6 +29682,10 @@
           "$ref": "#/definitions/errorDetails",
           "description": "This object describes errors that occur. It is only valid for responses and ignored in requests."
         },
+        "membershipId": {
+          "description": "",
+          "type": "string"
+        },
         "permissionProfileId": {
           "description": "",
           "type": "string"
@@ -32397,6 +32458,10 @@
           "description": "When set to **true**, the user receives notification if the offline signing failed.",
           "type": "string"
         },
+        "powerformResponsesLimitNotificationEmail": {
+          "description": "",
+          "type": "string"
+        },
         "recipientViewed": {
           "description": "When set to **true**, the sender receives notification that the recipient viewed the enveloper.",
           "type": "string"
@@ -34154,8 +34219,16 @@
           "description": "",
           "type": "string"
         },
+        "requireAll": {
+          "description": "When set to **true** and shared is true, information must be entered in this field to complete the envelope. ",
+          "type": "string"
+        },
         "required": {
           "description": "When set to **true**, the signer is required to fill out this tab",
+          "type": "string"
+        },
+        "requireInitialOnSharedChange": {
+          "description": "Optional element for field markup. When set to **true**, the signer is required to initial when they modify a shared field.",
           "type": "string"
         },
         "scaleValue": {
@@ -35481,6 +35554,14 @@
           "type": "string"
         },
         "canManageAdminsMetadata": {
+          "$ref": "#/definitions/settingsMetadata",
+          "description": ""
+        },
+        "canManageEnvelopeTransfer": {
+          "description": "",
+          "type": "string"
+        },
+        "canManageEnvelopeTransferMetadata": {
           "$ref": "#/definitions/settingsMetadata",
           "description": ""
         },
@@ -38943,8 +39024,16 @@
           "description": "",
           "type": "string"
         },
+        "requireAll": {
+          "description": "When set to **true** and shared is true, information must be entered in this field to complete the envelope. ",
+          "type": "string"
+        },
         "required": {
           "description": "When set to **true**, the signer is required to fill out this tab",
+          "type": "string"
+        },
+        "requireInitialOnSharedChange": {
+          "description": "Optional element for field markup. When set to **true**, the signer is required to initial when they modify a shared field.",
           "type": "string"
         },
         "scaleValue": {
