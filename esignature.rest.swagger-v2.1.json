@@ -1491,7 +1491,9 @@
         ],
         "summary": "Updates a branding resource file.",
         "operationId": "BrandResources_PutBrandResources",
-        "consumes": [],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "produces": [],
         "parameters": [
           {
@@ -1514,6 +1516,13 @@
             "required": true,
             "type": "string",
             "description": "The type of brand resource file that you are updating. Valid values are:\n\n- `sending`\n- `signing`\n- `email`\n- `signing_captive`"
+          },
+          {
+            "name": "file.xml",
+            "in": "formData",
+            "description": "Brand resource XML file.",
+            "required": true,
+            "type": "file"
           }
         ],
         "responses": {
@@ -23032,6 +23041,14 @@
           "$ref": "#/definitions/settingsMetadata",
           "description": "Metadata that indicates whether the `allowReminders` property is editable.\n"
         },
+        "allowRemoteNotary": {
+          "description": "",
+          "type": "string"
+        },
+        "allowRemoteNotaryMetadata": {
+          "$ref": "#/definitions/settingsMetadata",
+          "description": ""
+        },
         "allowResourceFileBranding": {
           "description": "If **true**,\nresource files can be uploaded in branding.\n",
           "type": "string"
@@ -23535,6 +23552,22 @@
         "enableAdvancedPowerFormsMetadata": {
           "$ref": "#/definitions/settingsMetadata",
           "description": "Metadata that indicates whether the `enableAdvancedPowerForms` property is editable.\n"
+        },
+        "enableAgreementActionsForCLM": {
+          "description": "",
+          "type": "string"
+        },
+        "enableAgreementActionsForCLMMetadata": {
+          "$ref": "#/definitions/settingsMetadata",
+          "description": ""
+        },
+        "enableAgreementActionsForESign": {
+          "description": "",
+          "type": "string"
+        },
+        "enableAgreementActionsForESignMetadata": {
+          "$ref": "#/definitions/settingsMetadata",
+          "description": ""
         },
         "enableAutoNav": {
           "description": "When **true**, enables the account to set the AutoNav rule setting, which enables a sender to override the auto-navigation setting per envelope.\n\n**Note**: To change this setting, you must be a SysAdmin user or `EnableAutoNavByDSAdmin must be set.",
@@ -25266,10 +25299,6 @@
           "items": {
             "$ref": "#/definitions/recipientAdditionalNotification"
           }
-        },
-        "additionalNotificationsMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": ""
         },
         "allowSystemOverrideForLockedRecipient": {
           "description": "",
@@ -27947,6 +27976,10 @@
     "bulkSendRequest": {
       "type": "object",
       "properties": {
+        "batchName": {
+          "description": "",
+          "type": "string"
+        },
         "envelopeOrTemplateId": {
           "description": "The GUID of the envelope or template that you want to send in bulk.",
           "type": "string"
@@ -27961,6 +27994,10 @@
       "properties": {
         "batchId": {
           "description": "A batch identifier that you can use to get the status of the batch.",
+          "type": "string"
+        },
+        "batchName": {
+          "description": "",
           "type": "string"
         },
         "batchSize": {
@@ -28084,10 +28121,6 @@
           "items": {
             "$ref": "#/definitions/recipientAdditionalNotification"
           }
-        },
-        "additionalNotificationsMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": ""
         },
         "agentCanEditEmail": {
           "description": "Optional element. When set to **true**, the agents recipient associated with this recipient can change the recipient's pre-populated email address. This element is only active if enabled for the account.",
@@ -28412,10 +28445,6 @@
           "items": {
             "$ref": "#/definitions/recipientAdditionalNotification"
           }
-        },
-        "additionalNotificationsMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": ""
         },
         "agentCanEditEmail": {
           "description": "Optional element. When set to **true**, the agents recipient associated with this recipient can change the recipient's pre-populated email address. This element is only active if enabled for the account.",
@@ -29757,6 +29786,1634 @@
         }
       },
       "x-ds-definition-name": "commentThread",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "commissionCounty": {
+      "type": "object",
+      "properties": {
+        "anchorAllowWhiteSpaceInCharacters": {
+          "description": "",
+          "type": "string"
+        },
+        "anchorAllowWhiteSpaceInCharactersMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": ""
+        },
+        "anchorCaseSensitive": {
+          "description": "This property controls how [anchor tabs][AnchorTabs] are placed. When **true**, the text string in a document must match the case of the `anchorString` property for an anchor tab to be created. The default value is **false**.\n\nFor example, when set to **true**, if the anchor string is `DocuSign`, then `DocuSign` will match but `Docusign`, `docusign`, `DoCuSiGn`, etc. will not match. When set to **false**, `DocuSign`, `Docusign`, `docusign`, `DoCuSiGn`, etc. will all match.\n\nThis functionality uses the following rules:\n\n- Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:\n\n  $~><|^+=\n\n  For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`\n\n- Strings embedded in other strings are ignored during the matching process.\n\n- In words that have dashes, the parts separated by dashes are treated as distinct words.\n\n  Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true**.\n\n- Letters with accent marks are treated as distinct characters from their unaccented counterparts.\n\n- For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.\n\n  Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.\n\n- Unlike punctuation, numbers are not ignored when finding anchor words.\n\n  Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTabs]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace",
+          "type": "string"
+        },
+        "anchorCaseSensitiveMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorCaseSensitive` property is editable."
+        },
+        "anchorHorizontalAlignment": {
+          "description": "This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :\n\n- `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.\n- `right`: Aligns the tab’s left side with the last character of the matching anchor word.\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTabs]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace\n",
+          "type": "string"
+        },
+        "anchorHorizontalAlignmentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorHorizontalAlignment` property is editable."
+        },
+        "anchorIgnoreIfNotPresent": {
+          "description": "When set to **true**, this tab is ignored if the `anchorString` is not found in the document.",
+          "type": "string"
+        },
+        "anchorIgnoreIfNotPresentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorIgnoreIfNotPresent` property is editable."
+        },
+        "anchorMatchWholeWord": {
+          "description": "When set to **true**, the text string in a document must match the value of the `anchorString` property in its entirety for an [anchor tab][AnchorTab] to be created. The default value is **false**.\n\nFor example, when set to **true**, if the input is `man` then `man` will match but `manpower`, `fireman`, and `penmanship` will not. When set to **false**, if the input is `man` then `man`, `manpower`, `fireman`, and `penmanship` will all match.\n\nThis functionality uses the following rules:\n\n- Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:\n\n  $~><|^+=\n\n  For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`\n\n- Strings embedded in other strings are ignored during the matching process.\n\n- In words that have dashes, the parts separated by dashes are treated as distinct words.\n\n  Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true**.\n\n- Letters with accent marks are treated as distinct characters from their unaccented counterparts.\n\n- For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.\n\n  Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.\n\n- Unlike punctuation, numbers are not ignored when finding anchor words.\n\n  Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).\n\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTab]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace\n",
+          "type": "string"
+        },
+        "anchorMatchWholeWordMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorMatchWholeWord` property is editable."
+        },
+        "anchorString": {
+          "description": "Specifies the string to find in the document and use as the basis for tab placement.",
+          "type": "string"
+        },
+        "anchorStringMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorString` property is editable."
+        },
+        "anchorTabProcessorVersion": {
+          "description": "Reserved for DocuSign.",
+          "type": "string"
+        },
+        "anchorTabProcessorVersionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Reserved for DocuSign."
+        },
+        "anchorUnits": {
+          "description": "Specifies units of the\n`anchorXOffset` and\n`anchorYOffset`.\nValid units are:\n\n- `pixels`\n- `inches`\n- `mms`\n- `cms`\n",
+          "type": "string"
+        },
+        "anchorUnitsMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorUnits` property is editable."
+        },
+        "anchorXOffset": {
+          "description": "Specifies the X axis location of the tab in `anchorUnits` relative to the `anchorString`.\n",
+          "type": "string"
+        },
+        "anchorXOffsetMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorXOffset` property is editable."
+        },
+        "anchorYOffset": {
+          "description": "Specifies the Y axis location of the tab in `anchorUnits` relative to the `anchorString`.\n",
+          "type": "string"
+        },
+        "anchorYOffsetMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorYOffset` property is editable."
+        },
+        "bold": {
+          "description": "When set to **true**, the information in the tab is bold.",
+          "type": "string"
+        },
+        "boldMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `bold` property is editable."
+        },
+        "concealValueOnDocument": {
+          "description": "When set to **true**, the field appears normally while the recipient is adding or modifying the information in the field, but the data is not visible (the characters are hidden by asterisks) to any other signer or the sender.\n\nWhen an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.\n\nThis setting applies only to text boxes and does not affect list boxes, radio buttons, or check boxes.",
+          "type": "string"
+        },
+        "concealValueOnDocumentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `concealValueOnDocument` property is editable."
+        },
+        "conditionalParentLabel": {
+          "description": "For conditional fields this is the `tabLabel` of the parent tab that controls this tab's visibility.",
+          "type": "string"
+        },
+        "conditionalParentLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `conditionalParentLabel` property is editable."
+        },
+        "conditionalParentValue": {
+          "description": "For conditional fields, this is the value of the parent tab that controls the tab's visibility.\n\nIf the parent tab is a Checkbox, Radio button, Optional Signature, or Optional Initial use \"on\" as the value to show that the parent tab is active.\n",
+          "type": "string"
+        },
+        "conditionalParentValueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `conditionalParentValue` property is editable."
+        },
+        "customTabId": {
+          "description": "The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.",
+          "type": "string"
+        },
+        "customTabIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `customTabId` property is editable."
+        },
+        "disableAutoSize": {
+          "description": "When set to **true**, disables the auto sizing of single line text boxes in the signing screen when the signer enters data. If disabled users will only be able enter as much data as the text box can hold. By default this is false. This property only affects single line text boxes.",
+          "type": "string"
+        },
+        "disableAutoSizeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `disableAutoSize` property is editable."
+        },
+        "documentId": {
+          "description": "The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.",
+          "type": "string"
+        },
+        "documentIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `documentId` property is editable."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/errorDetails",
+          "description": "This object describes errors that occur. It is only valid for responses and ignored in requests."
+        },
+        "font": {
+          "description": "The font to be used for the tab value. Supported fonts include:\n\n- Default\n- Arial\n- ArialNarrow\n- Calibri\n- CourierNew\n- Garamond\n- Georgia\n- Helvetica\n- LucidaConsole\n- MSGothic\n- MSMincho\n- OCR-A\n- Tahoma\n- TimesNewRoman\n- Trebuchet\n- Verdana\n",
+          "type": "string"
+        },
+        "fontColor": {
+          "description": "The font color to use for the information in the tab. Possible values are: \n\n- Black\n- BrightBlue\n- BrightRed\n- DarkGreen\n- DarkRed\n- Gold\n- Green\n- NavyBlue\n- Purple\n- White\n",
+          "type": "string"
+        },
+        "fontColorMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fontColor` property is editable."
+        },
+        "fontMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `font` property is editable."
+        },
+        "fontSize": {
+          "description": "The font size used for the information in the tab. Possible values are:\n\n- Size7\n- Size8\n- Size9\n- Size10\n- Size11\n- Size12\n- Size14\n- Size16\n- Size18\n- Size20\n- Size22\n- Size24\n- Size26\n- Size28\n- Size36\n- Size48\n- Size72",
+          "type": "string"
+        },
+        "fontSizeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fontSize` property is editable."
+        },
+        "formOrder": {
+          "description": "An integer specifying the order in which the guided form HTML should render. The order is relative to the `formPageLabel`, the group by which to place the guided form HTML block.",
+          "type": "string"
+        },
+        "formOrderMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `formOrder` property is editable."
+        },
+        "formPageLabel": {
+          "description": "A string specifying the group in which to place the guided form HTML. Each group displays as a separate guided forms page in the signing experience.",
+          "type": "string"
+        },
+        "formPageLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `formPageLabel` property is editable."
+        },
+        "formPageNumber": {
+          "description": "An integer specifying the order in which to present the guided form pages.",
+          "type": "string"
+        },
+        "formPageNumberMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fromPageNumber` property is editable."
+        },
+        "height": {
+          "description": "The height of the tab in pixels.",
+          "type": "string"
+        },
+        "heightMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `height` property is editable."
+        },
+        "italic": {
+          "description": "When set to **true**, the information in the tab is italic.",
+          "type": "string"
+        },
+        "italicMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `italic` property is editable."
+        },
+        "localePolicy": {
+          "$ref": "#/definitions/localePolicyTab",
+          "description": "Reserved for DocuSign."
+        },
+        "locked": {
+          "description": "When set to **true**, the signer cannot change the data of the custom tab.",
+          "type": "string"
+        },
+        "lockedMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `locked` property is editable."
+        },
+        "maxLength": {
+          "description": "An optional value that describes the maximum length of the property when the property is a string.",
+          "type": "string"
+        },
+        "maxLengthMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `maxLength` property is editable."
+        },
+        "mergeField": {
+          "$ref": "#/definitions/mergeField",
+          "description": "Contains the information necessary to map the tab to a field in SalesForce."
+        },
+        "mergeFieldXml": {
+          "description": "",
+          "type": "string"
+        },
+        "name": {
+          "description": "",
+          "type": "string"
+        },
+        "nameMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `name` property is editable. Read only."
+        },
+        "originalValue": {
+          "description": "The initial value of the tab when it was sent to the recipient. ",
+          "type": "string"
+        },
+        "originalValueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `originalValue` property is editable."
+        },
+        "pageNumber": {
+          "description": "The page number being accessed.",
+          "type": "string"
+        },
+        "pageNumberMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `pageNumber` property is editable."
+        },
+        "recipientId": {
+          "description": "A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.",
+          "type": "string"
+        },
+        "recipientIdGuid": {
+          "description": "The globally-unique identifier (GUID) for a specific recipient on a specific envelope. If the same recipient is associated with multiple envelopes, they will have a different GUID for each one. Read only.",
+          "type": "string"
+        },
+        "recipientIdGuidMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `recipientIdGuid` property is editable."
+        },
+        "recipientIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `recipientId` property is editable."
+        },
+        "required": {
+          "description": "When set to **true**, the signer is required to fill out this tab.",
+          "type": "string"
+        },
+        "requiredMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `required` property is editable."
+        },
+        "smartContractInformation": {
+          "$ref": "#/definitions/smartContractInformation",
+          "description": ""
+        },
+        "status": {
+          "description": "The status of the item.",
+          "type": "string"
+        },
+        "statusMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `status` property is editable."
+        },
+        "tabGroupLabels": {
+          "description": "An array of tab group labels that uniquely identify tab groups. To assign a tab to a `tabGroup`, you assign the `TabGroupLabel` to the `Tab.TabGroupLabels` array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tabGroupLabelsMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabGroupLabels` property is editable."
+        },
+        "tabId": {
+          "description": "The unique identifier for the tab.",
+          "type": "string"
+        },
+        "tabIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabId` property is editable."
+        },
+        "tabLabel": {
+          "description": "The label associated with the tab. This value may be an empty string.\nIf no value is provided, the tab type is used as the value.\n\nMaximum Length: 500 characters.\n",
+          "type": "string"
+        },
+        "tabLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabLabel` property is editable."
+        },
+        "tabOrder": {
+          "description": "A positive integer that sets the order the tab is navigated to during signing.\n\nTabs on a page are navigated to in ascending order, starting with the lowest number and moving to the highest. If two or more tabs have the same `tabOrder` value, the normal auto-navigation setting behavior for the envelope is used.",
+          "type": "string"
+        },
+        "tabOrderMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabOrder` property is editable."
+        },
+        "tabType": {
+          "description": "Indicates the type of tab (for example, `signHere` or `initialHere`).",
+          "type": "string"
+        },
+        "tabTypeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabType` property is editable."
+        },
+        "templateLocked": {
+          "description": "When set to **true**, the sender cannot change any attributes of the recipient. Used only when working with template recipients. ",
+          "type": "string"
+        },
+        "templateLockedMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `templateLocked` property is editable."
+        },
+        "templateRequired": {
+          "description": "When set to **true**, the sender may not remove the recipient. Used only when working with template recipients.",
+          "type": "string"
+        },
+        "templateRequiredMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `templateRequired` property is editable."
+        },
+        "tooltip": {
+          "description": "The text of a tooltip that appears when a user hovers over a form field or tab.",
+          "type": "string"
+        },
+        "toolTipMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `toolTip` property is editable."
+        },
+        "underline": {
+          "description": "When set to **true**, the information in the tab is underlined.",
+          "type": "string"
+        },
+        "underlineMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `underline` property is editable."
+        },
+        "value": {
+          "description": "Specifies the value of the tab. ",
+          "type": "string"
+        },
+        "valueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `value` property is editable."
+        },
+        "width": {
+          "description": "The width of the tab in pixels.",
+          "type": "string"
+        },
+        "widthMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `width` property is editable."
+        },
+        "xPosition": {
+          "description": "This property indicates the horizontal offset of the object on the page.\nDocuSign uses 72 DPI when determining position.\nRequired. May be zero.\n",
+          "type": "string"
+        },
+        "xPositionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `xPosition` property is editable."
+        },
+        "yPosition": {
+          "description": "This property indicates the vertical offset of the object on the page.\nDocuSign uses 72 DPI when determining position.\nRequired. May be zero.\n",
+          "type": "string"
+        },
+        "yPositionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `yPosition` property is editable."
+        }
+      },
+      "x-ds-definition-name": "commissionCounty",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "commissionExpiration": {
+      "type": "object",
+      "properties": {
+        "anchorAllowWhiteSpaceInCharacters": {
+          "description": "",
+          "type": "string"
+        },
+        "anchorAllowWhiteSpaceInCharactersMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": ""
+        },
+        "anchorCaseSensitive": {
+          "description": "This property controls how [anchor tabs][AnchorTabs] are placed. When **true**, the text string in a document must match the case of the `anchorString` property for an anchor tab to be created. The default value is **false**.\n\nFor example, when set to **true**, if the anchor string is `DocuSign`, then `DocuSign` will match but `Docusign`, `docusign`, `DoCuSiGn`, etc. will not match. When set to **false**, `DocuSign`, `Docusign`, `docusign`, `DoCuSiGn`, etc. will all match.\n\nThis functionality uses the following rules:\n\n- Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:\n\n  $~><|^+=\n\n  For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`\n\n- Strings embedded in other strings are ignored during the matching process.\n\n- In words that have dashes, the parts separated by dashes are treated as distinct words.\n\n  Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true**.\n\n- Letters with accent marks are treated as distinct characters from their unaccented counterparts.\n\n- For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.\n\n  Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.\n\n- Unlike punctuation, numbers are not ignored when finding anchor words.\n\n  Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTabs]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace",
+          "type": "string"
+        },
+        "anchorCaseSensitiveMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorCaseSensitive` property is editable."
+        },
+        "anchorHorizontalAlignment": {
+          "description": "This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :\n\n- `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.\n- `right`: Aligns the tab’s left side with the last character of the matching anchor word.\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTabs]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace\n",
+          "type": "string"
+        },
+        "anchorHorizontalAlignmentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorHorizontalAlignment` property is editable."
+        },
+        "anchorIgnoreIfNotPresent": {
+          "description": "When set to **true**, this tab is ignored if the `anchorString` is not found in the document.",
+          "type": "string"
+        },
+        "anchorIgnoreIfNotPresentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorIgnoreIfNotPresent` property is editable."
+        },
+        "anchorMatchWholeWord": {
+          "description": "When set to **true**, the text string in a document must match the value of the `anchorString` property in its entirety for an [anchor tab][AnchorTab] to be created. The default value is **false**.\n\nFor example, when set to **true**, if the input is `man` then `man` will match but `manpower`, `fireman`, and `penmanship` will not. When set to **false**, if the input is `man` then `man`, `manpower`, `fireman`, and `penmanship` will all match.\n\nThis functionality uses the following rules:\n\n- Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:\n\n  $~><|^+=\n\n  For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`\n\n- Strings embedded in other strings are ignored during the matching process.\n\n- In words that have dashes, the parts separated by dashes are treated as distinct words.\n\n  Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true**.\n\n- Letters with accent marks are treated as distinct characters from their unaccented counterparts.\n\n- For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.\n\n  Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.\n\n- Unlike punctuation, numbers are not ignored when finding anchor words.\n\n  Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).\n\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTab]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace\n",
+          "type": "string"
+        },
+        "anchorMatchWholeWordMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorMatchWholeWord` property is editable."
+        },
+        "anchorString": {
+          "description": "Specifies the string to find in the document and use as the basis for tab placement.",
+          "type": "string"
+        },
+        "anchorStringMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorString` property is editable."
+        },
+        "anchorTabProcessorVersion": {
+          "description": "Reserved for DocuSign.",
+          "type": "string"
+        },
+        "anchorTabProcessorVersionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Reserved for DocuSign."
+        },
+        "anchorUnits": {
+          "description": "Specifies units of the\n`anchorXOffset` and\n`anchorYOffset`.\nValid units are:\n\n- `pixels`\n- `inches`\n- `mms`\n- `cms`\n",
+          "type": "string"
+        },
+        "anchorUnitsMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorUnits` property is editable."
+        },
+        "anchorXOffset": {
+          "description": "Specifies the X axis location of the tab in `anchorUnits` relative to the `anchorString`.\n",
+          "type": "string"
+        },
+        "anchorXOffsetMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorXOffset` property is editable."
+        },
+        "anchorYOffset": {
+          "description": "Specifies the Y axis location of the tab in `anchorUnits` relative to the `anchorString`.\n",
+          "type": "string"
+        },
+        "anchorYOffsetMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorYOffset` property is editable."
+        },
+        "bold": {
+          "description": "When set to **true**, the information in the tab is bold.",
+          "type": "string"
+        },
+        "boldMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `bold` property is editable."
+        },
+        "concealValueOnDocument": {
+          "description": "When set to **true**, the field appears normally while the recipient is adding or modifying the information in the field, but the data is not visible (the characters are hidden by asterisks) to any other signer or the sender.\n\nWhen an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.\n\nThis setting applies only to text boxes and does not affect list boxes, radio buttons, or check boxes.",
+          "type": "string"
+        },
+        "concealValueOnDocumentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `concealValueOnDocument` property is editable."
+        },
+        "conditionalParentLabel": {
+          "description": "For conditional fields this is the `tabLabel` of the parent tab that controls this tab's visibility.",
+          "type": "string"
+        },
+        "conditionalParentLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `conditionalParentLabel` property is editable."
+        },
+        "conditionalParentValue": {
+          "description": "For conditional fields, this is the value of the parent tab that controls the tab's visibility.\n\nIf the parent tab is a Checkbox, Radio button, Optional Signature, or Optional Initial use \"on\" as the value to show that the parent tab is active.\n",
+          "type": "string"
+        },
+        "conditionalParentValueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `conditionalParentValue` property is editable."
+        },
+        "customTabId": {
+          "description": "The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.",
+          "type": "string"
+        },
+        "customTabIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `customTabId` property is editable."
+        },
+        "disableAutoSize": {
+          "description": "When set to **true**, disables the auto sizing of single line text boxes in the signing screen when the signer enters data. If disabled users will only be able enter as much data as the text box can hold. By default this is false. This property only affects single line text boxes.",
+          "type": "string"
+        },
+        "disableAutoSizeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `disableAutoSize` property is editable."
+        },
+        "documentId": {
+          "description": "The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.",
+          "type": "string"
+        },
+        "documentIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `documentId` property is editable."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/errorDetails",
+          "description": "This object describes errors that occur. It is only valid for responses and ignored in requests."
+        },
+        "font": {
+          "description": "The font to be used for the tab value. Supported fonts include:\n\n- Default\n- Arial\n- ArialNarrow\n- Calibri\n- CourierNew\n- Garamond\n- Georgia\n- Helvetica\n- LucidaConsole\n- MSGothic\n- MSMincho\n- OCR-A\n- Tahoma\n- TimesNewRoman\n- Trebuchet\n- Verdana\n",
+          "type": "string"
+        },
+        "fontColor": {
+          "description": "The font color to use for the information in the tab. Possible values are: \n\n- Black\n- BrightBlue\n- BrightRed\n- DarkGreen\n- DarkRed\n- Gold\n- Green\n- NavyBlue\n- Purple\n- White\n",
+          "type": "string"
+        },
+        "fontColorMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fontColor` property is editable."
+        },
+        "fontMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `font` property is editable."
+        },
+        "fontSize": {
+          "description": "The font size used for the information in the tab. Possible values are:\n\n- Size7\n- Size8\n- Size9\n- Size10\n- Size11\n- Size12\n- Size14\n- Size16\n- Size18\n- Size20\n- Size22\n- Size24\n- Size26\n- Size28\n- Size36\n- Size48\n- Size72",
+          "type": "string"
+        },
+        "fontSizeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fontSize` property is editable."
+        },
+        "formOrder": {
+          "description": "An integer specifying the order in which the guided form HTML should render. The order is relative to the `formPageLabel`, the group by which to place the guided form HTML block.",
+          "type": "string"
+        },
+        "formOrderMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `formOrder` property is editable."
+        },
+        "formPageLabel": {
+          "description": "A string specifying the group in which to place the guided form HTML. Each group displays as a separate guided forms page in the signing experience.",
+          "type": "string"
+        },
+        "formPageLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `formPageLabel` property is editable."
+        },
+        "formPageNumber": {
+          "description": "An integer specifying the order in which to present the guided form pages.",
+          "type": "string"
+        },
+        "formPageNumberMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fromPageNumber` property is editable."
+        },
+        "height": {
+          "description": "The height of the tab in pixels.",
+          "type": "string"
+        },
+        "heightMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `height` property is editable."
+        },
+        "italic": {
+          "description": "When set to **true**, the information in the tab is italic.",
+          "type": "string"
+        },
+        "italicMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `italic` property is editable."
+        },
+        "localePolicy": {
+          "$ref": "#/definitions/localePolicyTab",
+          "description": "Reserved for DocuSign."
+        },
+        "locked": {
+          "description": "When set to **true**, the signer cannot change the data of the custom tab.",
+          "type": "string"
+        },
+        "lockedMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `locked` property is editable."
+        },
+        "maxLength": {
+          "description": "An optional value that describes the maximum length of the property when the property is a string.",
+          "type": "string"
+        },
+        "maxLengthMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `maxLength` property is editable."
+        },
+        "mergeField": {
+          "$ref": "#/definitions/mergeField",
+          "description": "Contains the information necessary to map the tab to a field in SalesForce."
+        },
+        "mergeFieldXml": {
+          "description": "",
+          "type": "string"
+        },
+        "name": {
+          "description": "",
+          "type": "string"
+        },
+        "nameMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `name` property is editable. Read only."
+        },
+        "originalValue": {
+          "description": "The initial value of the tab when it was sent to the recipient. ",
+          "type": "string"
+        },
+        "originalValueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `originalValue` property is editable."
+        },
+        "pageNumber": {
+          "description": "The page number being accessed.",
+          "type": "string"
+        },
+        "pageNumberMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `pageNumber` property is editable."
+        },
+        "recipientId": {
+          "description": "A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.",
+          "type": "string"
+        },
+        "recipientIdGuid": {
+          "description": "The globally-unique identifier (GUID) for a specific recipient on a specific envelope. If the same recipient is associated with multiple envelopes, they will have a different GUID for each one. Read only.",
+          "type": "string"
+        },
+        "recipientIdGuidMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `recipientIdGuid` property is editable."
+        },
+        "recipientIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `recipientId` property is editable."
+        },
+        "required": {
+          "description": "When set to **true**, the signer is required to fill out this tab.",
+          "type": "string"
+        },
+        "requiredMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `required` property is editable."
+        },
+        "smartContractInformation": {
+          "$ref": "#/definitions/smartContractInformation",
+          "description": ""
+        },
+        "status": {
+          "description": "The status of the item.",
+          "type": "string"
+        },
+        "statusMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `status` property is editable."
+        },
+        "tabGroupLabels": {
+          "description": "An array of tab group labels that uniquely identify tab groups. To assign a tab to a `tabGroup`, you assign the `TabGroupLabel` to the `Tab.TabGroupLabels` array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tabGroupLabelsMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabGroupLabels` property is editable."
+        },
+        "tabId": {
+          "description": "The unique identifier for the tab.",
+          "type": "string"
+        },
+        "tabIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabId` property is editable."
+        },
+        "tabLabel": {
+          "description": "The label associated with the tab. This value may be an empty string.\nIf no value is provided, the tab type is used as the value.\n\nMaximum Length: 500 characters.\n",
+          "type": "string"
+        },
+        "tabLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabLabel` property is editable."
+        },
+        "tabOrder": {
+          "description": "A positive integer that sets the order the tab is navigated to during signing.\n\nTabs on a page are navigated to in ascending order, starting with the lowest number and moving to the highest. If two or more tabs have the same `tabOrder` value, the normal auto-navigation setting behavior for the envelope is used.",
+          "type": "string"
+        },
+        "tabOrderMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabOrder` property is editable."
+        },
+        "tabType": {
+          "description": "Indicates the type of tab (for example, `signHere` or `initialHere`).",
+          "type": "string"
+        },
+        "tabTypeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabType` property is editable."
+        },
+        "templateLocked": {
+          "description": "When set to **true**, the sender cannot change any attributes of the recipient. Used only when working with template recipients. ",
+          "type": "string"
+        },
+        "templateLockedMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `templateLocked` property is editable."
+        },
+        "templateRequired": {
+          "description": "When set to **true**, the sender may not remove the recipient. Used only when working with template recipients.",
+          "type": "string"
+        },
+        "templateRequiredMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `templateRequired` property is editable."
+        },
+        "tooltip": {
+          "description": "The text of a tooltip that appears when a user hovers over a form field or tab.",
+          "type": "string"
+        },
+        "toolTipMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `toolTip` property is editable."
+        },
+        "underline": {
+          "description": "When set to **true**, the information in the tab is underlined.",
+          "type": "string"
+        },
+        "underlineMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `underline` property is editable."
+        },
+        "value": {
+          "description": "Specifies the value of the tab. ",
+          "type": "string"
+        },
+        "valueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `value` property is editable."
+        },
+        "width": {
+          "description": "The width of the tab in pixels.",
+          "type": "string"
+        },
+        "widthMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `width` property is editable."
+        },
+        "xPosition": {
+          "description": "This property indicates the horizontal offset of the object on the page.\nDocuSign uses 72 DPI when determining position.\nRequired. May be zero.\n",
+          "type": "string"
+        },
+        "xPositionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `xPosition` property is editable."
+        },
+        "yPosition": {
+          "description": "This property indicates the vertical offset of the object on the page.\nDocuSign uses 72 DPI when determining position.\nRequired. May be zero.\n",
+          "type": "string"
+        },
+        "yPositionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `yPosition` property is editable."
+        }
+      },
+      "x-ds-definition-name": "commissionExpiration",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "commissionNumber": {
+      "type": "object",
+      "properties": {
+        "anchorAllowWhiteSpaceInCharacters": {
+          "description": "",
+          "type": "string"
+        },
+        "anchorAllowWhiteSpaceInCharactersMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": ""
+        },
+        "anchorCaseSensitive": {
+          "description": "This property controls how [anchor tabs][AnchorTabs] are placed. When **true**, the text string in a document must match the case of the `anchorString` property for an anchor tab to be created. The default value is **false**.\n\nFor example, when set to **true**, if the anchor string is `DocuSign`, then `DocuSign` will match but `Docusign`, `docusign`, `DoCuSiGn`, etc. will not match. When set to **false**, `DocuSign`, `Docusign`, `docusign`, `DoCuSiGn`, etc. will all match.\n\nThis functionality uses the following rules:\n\n- Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:\n\n  $~><|^+=\n\n  For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`\n\n- Strings embedded in other strings are ignored during the matching process.\n\n- In words that have dashes, the parts separated by dashes are treated as distinct words.\n\n  Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true**.\n\n- Letters with accent marks are treated as distinct characters from their unaccented counterparts.\n\n- For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.\n\n  Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.\n\n- Unlike punctuation, numbers are not ignored when finding anchor words.\n\n  Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTabs]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace",
+          "type": "string"
+        },
+        "anchorCaseSensitiveMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorCaseSensitive` property is editable."
+        },
+        "anchorHorizontalAlignment": {
+          "description": "This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :\n\n- `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.\n- `right`: Aligns the tab’s left side with the last character of the matching anchor word.\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTabs]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace\n",
+          "type": "string"
+        },
+        "anchorHorizontalAlignmentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorHorizontalAlignment` property is editable."
+        },
+        "anchorIgnoreIfNotPresent": {
+          "description": "When set to **true**, this tab is ignored if the `anchorString` is not found in the document.",
+          "type": "string"
+        },
+        "anchorIgnoreIfNotPresentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorIgnoreIfNotPresent` property is editable."
+        },
+        "anchorMatchWholeWord": {
+          "description": "When set to **true**, the text string in a document must match the value of the `anchorString` property in its entirety for an [anchor tab][AnchorTab] to be created. The default value is **false**.\n\nFor example, when set to **true**, if the input is `man` then `man` will match but `manpower`, `fireman`, and `penmanship` will not. When set to **false**, if the input is `man` then `man`, `manpower`, `fireman`, and `penmanship` will all match.\n\nThis functionality uses the following rules:\n\n- Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:\n\n  $~><|^+=\n\n  For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`\n\n- Strings embedded in other strings are ignored during the matching process.\n\n- In words that have dashes, the parts separated by dashes are treated as distinct words.\n\n  Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true**.\n\n- Letters with accent marks are treated as distinct characters from their unaccented counterparts.\n\n- For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.\n\n  Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.\n\n- Unlike punctuation, numbers are not ignored when finding anchor words.\n\n  Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).\n\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTab]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace\n",
+          "type": "string"
+        },
+        "anchorMatchWholeWordMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorMatchWholeWord` property is editable."
+        },
+        "anchorString": {
+          "description": "Specifies the string to find in the document and use as the basis for tab placement.",
+          "type": "string"
+        },
+        "anchorStringMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorString` property is editable."
+        },
+        "anchorTabProcessorVersion": {
+          "description": "Reserved for DocuSign.",
+          "type": "string"
+        },
+        "anchorTabProcessorVersionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Reserved for DocuSign."
+        },
+        "anchorUnits": {
+          "description": "Specifies units of the\n`anchorXOffset` and\n`anchorYOffset`.\nValid units are:\n\n- `pixels`\n- `inches`\n- `mms`\n- `cms`\n",
+          "type": "string"
+        },
+        "anchorUnitsMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorUnits` property is editable."
+        },
+        "anchorXOffset": {
+          "description": "Specifies the X axis location of the tab in `anchorUnits` relative to the `anchorString`.\n",
+          "type": "string"
+        },
+        "anchorXOffsetMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorXOffset` property is editable."
+        },
+        "anchorYOffset": {
+          "description": "Specifies the Y axis location of the tab in `anchorUnits` relative to the `anchorString`.\n",
+          "type": "string"
+        },
+        "anchorYOffsetMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorYOffset` property is editable."
+        },
+        "bold": {
+          "description": "When set to **true**, the information in the tab is bold.",
+          "type": "string"
+        },
+        "boldMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `bold` property is editable."
+        },
+        "concealValueOnDocument": {
+          "description": "When set to **true**, the field appears normally while the recipient is adding or modifying the information in the field, but the data is not visible (the characters are hidden by asterisks) to any other signer or the sender.\n\nWhen an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.\n\nThis setting applies only to text boxes and does not affect list boxes, radio buttons, or check boxes.",
+          "type": "string"
+        },
+        "concealValueOnDocumentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `concealValueOnDocument` property is editable."
+        },
+        "conditionalParentLabel": {
+          "description": "For conditional fields this is the `tabLabel` of the parent tab that controls this tab's visibility.",
+          "type": "string"
+        },
+        "conditionalParentLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `conditionalParentLabel` property is editable."
+        },
+        "conditionalParentValue": {
+          "description": "For conditional fields, this is the value of the parent tab that controls the tab's visibility.\n\nIf the parent tab is a Checkbox, Radio button, Optional Signature, or Optional Initial use \"on\" as the value to show that the parent tab is active.\n",
+          "type": "string"
+        },
+        "conditionalParentValueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `conditionalParentValue` property is editable."
+        },
+        "customTabId": {
+          "description": "The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.",
+          "type": "string"
+        },
+        "customTabIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `customTabId` property is editable."
+        },
+        "disableAutoSize": {
+          "description": "When set to **true**, disables the auto sizing of single line text boxes in the signing screen when the signer enters data. If disabled users will only be able enter as much data as the text box can hold. By default this is false. This property only affects single line text boxes.",
+          "type": "string"
+        },
+        "disableAutoSizeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `disableAutoSize` property is editable."
+        },
+        "documentId": {
+          "description": "The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.",
+          "type": "string"
+        },
+        "documentIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `documentId` property is editable."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/errorDetails",
+          "description": "This object describes errors that occur. It is only valid for responses and ignored in requests."
+        },
+        "font": {
+          "description": "The font to be used for the tab value. Supported fonts include:\n\n- Default\n- Arial\n- ArialNarrow\n- Calibri\n- CourierNew\n- Garamond\n- Georgia\n- Helvetica\n- LucidaConsole\n- MSGothic\n- MSMincho\n- OCR-A\n- Tahoma\n- TimesNewRoman\n- Trebuchet\n- Verdana\n",
+          "type": "string"
+        },
+        "fontColor": {
+          "description": "The font color to use for the information in the tab. Possible values are: \n\n- Black\n- BrightBlue\n- BrightRed\n- DarkGreen\n- DarkRed\n- Gold\n- Green\n- NavyBlue\n- Purple\n- White\n",
+          "type": "string"
+        },
+        "fontColorMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fontColor` property is editable."
+        },
+        "fontMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `font` property is editable."
+        },
+        "fontSize": {
+          "description": "The font size used for the information in the tab. Possible values are:\n\n- Size7\n- Size8\n- Size9\n- Size10\n- Size11\n- Size12\n- Size14\n- Size16\n- Size18\n- Size20\n- Size22\n- Size24\n- Size26\n- Size28\n- Size36\n- Size48\n- Size72",
+          "type": "string"
+        },
+        "fontSizeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fontSize` property is editable."
+        },
+        "formOrder": {
+          "description": "An integer specifying the order in which the guided form HTML should render. The order is relative to the `formPageLabel`, the group by which to place the guided form HTML block.",
+          "type": "string"
+        },
+        "formOrderMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `formOrder` property is editable."
+        },
+        "formPageLabel": {
+          "description": "A string specifying the group in which to place the guided form HTML. Each group displays as a separate guided forms page in the signing experience.",
+          "type": "string"
+        },
+        "formPageLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `formPageLabel` property is editable."
+        },
+        "formPageNumber": {
+          "description": "An integer specifying the order in which to present the guided form pages.",
+          "type": "string"
+        },
+        "formPageNumberMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fromPageNumber` property is editable."
+        },
+        "height": {
+          "description": "The height of the tab in pixels.",
+          "type": "string"
+        },
+        "heightMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `height` property is editable."
+        },
+        "italic": {
+          "description": "When set to **true**, the information in the tab is italic.",
+          "type": "string"
+        },
+        "italicMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `italic` property is editable."
+        },
+        "localePolicy": {
+          "$ref": "#/definitions/localePolicyTab",
+          "description": "Reserved for DocuSign."
+        },
+        "locked": {
+          "description": "When set to **true**, the signer cannot change the data of the custom tab.",
+          "type": "string"
+        },
+        "lockedMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `locked` property is editable."
+        },
+        "maxLength": {
+          "description": "An optional value that describes the maximum length of the property when the property is a string.",
+          "type": "string"
+        },
+        "maxLengthMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `maxLength` property is editable."
+        },
+        "mergeField": {
+          "$ref": "#/definitions/mergeField",
+          "description": "Contains the information necessary to map the tab to a field in SalesForce."
+        },
+        "mergeFieldXml": {
+          "description": "",
+          "type": "string"
+        },
+        "name": {
+          "description": "",
+          "type": "string"
+        },
+        "nameMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `name` property is editable. Read only."
+        },
+        "originalValue": {
+          "description": "The initial value of the tab when it was sent to the recipient. ",
+          "type": "string"
+        },
+        "originalValueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `originalValue` property is editable."
+        },
+        "pageNumber": {
+          "description": "The page number being accessed.",
+          "type": "string"
+        },
+        "pageNumberMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `pageNumber` property is editable."
+        },
+        "recipientId": {
+          "description": "A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.",
+          "type": "string"
+        },
+        "recipientIdGuid": {
+          "description": "The globally-unique identifier (GUID) for a specific recipient on a specific envelope. If the same recipient is associated with multiple envelopes, they will have a different GUID for each one. Read only.",
+          "type": "string"
+        },
+        "recipientIdGuidMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `recipientIdGuid` property is editable."
+        },
+        "recipientIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `recipientId` property is editable."
+        },
+        "required": {
+          "description": "When set to **true**, the signer is required to fill out this tab.",
+          "type": "string"
+        },
+        "requiredMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `required` property is editable."
+        },
+        "smartContractInformation": {
+          "$ref": "#/definitions/smartContractInformation",
+          "description": ""
+        },
+        "status": {
+          "description": "The status of the item.",
+          "type": "string"
+        },
+        "statusMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `status` property is editable."
+        },
+        "tabGroupLabels": {
+          "description": "An array of tab group labels that uniquely identify tab groups. To assign a tab to a `tabGroup`, you assign the `TabGroupLabel` to the `Tab.TabGroupLabels` array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tabGroupLabelsMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabGroupLabels` property is editable."
+        },
+        "tabId": {
+          "description": "The unique identifier for the tab.",
+          "type": "string"
+        },
+        "tabIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabId` property is editable."
+        },
+        "tabLabel": {
+          "description": "The label associated with the tab. This value may be an empty string.\nIf no value is provided, the tab type is used as the value.\n\nMaximum Length: 500 characters.\n",
+          "type": "string"
+        },
+        "tabLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabLabel` property is editable."
+        },
+        "tabOrder": {
+          "description": "A positive integer that sets the order the tab is navigated to during signing.\n\nTabs on a page are navigated to in ascending order, starting with the lowest number and moving to the highest. If two or more tabs have the same `tabOrder` value, the normal auto-navigation setting behavior for the envelope is used.",
+          "type": "string"
+        },
+        "tabOrderMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabOrder` property is editable."
+        },
+        "tabType": {
+          "description": "Indicates the type of tab (for example, `signHere` or `initialHere`).",
+          "type": "string"
+        },
+        "tabTypeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabType` property is editable."
+        },
+        "templateLocked": {
+          "description": "When set to **true**, the sender cannot change any attributes of the recipient. Used only when working with template recipients. ",
+          "type": "string"
+        },
+        "templateLockedMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `templateLocked` property is editable."
+        },
+        "templateRequired": {
+          "description": "When set to **true**, the sender may not remove the recipient. Used only when working with template recipients.",
+          "type": "string"
+        },
+        "templateRequiredMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `templateRequired` property is editable."
+        },
+        "tooltip": {
+          "description": "The text of a tooltip that appears when a user hovers over a form field or tab.",
+          "type": "string"
+        },
+        "toolTipMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `toolTip` property is editable."
+        },
+        "underline": {
+          "description": "When set to **true**, the information in the tab is underlined.",
+          "type": "string"
+        },
+        "underlineMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `underline` property is editable."
+        },
+        "value": {
+          "description": "Specifies the value of the tab. ",
+          "type": "string"
+        },
+        "valueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `value` property is editable."
+        },
+        "width": {
+          "description": "The width of the tab in pixels.",
+          "type": "string"
+        },
+        "widthMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `width` property is editable."
+        },
+        "xPosition": {
+          "description": "This property indicates the horizontal offset of the object on the page.\nDocuSign uses 72 DPI when determining position.\nRequired. May be zero.\n",
+          "type": "string"
+        },
+        "xPositionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `xPosition` property is editable."
+        },
+        "yPosition": {
+          "description": "This property indicates the vertical offset of the object on the page.\nDocuSign uses 72 DPI when determining position.\nRequired. May be zero.\n",
+          "type": "string"
+        },
+        "yPositionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `yPosition` property is editable."
+        }
+      },
+      "x-ds-definition-name": "commissionNumber",
+      "description": "",
+      "x-ms-summary": ""
+    },
+    "commissionState": {
+      "type": "object",
+      "properties": {
+        "anchorAllowWhiteSpaceInCharacters": {
+          "description": "",
+          "type": "string"
+        },
+        "anchorAllowWhiteSpaceInCharactersMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": ""
+        },
+        "anchorCaseSensitive": {
+          "description": "This property controls how [anchor tabs][AnchorTabs] are placed. When **true**, the text string in a document must match the case of the `anchorString` property for an anchor tab to be created. The default value is **false**.\n\nFor example, when set to **true**, if the anchor string is `DocuSign`, then `DocuSign` will match but `Docusign`, `docusign`, `DoCuSiGn`, etc. will not match. When set to **false**, `DocuSign`, `Docusign`, `docusign`, `DoCuSiGn`, etc. will all match.\n\nThis functionality uses the following rules:\n\n- Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:\n\n  $~><|^+=\n\n  For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`\n\n- Strings embedded in other strings are ignored during the matching process.\n\n- In words that have dashes, the parts separated by dashes are treated as distinct words.\n\n  Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true**.\n\n- Letters with accent marks are treated as distinct characters from their unaccented counterparts.\n\n- For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.\n\n  Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.\n\n- Unlike punctuation, numbers are not ignored when finding anchor words.\n\n  Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTabs]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace",
+          "type": "string"
+        },
+        "anchorCaseSensitiveMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorCaseSensitive` property is editable."
+        },
+        "anchorHorizontalAlignment": {
+          "description": "This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :\n\n- `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.\n- `right`: Aligns the tab’s left side with the last character of the matching anchor word.\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTabs]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace\n",
+          "type": "string"
+        },
+        "anchorHorizontalAlignmentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorHorizontalAlignment` property is editable."
+        },
+        "anchorIgnoreIfNotPresent": {
+          "description": "When set to **true**, this tab is ignored if the `anchorString` is not found in the document.",
+          "type": "string"
+        },
+        "anchorIgnoreIfNotPresentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorIgnoreIfNotPresent` property is editable."
+        },
+        "anchorMatchWholeWord": {
+          "description": "When set to **true**, the text string in a document must match the value of the `anchorString` property in its entirety for an [anchor tab][AnchorTab] to be created. The default value is **false**.\n\nFor example, when set to **true**, if the input is `man` then `man` will match but `manpower`, `fireman`, and `penmanship` will not. When set to **false**, if the input is `man` then `man`, `manpower`, `fireman`, and `penmanship` will all match.\n\nThis functionality uses the following rules:\n\n- Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:\n\n  $~><|^+=\n\n  For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`\n\n- Strings embedded in other strings are ignored during the matching process.\n\n- In words that have dashes, the parts separated by dashes are treated as distinct words.\n\n  Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true**.\n\n- Letters with accent marks are treated as distinct characters from their unaccented counterparts.\n\n- For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.\n\n  Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.\n\n- Unlike punctuation, numbers are not ignored when finding anchor words.\n\n  Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).\n\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTab]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace\n",
+          "type": "string"
+        },
+        "anchorMatchWholeWordMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorMatchWholeWord` property is editable."
+        },
+        "anchorString": {
+          "description": "Specifies the string to find in the document and use as the basis for tab placement.",
+          "type": "string"
+        },
+        "anchorStringMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorString` property is editable."
+        },
+        "anchorTabProcessorVersion": {
+          "description": "Reserved for DocuSign.",
+          "type": "string"
+        },
+        "anchorTabProcessorVersionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Reserved for DocuSign."
+        },
+        "anchorUnits": {
+          "description": "Specifies units of the\n`anchorXOffset` and\n`anchorYOffset`.\nValid units are:\n\n- `pixels`\n- `inches`\n- `mms`\n- `cms`\n",
+          "type": "string"
+        },
+        "anchorUnitsMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorUnits` property is editable."
+        },
+        "anchorXOffset": {
+          "description": "Specifies the X axis location of the tab in `anchorUnits` relative to the `anchorString`.\n",
+          "type": "string"
+        },
+        "anchorXOffsetMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorXOffset` property is editable."
+        },
+        "anchorYOffset": {
+          "description": "Specifies the Y axis location of the tab in `anchorUnits` relative to the `anchorString`.\n",
+          "type": "string"
+        },
+        "anchorYOffsetMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorYOffset` property is editable."
+        },
+        "bold": {
+          "description": "When set to **true**, the information in the tab is bold.",
+          "type": "string"
+        },
+        "boldMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `bold` property is editable."
+        },
+        "concealValueOnDocument": {
+          "description": "When set to **true**, the field appears normally while the recipient is adding or modifying the information in the field, but the data is not visible (the characters are hidden by asterisks) to any other signer or the sender.\n\nWhen an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.\n\nThis setting applies only to text boxes and does not affect list boxes, radio buttons, or check boxes.",
+          "type": "string"
+        },
+        "concealValueOnDocumentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `concealValueOnDocument` property is editable."
+        },
+        "conditionalParentLabel": {
+          "description": "For conditional fields this is the `tabLabel` of the parent tab that controls this tab's visibility.",
+          "type": "string"
+        },
+        "conditionalParentLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `conditionalParentLabel` property is editable."
+        },
+        "conditionalParentValue": {
+          "description": "For conditional fields, this is the value of the parent tab that controls the tab's visibility.\n\nIf the parent tab is a Checkbox, Radio button, Optional Signature, or Optional Initial use \"on\" as the value to show that the parent tab is active.\n",
+          "type": "string"
+        },
+        "conditionalParentValueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `conditionalParentValue` property is editable."
+        },
+        "customTabId": {
+          "description": "The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.",
+          "type": "string"
+        },
+        "customTabIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `customTabId` property is editable."
+        },
+        "disableAutoSize": {
+          "description": "When set to **true**, disables the auto sizing of single line text boxes in the signing screen when the signer enters data. If disabled users will only be able enter as much data as the text box can hold. By default this is false. This property only affects single line text boxes.",
+          "type": "string"
+        },
+        "disableAutoSizeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `disableAutoSize` property is editable."
+        },
+        "documentId": {
+          "description": "The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.",
+          "type": "string"
+        },
+        "documentIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `documentId` property is editable."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/errorDetails",
+          "description": "This object describes errors that occur. It is only valid for responses and ignored in requests."
+        },
+        "font": {
+          "description": "The font to be used for the tab value. Supported fonts include:\n\n- Default\n- Arial\n- ArialNarrow\n- Calibri\n- CourierNew\n- Garamond\n- Georgia\n- Helvetica\n- LucidaConsole\n- MSGothic\n- MSMincho\n- OCR-A\n- Tahoma\n- TimesNewRoman\n- Trebuchet\n- Verdana\n",
+          "type": "string"
+        },
+        "fontColor": {
+          "description": "The font color to use for the information in the tab. Possible values are: \n\n- Black\n- BrightBlue\n- BrightRed\n- DarkGreen\n- DarkRed\n- Gold\n- Green\n- NavyBlue\n- Purple\n- White\n",
+          "type": "string"
+        },
+        "fontColorMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fontColor` property is editable."
+        },
+        "fontMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `font` property is editable."
+        },
+        "fontSize": {
+          "description": "The font size used for the information in the tab. Possible values are:\n\n- Size7\n- Size8\n- Size9\n- Size10\n- Size11\n- Size12\n- Size14\n- Size16\n- Size18\n- Size20\n- Size22\n- Size24\n- Size26\n- Size28\n- Size36\n- Size48\n- Size72",
+          "type": "string"
+        },
+        "fontSizeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fontSize` property is editable."
+        },
+        "formOrder": {
+          "description": "An integer specifying the order in which the guided form HTML should render. The order is relative to the `formPageLabel`, the group by which to place the guided form HTML block.",
+          "type": "string"
+        },
+        "formOrderMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `formOrder` property is editable."
+        },
+        "formPageLabel": {
+          "description": "A string specifying the group in which to place the guided form HTML. Each group displays as a separate guided forms page in the signing experience.",
+          "type": "string"
+        },
+        "formPageLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `formPageLabel` property is editable."
+        },
+        "formPageNumber": {
+          "description": "An integer specifying the order in which to present the guided form pages.",
+          "type": "string"
+        },
+        "formPageNumberMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fromPageNumber` property is editable."
+        },
+        "height": {
+          "description": "The height of the tab in pixels.",
+          "type": "string"
+        },
+        "heightMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `height` property is editable."
+        },
+        "italic": {
+          "description": "When set to **true**, the information in the tab is italic.",
+          "type": "string"
+        },
+        "italicMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `italic` property is editable."
+        },
+        "localePolicy": {
+          "$ref": "#/definitions/localePolicyTab",
+          "description": "Reserved for DocuSign."
+        },
+        "locked": {
+          "description": "When set to **true**, the signer cannot change the data of the custom tab.",
+          "type": "string"
+        },
+        "lockedMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `locked` property is editable."
+        },
+        "maxLength": {
+          "description": "An optional value that describes the maximum length of the property when the property is a string.",
+          "type": "string"
+        },
+        "maxLengthMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `maxLength` property is editable."
+        },
+        "mergeField": {
+          "$ref": "#/definitions/mergeField",
+          "description": "Contains the information necessary to map the tab to a field in SalesForce."
+        },
+        "mergeFieldXml": {
+          "description": "",
+          "type": "string"
+        },
+        "name": {
+          "description": "",
+          "type": "string"
+        },
+        "nameMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `name` property is editable. Read only."
+        },
+        "originalValue": {
+          "description": "The initial value of the tab when it was sent to the recipient. ",
+          "type": "string"
+        },
+        "originalValueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `originalValue` property is editable."
+        },
+        "pageNumber": {
+          "description": "The page number being accessed.",
+          "type": "string"
+        },
+        "pageNumberMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `pageNumber` property is editable."
+        },
+        "recipientId": {
+          "description": "A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.",
+          "type": "string"
+        },
+        "recipientIdGuid": {
+          "description": "The globally-unique identifier (GUID) for a specific recipient on a specific envelope. If the same recipient is associated with multiple envelopes, they will have a different GUID for each one. Read only.",
+          "type": "string"
+        },
+        "recipientIdGuidMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `recipientIdGuid` property is editable."
+        },
+        "recipientIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `recipientId` property is editable."
+        },
+        "required": {
+          "description": "When set to **true**, the signer is required to fill out this tab.",
+          "type": "string"
+        },
+        "requiredMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `required` property is editable."
+        },
+        "smartContractInformation": {
+          "$ref": "#/definitions/smartContractInformation",
+          "description": ""
+        },
+        "status": {
+          "description": "The status of the item.",
+          "type": "string"
+        },
+        "statusMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `status` property is editable."
+        },
+        "tabGroupLabels": {
+          "description": "An array of tab group labels that uniquely identify tab groups. To assign a tab to a `tabGroup`, you assign the `TabGroupLabel` to the `Tab.TabGroupLabels` array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tabGroupLabelsMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabGroupLabels` property is editable."
+        },
+        "tabId": {
+          "description": "The unique identifier for the tab.",
+          "type": "string"
+        },
+        "tabIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabId` property is editable."
+        },
+        "tabLabel": {
+          "description": "The label associated with the tab. This value may be an empty string.\nIf no value is provided, the tab type is used as the value.\n\nMaximum Length: 500 characters.\n",
+          "type": "string"
+        },
+        "tabLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabLabel` property is editable."
+        },
+        "tabOrder": {
+          "description": "A positive integer that sets the order the tab is navigated to during signing.\n\nTabs on a page are navigated to in ascending order, starting with the lowest number and moving to the highest. If two or more tabs have the same `tabOrder` value, the normal auto-navigation setting behavior for the envelope is used.",
+          "type": "string"
+        },
+        "tabOrderMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabOrder` property is editable."
+        },
+        "tabType": {
+          "description": "Indicates the type of tab (for example, `signHere` or `initialHere`).",
+          "type": "string"
+        },
+        "tabTypeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabType` property is editable."
+        },
+        "templateLocked": {
+          "description": "When set to **true**, the sender cannot change any attributes of the recipient. Used only when working with template recipients. ",
+          "type": "string"
+        },
+        "templateLockedMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `templateLocked` property is editable."
+        },
+        "templateRequired": {
+          "description": "When set to **true**, the sender may not remove the recipient. Used only when working with template recipients.",
+          "type": "string"
+        },
+        "templateRequiredMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `templateRequired` property is editable."
+        },
+        "tooltip": {
+          "description": "The text of a tooltip that appears when a user hovers over a form field or tab.",
+          "type": "string"
+        },
+        "toolTipMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `toolTip` property is editable."
+        },
+        "underline": {
+          "description": "When set to **true**, the information in the tab is underlined.",
+          "type": "string"
+        },
+        "underlineMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `underline` property is editable."
+        },
+        "value": {
+          "description": "Specifies the value of the tab. ",
+          "type": "string"
+        },
+        "valueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `value` property is editable."
+        },
+        "width": {
+          "description": "The width of the tab in pixels.",
+          "type": "string"
+        },
+        "widthMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `width` property is editable."
+        },
+        "xPosition": {
+          "description": "This property indicates the horizontal offset of the object on the page.\nDocuSign uses 72 DPI when determining position.\nRequired. May be zero.\n",
+          "type": "string"
+        },
+        "xPositionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `xPosition` property is editable."
+        },
+        "yPosition": {
+          "description": "This property indicates the vertical offset of the object on the page.\nDocuSign uses 72 DPI when determining position.\nRequired. May be zero.\n",
+          "type": "string"
+        },
+        "yPositionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `yPosition` property is editable."
+        }
+      },
+      "x-ds-definition-name": "commissionState",
       "description": "",
       "x-ms-summary": ""
     },
@@ -33534,10 +35191,6 @@
           "items": {
             "$ref": "#/definitions/recipientAdditionalNotification"
           }
-        },
-        "additionalNotificationsMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": ""
         },
         "allowSystemOverrideForLockedRecipient": {
           "description": "",
@@ -39982,10 +41635,6 @@
             "$ref": "#/definitions/recipientAdditionalNotification"
           }
         },
-        "additionalNotificationsMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": ""
-        },
         "allowSystemOverrideForLockedRecipient": {
           "description": "",
           "type": "string"
@@ -42277,309 +43926,6 @@
       "description": "",
       "x-ms-summary": ""
     },
-    "notaryCertificate": {
-      "type": "object",
-      "properties": {
-        "anchorAllowWhiteSpaceInCharacters": {
-          "description": "",
-          "type": "string"
-        },
-        "anchorAllowWhiteSpaceInCharactersMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": ""
-        },
-        "anchorCaseSensitive": {
-          "description": "This property controls how [anchor tabs][AnchorTabs] are placed. When **true**, the text string in a document must match the case of the `anchorString` property for an anchor tab to be created. The default value is **false**.\n\nFor example, when set to **true**, if the anchor string is `DocuSign`, then `DocuSign` will match but `Docusign`, `docusign`, `DoCuSiGn`, etc. will not match. When set to **false**, `DocuSign`, `Docusign`, `docusign`, `DoCuSiGn`, etc. will all match.\n\nThis functionality uses the following rules:\n\n- Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:\n\n  $~><|^+=\n\n  For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`\n\n- Strings embedded in other strings are ignored during the matching process.\n\n- In words that have dashes, the parts separated by dashes are treated as distinct words.\n\n  Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true**.\n\n- Letters with accent marks are treated as distinct characters from their unaccented counterparts.\n\n- For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.\n\n  Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.\n\n- Unlike punctuation, numbers are not ignored when finding anchor words.\n\n  Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTabs]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace",
-          "type": "string"
-        },
-        "anchorCaseSensitiveMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `anchorCaseSensitive` property is editable."
-        },
-        "anchorHorizontalAlignment": {
-          "description": "This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :\n\n- `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.\n- `right`: Aligns the tab’s left side with the last character of the matching anchor word.\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTabs]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace\n",
-          "type": "string"
-        },
-        "anchorHorizontalAlignmentMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `anchorHorizontalAlignment` property is editable."
-        },
-        "anchorIgnoreIfNotPresent": {
-          "description": "When set to **true**, this tab is ignored if the `anchorString` is not found in the document.",
-          "type": "string"
-        },
-        "anchorIgnoreIfNotPresentMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `anchorIgnoreIfNotPresent` property is editable."
-        },
-        "anchorMatchWholeWord": {
-          "description": "When set to **true**, the text string in a document must match the value of the `anchorString` property in its entirety for an [anchor tab][AnchorTab] to be created. The default value is **false**.\n\nFor example, when set to **true**, if the input is `man` then `man` will match but `manpower`, `fireman`, and `penmanship` will not. When set to **false**, if the input is `man` then `man`, `manpower`, `fireman`, and `penmanship` will all match.\n\nThis functionality uses the following rules:\n\n- Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:\n\n  $~><|^+=\n\n  For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`\n\n- Strings embedded in other strings are ignored during the matching process.\n\n- In words that have dashes, the parts separated by dashes are treated as distinct words.\n\n  Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true**.\n\n- Letters with accent marks are treated as distinct characters from their unaccented counterparts.\n\n- For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.\n\n  Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.\n\n- Unlike punctuation, numbers are not ignored when finding anchor words.\n\n  Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).\n\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTab]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace\n",
-          "type": "string"
-        },
-        "anchorMatchWholeWordMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `anchorMatchWholeWord` property is editable."
-        },
-        "anchorString": {
-          "description": "Specifies the string to find in the document and use as the basis for tab placement.",
-          "type": "string"
-        },
-        "anchorStringMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `anchorString` property is editable."
-        },
-        "anchorTabProcessorVersion": {
-          "description": "Reserved for DocuSign.",
-          "type": "string"
-        },
-        "anchorTabProcessorVersionMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Reserved for DocuSign."
-        },
-        "anchorUnits": {
-          "description": "Specifies units of the\n`anchorXOffset` and\n`anchorYOffset`.\nValid units are:\n\n- `pixels`\n- `inches`\n- `mms`\n- `cms`\n",
-          "type": "string"
-        },
-        "anchorUnitsMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `anchorUnits` property is editable."
-        },
-        "anchorXOffset": {
-          "description": "Specifies the X axis location of the tab in `anchorUnits` relative to the `anchorString`.\n",
-          "type": "string"
-        },
-        "anchorXOffsetMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `anchorXOffset` property is editable."
-        },
-        "anchorYOffset": {
-          "description": "Specifies the Y axis location of the tab in `anchorUnits` relative to the `anchorString`.\n",
-          "type": "string"
-        },
-        "anchorYOffsetMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `anchorYOffset` property is editable."
-        },
-        "conditionalParentLabel": {
-          "description": "For conditional fields this is the `tabLabel` of the parent tab that controls this tab's visibility.",
-          "type": "string"
-        },
-        "conditionalParentLabelMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `conditionalParentLabel` property is editable."
-        },
-        "conditionalParentValue": {
-          "description": "For conditional fields, this is the value of the parent tab that controls the tab's visibility.\n\nIf the parent tab is a Checkbox, Radio button, Optional Signature, or Optional Initial use \"on\" as the value to show that the parent tab is active.\n",
-          "type": "string"
-        },
-        "conditionalParentValueMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `conditionalParentValue` property is editable."
-        },
-        "customTabId": {
-          "description": "The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.",
-          "type": "string"
-        },
-        "customTabIdMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `customTabId` property is editable."
-        },
-        "documentId": {
-          "description": "The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.",
-          "type": "string"
-        },
-        "documentIdMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `documentId` property is editable."
-        },
-        "errorDetails": {
-          "$ref": "#/definitions/errorDetails",
-          "description": "This object describes errors that occur. It is only valid for responses and ignored in requests."
-        },
-        "formOrder": {
-          "description": "An integer specifying the order in which the guided form HTML should render. The order is relative to the `formPageLabel`, the group by which to place the guided form HTML block.",
-          "type": "string"
-        },
-        "formOrderMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `formOrder` property is editable."
-        },
-        "formPageLabel": {
-          "description": "A string specifying the group in which to place the guided form HTML. Each group displays as a separate guided forms page in the signing experience.",
-          "type": "string"
-        },
-        "formPageLabelMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `formPageLabel` property is editable."
-        },
-        "formPageNumber": {
-          "description": "An integer specifying the order in which to present the guided form pages.",
-          "type": "string"
-        },
-        "formPageNumberMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `fromPageNumber` property is editable."
-        },
-        "height": {
-          "description": "The height of the tab in pixels.",
-          "type": "string"
-        },
-        "heightMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `height` property is editable."
-        },
-        "locked": {
-          "description": "When set to **true**, the signer cannot change the data of the custom tab.",
-          "type": "string"
-        },
-        "lockedMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `locked` property is editable."
-        },
-        "mergeField": {
-          "$ref": "#/definitions/mergeField",
-          "description": "Contains the information necessary to map the tab to a field in SalesForce."
-        },
-        "mergeFieldXml": {
-          "description": "",
-          "type": "string"
-        },
-        "pageNumber": {
-          "description": "The page number being accessed.",
-          "type": "string"
-        },
-        "pageNumberMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `pageNumber` property is editable."
-        },
-        "recipientId": {
-          "description": "A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.",
-          "type": "string"
-        },
-        "recipientIdGuid": {
-          "description": "The globally-unique identifier (GUID) for a specific recipient on a specific envelope. If the same recipient is associated with multiple envelopes, they will have a different GUID for each one. Read only.",
-          "type": "string"
-        },
-        "recipientIdGuidMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `recipientIdGuid` property is editable."
-        },
-        "recipientIdMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `recipientId` property is editable."
-        },
-        "required": {
-          "description": "When set to **true**, the signer is required to fill out this tab.",
-          "type": "string"
-        },
-        "requiredMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `required` property is editable."
-        },
-        "smartContractInformation": {
-          "$ref": "#/definitions/smartContractInformation",
-          "description": ""
-        },
-        "status": {
-          "description": "The status of the item.",
-          "type": "string"
-        },
-        "statusMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `status` property is editable."
-        },
-        "tabGroupLabels": {
-          "description": "An array of tab group labels that uniquely identify tab groups. To assign a tab to a `tabGroup`, you assign the `TabGroupLabel` to the `Tab.TabGroupLabels` array.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "tabGroupLabelsMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `tabGroupLabels` property is editable."
-        },
-        "tabId": {
-          "description": "The unique identifier for the tab.",
-          "type": "string"
-        },
-        "tabIdMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `tabId` property is editable."
-        },
-        "tabLabelMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `tabLabel` property is editable."
-        },
-        "tabOrder": {
-          "description": "A positive integer that sets the order the tab is navigated to during signing.\n\nTabs on a page are navigated to in ascending order, starting with the lowest number and moving to the highest. If two or more tabs have the same `tabOrder` value, the normal auto-navigation setting behavior for the envelope is used.",
-          "type": "string"
-        },
-        "tabOrderMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `tabOrder` property is editable."
-        },
-        "tabType": {
-          "description": "Indicates the type of tab (for example, `signHere` or `initialHere`).",
-          "type": "string"
-        },
-        "tabTypeMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `tabType` property is editable."
-        },
-        "templateLocked": {
-          "description": "When set to **true**, the sender cannot change any attributes of the recipient. Used only when working with template recipients. ",
-          "type": "string"
-        },
-        "templateLockedMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `templateLocked` property is editable."
-        },
-        "templateRequired": {
-          "description": "When set to **true**, the sender may not remove the recipient. Used only when working with template recipients.",
-          "type": "string"
-        },
-        "templateRequiredMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `templateRequired` property is editable."
-        },
-        "tooltip": {
-          "description": "The text of a tooltip that appears when a user hovers over a form field or tab.",
-          "type": "string"
-        },
-        "toolTipMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `toolTip` property is editable."
-        },
-        "width": {
-          "description": "The width of the tab in pixels.",
-          "type": "string"
-        },
-        "widthMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `width` property is editable."
-        },
-        "xPosition": {
-          "description": "This property indicates the horizontal offset of the object on the page.\nDocuSign uses 72 DPI when determining position.\nRequired. May be zero.\n",
-          "type": "string"
-        },
-        "xPositionMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `xPosition` property is editable."
-        },
-        "yPosition": {
-          "description": "This property indicates the vertical offset of the object on the page.\nDocuSign uses 72 DPI when determining position.\nRequired. May be zero.\n",
-          "type": "string"
-        },
-        "yPositionMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `yPosition` property is editable."
-        }
-      },
-      "x-ds-definition-name": "notaryCertificate",
-      "description": "",
-      "x-ms-summary": ""
-    },
     "notaryHost": {
       "type": "object",
       "properties": {
@@ -43073,10 +44419,6 @@
             "$ref": "#/definitions/recipientAdditionalNotification"
           }
         },
-        "additionalNotificationsMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": ""
-        },
         "agentCanEditEmail": {
           "description": "Optional element. When set to **true**, the agents recipient associated with this recipient can change the recipient's pre-populated email address. This element is only active if enabled for the account.",
           "type": "string"
@@ -43563,14 +44905,6 @@
           "$ref": "#/definitions/propertyMetadata",
           "description": "Metadata that indicates whether the `anchorYOffset` property is editable."
         },
-        "bold": {
-          "description": "When set to **true**, the information in the tab is bold.",
-          "type": "string"
-        },
-        "boldMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `bold` property is editable."
-        },
         "conditionalParentLabel": {
           "description": "For conditional fields this is the `tabLabel` of the parent tab that controls this tab's visibility.",
           "type": "string"
@@ -43607,30 +44941,6 @@
           "$ref": "#/definitions/errorDetails",
           "description": "This object describes errors that occur. It is only valid for responses and ignored in requests."
         },
-        "font": {
-          "description": "The font to be used for the tab value. Supported fonts include:\n\n- Default\n- Arial\n- ArialNarrow\n- Calibri\n- CourierNew\n- Garamond\n- Georgia\n- Helvetica\n- LucidaConsole\n- MSGothic\n- MSMincho\n- OCR-A\n- Tahoma\n- TimesNewRoman\n- Trebuchet\n- Verdana\n",
-          "type": "string"
-        },
-        "fontColor": {
-          "description": "The font color to use for the information in the tab. Possible values are: \n\n- Black\n- BrightBlue\n- BrightRed\n- DarkGreen\n- DarkRed\n- Gold\n- Green\n- NavyBlue\n- Purple\n- White\n",
-          "type": "string"
-        },
-        "fontColorMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `fontColor` property is editable."
-        },
-        "fontMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `font` property is editable."
-        },
-        "fontSize": {
-          "description": "The font size used for the information in the tab. Possible values are:\n\n- Size7\n- Size8\n- Size9\n- Size10\n- Size11\n- Size12\n- Size14\n- Size16\n- Size18\n- Size20\n- Size22\n- Size24\n- Size26\n- Size28\n- Size36\n- Size48\n- Size72",
-          "type": "string"
-        },
-        "fontSizeMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `fontSize` property is editable."
-        },
         "formOrder": {
           "description": "An integer specifying the order in which the guided form HTML should render. The order is relative to the `formPageLabel`, the group by which to place the guided form HTML block.",
           "type": "string"
@@ -43662,18 +44972,6 @@
         "heightMetadata": {
           "$ref": "#/definitions/propertyMetadata",
           "description": "Metadata that indicates whether the `height` property is editable."
-        },
-        "italic": {
-          "description": "When set to **true**, the information in the tab is italic.",
-          "type": "string"
-        },
-        "italicMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `italic` property is editable."
-        },
-        "localePolicy": {
-          "$ref": "#/definitions/localePolicyTab",
-          "description": "Reserved for DocuSign."
         },
         "mergeField": {
           "$ref": "#/definitions/mergeField",
@@ -43714,6 +45012,14 @@
         "recipientIdMetadata": {
           "$ref": "#/definitions/propertyMetadata",
           "description": "Metadata that indicates whether the `recipientId` property is editable."
+        },
+        "scaleValue": {
+          "description": "Sets the size of the tab. This field accepts values from `0.5` to `1.0`, where `1.0` represents full size and `0.5` is 50% of full size.",
+          "type": "string"
+        },
+        "scaleValueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `scaleValue` property is editable."
         },
         "smartContractInformation": {
           "$ref": "#/definitions/smartContractInformation",
@@ -43793,14 +45099,6 @@
         "toolTipMetadata": {
           "$ref": "#/definitions/propertyMetadata",
           "description": "Metadata that indicates whether the `toolTip` property is editable."
-        },
-        "underline": {
-          "description": "When set to **true**, the information in the tab is underlined.",
-          "type": "string"
-        },
-        "underlineMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": "Metadata that indicates whether the `underline` property is editable."
         },
         "width": {
           "description": "The width of the tab in pixels.",
@@ -45208,6 +46506,413 @@
       "x-ds-definition-name": "permissionProfileInformation",
       "description": "Contains details about the permission profiles associated with an account.",
       "x-ms-summary": "Contains details about the permission profiles associated with an account."
+    },
+    "phoneNumber": {
+      "type": "object",
+      "properties": {
+        "anchorAllowWhiteSpaceInCharacters": {
+          "description": "",
+          "type": "string"
+        },
+        "anchorAllowWhiteSpaceInCharactersMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": ""
+        },
+        "anchorCaseSensitive": {
+          "description": "This property controls how [anchor tabs][AnchorTabs] are placed. When **true**, the text string in a document must match the case of the `anchorString` property for an anchor tab to be created. The default value is **false**.\n\nFor example, when set to **true**, if the anchor string is `DocuSign`, then `DocuSign` will match but `Docusign`, `docusign`, `DoCuSiGn`, etc. will not match. When set to **false**, `DocuSign`, `Docusign`, `docusign`, `DoCuSiGn`, etc. will all match.\n\nThis functionality uses the following rules:\n\n- Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:\n\n  $~><|^+=\n\n  For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`\n\n- Strings embedded in other strings are ignored during the matching process.\n\n- In words that have dashes, the parts separated by dashes are treated as distinct words.\n\n  Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true**.\n\n- Letters with accent marks are treated as distinct characters from their unaccented counterparts.\n\n- For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.\n\n  Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.\n\n- Unlike punctuation, numbers are not ignored when finding anchor words.\n\n  Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTabs]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace",
+          "type": "string"
+        },
+        "anchorCaseSensitiveMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorCaseSensitive` property is editable."
+        },
+        "anchorHorizontalAlignment": {
+          "description": "This property controls how [anchor tabs][AnchorTabs] are aligned in relation to the anchor text. Possible values are :\n\n- `left`: Aligns the left side of the tab with the beginning of the first character of the matching anchor word. This is the default value.\n- `right`: Aligns the tab’s left side with the last character of the matching anchor word.\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTabs]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace\n",
+          "type": "string"
+        },
+        "anchorHorizontalAlignmentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorHorizontalAlignment` property is editable."
+        },
+        "anchorIgnoreIfNotPresent": {
+          "description": "When set to **true**, this tab is ignored if the `anchorString` is not found in the document.",
+          "type": "string"
+        },
+        "anchorIgnoreIfNotPresentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorIgnoreIfNotPresent` property is editable."
+        },
+        "anchorMatchWholeWord": {
+          "description": "When set to **true**, the text string in a document must match the value of the `anchorString` property in its entirety for an [anchor tab][AnchorTab] to be created. The default value is **false**.\n\nFor example, when set to **true**, if the input is `man` then `man` will match but `manpower`, `fireman`, and `penmanship` will not. When set to **false**, if the input is `man` then `man`, `manpower`, `fireman`, and `penmanship` will all match.\n\nThis functionality uses the following rules:\n\n- Unless punctuation is specified in the `anchorString`, this functionality ignores punctuation and the following characters:\n\n  $~><|^+=\n\n  For example, the `anchorString` `water` will match on the string `Fetch a pail of water.`\n\n- Strings embedded in other strings are ignored during the matching process.\n\n- In words that have dashes, the parts separated by dashes are treated as distinct words.\n\n  Example: If the anchor string is `forget`, then an anchor tab is placed on the `forget` in `forget-me-not`, even when `anchorMatchWholeWord` is set to **true**.\n\n- Letters with accent marks are treated as distinct characters from their unaccented counterparts.\n\n- For single-character anchor strings, if the two characters appear right next to each other in the document, a single anchor tab is placed for both of them.\n\n  Example: If the anchor string is `i`, then only one anchor tab is placed in `skiing`.\n\n- Unlike punctuation, numbers are not ignored when finding anchor words.\n\n  Example: If the anchor string is `cat`, then `-cat-` is matched but `1cat2` is not when `anchorMatchWholeWord` is set to **true** (its default value).\n\n\n**Note**: You can only specify the value of this property in POST requests.\n\n[AnchorTab]: https://developers.docusign.com/esign-rest-api/guides/concepts/tabs#autoplace\n",
+          "type": "string"
+        },
+        "anchorMatchWholeWordMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorMatchWholeWord` property is editable."
+        },
+        "anchorString": {
+          "description": "Specifies the string to find in the document and use as the basis for tab placement.",
+          "type": "string"
+        },
+        "anchorStringMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorString` property is editable."
+        },
+        "anchorTabProcessorVersion": {
+          "description": "Reserved for DocuSign.",
+          "type": "string"
+        },
+        "anchorTabProcessorVersionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Reserved for DocuSign."
+        },
+        "anchorUnits": {
+          "description": "Specifies units of the\n`anchorXOffset` and\n`anchorYOffset`.\nValid units are:\n\n- `pixels`\n- `inches`\n- `mms`\n- `cms`\n",
+          "type": "string"
+        },
+        "anchorUnitsMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorUnits` property is editable."
+        },
+        "anchorXOffset": {
+          "description": "Specifies the X axis location of the tab in `anchorUnits` relative to the `anchorString`.\n",
+          "type": "string"
+        },
+        "anchorXOffsetMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorXOffset` property is editable."
+        },
+        "anchorYOffset": {
+          "description": "Specifies the Y axis location of the tab in `anchorUnits` relative to the `anchorString`.\n",
+          "type": "string"
+        },
+        "anchorYOffsetMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `anchorYOffset` property is editable."
+        },
+        "bold": {
+          "description": "When set to **true**, the information in the tab is bold.",
+          "type": "string"
+        },
+        "boldMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `bold` property is editable."
+        },
+        "concealValueOnDocument": {
+          "description": "When set to **true**, the field appears normally while the recipient is adding or modifying the information in the field, but the data is not visible (the characters are hidden by asterisks) to any other signer or the sender.\n\nWhen an envelope is completed the information is only available to the sender through the Form Data link in the DocuSign Console. The information on the downloaded document remains masked by asterisks.\n\nThis setting applies only to text boxes and does not affect list boxes, radio buttons, or check boxes.",
+          "type": "string"
+        },
+        "concealValueOnDocumentMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `concealValueOnDocument` property is editable."
+        },
+        "conditionalParentLabel": {
+          "description": "For conditional fields this is the `tabLabel` of the parent tab that controls this tab's visibility.",
+          "type": "string"
+        },
+        "conditionalParentLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `conditionalParentLabel` property is editable."
+        },
+        "conditionalParentValue": {
+          "description": "For conditional fields, this is the value of the parent tab that controls the tab's visibility.\n\nIf the parent tab is a Checkbox, Radio button, Optional Signature, or Optional Initial use \"on\" as the value to show that the parent tab is active.\n",
+          "type": "string"
+        },
+        "conditionalParentValueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `conditionalParentValue` property is editable."
+        },
+        "customTabId": {
+          "description": "The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.",
+          "type": "string"
+        },
+        "customTabIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `customTabId` property is editable."
+        },
+        "disableAutoSize": {
+          "description": "When set to **true**, disables the auto sizing of single line text boxes in the signing screen when the signer enters data. If disabled users will only be able enter as much data as the text box can hold. By default this is false. This property only affects single line text boxes.",
+          "type": "string"
+        },
+        "disableAutoSizeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `disableAutoSize` property is editable."
+        },
+        "documentId": {
+          "description": "The `documentId` is set by the API client. It is an integer that falls between `1` and 2,147,483,647. The value is encoded as a string without commas. The values `1`, `2`, `3`, and so on are typically used to identify the first few documents in an envelope. Tab definitions include a `documentId` property that specifies the document on which to place the tab.",
+          "type": "string"
+        },
+        "documentIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `documentId` property is editable."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/errorDetails",
+          "description": "This object describes errors that occur. It is only valid for responses and ignored in requests."
+        },
+        "font": {
+          "description": "The font to be used for the tab value. Supported fonts include:\n\n- Default\n- Arial\n- ArialNarrow\n- Calibri\n- CourierNew\n- Garamond\n- Georgia\n- Helvetica\n- LucidaConsole\n- MSGothic\n- MSMincho\n- OCR-A\n- Tahoma\n- TimesNewRoman\n- Trebuchet\n- Verdana\n",
+          "type": "string"
+        },
+        "fontColor": {
+          "description": "The font color to use for the information in the tab. Possible values are: \n\n- Black\n- BrightBlue\n- BrightRed\n- DarkGreen\n- DarkRed\n- Gold\n- Green\n- NavyBlue\n- Purple\n- White\n",
+          "type": "string"
+        },
+        "fontColorMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fontColor` property is editable."
+        },
+        "fontMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `font` property is editable."
+        },
+        "fontSize": {
+          "description": "The font size used for the information in the tab. Possible values are:\n\n- Size7\n- Size8\n- Size9\n- Size10\n- Size11\n- Size12\n- Size14\n- Size16\n- Size18\n- Size20\n- Size22\n- Size24\n- Size26\n- Size28\n- Size36\n- Size48\n- Size72",
+          "type": "string"
+        },
+        "fontSizeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fontSize` property is editable."
+        },
+        "formOrder": {
+          "description": "An integer specifying the order in which the guided form HTML should render. The order is relative to the `formPageLabel`, the group by which to place the guided form HTML block.",
+          "type": "string"
+        },
+        "formOrderMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `formOrder` property is editable."
+        },
+        "formPageLabel": {
+          "description": "A string specifying the group in which to place the guided form HTML. Each group displays as a separate guided forms page in the signing experience.",
+          "type": "string"
+        },
+        "formPageLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `formPageLabel` property is editable."
+        },
+        "formPageNumber": {
+          "description": "An integer specifying the order in which to present the guided form pages.",
+          "type": "string"
+        },
+        "formPageNumberMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `fromPageNumber` property is editable."
+        },
+        "height": {
+          "description": "The height of the tab in pixels.",
+          "type": "string"
+        },
+        "heightMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `height` property is editable."
+        },
+        "italic": {
+          "description": "When set to **true**, the information in the tab is italic.",
+          "type": "string"
+        },
+        "italicMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `italic` property is editable."
+        },
+        "localePolicy": {
+          "$ref": "#/definitions/localePolicyTab",
+          "description": "Reserved for DocuSign."
+        },
+        "locked": {
+          "description": "When set to **true**, the signer cannot change the data of the custom tab.",
+          "type": "string"
+        },
+        "lockedMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `locked` property is editable."
+        },
+        "maxLength": {
+          "description": "An optional value that describes the maximum length of the property when the property is a string.",
+          "type": "string"
+        },
+        "maxLengthMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `maxLength` property is editable."
+        },
+        "mergeField": {
+          "$ref": "#/definitions/mergeField",
+          "description": "Contains the information necessary to map the tab to a field in SalesForce."
+        },
+        "mergeFieldXml": {
+          "description": "",
+          "type": "string"
+        },
+        "name": {
+          "description": "",
+          "type": "string"
+        },
+        "nameMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `name` property is editable. Read only."
+        },
+        "originalValue": {
+          "description": "The initial value of the tab when it was sent to the recipient. ",
+          "type": "string"
+        },
+        "originalValueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `originalValue` property is editable."
+        },
+        "pageNumber": {
+          "description": "The page number being accessed.",
+          "type": "string"
+        },
+        "pageNumberMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `pageNumber` property is editable."
+        },
+        "recipientId": {
+          "description": "A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.",
+          "type": "string"
+        },
+        "recipientIdGuid": {
+          "description": "The globally-unique identifier (GUID) for a specific recipient on a specific envelope. If the same recipient is associated with multiple envelopes, they will have a different GUID for each one. Read only.",
+          "type": "string"
+        },
+        "recipientIdGuidMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `recipientIdGuid` property is editable."
+        },
+        "recipientIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `recipientId` property is editable."
+        },
+        "required": {
+          "description": "When set to **true**, the signer is required to fill out this tab.",
+          "type": "string"
+        },
+        "requiredMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `required` property is editable."
+        },
+        "smartContractInformation": {
+          "$ref": "#/definitions/smartContractInformation",
+          "description": ""
+        },
+        "status": {
+          "description": "The status of the item.",
+          "type": "string"
+        },
+        "statusMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `status` property is editable."
+        },
+        "tabGroupLabels": {
+          "description": "An array of tab group labels that uniquely identify tab groups. To assign a tab to a `tabGroup`, you assign the `TabGroupLabel` to the `Tab.TabGroupLabels` array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tabGroupLabelsMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabGroupLabels` property is editable."
+        },
+        "tabId": {
+          "description": "The unique identifier for the tab.",
+          "type": "string"
+        },
+        "tabIdMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabId` property is editable."
+        },
+        "tabLabel": {
+          "description": "The label associated with the tab. This value may be an empty string.\nIf no value is provided, the tab type is used as the value.\n\nMaximum Length: 500 characters.\n",
+          "type": "string"
+        },
+        "tabLabelMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabLabel` property is editable."
+        },
+        "tabOrder": {
+          "description": "A positive integer that sets the order the tab is navigated to during signing.\n\nTabs on a page are navigated to in ascending order, starting with the lowest number and moving to the highest. If two or more tabs have the same `tabOrder` value, the normal auto-navigation setting behavior for the envelope is used.",
+          "type": "string"
+        },
+        "tabOrderMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabOrder` property is editable."
+        },
+        "tabType": {
+          "description": "Indicates the type of tab (for example, `signHere` or `initialHere`).",
+          "type": "string"
+        },
+        "tabTypeMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `tabType` property is editable."
+        },
+        "templateLocked": {
+          "description": "When set to **true**, the sender cannot change any attributes of the recipient. Used only when working with template recipients. ",
+          "type": "string"
+        },
+        "templateLockedMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `templateLocked` property is editable."
+        },
+        "templateRequired": {
+          "description": "When set to **true**, the sender may not remove the recipient. Used only when working with template recipients.",
+          "type": "string"
+        },
+        "templateRequiredMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `templateRequired` property is editable."
+        },
+        "tooltip": {
+          "description": "The text of a tooltip that appears when a user hovers over a form field or tab.",
+          "type": "string"
+        },
+        "toolTipMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `toolTip` property is editable."
+        },
+        "underline": {
+          "description": "When set to **true**, the information in the tab is underlined.",
+          "type": "string"
+        },
+        "underlineMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `underline` property is editable."
+        },
+        "value": {
+          "description": "Specifies the value of the tab. ",
+          "type": "string"
+        },
+        "valueMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `value` property is editable."
+        },
+        "width": {
+          "description": "The width of the tab in pixels.",
+          "type": "string"
+        },
+        "widthMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `width` property is editable."
+        },
+        "xPosition": {
+          "description": "This property indicates the horizontal offset of the object on the page.\nDocuSign uses 72 DPI when determining position.\nRequired. May be zero.\n",
+          "type": "string"
+        },
+        "xPositionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `xPosition` property is editable."
+        },
+        "yPosition": {
+          "description": "This property indicates the vertical offset of the object on the page.\nDocuSign uses 72 DPI when determining position.\nRequired. May be zero.\n",
+          "type": "string"
+        },
+        "yPositionMetadata": {
+          "$ref": "#/definitions/propertyMetadata",
+          "description": "Metadata that indicates whether the `yPosition` property is editable."
+        }
+      },
+      "x-ds-definition-name": "phoneNumber",
+      "description": "",
+      "x-ms-summary": ""
     },
     "planInformation": {
       "description": "An object used to identify the features and attributes of the account being created.",
@@ -48949,10 +50654,6 @@
             "$ref": "#/definitions/recipientAdditionalNotification"
           }
         },
-        "additionalNotificationsMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": ""
-        },
         "agentCanEditEmail": {
           "description": "Optional element. When set to **true**, the agent recipient associated with this recipient can change the recipient's pre-populated email address. This element is only active if enabled for the account.",
           "type": "string"
@@ -51988,6 +53689,34 @@
             "$ref": "#/definitions/commentThread"
           }
         },
+        "commissionCountyTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionCounty"
+          }
+        },
+        "commissionExpirationTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionExpiration"
+          }
+        },
+        "commissionNumberTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionNumber"
+          }
+        },
+        "commissionStateTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionState"
+          }
+        },
         "companyTabs": {
           "description": "A list of \n[Company tabs][company].\n\n\nA Company tab displays a field for the name of the recipient's company. This value can't be set.\n\n\n\n[company]: https://developers.docusign.com/esign-rest-api/reference/EnvelopeRecipientTabs/create/#/definitions/company \n",
           "type": "array",
@@ -52093,13 +53822,6 @@
             "$ref": "#/definitions/notarize"
           }
         },
-        "notaryCertificateTabs": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/notaryCertificate"
-          }
-        },
         "notarySealTabs": {
           "description": "",
           "type": "array",
@@ -52119,6 +53841,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/number"
+          }
+        },
+        "phoneNumberTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/phoneNumber"
           }
         },
         "polyLineOverlayTabs": {
@@ -52581,6 +54310,34 @@
             "$ref": "#/definitions/commentThread"
           }
         },
+        "commissionCountyTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionCounty"
+          }
+        },
+        "commissionExpirationTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionExpiration"
+          }
+        },
+        "commissionNumberTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionNumber"
+          }
+        },
+        "commissionStateTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionState"
+          }
+        },
         "companyTabs": {
           "description": "A list of \n[Company tabs][company].\n\n\nA Company tab displays a field for the name of the recipient's company. This value can't be set.\n\n\n\n[company]: https://developers.docusign.com/esign-rest-api/reference/EnvelopeRecipientTabs/create/#/definitions/company \n",
           "type": "array",
@@ -52686,13 +54443,6 @@
             "$ref": "#/definitions/notarize"
           }
         },
-        "notaryCertificateTabs": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/notaryCertificate"
-          }
-        },
         "notarySealTabs": {
           "description": "",
           "type": "array",
@@ -52712,6 +54462,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/number"
+          }
+        },
+        "phoneNumberTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/phoneNumber"
           }
         },
         "polyLineOverlayTabs": {
@@ -55474,10 +57231,6 @@
             "$ref": "#/definitions/recipientAdditionalNotification"
           }
         },
-        "additionalNotificationsMetadata": {
-          "$ref": "#/definitions/propertyMetadata",
-          "description": ""
-        },
         "agentCanEditEmail": {
           "description": "Optional element. When set to **true**, the agents recipient associated with this recipient can change the recipient's pre-populated email address. This element is only active if enabled for the account.",
           "type": "string"
@@ -57175,6 +58928,34 @@
             "$ref": "#/definitions/commentThread"
           }
         },
+        "commissionCountyTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionCounty"
+          }
+        },
+        "commissionExpirationTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionExpiration"
+          }
+        },
+        "commissionNumberTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionNumber"
+          }
+        },
+        "commissionStateTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionState"
+          }
+        },
         "companyTabs": {
           "description": "A list of \n[Company tabs][company].\n\n\nA Company tab displays a field for the name of the recipient's company. This value can't be set.\n\n\n\n[company]: https://developers.docusign.com/esign-rest-api/reference/EnvelopeRecipientTabs/create/#/definitions/company \n",
           "type": "array",
@@ -57280,13 +59061,6 @@
             "$ref": "#/definitions/notarize"
           }
         },
-        "notaryCertificateTabs": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/notaryCertificate"
-          }
-        },
         "notarySealTabs": {
           "description": "",
           "type": "array",
@@ -57306,6 +59080,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/number"
+          }
+        },
+        "phoneNumberTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/phoneNumber"
           }
         },
         "polyLineOverlayTabs": {
@@ -57416,6 +59197,34 @@
             "$ref": "#/definitions/commentThread"
           }
         },
+        "commissionCountyTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionCounty"
+          }
+        },
+        "commissionExpirationTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionExpiration"
+          }
+        },
+        "commissionNumberTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionNumber"
+          }
+        },
+        "commissionStateTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionState"
+          }
+        },
         "companyTabs": {
           "description": "A list of \n[Company tabs][company].\n\n\nA Company tab displays a field for the name of the recipient's company. This value can't be set.\n\n\n\n[company]: https://developers.docusign.com/esign-rest-api/reference/EnvelopeRecipientTabs/create/#/definitions/company \n",
           "type": "array",
@@ -57521,13 +59330,6 @@
             "$ref": "#/definitions/notarize"
           }
         },
-        "notaryCertificateTabs": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/notaryCertificate"
-          }
-        },
         "notarySealTabs": {
           "description": "",
           "type": "array",
@@ -57547,6 +59349,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/number"
+          }
+        },
+        "phoneNumberTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/phoneNumber"
           }
         },
         "polyLineOverlayTabs": {
@@ -57657,6 +59466,34 @@
             "$ref": "#/definitions/commentThread"
           }
         },
+        "commissionCountyTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionCounty"
+          }
+        },
+        "commissionExpirationTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionExpiration"
+          }
+        },
+        "commissionNumberTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionNumber"
+          }
+        },
+        "commissionStateTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionState"
+          }
+        },
         "companyTabs": {
           "description": "A list of \n[Company tabs][company].\n\n\nA Company tab displays a field for the name of the recipient's company. This value can't be set.\n\n\n\n[company]: https://developers.docusign.com/esign-rest-api/reference/EnvelopeRecipientTabs/create/#/definitions/company \n",
           "type": "array",
@@ -57762,13 +59599,6 @@
             "$ref": "#/definitions/notarize"
           }
         },
-        "notaryCertificateTabs": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/notaryCertificate"
-          }
-        },
         "notarySealTabs": {
           "description": "",
           "type": "array",
@@ -57788,6 +59618,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/number"
+          }
+        },
+        "phoneNumberTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/phoneNumber"
           }
         },
         "polyLineOverlayTabs": {
@@ -60195,6 +62032,34 @@
             "$ref": "#/definitions/commentThread"
           }
         },
+        "commissionCountyTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionCounty"
+          }
+        },
+        "commissionExpirationTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionExpiration"
+          }
+        },
+        "commissionNumberTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionNumber"
+          }
+        },
+        "commissionStateTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commissionState"
+          }
+        },
         "companyTabs": {
           "description": "A list of \n[Company tabs][company].\n\n\nA Company tab displays a field for the name of the recipient's company. This value can't be set.\n\n\n\n[company]: https://developers.docusign.com/esign-rest-api/reference/EnvelopeRecipientTabs/create/#/definitions/company \n",
           "type": "array",
@@ -60300,13 +62165,6 @@
             "$ref": "#/definitions/notarize"
           }
         },
-        "notaryCertificateTabs": {
-          "description": "",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/notaryCertificate"
-          }
-        },
         "notarySealTabs": {
           "description": "",
           "type": "array",
@@ -60326,6 +62184,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/number"
+          }
+        },
+        "phoneNumberTabs": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/phoneNumber"
           }
         },
         "polyLineOverlayTabs": {
