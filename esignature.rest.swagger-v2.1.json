@@ -112,7 +112,6 @@
                         "schema": {
                             "$ref": "#/definitions/newAccountDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -490,7 +489,6 @@
                         "schema": {
                             "$ref": "#/definitions/billingPaymentRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -669,7 +667,6 @@
                         "schema": {
                             "$ref": "#/definitions/billingPlanInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -798,7 +795,6 @@
                         "schema": {
                             "$ref": "#/definitions/downgradeBillingPlanInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -850,7 +846,6 @@
                         "schema": {
                             "$ref": "#/definitions/purchasedEnvelopesInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -950,7 +945,6 @@
                         "schema": {
                             "$ref": "#/definitions/brand"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -998,7 +992,6 @@
                         "schema": {
                             "$ref": "#/definitions/brandsRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -1114,7 +1107,6 @@
                         "schema": {
                             "$ref": "#/definitions/brand"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -1722,7 +1714,6 @@
                         "schema": {
                             "$ref": "#/definitions/bulkSendBatchRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -1787,7 +1778,6 @@
                         "schema": {
                             "$ref": "#/definitions/bulkSendBatchActionRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -1973,7 +1963,6 @@
                         "schema": {
                             "$ref": "#/definitions/bulkSendingList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -2076,7 +2065,6 @@
                         "schema": {
                             "$ref": "#/definitions/bulkSendingList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -2179,7 +2167,6 @@
                         "schema": {
                             "$ref": "#/definitions/bulkSendRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -2237,7 +2224,6 @@
                         "schema": {
                             "$ref": "#/definitions/bulkSendRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -2296,7 +2282,6 @@
                         "schema": {
                             "$ref": "#/definitions/captiveRecipientInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -2346,7 +2331,6 @@
                         "schema": {
                             "$ref": "#/definitions/chunkedUploadRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -2567,7 +2551,6 @@
                         "schema": {
                             "$ref": "#/definitions/chunkedUploadRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -2658,7 +2641,6 @@
                         "schema": {
                             "$ref": "#/definitions/connectCustomConfiguration"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -2706,7 +2688,6 @@
                         "schema": {
                             "$ref": "#/definitions/connectCustomConfiguration"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -3075,7 +3056,6 @@
                         "schema": {
                             "$ref": "#/definitions/connectFailureFilter"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -3522,7 +3502,6 @@
                         "schema": {
                             "$ref": "#/definitions/consumerDisclosure"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -3573,7 +3552,6 @@
                         "schema": {
                             "$ref": "#/definitions/contactModRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -3621,7 +3599,6 @@
                         "schema": {
                             "$ref": "#/definitions/contactModRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -3669,7 +3646,6 @@
                         "schema": {
                             "$ref": "#/definitions/contactModRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -3865,7 +3841,6 @@
                         "schema": {
                             "$ref": "#/definitions/customField"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -3930,7 +3905,6 @@
                         "schema": {
                             "$ref": "#/definitions/customField"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -4307,7 +4281,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -4850,7 +4823,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelope"
                         },
-                        "type": "string",
                         "description": "A container used to send documents to recipients. The envelope carries information about the sender and timestamps to indicate the progress of the delivery procedure. It can contain collections of Documents, Tabs and Recipients."
                     }
                 ],
@@ -4953,7 +4925,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeAttachmentsRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -5009,7 +4980,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeAttachmentsRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -5125,7 +5095,6 @@
                         "schema": {
                             "$ref": "#/definitions/attachment"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -5335,7 +5304,6 @@
                         "schema": {
                             "$ref": "#/definitions/customFields"
                         },
-                        "type": "string",
                         "description": "An optional array of strings that enables the sender to provide custom data about the recipient. This information is returned in the envelope status but otherwise not used by DocuSign. Each `customField` string can be a maximum of 100 characters."
                     }
                 ],
@@ -5390,7 +5358,6 @@
                         "schema": {
                             "$ref": "#/definitions/customFields"
                         },
-                        "type": "string",
                         "description": "An optional array of strings that enables the sender to provide custom data about the recipient. This information is returned in the envelope status but otherwise not used by DocuSign. Each `customField` string can be a maximum of 100 characters."
                     }
                 ],
@@ -5445,7 +5412,6 @@
                         "schema": {
                             "$ref": "#/definitions/customFields"
                         },
-                        "type": "string",
                         "description": "An optional array of strings that enables the sender to provide custom data about the recipient. This information is returned in the envelope status but otherwise not used by DocuSign. Each `customField` string can be a maximum of 100 characters."
                     }
                 ],
@@ -5666,7 +5632,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -5721,7 +5686,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -6111,7 +6075,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentFieldsInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -6173,7 +6136,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentFieldsInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -6235,7 +6197,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentFieldsInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -6614,7 +6575,6 @@
                         "schema": {
                             "$ref": "#/definitions/pageRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -6799,7 +6759,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentHtmlDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -6930,7 +6889,6 @@
                         "schema": {
                             "$ref": "#/definitions/tabs"
                         },
-                        "type": "string",
                         "description": "A list of tabs, which are represented graphically as symbols on documents at the time of signing. Tabs show recipients where to sign, initial, or enter data. They may also display data to the recipients."
                     }
                 ],
@@ -6992,7 +6950,6 @@
                         "schema": {
                             "$ref": "#/definitions/tabs"
                         },
-                        "type": "string",
                         "description": "A list of tabs, which are represented graphically as symbols on documents at the time of signing. Tabs show recipients where to sign, initial, or enter data. They may also display data to the recipients."
                     }
                 ],
@@ -7054,7 +7011,6 @@
                         "schema": {
                             "$ref": "#/definitions/tabs"
                         },
-                        "type": "string",
                         "description": "A list of tabs, which are represented graphically as symbols on documents at the time of signing. Tabs show recipients where to sign, initial, or enter data. They may also display data to the recipients."
                     }
                 ],
@@ -7186,7 +7142,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentTemplateList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -7348,7 +7303,6 @@
                         "schema": {
                             "$ref": "#/definitions/emailSettings"
                         },
-                        "type": "string",
                         "description": "A complex type that contains email settings."
                     }
                 ],
@@ -7403,7 +7357,6 @@
                         "schema": {
                             "$ref": "#/definitions/emailSettings"
                         },
-                        "type": "string",
                         "description": "A complex type that contains email settings."
                     }
                 ],
@@ -7647,7 +7600,6 @@
                         "schema": {
                             "$ref": "#/definitions/lockRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -7702,7 +7654,6 @@
                         "schema": {
                             "$ref": "#/definitions/lockRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -7849,7 +7800,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeNotificationRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -8094,7 +8044,6 @@
                         "schema": {
                             "$ref": "#/definitions/recipients"
                         },
-                        "type": "string",
                         "description": "An array of recipient objects that provides details about the recipients of the envelope."
                     }
                 ],
@@ -8156,7 +8105,6 @@
                         "schema": {
                             "$ref": "#/definitions/recipients"
                         },
-                        "type": "string",
                         "description": "An array of recipient objects that provides details about the recipients of the envelope."
                     }
                 ],
@@ -8211,7 +8159,6 @@
                         "schema": {
                             "$ref": "#/definitions/recipients"
                         },
-                        "type": "string",
                         "description": "An array of recipient objects that provides details about the recipients of the envelope."
                     }
                 ],
@@ -8513,7 +8460,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentVisibilityList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -8986,7 +8932,6 @@
                         "schema": {
                             "$ref": "#/definitions/tabs"
                         },
-                        "type": "string",
                         "description": "A list of tabs, which are represented graphically as symbols on documents at the time of signing. Tabs show recipients where to sign, initial, or enter data. They may also display data to the recipients."
                     }
                 ],
@@ -9048,7 +8993,6 @@
                         "schema": {
                             "$ref": "#/definitions/tabs"
                         },
-                        "type": "string",
                         "description": "A list of tabs, which are represented graphically as symbols on documents at the time of signing. Tabs show recipients where to sign, initial, or enter data. They may also display data to the recipients."
                     }
                 ],
@@ -9110,7 +9054,6 @@
                         "schema": {
                             "$ref": "#/definitions/tabs"
                         },
-                        "type": "string",
                         "description": "A list of tabs, which are represented graphically as symbols on documents at the time of signing. Tabs show recipients where to sign, initial, or enter data. They may also display data to the recipients."
                     }
                 ],
@@ -9222,7 +9165,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentVisibilityList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -9335,7 +9277,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentHtmlDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -9540,7 +9481,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentTemplateList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -9598,7 +9538,6 @@
                         "schema": {
                             "$ref": "#/definitions/correctViewRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -9652,7 +9591,6 @@
                         "schema": {
                             "$ref": "#/definitions/correctViewRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -9708,7 +9646,6 @@
                         "schema": {
                             "$ref": "#/definitions/returnUrlRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -9781,7 +9718,6 @@
                         "schema": {
                             "$ref": "#/definitions/recipientViewRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -9838,7 +9774,6 @@
                         "schema": {
                             "$ref": "#/definitions/recipientPreviewRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -9897,7 +9832,6 @@
                         "schema": {
                             "$ref": "#/definitions/returnUrlRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -9954,7 +9888,6 @@
                         "schema": {
                             "$ref": "#/definitions/recipientViewRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -10057,7 +9990,6 @@
                         "schema": {
                             "$ref": "#/definitions/workflow"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -10235,7 +10167,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeIdsRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -10337,7 +10268,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeTransferRuleInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -10385,7 +10315,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeTransferRuleRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -10443,7 +10372,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeTransferRule"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -10575,7 +10503,6 @@
                         "schema": {
                             "$ref": "#/definitions/favoriteTemplatesInfo"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -10624,7 +10551,6 @@
                         "schema": {
                             "$ref": "#/definitions/favoriteTemplatesInfo"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -10861,7 +10787,6 @@
                         "schema": {
                             "$ref": "#/definitions/foldersRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -10985,7 +10910,6 @@
                         "schema": {
                             "$ref": "#/definitions/groupInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -11033,7 +10957,6 @@
                         "schema": {
                             "$ref": "#/definitions/groupInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -11081,7 +11004,6 @@
                         "schema": {
                             "$ref": "#/definitions/groupInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -11184,7 +11106,6 @@
                         "schema": {
                             "$ref": "#/definitions/brandsRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -11239,7 +11160,6 @@
                         "schema": {
                             "$ref": "#/definitions/brandsRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -11356,7 +11276,6 @@
                         "schema": {
                             "$ref": "#/definitions/userInfoList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -11411,7 +11330,6 @@
                         "schema": {
                             "$ref": "#/definitions/userInfoList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -11596,7 +11514,6 @@
                         "schema": {
                             "$ref": "#/definitions/permissionProfile"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -11713,7 +11630,6 @@
                         "schema": {
                             "$ref": "#/definitions/permissionProfile"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -11879,7 +11795,6 @@
                         "schema": {
                             "$ref": "#/definitions/powerForm"
                         },
-                        "type": "string",
                         "description": "Information about any PowerForms that are included in the envelope."
                     }
                 ],
@@ -11927,7 +11842,6 @@
                         "schema": {
                             "$ref": "#/definitions/powerFormsRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -12030,7 +11944,6 @@
                         "schema": {
                             "$ref": "#/definitions/powerForm"
                         },
-                        "type": "string",
                         "description": "Information about any PowerForms that are included in the envelope."
                     }
                 ],
@@ -12520,7 +12433,6 @@
                         "schema": {
                             "$ref": "#/definitions/accountSettingsInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -12619,7 +12531,6 @@
                         "schema": {
                             "$ref": "#/definitions/bccEmailArchive"
                         },
-                        "type": "string",
                         "description": "Boolean that specifies whether BCC for Email Archive is enabled for the account. BCC for Email Archive allows you to set up an archive email address so that a BCC copy of an envelope is sent only to that address."
                     }
                 ],
@@ -12813,7 +12724,6 @@
                         "schema": {
                             "$ref": "#/definitions/eNoteConfiguration"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -12940,7 +12850,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopePurgeConfiguration"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -13030,7 +12939,6 @@
                         "schema": {
                             "$ref": "#/definitions/notificationDefaults"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -13119,7 +13027,6 @@
                         "schema": {
                             "$ref": "#/definitions/accountPasswordRules"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -13208,7 +13115,6 @@
                         "schema": {
                             "$ref": "#/definitions/tabAccountSettings"
                         },
-                        "type": "string",
                         "description": "Account-wide tab settings."
                     }
                 ],
@@ -13375,7 +13281,6 @@
                         "schema": {
                             "$ref": "#/definitions/accountSharedAccess"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -13525,7 +13430,6 @@
                         "schema": {
                             "$ref": "#/definitions/accountSignaturesInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -13580,7 +13484,6 @@
                         "schema": {
                             "$ref": "#/definitions/accountSignaturesInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -13690,7 +13593,6 @@
                         "schema": {
                             "$ref": "#/definitions/accountSignatureDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -14013,7 +13915,6 @@
                         "schema": {
                             "$ref": "#/definitions/signingGroupInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -14061,7 +13962,6 @@
                         "schema": {
                             "$ref": "#/definitions/signingGroupInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -14109,7 +14009,6 @@
                         "schema": {
                             "$ref": "#/definitions/signingGroupInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -14212,7 +14111,6 @@
                         "schema": {
                             "$ref": "#/definitions/signingGroup"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -14315,7 +14213,6 @@
                         "schema": {
                             "$ref": "#/definitions/signingGroupUsers"
                         },
-                        "type": "string",
                         "description": "A complex type that contains information about users in the signing group."
                     }
                 ],
@@ -14370,7 +14267,6 @@
                         "schema": {
                             "$ref": "#/definitions/signingGroupUsers"
                         },
-                        "type": "string",
                         "description": "A complex type that contains information about users in the signing group."
                     }
                 ],
@@ -14507,7 +14403,6 @@
                         "schema": {
                             "$ref": "#/definitions/tabMetadata"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -14610,7 +14505,6 @@
                         "schema": {
                             "$ref": "#/definitions/tabMetadata"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -14902,7 +14796,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeTemplate"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -15012,7 +14905,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeTemplate"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -15077,7 +14969,6 @@
                         "schema": {
                             "$ref": "#/definitions/groupInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -15139,7 +15030,6 @@
                         "schema": {
                             "$ref": "#/definitions/groupInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -15242,7 +15132,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateCustomFields"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -15297,7 +15186,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateCustomFields"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -15352,7 +15240,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateCustomFields"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -15462,7 +15349,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -15517,7 +15403,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -15657,7 +15542,6 @@
                         "schema": {
                             "$ref": "#/definitions/envelopeDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -15774,7 +15658,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentFieldsInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -15836,7 +15719,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentFieldsInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -15898,7 +15780,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentFieldsInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -16129,7 +16010,6 @@
                         "schema": {
                             "$ref": "#/definitions/pageRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -16287,7 +16167,6 @@
                         "schema": {
                             "$ref": "#/definitions/pageRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -16410,7 +16289,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentHtmlDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -16534,7 +16412,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateTabs"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -16596,7 +16473,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateTabs"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -16658,7 +16534,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateTabs"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -16810,7 +16685,6 @@
                         "schema": {
                             "$ref": "#/definitions/lockRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -16865,7 +16739,6 @@
                         "schema": {
                             "$ref": "#/definitions/lockRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -16920,7 +16793,6 @@
                         "schema": {
                             "$ref": "#/definitions/lockRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -17023,7 +16895,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateNotificationRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -17154,7 +17025,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateRecipients"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -17216,7 +17086,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateRecipients"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -17271,7 +17140,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateRecipients"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -17336,7 +17204,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateRecipients"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -17467,7 +17334,6 @@
                         "schema": {
                             "$ref": "#/definitions/bulkRecipientsRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -17635,7 +17501,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateDocumentVisibilityList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -17767,7 +17632,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateTabs"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -17829,7 +17693,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateTabs"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -17891,7 +17754,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateTabs"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -17948,7 +17810,6 @@
                         "schema": {
                             "$ref": "#/definitions/templateDocumentVisibilityList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -18006,7 +17867,6 @@
                         "schema": {
                             "$ref": "#/definitions/documentHtmlDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -18064,7 +17924,6 @@
                         "schema": {
                             "$ref": "#/definitions/returnUrlRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -18122,7 +17981,6 @@
                         "schema": {
                             "$ref": "#/definitions/recipientPreviewRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -18225,7 +18083,6 @@
                         "schema": {
                             "$ref": "#/definitions/workflow"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -18488,7 +18345,6 @@
                         "schema": {
                             "$ref": "#/definitions/userInformationList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -18537,7 +18393,6 @@
                         "schema": {
                             "$ref": "#/definitions/newUsersDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -18592,7 +18447,6 @@
                         "schema": {
                             "$ref": "#/definitions/userInfoList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -18715,7 +18569,6 @@
                         "schema": {
                             "$ref": "#/definitions/userInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -18826,7 +18679,6 @@
                         "schema": {
                             "$ref": "#/definitions/cloudStorageProviders"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -18881,7 +18733,6 @@
                         "schema": {
                             "$ref": "#/definitions/cloudStorageProviders"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -19306,7 +19157,6 @@
                         "schema": {
                             "$ref": "#/definitions/customSettingsInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -19361,7 +19211,6 @@
                         "schema": {
                             "$ref": "#/definitions/customSettingsInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -19464,7 +19313,6 @@
                         "schema": {
                             "$ref": "#/definitions/userProfile"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -19714,7 +19562,6 @@
                         "schema": {
                             "$ref": "#/definitions/userSettingsInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -19820,7 +19667,6 @@
                         "schema": {
                             "$ref": "#/definitions/userSignaturesInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -19876,7 +19722,6 @@
                         "schema": {
                             "$ref": "#/definitions/userSignaturesInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -20000,7 +19845,6 @@
                         "schema": {
                             "$ref": "#/definitions/userSignatureDefinition"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -20298,7 +20142,6 @@
                         "schema": {
                             "$ref": "#/definitions/consoleViewRequest"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -20401,7 +20244,6 @@
                         "schema": {
                             "$ref": "#/definitions/watermark"
                         },
-                        "type": "string",
                         "description": "When **true,** the account has the watermark feature enabled, and the envelope is not complete, then the watermark for the account is added to the PDF documents. This option can remove the watermark. "
                     }
                 ],
@@ -20452,7 +20294,6 @@
                         "schema": {
                             "$ref": "#/definitions/watermark"
                         },
-                        "type": "string",
                         "description": "When **true,** the account has the watermark feature enabled, and the envelope is not complete, then the watermark for the account is added to the PDF documents. This option can remove the watermark. "
                     }
                 ],
@@ -20542,7 +20383,6 @@
                         "schema": {
                             "$ref": "#/definitions/workspace"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -20645,7 +20485,6 @@
                         "schema": {
                             "$ref": "#/definitions/workspace"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -20855,7 +20694,6 @@
                         "schema": {
                             "$ref": "#/definitions/workspaceItemList"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -21325,7 +21163,6 @@
                         "schema": {
                             "$ref": "#/definitions/notary"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -21366,7 +21203,6 @@
                         "schema": {
                             "$ref": "#/definitions/notary"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -21495,7 +21331,6 @@
                         "schema": {
                             "$ref": "#/definitions/notaryJurisdiction"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -21584,7 +21419,6 @@
                         "schema": {
                             "$ref": "#/definitions/notaryJurisdiction"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
@@ -21838,7 +21672,6 @@
                         "schema": {
                             "$ref": "#/definitions/diagnosticsSettingsInformation"
                         },
-                        "type": "string",
                         "description": ""
                     }
                 ],
