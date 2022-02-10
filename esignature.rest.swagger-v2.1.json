@@ -22411,8 +22411,7 @@
                 },
                 "useDisplayAppliance": {
                     "description": "",
-                    "type": "boolean",
-                    "nullable": true
+                    "type": "boolean"
                 }
             },
             "x-ds-definition-name": "accountInformation",
