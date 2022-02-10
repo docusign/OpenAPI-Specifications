@@ -27733,18 +27733,15 @@
                 },
                 "isOverridingCompanyName": {
                     "description": "When **true,** the `brandCompany` property is overriding the name of the company in the account settings.",
-                    "type": "boolean",
-                    "nullable": true
+                    "type": "boolean"
                 },
                 "isSendingDefault": {
                     "description": "When **true,** the sending brand is the default brand for sending new envelopes.",
-                    "type": "boolean",
-                    "nullable": true
+                    "type": "boolean"
                 },
                 "isSigningDefault": {
                     "description": "When **true,** the siging brand is the default brand for the signing experience.",
-                    "type": "boolean",
-                    "nullable": true
+                    "type": "boolean"
                 },
                 "landingPages": {
                     "description": "An array of name/value pairs specifying the pages to which the user is redirected after the following events occur:\n\n- Signing Completed\n- Viewed Exit\n- Finish Later\n- Decline\n- Session Timeout\n- Authentication Failure\n\nIf you do not specify landing pages, the DocuSign default pages are used.",
@@ -36026,8 +36023,7 @@
                 },
                 "signerMustAcknowledgeUseAccountDefault": {
                     "description": "When **true,** the account default setting for the required recipient option is used. If this property is set, `signerMustAcknowledge` cannot be set (and vice versa).",
-                    "type": "boolean",
-                    "nullable": true
+                    "type": "boolean"
                 },
                 "tabs": {
                     "$ref": "#/definitions/tabs",
