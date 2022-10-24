@@ -1,0 +1,2037 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1",
+        "title": "DocuSign Click API",
+        "description": "DocuSign Click lets you capture consent to standard agreement terms with a single click: terms and conditions, terms of service, terms of use, privacy policies, and more. The Click API lets you include this customizable clickwrap solution in your DocuSign integrations.",
+        "termsOfService": "https://www.docusign.com/company/terms-and-conditions/web",
+        "contact": {
+            "name": "DocuSign Developer Center",
+            "url": "https://developers.docusign.com/",
+            "email": "devcenter@docusign.com"
+        }
+    },
+    "host": "www.docusign.net",
+    "basePath": "/clickapi",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json",
+        "application/xml"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "externalDocs": {
+        "description": "See the DocuSign Click API Guide for more information.",
+        "url": "https://developers.docusign.com/docs/click-api/"
+    },
+    "paths": {
+        "/service_information": {
+            "get": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Gets the current version and other information about the Click API.",
+                "operationId": "ServiceInformation_GetServiceInformation",
+                "consumes": [],
+                "produces": [],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/serviceInformation"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getServiceInformation",
+                "x-ds-method": "getServiceInformation",
+                "x-ds-service": "Uncategorized",
+                "description": "The response includes information about the Click API, including the service version, build version, and linked sites.\n\nThis method does not require authentication.",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v1/accounts/{accountId}/clickwraps": {
+            "get": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Gets all the clickwraps for a user.",
+                "operationId": "Clickwraps_GetClickwraps",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Names of columns by which to filter and values to match on."
+                    },
+                    {
+                        "name": "from_date",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The earliest date to return agreements from."
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The name of the clickwraps to return.\n"
+                    },
+                    {
+                        "name": "ownerUserId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The user ID of the owner."
+                    },
+                    {
+                        "name": "page_number",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The results for this endpoint are paginated. Use this parameter to indicate which page to return. The `minimumPagesRemaining` value in the response indicates whether to continue querying for additional pages.\n\nFor example, if the page size is 40:\n* If this property is set to 0 (the default), the endpoint returns results 1-40.\n* If this property is set to 1, the endpoint returns results 41-80.\n\nThe default value is 0.\n"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The status of the clickwraps to filter by. One of:\n\n- `active`\n- `inactive`\n\n"
+                    },
+                    {
+                        "name": "to_date",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The latest date to return agreements from."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapVersionsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getClickwraps",
+                "x-ds-method": "getClickwraps",
+                "x-ds-service": "Uncategorized",
+                "description": "Gets all the clickwraps for a user. \n\n**Note:** This endpoint returns a list of `clickwrapVersionSummaryResponse` objects. Each version of each clickwrap is returned as a separate entry in the list.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.\n",
+                "x-ds-in-sdk": true
+            },
+            "post": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Creates a clickwrap for an account.",
+                "operationId": "Clickwraps_PostClickwrap",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapRequest",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapRequest"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapVersionSummaryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "createClickwrap",
+                "x-ds-method": "createClickwrap",
+                "x-ds-service": "Uncategorized",
+                "description": "Creates a clickwrap for an account.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "delete": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Deletes clickwraps for an account.",
+                "operationId": "Clickwraps_DeleteClickwraps",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapIds",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "A comma-separated list of clickwrap IDs to delete."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapsDeleteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "deleteClickwraps",
+                "x-ds-method": "deleteClickwraps",
+                "x-ds-service": "Uncategorized",
+                "description": "Deletes all clickwraps for an account\nor only the ones specified in the\n`clickwrapIds` query parameter.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v1/accounts/{accountId}/clickwraps/{clickwrapId}": {
+            "get": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Gets a  single clickwrap object.",
+                "operationId": "Clickwraps_GetClickwrap",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapVersionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getClickwrap",
+                "x-ds-method": "getClickwrap",
+                "x-ds-service": "Uncategorized",
+                "description": "Retrieves the definition of the specified clickwrap.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "put": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Transfer ownership of a clickwrap.",
+                "operationId": "Clickwraps_PutClickwrap",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    },
+                    {
+                        "name": "clickwrapTransferRequest",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapTransferRequest"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapVersionSummaryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "updateClickwrap",
+                "x-ds-method": "updateClickwrap",
+                "x-ds-service": "Uncategorized",
+                "description": "Transfers ownership of a clickwrap. You specify the old and the new user ID in the request body.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "delete": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Deletes a clickwrap and all of its versions.",
+                "operationId": "Clickwraps_DeleteClickwrap",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    },
+                    {
+                        "name": "versions",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "A comma-separated list of versions to delete."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapVersionsDeleteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "deleteClickwrap",
+                "x-ds-method": "deleteClickwrap",
+                "x-ds-service": "Uncategorized",
+                "description": "Deletes the clickwrap specified by `clickwrapId` and all of its versions.\nActive clickwraps are not deleted\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v1/accounts/{accountId}/clickwraps/{clickwrapId}/agreements": {
+            "post": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Creates a unique URL for the agreement\nthat you can embed in your application.\n",
+                "operationId": "UserAgreements_PostHasAgreed",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    },
+                    {
+                        "name": "userAgreementRequest",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/userAgreementRequest"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/userAgreementResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "createHasAgreed",
+                "x-ds-method": "createHasAgreed",
+                "x-ds-service": "Uncategorized",
+                "description": "Creates a unique URL for the agreement\nthat you can embed in your application.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` and `click.send`.\n\nThe request must include at least the\n`clientUserId`. This is a value that you\ngenerate to identify the unique recipient\nof the agreement.\n\nIf you are using a [dynamic content][] document,\nyou can supply the values in the documentData\nproperty of the request, like this:\n\n```json\n{\n  \"clientUserId\": \"cl-bc7f-48a9\",\n  \"documentData\": {\n    \"fullName\": \"T. J. Fanning\",\n    \"email\": \"tj@example.com\",\n    \"company\": \"Fanning Indusdtries\",\n    \"title\": \"Cat wrangler\",\n    \"date\": \"2022-10-13T05:17:14-07:00\"\n  }\n}\n```\n\nA response will look like this.\nThe `agreementUrl` is unique to the user identified by the `clientUserId`.\nYour user can open the URL to approve the agreement.\nThe `documentData` property appears only if you provided it in the request.\n\n```json\n{\n  \"accountId\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\",\n  \"clickwrapId\": \"0e64e4a7-xxxx-xxxx-xxxx-ce5a93b162af\",\n  \"clientUserId\": \"tcl-bc7f-48a9j\",\n  \"agreementId\": \"1f346c7d-xxxx-xxxx-xxxx-a5c968666785\",\n  \"documents\": [ . . .],\n  \"consumerDisclosureEnabled\": true,\n  \"agreementUrl\": \"https://demo.docusign.net/clickapi/v1/redeem?agreementToken=AcTZT8g ... cxEqrUsA1lQ8DPPy05dE0\",\n  \"createdOn\": \"2022-10-20T16:27:25.1287685Z\",\n  \"status\": \"created\",\n  \"versionId\": \"5957716d-xxxx-xxxx-xxxx-e1594f00ff12\",\n  \"versionNumber\": 1,\n  \"settings\": {\n    \"displayName\": \"Agree with me\",\n    \"hasDeclineButton\": true,\n    .  . .\n    \"statementAlignment\": \"bottom\"\n  },\n  \"documentData\": {\n    \"fullName\": \"T. J. Fanning\",\n    \"email\": \"tj@example.com\",\n    \"company\": \"Fanning Indusdtries\",\n    \"title\": \"Cat wrangler\",\n    \"date\": \"2022-10-13T05:17:14-07:00\"\n  }\n}\n```\n\nThis method returns the following\nresult codes and response bodies\ndepending on whether the user has agreed.\n\n\n| Agreed | Response code | Response body          |\n| :----- | :------------ | :--------------------- |\n| No     | 201           | Full response as above |\n| Yes    | 200           | No response (empty)    |\n\n\n### Related topics\n\n- [Add dynamic content to your clickwrap][dynamic content]\n- [How to embed a clickwrap][embed-howto]\n\n\n[dynamic content]:  /docs/click-api/click101/customize-clickwrap-fields/#add-dynamic-content-to-your-clickwrap\n[embedding]:        /docs/click-api/click101/customize-clickwrap-fields/#embed-clickwraps-that-contain-dynamic-content\n[embed-howto]:      /docs/click-api/how-to/embed-clickwraps/\n",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v1/accounts/{accountId}/clickwraps/{clickwrapId}/agreements/{agreementId}": {
+            "get": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Gets a specific agreement for a specified clickwrap.",
+                "operationId": "UserAgreements_GetAgreement",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "agreementId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The agreement ID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/userAgreementResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getAgreement",
+                "x-ds-method": "getAgreement",
+                "x-ds-service": "Uncategorized",
+                "description": "Gets the agreement specified by `agreementId`.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` or `click.send`.",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v1/accounts/{accountId}/clickwraps/{clickwrapId}/agreements/{agreementId}/download": {
+            "get": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Gets the completed user agreement PDF.",
+                "operationId": "UserAgreements_GetAgreementPdf",
+                "consumes": [],
+                "produces": [
+                    "application/pdf"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "agreementId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The agreement ID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    },
+                    {
+                        "name": "include_coc",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "When **true,** the Certificate of Completion will be appended to the PDF. The default value is **false.**"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getAgreementPdf",
+                "x-ds-method": "getAgreementPdf",
+                "x-ds-service": "Uncategorized",
+                "description": "Gets the PDF of  `agreementId` for the clickwrap specified by `clickwrapId`.\n\nThe response to this method is the bytes of the PDF file.\nThe response includes the HTTP header `application/pdf`.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` or `click.send`.",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v1/accounts/{accountId}/clickwraps/{clickwrapId}/users": {
+            "get": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Get user agreements",
+                "operationId": "UserAgreements_GetClickwrapAgreements",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    },
+                    {
+                        "name": "client_user_id",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The client ID.\n"
+                    },
+                    {
+                        "name": "from_date",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The earliest date to return agreements from."
+                    },
+                    {
+                        "name": "page_number",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The results for this endpoint are paginated. Use this parameter to indicate which page to return. The `minimumPagesRemaining` value in the response indicates whether to continue querying for additional pages.\n\nFor example, if the page size is 40:\n* If this property is set to 0 (the default), the endpoint returns results 1-40.\n* If this property is set to 1, the endpoint returns results 41-80.\n\nThe default value is 0.\n"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The status of the clickwraps to return."
+                    },
+                    {
+                        "name": "to_date",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The latest date to return agreements from."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapAgreementsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getClickwrapAgreements",
+                "x-ds-method": "getClickwrapAgreements",
+                "x-ds-service": "Uncategorized",
+                "description": "Retrieves the user agreements for a specified clickwrap. Each `userAgreementResponse` object describes a single user's response to the clickwrap. You can also filter the agreements by date, status, page number, and client user ID.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v1/accounts/{accountId}/clickwraps/{clickwrapId}/versions": {
+            "get": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Gets all the versions of a clickwrap.",
+                "operationId": "ClickwrapVersions_GetClickwrapVersions",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapVersionsPagedResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getClickwrapVersions",
+                "x-ds-method": "getClickwrapVersions",
+                "x-ds-service": "Uncategorized",
+                "description": "Gets all the versions of a clickwrap for an account.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "post": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Creates a new clickwrap version.",
+                "operationId": "ClickwrapVersions_PostClickwrapVersion",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    },
+                    {
+                        "name": "clickwrapRequest",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapRequest"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapVersionSummaryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "createClickwrapVersion",
+                "x-ds-method": "createClickwrapVersion",
+                "x-ds-service": "Uncategorized",
+                "description": "Creates a new version of an existing clickwrap. In a new version, you can replace the uploaded documents, change the display settings, and change the name of the clickwrap. The version number is automatically incremented based on the last version of the clickwrap.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "delete": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Deletes the versions of a clickwrap.",
+                "operationId": "ClickwrapVersions_DeleteClickwrapVersions",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    },
+                    {
+                        "name": "clickwrapVersionIds",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "A comma-separated list of clickwrap version IDs to delete."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapVersionsDeleteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "deleteClickwrapVersions",
+                "x-ds-method": "deleteClickwrapVersions",
+                "x-ds-service": "Uncategorized",
+                "description": "Deletes all versions of a clickwrap,\nor only the ones specified in the\n`clickwrapVersionIds` query parameter.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v1/accounts/{accountId}/clickwraps/{clickwrapId}/versions/{versionId}": {
+            "get": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Gets a specific version of a clickwrap by version ID.",
+                "operationId": "ClickwrapVersions_GetClickwrapVersion",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    },
+                    {
+                        "name": "versionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the version."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapVersionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getClickwrapVersion",
+                "x-ds-method": "getClickwrapVersion",
+                "x-ds-service": "Uncategorized",
+                "description": "Gets the version specified by `versionId`  from the clickwrap `clickwrapId`.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "put": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Transfer ownership of a version of a clickwrap by version ID.",
+                "operationId": "ClickwrapVersions_PutClickwrapVersion",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    },
+                    {
+                        "name": "versionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the version."
+                    },
+                    {
+                        "name": "clickwrapRequest",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapRequest"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapVersionSummaryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "updateClickwrapVersion",
+                "x-ds-method": "updateClickwrapVersion",
+                "x-ds-service": "Uncategorized",
+                "description": "Transfers ownership of a clickwrap version specified by `versionId`. You specify the old and the new user ID in the request body.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "delete": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Deletes a clickwrap version by version ID.",
+                "operationId": "ClickwrapVersions_DeleteClickwrapVersion",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    },
+                    {
+                        "name": "versionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the version."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapVersionDeleteResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "deleteClickwrapVersion",
+                "x-ds-method": "deleteClickwrapVersion",
+                "x-ds-service": "Uncategorized",
+                "description": "Deletes the clickwrap version specified by `versionId` of the clickwrap specified by `clickwrapId`.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v1/accounts/{accountId}/clickwraps/{clickwrapId}/versions/{versionId}/documents/{orderOrDisclosure}": {
+            "get": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Downloads a document at an order within the agreement.",
+                "operationId": "UserAgreements_GetAgreementDocument",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    },
+                    {
+                        "name": "orderOrDisclosure",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": ""
+                    },
+                    {
+                        "name": "versionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the version."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/document"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getAgreementDocument",
+                "x-ds-method": "getAgreementDocument",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v1/accounts/{accountId}/clickwraps/{clickwrapId}/versions/{versionId}/users": {
+            "get": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Gets the agreement responses for a clickwrap version by version ID.",
+                "operationId": "UserAgreements_GetClickwrapVersionAgreements",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The external account number (int) or account ID GUID."
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the clickwrap."
+                    },
+                    {
+                        "name": "versionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The ID of the version."
+                    },
+                    {
+                        "name": "client_user_id",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": ""
+                    },
+                    {
+                        "name": "from_date",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The earliest date to return agreements from."
+                    },
+                    {
+                        "name": "page_number",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The results for this endpoint are paginated. Use this parameter to indicate which page to return. The `minimumPagesRemaining` value in the response indicates whether to continue querying for additional pages.\n\nFor example, if the page size is 40:\n* If this property is set to 0 (the default), the endpoint returns results 1-40.\n* If this property is set to 1, the endpoint returns results 41-80.\n\nThe default value is 0.\n"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Clickwrap status. Possible values:\n\n- `active`\n- `inactive`\n- `deleted`"
+                    },
+                    {
+                        "name": "to_date",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The latest date to return agreements from."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/clickwrapAgreementsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getClickwrapVersionAgreements",
+                "x-ds-method": "getClickwrapVersionAgreements",
+                "x-ds-service": "Uncategorized",
+                "description": "Gets the agreement responses for a specific version.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        }
+    },
+    "definitions": {
+        "clickwrapAgreementsResponse": {
+            "type": "object",
+            "properties": {
+                "beginCreatedOn": {
+                    "description": "User agreements from this datetime.",
+                    "type": "object"
+                },
+                "minimumPagesRemaining": {
+                    "format": "int32",
+                    "description": "Number of pages remaining in the response.",
+                    "type": "integer"
+                },
+                "page": {
+                    "format": "int32",
+                    "description": "The number of the current page.",
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "format": "int32",
+                    "description": "The number of items per page.",
+                    "type": "integer"
+                },
+                "userAgreements": {
+                    "description": "An array of user agreements.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/userAgreementResponse"
+                    }
+                }
+            },
+            "x-ds-definition-name": "clickwrapAgreementsResponse",
+            "description": "The results are paginated.\nUse the following properties to navigate the pages.\nUse the `page_number` query parameter to specify a page.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n",
+            "x-ms-summary": "The results are paginated.\nUse the following properties to navigate the pages.\nUse the `page_number` query parameter to specify a page.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n"
+        },
+        "clickwrapDeleteResponse": {
+            "type": "object",
+            "properties": {
+                "clickwrapId": {
+                    "description": "The ID of the clickwrap.",
+                    "type": "string"
+                },
+                "clickwrapName": {
+                    "description": "The name of the clickwrap.",
+                    "type": "string"
+                },
+                "deletionMessage": {
+                    "description": "A message describing the result of deletion request. One of:\n\n- `alreadyDeleted`: Clickwrap is already deleted.\n- `deletionSuccess`: Successfully deleted the clickwrap.\n- `deletionFailure`: Failed to delete the clickwrap.\n- `cannotDelete`: Active clickwrap version cannot be deleted.",
+                    "type": "string"
+                },
+                "deletionSuccess": {
+                    "description": "**True** if the clickwrap was deleted successfully. **False** otherwise.",
+                    "type": "boolean"
+                },
+                "status": {
+                    "description": "Clickwrap status. Possible values:\n\n- `active`\n- `inactive`\n- `deleted`",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "clickwrapDeleteResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "clickwrapRequest": {
+            "type": "object",
+            "properties": {
+                "clickwrapName": {
+                    "description": "The name of the clickwrap. This field is required.",
+                    "type": "string"
+                },
+                "displaySettings": {
+                    "$ref": "#/definitions/displaySettings",
+                    "description": "Display settings for the clickwrap. This object is required."
+                },
+                "documents": {
+                    "description": "An array of documents. This object is required.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/document"
+                    }
+                },
+                "fieldsToNull": {
+                    "description": "Specifies whether `scheduledReacceptance` and `scheduledDate` should be cleared. May be one of:\n\n- `\"scheduledReacceptance\"`\n- `\"scheduledDate\"`\n- `\"scheduledReacceptance,scheduledDate\"`\n",
+                    "type": "string"
+                },
+                "isMajorVersion": {
+                    "description": "Not used.\n",
+                    "type": "boolean"
+                },
+                "isShared": {
+                    "description": "When **true,** indicates that the clickwrap is shared with one or more users in the account.",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Not used.",
+                    "type": "string"
+                },
+                "requireReacceptance": {
+                    "description": "When **true,** requires signers who have previously agreed to this\nclickwrap to sign again. The version number is incremented.",
+                    "type": "boolean"
+                },
+                "scheduledDate": {
+                    "description": "The time and date when this clickwrap is activated.",
+                    "type": "object"
+                },
+                "scheduledReacceptance": {
+                    "$ref": "#/definitions/clickwrapScheduledReacceptance",
+                    "description": "Specifies the interval between reacceptances in days, weeks, months, or years."
+                },
+                "status": {
+                    "description": "Clickwrap status. This property is read-only. Possible values:\n\n- `active`\n- `inactive`\n- `deleted`",
+                    "type": "object"
+                },
+                "transferFromUserId": {
+                    "description": "Not used. To update the user ID of a clickwrap, use the [updateClickwrap](/docs/click-api/reference/accounts/clickwraps/updateclickwrap/) endpoint.",
+                    "type": "string"
+                },
+                "transferToUserId": {
+                    "description": "Not used. To update the user ID of a clickwrap, use the [updateClickwrap](/docs/click-api/reference/accounts/clickwraps/updateclickwrap/) endpoint.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "clickwrapRequest",
+            "description": "Request body for working with clickwrap.",
+            "x-ms-summary": "Request body for working with clickwrap."
+        },
+        "clickwrapScheduledReacceptance": {
+            "type": "object",
+            "properties": {
+                "recurrenceInterval": {
+                    "format": "int32",
+                    "description": "The time between recurrences specified in `recurrenceIntervalType` units.\n\nThe minimum and maximum values depend on `recurrenceIntervalType`:\n\n- `days`: 1 - 365\n- `weeks`: 1 - 52\n- `months`: 1 - 12\n- `years`: 1",
+                    "type": "integer"
+                },
+                "recurrenceIntervalType": {
+                    "description": "The units of the `recurrenceInterval`. Must be one of:\n\n- `days`\n- `weeks`\n- `month`\n- `years`\n",
+                    "type": "string"
+                },
+                "startDateTime": {
+                    "description": "The date when the recurrence interval starts.",
+                    "type": "object"
+                }
+            },
+            "x-ds-definition-name": "clickwrapScheduledReacceptance",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "clickwrapsDeleteResponse": {
+            "type": "object",
+            "properties": {
+                "clickwraps": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/clickwrapDeleteResponse"
+                    }
+                }
+            },
+            "x-ds-definition-name": "clickwrapsDeleteResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "clickwrapTransferRequest": {
+            "type": "object",
+            "properties": {
+                "transferFromUserId": {
+                    "description": "ID of the user to transfer from. This property is required.",
+                    "type": "string"
+                },
+                "transferToUserId": {
+                    "description": "ID of the user to transfer to. This property is required.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "clickwrapTransferRequest",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "clickwrapVersion": {
+            "type": "object",
+            "properties": {
+                "clickwrapVersionId": {
+                    "description": "The unique version ID, a GUID, of this clickwrap version.",
+                    "type": "string"
+                },
+                "createdTime": {
+                    "description": "The time that the clickwrap was created.",
+                    "type": "object"
+                },
+                "lastModified": {
+                    "description": "The time that the clickwrap was last modified.",
+                    "type": "object"
+                },
+                "lastModifiedBy": {
+                    "description": "The user ID of the last user who modified this clickwrap.",
+                    "type": "string"
+                },
+                "ownerUserId": {
+                    "description": "The user ID of the owner of this clickwrap.",
+                    "type": "string"
+                },
+                "requireReacceptance": {
+                    "description": "When **true,** requires signers who have previously agreed to this\nclickwrap to sign again. The version number is incremented.",
+                    "type": "boolean"
+                },
+                "scheduledDate": {
+                    "description": "The time and date when this clickwrap is activated.",
+                    "type": "object"
+                },
+                "scheduledReacceptance": {
+                    "$ref": "#/definitions/clickwrapScheduledReacceptance",
+                    "description": "Specifies the interval between reacceptances in days, weeks, months, or years."
+                },
+                "status": {
+                    "description": "Clickwrap status. Possible values:\n\n- `active`\n- `inactive`\n- `deleted`",
+                    "type": "string"
+                },
+                "versionId": {
+                    "description": "The ID of the version.",
+                    "type": "string"
+                },
+                "versionNumber": {
+                    "description": "Version of the clickwrap.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "clickwrapVersion",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "clickwrapVersionDeleteResponse": {
+            "type": "object",
+            "properties": {
+                "clickwrapVersionId": {
+                    "description": "The unique version ID, a GUID, of this clickwrap version.",
+                    "type": "string"
+                },
+                "createdTime": {
+                    "description": "The time that the clickwrap was created.",
+                    "type": "object"
+                },
+                "deletionMessage": {
+                    "description": "A message describing the result of deletion request. One of:\n\n- `alreadyDeleted`: Clickwrap is already deleted.\n- `deletionSuccess`: Successfully deleted the clickwrap.\n- `deletionFailure`: Failed to delete the clickwrap.\n- `cannotDelete`: Active clickwrap version cannot be deleted.",
+                    "type": "string"
+                },
+                "deletionSuccess": {
+                    "description": "**True** if the clickwrap was deleted successfully. **False** otherwise.",
+                    "type": "boolean"
+                },
+                "lastModified": {
+                    "description": "The time that the clickwrap was last modified.",
+                    "type": "object"
+                },
+                "lastModifiedBy": {
+                    "description": "The user ID of the last user who modified this clickwrap.",
+                    "type": "string"
+                },
+                "ownerUserId": {
+                    "description": "The user ID of the owner of this clickwrap.",
+                    "type": "string"
+                },
+                "requireReacceptance": {
+                    "description": "When **true,** requires signers who have previously agreed to this\nclickwrap to sign again. The version number is incremented.",
+                    "type": "boolean"
+                },
+                "scheduledDate": {
+                    "description": "The time and date when this clickwrap is activated.",
+                    "type": "object"
+                },
+                "scheduledReacceptance": {
+                    "$ref": "#/definitions/clickwrapScheduledReacceptance",
+                    "description": "Specifies the interval between reacceptances in days, weeks, months, or years."
+                },
+                "status": {
+                    "description": "Clickwrap status. Possible values:\n\n- `active`\n- `inactive`\n- `deleted`",
+                    "type": "string"
+                },
+                "versionId": {
+                    "description": "The ID of the version.",
+                    "type": "string"
+                },
+                "versionNumber": {
+                    "description": "Version of the clickwrap.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "clickwrapVersionDeleteResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "clickwrapVersionResponse": {
+            "type": "object",
+            "properties": {
+                "accountId": {
+                    "description": "The external account number (int) or account ID GUID.",
+                    "type": "string"
+                },
+                "clickwrapId": {
+                    "description": "The ID of the clickwrap.",
+                    "type": "string"
+                },
+                "clickwrapName": {
+                    "description": "The name of the clickwrap.",
+                    "type": "string"
+                },
+                "clickwrapVersionId": {
+                    "description": "The unique version ID, a GUID, of this clickwrap version.",
+                    "type": "string"
+                },
+                "createdTime": {
+                    "description": "The time that the clickwrap was created.",
+                    "type": "object"
+                },
+                "displaySettings": {
+                    "$ref": "#/definitions/displaySettings",
+                    "description": "Display settings for a clickwrap."
+                },
+                "documents": {
+                    "description": "An array of documents.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/document"
+                    }
+                },
+                "lastModified": {
+                    "description": "The time that the clickwrap was last modified.",
+                    "type": "object"
+                },
+                "lastModifiedBy": {
+                    "description": "The user ID of the last user who modified this clickwrap.",
+                    "type": "string"
+                },
+                "ownerUserId": {
+                    "description": "The user ID of the owner of this clickwrap.",
+                    "type": "string"
+                },
+                "requireReacceptance": {
+                    "description": "When **true,** requires signers who have previously agreed to this\nclickwrap to sign again. The version number is incremented.",
+                    "type": "boolean"
+                },
+                "scheduledDate": {
+                    "description": "The time and date when this clickwrap is activated.",
+                    "type": "object"
+                },
+                "scheduledReacceptance": {
+                    "$ref": "#/definitions/clickwrapScheduledReacceptance",
+                    "description": "Specifies the interval between reacceptances in days, weeks, months, or years."
+                },
+                "status": {
+                    "description": "Clickwrap status. Possible values:\n\n- `active`\n- `inactive`\n- `deleted`",
+                    "type": "string"
+                },
+                "versionId": {
+                    "description": "The ID of the version.",
+                    "type": "string"
+                },
+                "versionNumber": {
+                    "description": "Version of the clickwrap.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "clickwrapVersionResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "clickwrapVersionsDeleteResponse": {
+            "type": "object",
+            "properties": {
+                "clickwrapId": {
+                    "description": "The ID of the clickwrap.",
+                    "type": "string"
+                },
+                "clickwrapName": {
+                    "description": "The name of the clickwrap.",
+                    "type": "string"
+                },
+                "versions": {
+                    "description": "An array of delete responses.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/clickwrapVersionDeleteResponse"
+                    }
+                }
+            },
+            "x-ds-definition-name": "clickwrapVersionsDeleteResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "clickwrapVersionsPagedResponse": {
+            "type": "object",
+            "properties": {
+                "accountId": {
+                    "description": "The external account number (int) or account ID GUID.",
+                    "type": "string"
+                },
+                "clickwrapId": {
+                    "description": "The ID of the clickwrap.",
+                    "type": "string"
+                },
+                "clickwrapName": {
+                    "description": "The name of the clickwrap.",
+                    "type": "string"
+                },
+                "minimumPagesRemaining": {
+                    "format": "int32",
+                    "description": "Number of pages remaining in the response.",
+                    "type": "integer"
+                },
+                "page": {
+                    "format": "int32",
+                    "description": "The number of the current page.",
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "format": "int32",
+                    "description": "The number of items per page.",
+                    "type": "integer"
+                },
+                "versions": {
+                    "description": "An array of clickwrap versions.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/clickwrapVersion"
+                    }
+                }
+            },
+            "x-ds-definition-name": "clickwrapVersionsPagedResponse",
+            "description": "The results are paginated.\nUse the following properties to navigate the pages.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n\n",
+            "x-ms-summary": "The results are paginated.\nUse the following properties to navigate the pages.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n\n"
+        },
+        "clickwrapVersionsResponse": {
+            "type": "object",
+            "properties": {
+                "clickwraps": {
+                    "description": "An array of `clickwrapVersionSummaryResponse` objects.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/clickwrapVersionSummaryResponse"
+                    }
+                },
+                "minimumPagesRemaining": {
+                    "format": "int32",
+                    "description": "Number of pages remaining in the response.",
+                    "type": "integer"
+                },
+                "page": {
+                    "format": "int32",
+                    "description": "The number of the current page.",
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "format": "int32",
+                    "description": "The number of items per page.",
+                    "type": "integer"
+                }
+            },
+            "x-ds-definition-name": "clickwrapVersionsResponse",
+            "description": "The results are paginated.\nUse the following properties to navigate the pages.\nUse the `page_number` query parameter to specify a page.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n",
+            "x-ms-summary": "The results are paginated.\nUse the following properties to navigate the pages.\nUse the `page_number` query parameter to specify a page.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n"
+        },
+        "clickwrapVersionSummaryResponse": {
+            "type": "object",
+            "properties": {
+                "accountId": {
+                    "description": "The external account number (int) or account ID GUID.",
+                    "type": "string"
+                },
+                "clickwrapId": {
+                    "description": "The ID of the clickwrap.",
+                    "type": "string"
+                },
+                "clickwrapName": {
+                    "description": "The name of the clickwrap.",
+                    "type": "string"
+                },
+                "clickwrapVersionId": {
+                    "description": "The unique version ID, a GUID, of this clickwrap version.",
+                    "type": "string"
+                },
+                "createdTime": {
+                    "description": "The time that the clickwrap was created.",
+                    "type": "object"
+                },
+                "lastModified": {
+                    "description": "The time that the clickwrap was last modified.",
+                    "type": "object"
+                },
+                "lastModifiedBy": {
+                    "description": "The user ID of the last user who modified this clickwrap.",
+                    "type": "string"
+                },
+                "ownerUserId": {
+                    "description": "The user ID of the owner of this clickwrap.",
+                    "type": "string"
+                },
+                "requireReacceptance": {
+                    "description": "When **true,** requires signers who have previously agreed to this\nclickwrap to sign again. The version number is incremented.",
+                    "type": "boolean"
+                },
+                "scheduledDate": {
+                    "description": "The time and date when this clickwrap is activated.",
+                    "type": "object"
+                },
+                "scheduledReacceptance": {
+                    "$ref": "#/definitions/clickwrapScheduledReacceptance",
+                    "description": "Specifies the interval between reacceptances in days, weeks, months, or years."
+                },
+                "status": {
+                    "description": "Clickwrap status. Possible values:\n\n- `active`\n- `inactive`\n- `deleted`",
+                    "type": "string"
+                },
+                "versionId": {
+                    "description": "The ID of the version.",
+                    "type": "string"
+                },
+                "versionNumber": {
+                    "description": "Version of the clickwrap.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "clickwrapVersionSummaryResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "displaySettings": {
+            "type": "object",
+            "properties": {
+                "actionButtonAlignment": {
+                    "description": "Position of the Accept button in the agreement. One of \n\n- `right`\n- `left`\n",
+                    "type": "string"
+                },
+                "allowClientOnly": {
+                    "description": "When **true,** this agreement can be be used in client-only integrations",
+                    "type": "boolean"
+                },
+                "allowedHosts": {
+                    "description": "Hosts that can host the clickwrap.\n\nIt is an error if the clickwrap didn't come from one of these hosts.\n",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "brandId": {
+                    "description": "The signing brand ID.",
+                    "type": "string"
+                },
+                "consentButtonText": {
+                    "description": "Text on the agree button.",
+                    "type": "string"
+                },
+                "consentText": {
+                    "description": "The text on agree button.",
+                    "type": "string"
+                },
+                "declineButtonText": {
+                    "description": "The text on the decline button.",
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "The display name of the user agreement.",
+                    "type": "string"
+                },
+                "documentDisplay": {
+                    "description": "Display type: link or document",
+                    "type": "string"
+                },
+                "downloadable": {
+                    "description": "**True** if the agreement is downloadable.",
+                    "type": "boolean"
+                },
+                "format": {
+                    "description": "Display format: inline or modal.",
+                    "type": "string"
+                },
+                "hasDeclineButton": {
+                    "description": "**True** if the agreement has a decline checkbox.",
+                    "type": "boolean"
+                },
+                "mustRead": {
+                    "description": "**True** if the user needs to scroll to the end of the document.\n",
+                    "type": "boolean"
+                },
+                "mustView": {
+                    "description": "**True** if the user must view the document.\n",
+                    "type": "boolean"
+                },
+                "recordDeclineResponses": {
+                    "description": "When **true,** this agreement records decline actions.",
+                    "type": "boolean"
+                },
+                "requireAccept": {
+                    "description": "**True** if accept is required.\n",
+                    "type": "boolean"
+                },
+                "sendToEmail": {
+                    "description": "**True** if send to email is applicable.\n",
+                    "type": "boolean"
+                }
+            },
+            "x-ds-definition-name": "displaySettings",
+            "description": "Information about how an agreement is displayed.",
+            "x-ms-summary": "Information about how an agreement is displayed."
+        },
+        "document": {
+            "type": "object",
+            "properties": {
+                "documentBase64": {
+                    "description": "The base64-encoded contents of the document.",
+                    "type": "string"
+                },
+                "documentDisplay": {
+                    "description": "Display type: link or document",
+                    "type": "string"
+                },
+                "documentHtml": {
+                    "description": "The HTML representation of the document.",
+                    "type": "string"
+                },
+                "documentName": {
+                    "description": "The name of the document.",
+                    "type": "string"
+                },
+                "fileExtension": {
+                    "description": "The file extension of the document.",
+                    "type": "string"
+                },
+                "mustRead": {
+                    "description": "**True** if the user needs to scroll to the end of the document.\n",
+                    "type": "boolean"
+                },
+                "mustView": {
+                    "description": "**True** if the user must view the document.\n",
+                    "type": "boolean"
+                },
+                "order": {
+                    "format": "int32",
+                    "description": "The order of document layout.",
+                    "type": "integer"
+                }
+            },
+            "x-ds-definition-name": "document",
+            "description": "Information about a document.",
+            "x-ms-summary": "Information about a document."
+        },
+        "errorDetails": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "description": "The error code.",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "The error message.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "errorDetails",
+            "description": "Error details.",
+            "x-ms-summary": "Error details."
+        },
+        "documentData": {
+            "type": "object",
+            "description": "The object of data to be merged with the clickwrap document. A merged document must be created from Click's web editor and supports fullName, email, company, title and date.",
+            "properties": {
+                "fullName": {
+                    "description": "The full name of the signer.\nThis field is created in the editor for a clickwrap document.\n",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "The email address of the signer.\nThis field is created in the editor for a clickwrap document.\n",
+                    "type": "string"
+                },
+                "company": {
+                    "description": "The company name of the signer.\nThis field is created in the editor for a clickwrap document.\n",
+                    "type": "string"
+                },
+                "jobTitle": {
+                    "description": "The job title of the signer.\nThis field is created in the editor for a clickwrap document.\n",
+                    "type": "string"
+                },
+                "date": {
+                    "description": "A custom date for the contract.\nThis field is created in the editor for a clickwrap document.\n",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "documentData",
+            "x-ms-summary": "The object of data to be merged with the clickwrap document. A merged document must be created from Click's web editor and supports fullName, email, company, title and date."
+        },
+        "serviceInformation": {
+            "type": "object",
+            "properties": {
+                "buildBranch": {
+                    "description": "",
+                    "type": "string"
+                },
+                "buildBranchDeployedDateTime": {
+                    "description": "",
+                    "type": "string"
+                },
+                "buildSHA": {
+                    "description": "",
+                    "type": "string"
+                },
+                "buildVersion": {
+                    "description": "The internal build version information.",
+                    "type": "string"
+                },
+                "linkedSites": {
+                    "description": "An array of URLs (strings) of related sites.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "serviceVersions": {
+                    "description": "An array of `serviceVersion` objects.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/serviceVersion"
+                    }
+                }
+            },
+            "x-ds-definition-name": "serviceInformation",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "serviceVersion": {
+            "type": "object",
+            "properties": {
+                "version": {
+                    "description": "The human-readable semver version string.",
+                    "type": "string"
+                },
+                "versionUrl": {
+                    "description": "The URL where this version of the API can be found.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "serviceVersion",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "userAgreementRequest": {
+            "type": "object",
+            "properties": {
+                "clientUserId": {
+                    "description": "A unique value that identifies a user.\nYou can use anything that your system uses\nto identify unique users, such as\nemployee IDs, email addresses, and surrogate keys as the value of `clientUserId`.\n\nA clickwrap with a specific `clientUserId` will not appear again\nonce it has been accepted.\n",
+                    "type": "string"
+                },
+                "documentData": {
+                    "$ref": "#/definitions/documentData",
+                    "description": "This property specifies the data used to create\na clickwrap with [dynamic content][].\n\n\n\n[dynamic content]: /docs/click-api/click101/customize-clickwrap-fields/#embed-clickwraps-that-contain-dynamic-content\n"
+                },
+                "metadata": {
+                    "description": "A customer-defined string you can use in requests. This string will appear in the corresponding response.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "userAgreementRequest",
+            "description": "Data used to create the agreement.",
+            "x-ms-summary": "Data used to create the agreement."
+        },
+        "userAgreementResponse": {
+            "type": "object",
+            "properties": {
+                "accountId": {
+                    "description": "The external account number (int) or account ID GUID.",
+                    "type": "string"
+                },
+                "agreedOn": {
+                    "description": "Date that the client last completed the agreement.\n\nThis property is null if `agreementUrl` is not null and `status` is not  `agreed`.",
+                    "type": "object"
+                },
+                "agreementId": {
+                    "description": "The agreement ID.",
+                    "type": "string"
+                },
+                "agreementUrl": {
+                    "description": "When not null, an agreement is required for user specified by  `clientUserId`.\n\nWhen missing the user specified by `clientUserId`\nhas already agreed and does not require a new acceptance.\n\nUse this URL to render the agreement in a web page.\n\n<!--\nor redirected to when providing redirect_url as a query parameter.\n-->\n",
+                    "type": "string"
+                },
+                "clickwrapId": {
+                    "description": "The ID of the clickwrap.",
+                    "type": "string"
+                },
+                "clientUserId": {
+                    "description": "A unique value that identifies a user.\nYou can use anything that your system uses\nto identify unique users, such as\nemployee IDs, email addresses, and surrogate keys as the value of `clientUserId`.\n\nA clickwrap with a specific `clientUserId` will not appear again\nonce it has been accepted.\n",
+                    "type": "string"
+                },
+                "consumerDisclosureEnabled": {
+                    "description": "",
+                    "type": "boolean"
+                },
+                "consumerDisclosureHtml": {
+                    "description": "The customer-branded HTML with the Electronic Record and Signature Disclosure information",
+                    "type": "string"
+                },
+                "createdOn": {
+                    "description": "The date when the clickwrap was created. May be null.",
+                    "type": "object"
+                },
+                "declinedOn": {
+                    "description": "The date when the user declined the most recent required agreement.\n\nThis property is valid only when `status` is `declined`. Otherwise it is null.",
+                    "type": "object"
+                },
+                "documentData": {
+                    "$ref": "#/definitions/documentData",
+                    "description": "This property specifies the data used to create\na clickwrap with [dynamic content][].\n\n\n\n[dynamic content]: /docs/click-api/click101/customize-clickwrap-fields/#embed-clickwraps-that-contain-dynamic-content\n"
+                },
+                "documents": {
+                    "description": "An array of documents.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/document"
+                    }
+                },
+                "metadata": {
+                    "description": "A customer-defined string you can use in requests. This string will appear in the corresponding response.",
+                    "type": "string"
+                },
+                "settings": {
+                    "$ref": "#/definitions/displaySettings",
+                    "description": "The display settings for this agreement."
+                },
+                "status": {
+                    "description": "User agreement status. One of:\n\n- `created`\n- `agreed`\n- `declined`",
+                    "type": "string"
+                },
+                "style": {
+                    "description": "",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Object"
+                    }
+                },
+                "version": {
+                    "description": "The human-readable semver version string.",
+                    "type": "string"
+                },
+                "versionId": {
+                    "description": "The ID of the version.",
+                    "type": "string"
+                },
+                "versionNumber": {
+                    "format": "int32",
+                    "description": "Version of the clickwrap.",
+                    "type": "integer"
+                }
+            },
+            "x-ds-definition-name": "userAgreementResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "ClickWraps": {
+            "type": "object",
+            "properties": {
+                "clickwraps": {
+                    "description": "An array of clickwraps.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/clickwrapVersionSummaryResponse"
+                    }
+                },
+                "minimumPagesRemaining": {
+                    "format": "int32",
+                    "description": "Number of pages remaining in the response.",
+                    "type": "integer"
+                },
+                "page": {
+                    "format": "int32",
+                    "description": "The number of the current page.",
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "format": "int32",
+                    "description": "The number of items per page.",
+                    "type": "integer"
+                }
+            },
+            "x-ds-definition-name": "clickwrapVersionsResponse",
+            "description": "Methods for working with clickwraps and user agreements.",
+            "x-ds-category": "Accounts",
+            "x-ds-order": "10",
+            "x-ms-summary": "Methods for working with clickwraps and user agreements."
+        }
+    },
+    "parameters": {},
+    "responses": {},
+    "securityDefinitions": {},
+    "x-ds-allow-editing": false,
+    "tags": [
+        {
+            "name": "ClickWraps",
+            "description": "Methods for working with clickwraps and user agreements."
+        }
+    ],
+    "x-ds-categories": [
+        {
+            "name": "Accounts",
+            "summary": "DocuSign Click enables companies to capture consent to standard agreement terms with a single click.",
+            "description": "DocuSign Click lets you capture consent to standard agreement terms with a single click: terms and conditions, terms of service, terms of use, privacy policies, and more. The Click API lets you include this customizable clickwrap solution in your DocuSign integrations.\n\n"
+        }
+    ]
+}
