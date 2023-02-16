@@ -3,7 +3,7 @@
     "info": {
         "version": "v1",
         "title": "DocuSign Click API",
-        "description": "DocuSign Click lets you capture consent to standard agreement terms with a single click: terms and conditions, terms of service, terms of use, privacy policies, and more. The Click API lets you include this customizable clickwrap solution in your DocuSign integrations.",
+        "description": "Elastic signing (also known as DocuSign Click)  lets you capture consent to standard agreement terms with a single click: terms and conditions, terms of service, terms of use, privacy policies, and more. The Click API lets you include this customizable elastic template solution in your DocuSign integrations.",
         "termsOfService": "https://www.docusign.com/company/terms-and-conditions/web",
         "contact": {
             "name": "DocuSign Developer Center",
@@ -34,6 +34,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Gets the current version and other information about the Click API.",
+                "description": "The response includes information about the Click API, including the service version, build version, and linked sites.\n\nThis method does not require authentication.",
                 "operationId": "ServiceInformation_GetServiceInformation",
                 "consumes": [],
                 "produces": [],
@@ -56,7 +57,6 @@
                 "x-ds-methodname": "getServiceInformation",
                 "x-ds-method": "getServiceInformation",
                 "x-ds-service": "Uncategorized",
-                "description": "The response includes information about the Click API, including the service version, build version, and linked sites.\n\nThis method does not require authentication.",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -66,7 +66,8 @@
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Gets all the clickwraps for a user.",
+                "summary": "Gets all the elastic templates for a user.",
+                "description": "Gets all the elastic templates for a user.\n\n**Note:** This endpoint returns a list of `clickwrapVersionSummaryResponse` objects. Each version of each elastic template is returned as a separate entry in the list.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.\n",
                 "operationId": "Clickwraps_GetClickwraps",
                 "consumes": [],
                 "produces": [],
@@ -74,58 +75,58 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "filter",
                         "in": "query",
+                        "description": "Names of columns by which to filter and values to match on.",
                         "required": false,
-                        "type": "string",
-                        "description": "Names of columns by which to filter and values to match on."
+                        "type": "string"
                     },
                     {
                         "name": "from_date",
                         "in": "query",
+                        "description": "The earliest date to return clickwraps from.",
                         "required": false,
-                        "type": "string",
-                        "description": "The earliest date to return agreements from."
+                        "type": "string"
                     },
                     {
                         "name": "name",
                         "in": "query",
+                        "description": "The name of the elastic templates to return.\n",
                         "required": false,
-                        "type": "string",
-                        "description": "The name of the clickwraps to return.\n"
+                        "type": "string"
                     },
                     {
                         "name": "ownerUserId",
                         "in": "query",
+                        "description": "The user ID of the owner.",
                         "required": false,
-                        "type": "string",
-                        "description": "The user ID of the owner."
+                        "type": "string"
                     },
                     {
                         "name": "page_number",
                         "in": "query",
+                        "description": "The results for this endpoint are paginated. Use this parameter to indicate which page to return. The `minimumPagesRemaining` value in the response indicates whether to continue querying for additional pages.\n\nFor example, if the page size is 40:\n* If this property is set to 0 (the default), the endpoint returns results 1-40.\n* If this property is set to 1, the endpoint returns results 41-80.\n\nThe default value is 0.\n",
                         "required": false,
-                        "type": "string",
-                        "description": "The results for this endpoint are paginated. Use this parameter to indicate which page to return. The `minimumPagesRemaining` value in the response indicates whether to continue querying for additional pages.\n\nFor example, if the page size is 40:\n* If this property is set to 0 (the default), the endpoint returns results 1-40.\n* If this property is set to 1, the endpoint returns results 41-80.\n\nThe default value is 0.\n"
+                        "type": "string"
                     },
                     {
                         "name": "status",
                         "in": "query",
+                        "description": "The status of the elastic templates to filter by. One of:\n\n- `active`\n- `inactive`\n\n",
                         "required": false,
-                        "type": "string",
-                        "description": "The status of the clickwraps to filter by. One of:\n\n- `active`\n- `inactive`\n\n"
+                        "type": "string"
                     },
                     {
                         "name": "to_date",
                         "in": "query",
+                        "description": "The latest date to return clickwraps from.",
                         "required": false,
-                        "type": "string",
-                        "description": "The latest date to return agreements from."
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -146,14 +147,14 @@
                 "x-ds-methodname": "getClickwraps",
                 "x-ds-method": "getClickwraps",
                 "x-ds-service": "Uncategorized",
-                "description": "Gets all the clickwraps for a user. \n\n**Note:** This endpoint returns a list of `clickwrapVersionSummaryResponse` objects. Each version of each clickwrap is returned as a separate entry in the list.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.\n",
                 "x-ds-in-sdk": true
             },
             "post": {
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Creates a clickwrap for an account.",
+                "summary": "Creates an elastic template for an account.",
+                "description": "Creates an elastic template for an account.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "Clickwraps_PostClickwrap",
                 "consumes": [],
                 "produces": [],
@@ -161,18 +162,18 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapRequest",
                         "in": "body",
+                        "description": "",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/clickwrapRequest"
-                        },
-                        "description": ""
+                        }
                     }
                 ],
                 "responses": {
@@ -193,14 +194,14 @@
                 "x-ds-methodname": "createClickwrap",
                 "x-ds-method": "createClickwrap",
                 "x-ds-service": "Uncategorized",
-                "description": "Creates a clickwrap for an account.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "delete": {
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Deletes clickwraps for an account.",
+                "summary": "Deletes elastic templates for an account.",
+                "description": "Deletes all elastic templates for an account\nor only the ones specified in the\n`clickwrapIds` query parameter.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "Clickwraps_DeleteClickwraps",
                 "consumes": [],
                 "produces": [],
@@ -208,16 +209,16 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapIds",
                         "in": "query",
+                        "description": "A comma-separated list of elastic template IDs to delete.",
                         "required": false,
-                        "type": "string",
-                        "description": "A comma-separated list of clickwrap IDs to delete."
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -238,7 +239,6 @@
                 "x-ds-methodname": "deleteClickwraps",
                 "x-ds-method": "deleteClickwraps",
                 "x-ds-service": "Uncategorized",
-                "description": "Deletes all clickwraps for an account\nor only the ones specified in the\n`clickwrapIds` query parameter.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -248,7 +248,8 @@
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Gets a  single clickwrap object.",
+                "summary": "Gets a  single elastic template object.",
+                "description": "Retrieves the definition of the specified elastic template.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "Clickwraps_GetClickwrap",
                 "consumes": [],
                 "produces": [],
@@ -256,16 +257,16 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -286,14 +287,14 @@
                 "x-ds-methodname": "getClickwrap",
                 "x-ds-method": "getClickwrap",
                 "x-ds-service": "Uncategorized",
-                "description": "Retrieves the definition of the specified clickwrap.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "put": {
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Transfer ownership of a clickwrap.",
+                "summary": "Transfer ownership of an elastic template.",
+                "description": "Transfers ownership of an elastic template. You specify the old and the new user ID in the request body.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "Clickwraps_PutClickwrap",
                 "consumes": [],
                 "produces": [],
@@ -301,25 +302,25 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapTransferRequest",
                         "in": "body",
+                        "description": "",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/clickwrapTransferRequest"
-                        },
-                        "description": ""
+                        }
                     }
                 ],
                 "responses": {
@@ -340,14 +341,14 @@
                 "x-ds-methodname": "updateClickwrap",
                 "x-ds-method": "updateClickwrap",
                 "x-ds-service": "Uncategorized",
-                "description": "Transfers ownership of a clickwrap. You specify the old and the new user ID in the request body.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "delete": {
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Deletes a clickwrap and all of its versions.",
+                "summary": "Deletes an elastic template and all of its versions.",
+                "description": "Deletes the elastic template specified by `clickwrapId` and all of its versions.\nActive elastic templates are not deleted\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "Clickwraps_DeleteClickwrap",
                 "consumes": [],
                 "produces": [],
@@ -355,23 +356,23 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     },
                     {
                         "name": "versions",
                         "in": "query",
+                        "description": "A comma-separated list of versions to delete.",
                         "required": false,
-                        "type": "string",
-                        "description": "A comma-separated list of versions to delete."
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -392,7 +393,6 @@
                 "x-ds-methodname": "deleteClickwrap",
                 "x-ds-method": "deleteClickwrap",
                 "x-ds-service": "Uncategorized",
-                "description": "Deletes the clickwrap specified by `clickwrapId` and all of its versions.\nActive clickwraps are not deleted\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -403,6 +403,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Creates a unique URL for the agreement\nthat you can embed in your application.\n",
+                "description": "Creates a unique URL for the elastic signing agreement\nthat you can embed in your application.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` and `click.send`.\n\nThe request must include at least the\n`clientUserId`. This is a value that you\ngenerate to identify the unique recipient\nof the agreement.\n\nIf you are using a [dynamic content][] document,\nyou can supply the values in the `documentData`\nproperty of the request, like this:\n\n```json\n{\n  \"clientUserId\": \"cl-bc7f-48a9\",\n  \"documentData\": {\n    \"fullName\": \"T. J. Fanning\",\n    \"email\": \"tj@example.com\",\n    \"company\": \"Fanning Indusdtries\",\n    \"title\": \"Cat wrangler\",\n    \"date\": \"2022-10-13T05:17:14-07:00\"\n  }\n}\n```\n\nA response looks like this.\nThe `agreementUrl` is unique to the user identified by the `clientUserId`.\nYour user can open the URL to approve the agreement.\nThe `documentData` property appears only if you provided it in the request.\n\n```json\n{\n  \"accountId\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\",\n  \"clickwrapId\": \"0e64e4a7-xxxx-xxxx-xxxx-ce5a93b162af\",\n  \"clientUserId\": \"tcl-bc7f-48a9j\",\n  \"agreementId\": \"1f346c7d-xxxx-xxxx-xxxx-a5c968666785\",\n  \"documents\": [ . . .],\n  \"consumerDisclosureEnabled\": true,\n  \"agreementUrl\": \"https://demo.docusign.net/clickapi/v1/redeem?agreementToken=AcTZT8g ... cxEqrUsA1lQ8DPPy05dE0\",\n  \"createdOn\": \"2022-10-20T16:27:25.1287685Z\",\n  \"status\": \"created\",\n  \"versionId\": \"5957716d-xxxx-xxxx-xxxx-e1594f00ff12\",\n  \"versionNumber\": 1,\n  \"settings\": {\n    \"displayName\": \"Agree with me\",\n    \"hasDeclineButton\": true,\n    .  . .\n    \"statementAlignment\": \"bottom\"\n  },\n  \"documentData\": {\n    \"fullName\": \"T. J. Fanning\",\n    \"email\": \"tj@example.com\",\n    \"company\": \"Fanning Indusdtries\",\n    \"title\": \"Cat wrangler\",\n    \"date\": \"2022-10-13T05:17:14-07:00\"\n  }\n}\n```\n\nThis method returns the following\nresponse code and response body,\ndepending on whether the user has agreed.\n\n\n| User has agreed | Response code | Response body          |\n| :----- | :------------ | :--------------------- |\n| No     | 201           | Full response as above |\n| Yes    | 200           | No response (empty)    |\n\n\n### Related topics\n\n- [Add dynamic content to your elastic template][dynamic content]\n- [How to embed an elastic template][embed-howto]\n\n\n[dynamic content]:  /docs/click-api/click101/customize-clickwrap-fields/#add-dynamic-content-to-your-clickwrap\n[embedding]:        /docs/click-api/click101/customize-clickwrap-fields/#embed-clickwraps-that-contain-dynamic-content\n[embed-howto]:      /docs/click-api/how-to/embed-clickwraps/\n",
                 "operationId": "UserAgreements_PostHasAgreed",
                 "consumes": [],
                 "produces": [],
@@ -410,25 +411,25 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     },
                     {
                         "name": "userAgreementRequest",
                         "in": "body",
+                        "description": "",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/userAgreementRequest"
-                        },
-                        "description": ""
+                        }
                     }
                 ],
                 "responses": {
@@ -449,7 +450,6 @@
                 "x-ds-methodname": "createHasAgreed",
                 "x-ds-method": "createHasAgreed",
                 "x-ds-service": "Uncategorized",
-                "description": "Creates a unique URL for the agreement\nthat you can embed in your application.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` and `click.send`.\n\nThe request must include at least the\n`clientUserId`. This is a value that you\ngenerate to identify the unique recipient\nof the agreement.\n\nIf you are using a [dynamic content][] document,\nyou can supply the values in the documentData\nproperty of the request, like this:\n\n```json\n{\n  \"clientUserId\": \"cl-bc7f-48a9\",\n  \"documentData\": {\n    \"fullName\": \"T. J. Fanning\",\n    \"email\": \"tj@example.com\",\n    \"company\": \"Fanning Indusdtries\",\n    \"title\": \"Cat wrangler\",\n    \"date\": \"2022-10-13T05:17:14-07:00\"\n  }\n}\n```\n\nA response will look like this.\nThe `agreementUrl` is unique to the user identified by the `clientUserId`.\nYour user can open the URL to approve the agreement.\nThe `documentData` property appears only if you provided it in the request.\n\n```json\n{\n  \"accountId\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\",\n  \"clickwrapId\": \"0e64e4a7-xxxx-xxxx-xxxx-ce5a93b162af\",\n  \"clientUserId\": \"tcl-bc7f-48a9j\",\n  \"agreementId\": \"1f346c7d-xxxx-xxxx-xxxx-a5c968666785\",\n  \"documents\": [ . . .],\n  \"consumerDisclosureEnabled\": true,\n  \"agreementUrl\": \"https://demo.docusign.net/clickapi/v1/redeem?agreementToken=AcTZT8g ... cxEqrUsA1lQ8DPPy05dE0\",\n  \"createdOn\": \"2022-10-20T16:27:25.1287685Z\",\n  \"status\": \"created\",\n  \"versionId\": \"5957716d-xxxx-xxxx-xxxx-e1594f00ff12\",\n  \"versionNumber\": 1,\n  \"settings\": {\n    \"displayName\": \"Agree with me\",\n    \"hasDeclineButton\": true,\n    .  . .\n    \"statementAlignment\": \"bottom\"\n  },\n  \"documentData\": {\n    \"fullName\": \"T. J. Fanning\",\n    \"email\": \"tj@example.com\",\n    \"company\": \"Fanning Indusdtries\",\n    \"title\": \"Cat wrangler\",\n    \"date\": \"2022-10-13T05:17:14-07:00\"\n  }\n}\n```\n\nThis method returns the following\nresult codes and response bodies\ndepending on whether the user has agreed.\n\n\n| Agreed | Response code | Response body          |\n| :----- | :------------ | :--------------------- |\n| No     | 201           | Full response as above |\n| Yes    | 200           | No response (empty)    |\n\n\n### Related topics\n\n- [Add dynamic content to your clickwrap][dynamic content]\n- [How to embed a clickwrap][embed-howto]\n\n\n[dynamic content]:  /docs/click-api/click101/customize-clickwrap-fields/#add-dynamic-content-to-your-clickwrap\n[embedding]:        /docs/click-api/click101/customize-clickwrap-fields/#embed-clickwraps-that-contain-dynamic-content\n[embed-howto]:      /docs/click-api/how-to/embed-clickwraps/\n",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -459,7 +459,8 @@
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Gets a specific agreement for a specified clickwrap.",
+                "summary": "Gets a specific agreement for a specified elastic template.",
+                "description": "Gets the agreement specified by `agreementId`.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` or `click.send`.",
                 "operationId": "UserAgreements_GetAgreement",
                 "consumes": [],
                 "produces": [],
@@ -467,23 +468,23 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "agreementId",
                         "in": "path",
+                        "description": "The agreement ID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The agreement ID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -504,7 +505,6 @@
                 "x-ds-methodname": "getAgreement",
                 "x-ds-method": "getAgreement",
                 "x-ds-service": "Uncategorized",
-                "description": "Gets the agreement specified by `agreementId`.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` or `click.send`.",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -515,6 +515,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Gets the completed user agreement PDF.",
+                "description": "Gets the PDF of  `agreementId` for the clickwrap specified by `clickwrapId`.\n\nThe response to this method is the bytes of the PDF file.\nThe response includes the HTTP header `application/pdf`.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` or `click.send`.",
                 "operationId": "UserAgreements_GetAgreementPdf",
                 "consumes": [],
                 "produces": [
@@ -524,30 +525,30 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "agreementId",
                         "in": "path",
+                        "description": "The agreement ID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The agreement ID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     },
                     {
                         "name": "include_coc",
                         "in": "query",
+                        "description": "When **true,** the Certificate of Completion will be appended to the PDF. The default value is **false.**",
                         "required": false,
-                        "type": "string",
-                        "description": "When **true,** the Certificate of Completion will be appended to the PDF. The default value is **false.**"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -568,7 +569,60 @@
                 "x-ds-methodname": "getAgreementPdf",
                 "x-ds-method": "getAgreementPdf",
                 "x-ds-service": "Uncategorized",
-                "description": "Gets the PDF of  `agreementId` for the clickwrap specified by `clickwrapId`.\n\nThe response to this method is the bytes of the PDF file.\nThe response includes the HTTP header `application/pdf`.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` or `click.send`.",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v1/accounts/{accountId}/clickwraps/{clickwrapId}/bulk_agreements": {
+            "post": {
+                "tags": [
+                    "ClickWraps"
+                ],
+                "summary": "Starts an export of clickwrap agreements for a specified date range.",
+                "description": "Starts an asynchronus process to export clickwrap agreements for a specified date range.\nAn email will be sent to the creator after it has been processed.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`",
+                "operationId": "UserAgreements_PostBulkClickwrapAgreements",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "clickwrapId",
+                        "in": "path",
+                        "description": "The ID of the elastic template.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "bulkClickwrapRequest",
+                        "in": "body",
+                        "description": "",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/bulkClickwrapRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response."
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "createBulkClickwrapAgreements",
+                "x-ds-method": "createBulkClickwrapAgreements",
+                "x-ds-service": "Uncategorized",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -578,7 +632,8 @@
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Get user agreements",
+                "summary": "Get elastic signing agreements.",
+                "description": "Retrieves the user agreements for a specified elastic template. Each `userAgreementResponse` object describes a single user's response to the elastic signing agreement. You can also filter the agreements by date, status, page number, and client user ID.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "UserAgreements_GetClickwrapAgreements",
                 "consumes": [],
                 "produces": [],
@@ -586,51 +641,51 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     },
                     {
                         "name": "client_user_id",
                         "in": "query",
+                        "description": "The client ID.\n",
                         "required": false,
-                        "type": "string",
-                        "description": "The client ID.\n"
+                        "type": "string"
                     },
                     {
                         "name": "from_date",
                         "in": "query",
+                        "description": "The earliest date to return agreements from.",
                         "required": false,
-                        "type": "string",
-                        "description": "The earliest date to return agreements from."
+                        "type": "string"
                     },
                     {
                         "name": "page_number",
                         "in": "query",
+                        "description": "The results for this endpoint are paginated. Use this parameter to indicate which page to return. The `minimumPagesRemaining` value in the response indicates whether to continue querying for additional pages.\n\nFor example, if the page size is 40:\n* If this property is set to 0 (the default), the endpoint returns results 1-40.\n* If this property is set to 1, the endpoint returns results 41-80.\n\nThe default value is 0.\n",
                         "required": false,
-                        "type": "string",
-                        "description": "The results for this endpoint are paginated. Use this parameter to indicate which page to return. The `minimumPagesRemaining` value in the response indicates whether to continue querying for additional pages.\n\nFor example, if the page size is 40:\n* If this property is set to 0 (the default), the endpoint returns results 1-40.\n* If this property is set to 1, the endpoint returns results 41-80.\n\nThe default value is 0.\n"
+                        "type": "string"
                     },
                     {
                         "name": "status",
                         "in": "query",
+                        "description": "The status of the elastic templates to return.",
                         "required": false,
-                        "type": "string",
-                        "description": "The status of the clickwraps to return."
+                        "type": "string"
                     },
                     {
                         "name": "to_date",
                         "in": "query",
+                        "description": "The latest date to return agreements from.",
                         "required": false,
-                        "type": "string",
-                        "description": "The latest date to return agreements from."
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -651,7 +706,6 @@
                 "x-ds-methodname": "getClickwrapAgreements",
                 "x-ds-method": "getClickwrapAgreements",
                 "x-ds-service": "Uncategorized",
-                "description": "Retrieves the user agreements for a specified clickwrap. Each `userAgreementResponse` object describes a single user's response to the clickwrap. You can also filter the agreements by date, status, page number, and client user ID.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -661,7 +715,8 @@
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Gets all the versions of a clickwrap.",
+                "summary": "Gets all the versions of an elastic template.",
+                "description": "Gets all the versions of an elastic template for an account.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "ClickwrapVersions_GetClickwrapVersions",
                 "consumes": [],
                 "produces": [],
@@ -669,16 +724,16 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -699,14 +754,14 @@
                 "x-ds-methodname": "getClickwrapVersions",
                 "x-ds-method": "getClickwrapVersions",
                 "x-ds-service": "Uncategorized",
-                "description": "Gets all the versions of a clickwrap for an account.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "post": {
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Creates a new clickwrap version.",
+                "summary": "Creates a new elastic template version.",
+                "description": "Creates a new version of an existing elastic template. In a new version, you can replace the uploaded documents, change the display settings, and change the name of the elastic template. The version number is automatically incremented based on the last version of the elastic template.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "ClickwrapVersions_PostClickwrapVersion",
                 "consumes": [],
                 "produces": [],
@@ -714,25 +769,25 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapRequest",
                         "in": "body",
+                        "description": "",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/clickwrapRequest"
-                        },
-                        "description": ""
+                        }
                     }
                 ],
                 "responses": {
@@ -753,14 +808,14 @@
                 "x-ds-methodname": "createClickwrapVersion",
                 "x-ds-method": "createClickwrapVersion",
                 "x-ds-service": "Uncategorized",
-                "description": "Creates a new version of an existing clickwrap. In a new version, you can replace the uploaded documents, change the display settings, and change the name of the clickwrap. The version number is automatically incremented based on the last version of the clickwrap.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "delete": {
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Deletes the versions of a clickwrap.",
+                "summary": "Deletes the versions of an elastic template.",
+                "description": "Deletes all versions of an elastic template,\nor only the ones specified in the\n`clickwrapVersionIds` query parameter.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "ClickwrapVersions_DeleteClickwrapVersions",
                 "consumes": [],
                 "produces": [],
@@ -768,23 +823,23 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapVersionIds",
                         "in": "query",
+                        "description": "A comma-separated list of elastic template version IDs to delete.",
                         "required": false,
-                        "type": "string",
-                        "description": "A comma-separated list of clickwrap version IDs to delete."
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -805,7 +860,6 @@
                 "x-ds-methodname": "deleteClickwrapVersions",
                 "x-ds-method": "deleteClickwrapVersions",
                 "x-ds-service": "Uncategorized",
-                "description": "Deletes all versions of a clickwrap,\nor only the ones specified in the\n`clickwrapVersionIds` query parameter.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -815,7 +869,8 @@
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Gets a specific version of a clickwrap by version ID.",
+                "summary": "Gets a specific version of an elastic template by version ID.",
+                "description": "Gets the version specified by `versionId`  from the elastic template `clickwrapId`.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "ClickwrapVersions_GetClickwrapVersion",
                 "consumes": [],
                 "produces": [],
@@ -823,23 +878,23 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     },
                     {
                         "name": "versionId",
                         "in": "path",
+                        "description": "The ID of the version.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the version."
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -860,14 +915,14 @@
                 "x-ds-methodname": "getClickwrapVersion",
                 "x-ds-method": "getClickwrapVersion",
                 "x-ds-service": "Uncategorized",
-                "description": "Gets the version specified by `versionId`  from the clickwrap `clickwrapId`.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "put": {
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Transfer ownership of a version of a clickwrap by version ID.",
+                "summary": "Transfer ownership of a version of an elastic template by version ID.",
+                "description": "Transfers ownership of an elastic template version specified by `versionId`. You specify the old and the new user ID in the request body.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "ClickwrapVersions_PutClickwrapVersion",
                 "consumes": [],
                 "produces": [],
@@ -875,32 +930,32 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     },
                     {
                         "name": "versionId",
                         "in": "path",
+                        "description": "The ID of the version.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the version."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapRequest",
                         "in": "body",
+                        "description": "",
                         "required": false,
                         "schema": {
                             "$ref": "#/definitions/clickwrapRequest"
-                        },
-                        "description": ""
+                        }
                     }
                 ],
                 "responses": {
@@ -921,14 +976,14 @@
                 "x-ds-methodname": "updateClickwrapVersion",
                 "x-ds-method": "updateClickwrapVersion",
                 "x-ds-service": "Uncategorized",
-                "description": "Transfers ownership of a clickwrap version specified by `versionId`. You specify the old and the new user ID in the request body.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "delete": {
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Deletes a clickwrap version by version ID.",
+                "summary": "Deletes an elastic template version by version ID.",
+                "description": "Deletes the elastic template version specified by `versionId` of the elastic template specified by `clickwrapId`.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "ClickwrapVersions_DeleteClickwrapVersion",
                 "consumes": [],
                 "produces": [],
@@ -936,23 +991,23 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     },
                     {
                         "name": "versionId",
                         "in": "path",
+                        "description": "The ID of the version.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the version."
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -973,7 +1028,6 @@
                 "x-ds-methodname": "deleteClickwrapVersion",
                 "x-ds-method": "deleteClickwrapVersion",
                 "x-ds-service": "Uncategorized",
-                "description": "Deletes the clickwrap version specified by `versionId` of the clickwrap specified by `clickwrapId`.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -984,6 +1038,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Downloads a document at an order within the agreement.",
+                "description": "Downloads a specific document from the agreement presented to the user.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.sign`",
                 "operationId": "UserAgreements_GetAgreementDocument",
                 "consumes": [],
                 "produces": [],
@@ -991,30 +1046,30 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     },
                     {
                         "name": "orderOrDisclosure",
                         "in": "path",
+                        "description": "The order of the document or consumer_disclosure.",
                         "required": true,
-                        "type": "string",
-                        "description": ""
+                        "type": "string"
                     },
                     {
                         "name": "versionId",
                         "in": "path",
+                        "description": "The ID of the version.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the version."
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -1035,7 +1090,6 @@
                 "x-ds-methodname": "getAgreementDocument",
                 "x-ds-method": "getAgreementDocument",
                 "x-ds-service": "Uncategorized",
-                "description": "",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -1045,7 +1099,8 @@
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Gets the agreement responses for a clickwrap version by version ID.",
+                "summary": "Gets the agreement responses for an elastic template version by version ID.",
+                "description": "Gets the agreement responses for a specific version.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "UserAgreements_GetClickwrapVersionAgreements",
                 "consumes": [],
                 "produces": [],
@@ -1053,58 +1108,58 @@
                     {
                         "name": "accountId",
                         "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
                         "required": true,
-                        "type": "string",
-                        "description": "The external account number (int) or account ID GUID."
+                        "type": "string"
                     },
                     {
                         "name": "clickwrapId",
                         "in": "path",
+                        "description": "The ID of the elastic template.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the clickwrap."
+                        "type": "string"
                     },
                     {
                         "name": "versionId",
                         "in": "path",
+                        "description": "The ID of the version.",
                         "required": true,
-                        "type": "string",
-                        "description": "The ID of the version."
+                        "type": "string"
                     },
                     {
                         "name": "client_user_id",
                         "in": "query",
+                        "description": "The client user ID to filter to a single user's agreements.",
                         "required": false,
-                        "type": "string",
-                        "description": ""
+                        "type": "string"
                     },
                     {
                         "name": "from_date",
                         "in": "query",
+                        "description": "The earliest date to return agreements from.",
                         "required": false,
-                        "type": "string",
-                        "description": "The earliest date to return agreements from."
+                        "type": "string"
                     },
                     {
                         "name": "page_number",
                         "in": "query",
+                        "description": "The results for this endpoint are paginated. Use this parameter to indicate which page to return. The `minimumPagesRemaining` value in the response indicates whether to continue querying for additional pages.\n\nFor example, if the page size is 40:\n* If this property is set to 0 (the default), the endpoint returns results 1-40.\n* If this property is set to 1, the endpoint returns results 41-80.\n\nThe default value is 0.\n",
                         "required": false,
-                        "type": "string",
-                        "description": "The results for this endpoint are paginated. Use this parameter to indicate which page to return. The `minimumPagesRemaining` value in the response indicates whether to continue querying for additional pages.\n\nFor example, if the page size is 40:\n* If this property is set to 0 (the default), the endpoint returns results 1-40.\n* If this property is set to 1, the endpoint returns results 41-80.\n\nThe default value is 0.\n"
+                        "type": "string"
                     },
                     {
                         "name": "status",
                         "in": "query",
+                        "description": "Elastic template status. Possible values:\n\n- `active`\n- `inactive`\n- `deleted`",
                         "required": false,
-                        "type": "string",
-                        "description": "Clickwrap status. Possible values:\n\n- `active`\n- `inactive`\n- `deleted`"
+                        "type": "string"
                     },
                     {
                         "name": "to_date",
                         "in": "query",
+                        "description": "The latest date to return agreements from.",
                         "required": false,
-                        "type": "string",
-                        "description": "The latest date to return agreements from."
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -1125,13 +1180,32 @@
                 "x-ds-methodname": "getClickwrapVersionAgreements",
                 "x-ds-method": "getClickwrapVersionAgreements",
                 "x-ds-service": "Uncategorized",
-                "description": "Gets the agreement responses for a specific version.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "x-ds-in-sdk": true
             },
             "parameters": []
         }
     },
     "definitions": {
+        "bulkClickwrapRequest": {
+            "description": "Data used to start a bulk agreements export.",
+            "type": "object",
+            "properties": {
+                "fromDate": {
+                    "description": "The earliest date to return agreements from.",
+                    "type": "object"
+                },
+                "status": {
+                    "description": "User agreement status. One of:\n\n- `agreed`\n- `declined`",
+                    "type": "string"
+                },
+                "toDate": {
+                    "description": "The latest date to return agreements from.",
+                    "type": "object"
+                }
+            },
+            "x-ds-definition-name": "bulkClickwrapRequest",
+            "x-ms-summary": "Data used to start a bulk agreements export."
+        },
         "clickwrapAgreementsResponse": {
             "type": "object",
             "properties": {
@@ -1167,22 +1241,23 @@
             "x-ms-summary": "The results are paginated.\nUse the following properties to navigate the pages.\nUse the `page_number` query parameter to specify a page.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n"
         },
         "clickwrapDeleteResponse": {
+            "description": "The result of a clickwrap deletion request.",
             "type": "object",
             "properties": {
                 "clickwrapId": {
-                    "description": "The ID of the clickwrap.",
+                    "description": "The ID of the elastic template.",
                     "type": "string"
                 },
                 "clickwrapName": {
-                    "description": "The name of the clickwrap.",
+                    "description": "The name of the elastic template.",
                     "type": "string"
                 },
                 "deletionMessage": {
-                    "description": "A message describing the result of deletion request. One of:\n\n- `alreadyDeleted`: Clickwrap is already deleted.\n- `deletionSuccess`: Successfully deleted the clickwrap.\n- `deletionFailure`: Failed to delete the clickwrap.\n- `cannotDelete`: Active clickwrap version cannot be deleted.",
+                    "description": "A message describing the result of deletion request. One of:\n\n- `alreadyDeleted`: Elastic template is already deleted.\n- `deletionSuccess`: Successfully deleted the elastic template.\n- `deletionFailure`: Failed to delete the elastic template.\n- `cannotDelete`: Active elastic template versions cannot be deleted.\n",
                     "type": "string"
                 },
                 "deletionSuccess": {
-                    "description": "**True** if the clickwrap was deleted successfully. **False** otherwise.",
+                    "description": "**True** if the elastic template was deleted successfully. **False** otherwise.",
                     "type": "boolean"
                 },
                 "status": {
@@ -1191,18 +1266,18 @@
                 }
             },
             "x-ds-definition-name": "clickwrapDeleteResponse",
-            "description": "",
-            "x-ms-summary": ""
+            "x-ms-summary": "The result of a clickwrap deletion request."
         },
         "clickwrapRequest": {
+            "description": "Request body for working with elastic templates.",
             "type": "object",
             "properties": {
                 "clickwrapName": {
-                    "description": "The name of the clickwrap. This field is required.",
+                    "description": "The name of the elastic template. This field is required.",
                     "type": "string"
                 },
                 "dataFields": {
-                    "description": "",
+                    "description": "An array of data fields available to be inserted into the documents.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/dataField"
@@ -1210,7 +1285,7 @@
                 },
                 "displaySettings": {
                     "$ref": "#/definitions/displaySettings",
-                    "description": "Display settings for the clickwrap. This object is required."
+                    "description": "Display settings for the elastic template. This object is required."
                 },
                 "documents": {
                     "description": "An array of documents. This object is required.",
@@ -1228,7 +1303,7 @@
                     "type": "boolean"
                 },
                 "isShared": {
-                    "description": "When **true,** indicates that the clickwrap is shared with one or more users in the account.",
+                    "description": "When **true,** indicates that the elastic template is shared with one or more users in the account.",
                     "type": "boolean"
                 },
                 "name": {
@@ -1236,11 +1311,11 @@
                     "type": "string"
                 },
                 "requireReacceptance": {
-                    "description": "When **true,** requires signers who have previously agreed to this\nclickwrap to sign again. The version number is incremented.",
+                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again. The version number is incremented.",
                     "type": "boolean"
                 },
                 "scheduledDate": {
-                    "description": "The time and date when this clickwrap is activated.",
+                    "description": "The time and date when this elastic template is activated.",
                     "type": "object"
                 },
                 "scheduledReacceptance": {
@@ -1248,21 +1323,20 @@
                     "description": "Specifies the interval between reacceptances in days, weeks, months, or years."
                 },
                 "status": {
-                    "description": "Clickwrap status. This property is read-only. Possible values:\n\n- `active`\n- `inactive`\n- `deleted`",
+                    "description": "Status of an elastic template. This property is read-only. Possible values:\n\n- `active`\n- `inactive`\n- `deleted`",
                     "type": "string"
                 },
                 "transferFromUserId": {
-                    "description": "Not used. To update the user ID of a clickwrap, use the [updateClickwrap](/docs/click-api/reference/accounts/clickwraps/updateclickwrap/) endpoint.",
+                    "description": "Not used. To update the user ID of an elastic template, use the [updateClickwrap](/docs/click-api/reference/accounts/clickwraps/updateclickwrap/) endpoint.",
                     "type": "string"
                 },
                 "transferToUserId": {
-                    "description": "Not used. To update the user ID of a clickwrap, use the [updateClickwrap](/docs/click-api/reference/accounts/clickwraps/updateclickwrap/) endpoint.",
+                    "description": "Not used. To update the user ID of an elastic template, use the [updateClickwrap](/docs/click-api/reference/accounts/clickwraps/updateclickwrap/) endpoint.",
                     "type": "string"
                 }
             },
             "x-ds-definition-name": "clickwrapRequest",
-            "description": "Request body for working with clickwrap.",
-            "x-ms-summary": "Request body for working with clickwrap."
+            "x-ms-summary": "Request body for working with elastic templates."
         },
         "clickwrapScheduledReacceptance": {
             "type": "object",
@@ -1289,7 +1363,7 @@
             "type": "object",
             "properties": {
                 "clickwraps": {
-                    "description": "",
+                    "description": "An array of clickwrap deletion results.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/clickwrapDeleteResponse"
@@ -1301,6 +1375,7 @@
             "x-ms-summary": ""
         },
         "clickwrapTransferRequest": {
+            "description": "Data used to transfer a clickwrap from one user to another.",
             "type": "object",
             "properties": {
                 "transferFromUserId": {
@@ -1313,33 +1388,32 @@
                 }
             },
             "x-ds-definition-name": "clickwrapTransferRequest",
-            "description": "",
-            "x-ms-summary": ""
+            "x-ms-summary": "Data used to transfer a clickwrap from one user to another."
         },
         "clickwrapVersion": {
             "type": "object",
             "properties": {
                 "clickwrapVersionId": {
-                    "description": "The unique version ID, a GUID, of this clickwrap version.",
+                    "description": "The unique GUID of this elastic template version.",
                     "type": "string"
                 },
                 "createdTime": {
-                    "description": "The time that the clickwrap was created.",
+                    "description": "The time that the elastic template was created.",
                     "type": "object"
                 },
                 "dataFields": {
-                    "description": "",
+                    "description": "An array of `dataField` objects.\n",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/dataField"
                     }
                 },
                 "lastModified": {
-                    "description": "The time that the clickwrap was last modified.",
+                    "description": "The time that the elastic template was last modified.",
                     "type": "object"
                 },
                 "lastModifiedBy": {
-                    "description": "The user ID of the last user who modified this clickwrap.",
+                    "description": "The user ID of the last user who modified this elastic template.",
                     "type": "string"
                 },
                 "ownerUserId": {
@@ -1347,11 +1421,11 @@
                     "type": "string"
                 },
                 "requireReacceptance": {
-                    "description": "When **true,** requires signers who have previously agreed to this\nclickwrap to sign again. The version number is incremented.",
+                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again. The version number is incremented.",
                     "type": "boolean"
                 },
                 "scheduledDate": {
-                    "description": "The time and date when this clickwrap is activated.",
+                    "description": "The time and date when this elastic template is activated.",
                     "type": "object"
                 },
                 "scheduledReacceptance": {
@@ -1367,7 +1441,7 @@
                     "type": "string"
                 },
                 "versionNumber": {
-                    "description": "Version of the clickwrap.",
+                    "description": "Version of the elastic template.",
                     "type": "string"
                 }
             },
@@ -1379,34 +1453,34 @@
             "type": "object",
             "properties": {
                 "clickwrapVersionId": {
-                    "description": "The unique version ID, a GUID, of this clickwrap version.",
+                    "description": "The unique GUID of this elastic template version.",
                     "type": "string"
                 },
                 "createdTime": {
-                    "description": "The time that the clickwrap was created.",
+                    "description": "The time that the elastic template was created.",
                     "type": "object"
                 },
                 "dataFields": {
-                    "description": "",
+                    "description": "An array of `dataField` objects.\n",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/dataField"
                     }
                 },
                 "deletionMessage": {
-                    "description": "A message describing the result of deletion request. One of:\n\n- `alreadyDeleted`: Clickwrap is already deleted.\n- `deletionSuccess`: Successfully deleted the clickwrap.\n- `deletionFailure`: Failed to delete the clickwrap.\n- `cannotDelete`: Active clickwrap version cannot be deleted.",
+                    "description": "A message describing the result of deletion request. One of:\n\n- `alreadyDeleted`: Elastic template is already deleted.\n- `deletionSuccess`: Successfully deleted the elastic template.\n- `deletionFailure`: Failed to delete the elastic template.\n- `cannotDelete`: Active elastic template versions cannot be deleted.\n",
                     "type": "string"
                 },
                 "deletionSuccess": {
-                    "description": "**True** if the clickwrap was deleted successfully. **False** otherwise.",
+                    "description": "**True** if the elastic template was deleted successfully. **False** otherwise.",
                     "type": "boolean"
                 },
                 "lastModified": {
-                    "description": "The time that the clickwrap was last modified.",
+                    "description": "The time that the elastic template was last modified.",
                     "type": "object"
                 },
                 "lastModifiedBy": {
-                    "description": "The user ID of the last user who modified this clickwrap.",
+                    "description": "The user ID of the last user who modified this elastic template.",
                     "type": "string"
                 },
                 "ownerUserId": {
@@ -1414,11 +1488,11 @@
                     "type": "string"
                 },
                 "requireReacceptance": {
-                    "description": "When **true,** requires signers who have previously agreed to this\nclickwrap to sign again. The version number is incremented.",
+                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again. The version number is incremented.",
                     "type": "boolean"
                 },
                 "scheduledDate": {
-                    "description": "The time and date when this clickwrap is activated.",
+                    "description": "The time and date when this elastic template is activated.",
                     "type": "object"
                 },
                 "scheduledReacceptance": {
@@ -1434,7 +1508,7 @@
                     "type": "string"
                 },
                 "versionNumber": {
-                    "description": "Version of the clickwrap.",
+                    "description": "Version of the elastic template.",
                     "type": "string"
                 }
             },
@@ -1450,23 +1524,23 @@
                     "type": "string"
                 },
                 "clickwrapId": {
-                    "description": "The ID of the clickwrap.",
+                    "description": "The ID of the elastic template.",
                     "type": "string"
                 },
                 "clickwrapName": {
-                    "description": "The name of the clickwrap.",
+                    "description": "The name of the elastic template.",
                     "type": "string"
                 },
                 "clickwrapVersionId": {
-                    "description": "The unique version ID, a GUID, of this clickwrap version.",
+                    "description": "The unique GUID of this elastic template version.",
                     "type": "string"
                 },
                 "createdTime": {
-                    "description": "The time that the clickwrap was created.",
+                    "description": "The time that the elastic template was created.",
                     "type": "object"
                 },
                 "dataFields": {
-                    "description": "",
+                    "description": "An array of `dataField` objects.\n",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/dataField"
@@ -1474,7 +1548,7 @@
                 },
                 "displaySettings": {
                     "$ref": "#/definitions/displaySettings",
-                    "description": "Display settings for a clickwrap."
+                    "description": "Display settings for an elastic template."
                 },
                 "documents": {
                     "description": "An array of documents.",
@@ -1484,11 +1558,11 @@
                     }
                 },
                 "lastModified": {
-                    "description": "The time that the clickwrap was last modified.",
+                    "description": "The time that the elastic template was last modified.",
                     "type": "object"
                 },
                 "lastModifiedBy": {
-                    "description": "The user ID of the last user who modified this clickwrap.",
+                    "description": "The user ID of the last user who modified this elastic template.",
                     "type": "string"
                 },
                 "ownerUserId": {
@@ -1496,11 +1570,11 @@
                     "type": "string"
                 },
                 "requireReacceptance": {
-                    "description": "When **true,** requires signers who have previously agreed to this\nclickwrap to sign again. The version number is incremented.",
+                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again. The version number is incremented.",
                     "type": "boolean"
                 },
                 "scheduledDate": {
-                    "description": "The time and date when this clickwrap is activated.",
+                    "description": "The time and date when this elastic template is activated.",
                     "type": "object"
                 },
                 "scheduledReacceptance": {
@@ -1516,7 +1590,7 @@
                     "type": "string"
                 },
                 "versionNumber": {
-                    "description": "Version of the clickwrap.",
+                    "description": "Version of the elastic template.",
                     "type": "string"
                 }
             },
@@ -1528,11 +1602,11 @@
             "type": "object",
             "properties": {
                 "clickwrapId": {
-                    "description": "The ID of the clickwrap.",
+                    "description": "The ID of the elastic template.",
                     "type": "string"
                 },
                 "clickwrapName": {
-                    "description": "The name of the clickwrap.",
+                    "description": "The name of the elastic template.",
                     "type": "string"
                 },
                 "versions": {
@@ -1548,6 +1622,7 @@
             "x-ms-summary": ""
         },
         "clickwrapVersionsPagedResponse": {
+            "description": "The results are paginated.\nUse the following properties to navigate the pages.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n\n",
             "type": "object",
             "properties": {
                 "accountId": {
@@ -1555,16 +1630,16 @@
                     "type": "string"
                 },
                 "clickwrapId": {
-                    "description": "The ID of the clickwrap.",
+                    "description": "The ID of the elastic template.",
                     "type": "string"
                 },
                 "clickwrapName": {
-                    "description": "The name of the clickwrap.",
+                    "description": "The name of the elastic template.",
                     "type": "string"
                 },
                 "minimumPagesRemaining": {
                     "format": "int32",
-                    "description": "Number of pages remaining in the response.",
+                    "description": "An array of clickwrap versions.",
                     "type": "integer"
                 },
                 "page": {
@@ -1578,7 +1653,7 @@
                     "type": "integer"
                 },
                 "versions": {
-                    "description": "An array of clickwrap versions.",
+                    "description": "An array of elastic template versions.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/clickwrapVersion"
@@ -1586,10 +1661,10 @@
                 }
             },
             "x-ds-definition-name": "clickwrapVersionsPagedResponse",
-            "description": "The results are paginated.\nUse the following properties to navigate the pages.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n\n",
             "x-ms-summary": "The results are paginated.\nUse the following properties to navigate the pages.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n\n"
         },
         "clickwrapVersionsResponse": {
+            "description": "The results are paginated.\nUse the following properties to navigate the pages.\nUse the `page_number` query parameter to specify a page.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n",
             "type": "object",
             "properties": {
                 "clickwraps": {
@@ -1616,7 +1691,6 @@
                 }
             },
             "x-ds-definition-name": "clickwrapVersionsResponse",
-            "description": "The results are paginated.\nUse the following properties to navigate the pages.\nUse the `page_number` query parameter to specify a page.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n",
             "x-ms-summary": "The results are paginated.\nUse the following properties to navigate the pages.\nUse the `page_number` query parameter to specify a page.\n\n- `page`: The page number of the current results.\n- `pageSize`: The number of results in the current page.\n- `minimumPagesRemaining`: The number of pages that follow this one.\n"
         },
         "clickwrapVersionSummaryResponse": {
@@ -1627,34 +1701,34 @@
                     "type": "string"
                 },
                 "clickwrapId": {
-                    "description": "The ID of the clickwrap.",
+                    "description": "The ID of the elastic template.",
                     "type": "string"
                 },
                 "clickwrapName": {
-                    "description": "The name of the clickwrap.",
+                    "description": "The name of the elastic template.",
                     "type": "string"
                 },
                 "clickwrapVersionId": {
-                    "description": "The unique version ID, a GUID, of this clickwrap version.",
+                    "description": "The unique GUID of this elastic template version.",
                     "type": "string"
                 },
                 "createdTime": {
-                    "description": "The time that the clickwrap was created.",
+                    "description": "The time that the elastic template was created.",
                     "type": "object"
                 },
                 "dataFields": {
-                    "description": "",
+                    "description": "An array of `dataField` objects.\n",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/dataField"
                     }
                 },
                 "lastModified": {
-                    "description": "The time that the clickwrap was last modified.",
+                    "description": "The time that the elastic template was last modified.",
                     "type": "object"
                 },
                 "lastModifiedBy": {
-                    "description": "The user ID of the last user who modified this clickwrap.",
+                    "description": "The user ID of the last user who modified this elastic template.",
                     "type": "string"
                 },
                 "ownerUserId": {
@@ -1662,11 +1736,11 @@
                     "type": "string"
                 },
                 "requireReacceptance": {
-                    "description": "When **true,** requires signers who have previously agreed to this\nclickwrap to sign again. The version number is incremented.",
+                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again. The version number is incremented.",
                     "type": "boolean"
                 },
                 "scheduledDate": {
-                    "description": "The time and date when this clickwrap is activated.",
+                    "description": "The time and date when this elastic template is activated.",
                     "type": "object"
                 },
                 "scheduledReacceptance": {
@@ -1682,7 +1756,7 @@
                     "type": "string"
                 },
                 "versionNumber": {
-                    "description": "Version of the clickwrap.",
+                    "description": "Version of the elastic template.",
                     "type": "string"
                 }
             },
@@ -1694,23 +1768,24 @@
             "type": "object",
             "properties": {
                 "label": {
-                    "description": "",
+                    "description": "<!-- Tir global value is used for dataField properties -->\nThe text label to display for this data field.\n",
                     "type": "string"
                 },
                 "name": {
-                    "description": "",
+                    "description": "<!-- Tir global value is used for dataField properties -->\nThe name of the data field.\n",
                     "type": "string"
                 },
                 "type": {
-                    "description": "",
+                    "description": "<!-- Tir global value is used for dataField properties -->\nThe type of the value that the field holds.\nMust be one of the following case-sensitive keywords:\n\n- `NUMBER`\n- `DATE`\n- `STRING`\n\n\n",
                     "type": "string"
                 }
             },
             "x-ds-definition-name": "dataField",
-            "description": "",
-            "x-ms-summary": ""
+            "description": "Describes a single data field.",
+            "x-ms-summary": "Describes a single data field."
         },
         "displaySettings": {
+            "description": "Information about how an agreement is displayed.",
             "type": "object",
             "properties": {
                 "actionButtonAlignment": {
@@ -1722,7 +1797,7 @@
                     "type": "boolean"
                 },
                 "allowedHosts": {
-                    "description": "Hosts that can host the clickwrap.\n\nIt is an error if the clickwrap didn't come from one of these hosts.\n",
+                    "description": "Hosts that can host the elastic template.\n\nIt is an error if the elastic template didn't come from one of these hosts.\n",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -1785,15 +1860,15 @@
                     "type": "boolean"
                 },
                 "statementAlignment": {
-                    "description": "",
+                    "description": "Position of the agreement statement. One of \n\n- `top`\n- `bottom`\n",
                     "type": "string"
                 }
             },
             "x-ds-definition-name": "displaySettings",
-            "description": "Information about how an agreement is displayed.",
             "x-ms-summary": "Information about how an agreement is displayed."
         },
         "document": {
+            "description": "Information about a document.",
             "type": "object",
             "properties": {
                 "documentBase64": {
@@ -1831,10 +1906,10 @@
                 }
             },
             "x-ds-definition-name": "document",
-            "description": "Information about a document.",
             "x-ms-summary": "Information about a document."
         },
         "errorDetails": {
+            "description": "Error details.",
             "type": "object",
             "properties": {
                 "errorCode": {
@@ -1847,22 +1922,21 @@
                 }
             },
             "x-ds-definition-name": "errorDetails",
-            "description": "Error details.",
             "x-ms-summary": "Error details."
         },
         "serviceInformation": {
             "type": "object",
             "properties": {
                 "buildBranch": {
-                    "description": "",
+                    "description": "The internal source control branch.",
                     "type": "string"
                 },
                 "buildBranchDeployedDateTime": {
-                    "description": "",
+                    "description": "The date-time this branch was deployed.",
                     "type": "string"
                 },
                 "buildSHA": {
-                    "description": "",
+                    "description": "The internal source control SHA.",
                     "type": "string"
                 },
                 "buildVersion": {
@@ -1905,6 +1979,7 @@
             "x-ms-summary": ""
         },
         "userAgreementRequest": {
+            "description": "Data used to create the agreement.",
             "type": "object",
             "properties": {
                 "clientUserId": {
@@ -1912,7 +1987,7 @@
                     "type": "string"
                 },
                 "documentData": {
-                    "description": "This property specifies the data used to create\na clickwrap with [dynamic content][].\n\n\n\n[dynamic content]: /docs/click-api/click101/customize-clickwrap-fields/#embed-clickwraps-that-contain-dynamic-content\n",
+                    "description": "This property specifies the data used to create\nan elastic template with [dynamic content][].\n\n\n\n[dynamic content]: /docs/click-api/click101/customize-clickwrap-fields/#embed-clickwraps-that-contain-dynamic-content\n",
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
@@ -1921,10 +1996,13 @@
                 "metadata": {
                     "description": "A customer-defined string you can use in requests. This string will appear in the corresponding response.",
                     "type": "string"
+                },
+                "returnUrl": {
+                    "description": "The URL to redirect to after the agreement is complete when the agreement is not rendered in an iframe.",
+                    "type": "string"
                 }
             },
             "x-ds-definition-name": "userAgreementRequest",
-            "description": "Data used to create the agreement.",
             "x-ms-summary": "Data used to create the agreement."
         },
         "userAgreementResponse": {
@@ -1947,15 +2025,15 @@
                     "type": "string"
                 },
                 "clickwrapId": {
-                    "description": "The ID of the clickwrap.",
+                    "description": "The ID of the elastic template.",
                     "type": "string"
                 },
                 "clientUserId": {
-                    "description": "A unique value that identifies a user.\nYou can use anything that your system uses\nto identify unique users, such as\nemployee IDs, email addresses, and surrogate keys as the value of `clientUserId`.\n\nA clickwrap with a specific `clientUserId` will not appear again\nonce it has been accepted.\n",
+                    "description": "A unique value that identifies a user.\nYou can use anything that your system uses\nto identify unique users, such as\nemployee IDs, email addresses, and surrogate keys as the value of `clientUserId`.\n\nAn elastic signing agreement with a specific `clientUserId` will not appear again\nonce it has been accepted.\n",
                     "type": "string"
                 },
                 "consumerDisclosureEnabled": {
-                    "description": "",
+                    "description": "**True** if consumer disclosure was required by this agreement.",
                     "type": "boolean"
                 },
                 "consumerDisclosureHtml": {
@@ -1963,15 +2041,22 @@
                     "type": "string"
                 },
                 "createdOn": {
-                    "description": "The date when the clickwrap was created. May be null.",
+                    "description": "The date when the elastic template was created. May be null.",
                     "type": "object"
+                },
+                "dataFields": {
+                    "description": "An array of `dataField` objects.\n",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dataField"
+                    }
                 },
                 "declinedOn": {
                     "description": "The date when the user declined the most recent required agreement.\n\nThis property is valid only when `status` is `declined`. Otherwise it is null.",
                     "type": "object"
                 },
                 "documentData": {
-                    "description": "This property specifies the data used to create\na clickwrap with [dynamic content][].\n\n\n\n[dynamic content]: /docs/click-api/click101/customize-clickwrap-fields/#embed-clickwraps-that-contain-dynamic-content\n",
+                    "description": "This property specifies the data used to create\nan elastic template with [dynamic content][].\n\n\n\n[dynamic content]: /docs/click-api/click101/customize-clickwrap-fields/#embed-clickwraps-that-contain-dynamic-content\n",
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
@@ -1988,6 +2073,10 @@
                     "description": "A customer-defined string you can use in requests. This string will appear in the corresponding response.",
                     "type": "string"
                 },
+                "returnUrl": {
+                    "description": "The URL redirected to after the agreement was completed.",
+                    "type": "string"
+                },
                 "settings": {
                     "$ref": "#/definitions/displaySettings",
                     "description": "The display settings for this agreement."
@@ -1997,7 +2086,7 @@
                     "type": "string"
                 },
                 "style": {
-                    "description": "",
+                    "description": "This property specifies the custom style provided when the agreement was created by [customizing the template appearance][].\n\n\n\n[customizing the template appearance]: /docs/click-api/click101/customize-elastic-template-appearance/\n",
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
@@ -2013,7 +2102,7 @@
                 },
                 "versionNumber": {
                     "format": "int32",
-                    "description": "Version of the clickwrap.",
+                    "description": "Version of the elastic template.",
                     "type": "integer"
                 }
             },
@@ -2022,44 +2111,36 @@
             "x-ms-summary": ""
         },
         "ClickWraps": {
+            "description": "Methods for working with elastic templates and user agreements.",
             "type": "object",
             "properties": {
-                "buildBranch": {
-                    "description": "",
-                    "type": "string"
-                },
-                "buildBranchDeployedDateTime": {
-                    "description": "",
-                    "type": "string"
-                },
-                "buildSHA": {
-                    "description": "",
-                    "type": "string"
-                },
-                "buildVersion": {
-                    "description": "",
-                    "type": "string"
-                },
-                "linkedSites": {
-                    "description": "",
+                "clickwraps": {
+                    "description": "An array of elastic templates.",
                     "type": "array",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/clickwrapVersionSummaryResponse"
                     }
                 },
-                "serviceVersions": {
-                    "description": "",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/serviceVersion"
-                    }
+                "minimumPagesRemaining": {
+                    "format": "int32",
+                    "description": "Number of pages remaining in the response.",
+                    "type": "integer"
+                },
+                "page": {
+                    "format": "int32",
+                    "description": "The number of the current page.",
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "format": "int32",
+                    "description": "The number of items per page.",
+                    "type": "integer"
                 }
             },
-            "x-ds-definition-name": "serviceInformation",
-            "description": "Methods for working with clickwraps and user agreements.",
+            "x-ds-definition-name": "clickwrapVersionsResponse",
             "x-ds-category": "Accounts",
-            "x-ds-order": "100",
-            "x-ms-summary": "Methods for working with clickwraps and user agreements."
+            "x-ds-order": "10",
+            "x-ms-summary": "Methods for working with elastic templates and user agreements."
         }
     },
     "parameters": {},
@@ -2069,14 +2150,14 @@
     "tags": [
         {
             "name": "ClickWraps",
-            "description": "Methods for working with clickwraps and user agreements."
+            "description": "Methods for working with elastic templates and elastic signing agreements."
         }
     ],
     "x-ds-categories": [
         {
             "name": "Accounts",
-            "summary": "DocuSign Click enables companies to capture consent to standard agreement terms with a single click.",
-            "description": "DocuSign Click lets you capture consent to standard agreement terms with a single click: terms and conditions, terms of service, terms of use, privacy policies, and more. The Click API lets you include this customizable clickwrap solution in your DocuSign integrations.\n\n"
+            "summary": "Elastic signing (also known as DocuSign Click) enables companies to capture consent to standard agreement terms with a single click.\n",
+            "description": "Elastic signing (also known as DocuSign Click) lets you capture consent to standard agreement terms with a single click: terms and conditions, terms of service, terms of use, privacy policies, and more. The Click API lets you include this customizable solution in your DocuSign integrations.\n\n"
         }
     ]
 }
