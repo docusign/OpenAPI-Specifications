@@ -7,6 +7,7 @@
    "generatedDateTime":"",
    "data":{
       "accountId":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "recipientId":"1",
       "envelopeId":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "envelopeSummary":{
@@ -21,7 +22,60 @@
          "emailBlurb":"sample string 9",
          "envelopeId":"sample string 10",
          "signingLocation":"sample string 11",
-         "customFieldsUri":"sample string 12",
+         "notificationUri":"sample string 12",
+         "enforceSignerVisibility":"sample string 13",
+         "enableWetSign":"sample string 14",
+         "allowMarkup":"sample string 15",
+         "allowReassign":"sample string 16",
+         "createdDateTime":"sample string 17",
+         "lastModifiedDateTime":"sample string 18",
+         "deliveredDateTime":"sample string 19",
+         "initialSentDateTime":"sample string 20",
+         "sentDateTime":"sample string 21",
+         "completedDateTime":"sample string 22",
+         "voidedDateTime":"sample string 23",
+         "voidedReason":"sample string 24",
+         "deletedDateTime":"sample string 25",
+         "declinedDateTime":"sample string 26",
+         "statusChangedDateTime":"sample string 27",
+         "documentsCombinedUri":"sample string 28",
+         "certificateUri":"sample string 29",
+         "templatesUri":"sample string 30",
+         "messageLock":"sample string 31",
+         "recipientsLock":"sample string 32",
+         "customFieldsUri":"sample string 33",
+         "sender": {
+           "userName": "",
+           "userId": "",
+           "accountId": "",
+           "email": "",
+           "ipAddress": ""
+        },
+         "folders": [
+        {
+          "name": "",
+          "type": "",
+          "owner": {
+            "userId": "",
+            "email": ""
+          },
+          "folderId": "",
+          "uri": ""
+        },
+        {
+          "name": "",
+          "type": "",
+          "owner": {
+            "userId": "",
+            "email": ""
+          },
+          "folderId": "",
+          "uri": ""
+        },
+        {
+          "name": ""
+        }
+        ],
          "customFields":{
             "textCustomFields":[
                {
@@ -72,27 +126,6 @@
                "expireWarn":"sample string 3"
             }
          },
-         "notificationUri":"sample string 17",
-         "enforceSignerVisibility":"sample string 18",
-         "enableWetSign":"sample string 19",
-         "allowMarkup":"sample string 20",
-         "allowReassign":"sample string 21",
-         "createdDateTime":"sample string 22",
-         "lastModifiedDateTime":"sample string 23",
-         "deliveredDateTime":"sample string 24",
-         "initialSentDateTime":"sample string 25",
-         "sentDateTime":"sample string 26",
-         "completedDateTime":"sample string 27",
-         "voidedDateTime":"sample string 28",
-         "voidedReason":"sample string 29",
-         "deletedDateTime":"sample string 30",
-         "declinedDateTime":"sample string 31",
-         "statusChangedDateTime":"sample string 32",
-         "documentsCombinedUri":"sample string 33",
-         "certificateUri":"sample string 34",
-         "templatesUri":"sample string 35",
-         "messageLock":"sample string 36",
-         "recipientsLock":"sample string 37",
          "recipients":{
             "signers":[
                {
