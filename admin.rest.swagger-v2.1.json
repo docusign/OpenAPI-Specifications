@@ -68,6 +68,60 @@
                 "x-ds-in-sdk": true
             }
         },
+        "/v2/data_redaction/accounts/{accountId}/user": {
+            "post": {
+                "tags": [
+                    "DataDeletion"
+                ],
+                "summary": "Deletes membership data for a user on an account.",
+                "description": "Deletes the data for a single account membership for a specified user.\n\nTo call this endpoint: \n* You must be an administrator (or delegated administrator) of the specified account.\n* The user must have been closed for at least 24 hours.\n\n**Note:** After a user's data is deleted for every account to which they belong, their user-level data will automatically be deleted.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_data_redact`.\n",
+                "operationId": "DataRedaction_RedactIndividualMembershipData",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account from which to delete the user's data.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "requestModel",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IndividualMembershipDataRedactionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IndividualUserDataRedactionResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "user_data_redact"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "redactIndividualMembershipData",
+                "x-ds-method": "redactIndividualMembershipData",
+                "x-ds-service": "Accounts",
+                "x-ds-in-sdk": true
+            }
+        },
         "/v2/organizations/{organizationId}/accounts/{accountId}/permissions": {
             "get": {
                 "tags": [
@@ -1328,6 +1382,60 @@
                 "x-ds-methodname": "getIdentityProviders",
                 "x-ds-method": "getIdentityProviders",
                 "x-ds-service": "IdentityProviders",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v2/data_redaction/organizations/{organizationId}/user": {
+            "post": {
+                "tags": [
+                    "DataDeletion"
+                ],
+                "summary": "Deletes data for one or more of a user's account memberships.",
+                "description": "Deletes data for one or more of a user's account memberships.\n\nTo call this endpoint: \n* You must be an organization administrator (or delegated administrator) with permission to manage the specified accounts or the user's email domain.\n* The user must have been closed for at least 24 hours.\n\n**Note:** After a user's data is deleted for every account to which they belong, their user-level data will automatically be deleted.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_data_redact`.",
+                "operationId": "DataRedaction_RedactIndividualUserData",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization ID Guid",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "requestModel",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IndividualUserDataRedactionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IndividualUserDataRedactionResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "user_data_redact"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "redactIndividualUserData",
+                "x-ds-method": "redactIndividualUserData",
+                "x-ds-service": "Organizations",
                 "x-ds-in-sdk": true
             }
         },
@@ -4183,6 +4291,117 @@
             "description": "",
             "x-ms-summary": ""
         },
+        "IndividualUserDataRedactionRequest": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": "The ID of the user whose data you want to delete."
+                },
+                "memberships": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MembershipDataRedactionRequest"
+                    },
+                    "description": "A list of accounts from which you want to delete the user's data. At least one account is required."
+                }
+            },
+            "x-ds-definition-name": "IndividualUserDataRedactionRequest",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "IndividualMembershipDataRedactionRequest": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": "The ID of the user whose data you want to delete."
+                }
+            },
+            "x-ds-definition-name": "IndividualMembershipDataRedactionRequest",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "IndividualUserDataRedactionResponse": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": "The ID of the user."
+                },
+                "status": {
+                    "enum": [
+                        "unknown",
+                        "pending",
+                        "failure",
+                        "success",
+                        "already_redacted"
+                    ],
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The overall status of the data deletion request."
+                },
+                "membership_results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MembershipDataRedactionResponse"
+                    },
+                    "readOnly": true,
+                    "description": "A list of objects describing the status of the deletion request for each account."
+                }
+            },
+            "x-ds-definition-name": "IndividualUserDataRedactionResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "MembershipDataRedactionRequest": {
+            "type": "object",
+            "properties": {
+                "account_id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": "The ID of the account from which to delete the user's data."
+                }
+            },
+            "x-ds-definition-name": "MembershipDataRedactionRequest",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "MembershipDataRedactionResponse": {
+            "type": "object",
+            "properties": {
+                "account_id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": "The ID of the account."
+                },
+                "status": {
+                    "enum": [
+                        "unknown",
+                        "pending",
+                        "failure",
+                        "success",
+                        "already_redacted"
+                    ],
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The status of the data deletion request. Valid values:\n- `success`\n- `pending`\n- `failure`\n- `already_redacted`\n"
+                }
+            },
+            "x-ds-definition-name": "MembershipDataRedactionResponse",
+            "description": "An object describing the status of the data deletion request for a specific account.",
+            "x-ms-summary": "An object describing the status of the data deletion request for a specific account."
+        },
         "OSAMR_Contact": {
             "type": "object",
             "properties": {
@@ -6258,6 +6477,43 @@
             "x-ds-category": "BulkOperations",
             "x-ds-order": "100",
             "x-ms-summary": "Methods to import users."
+        },
+        "DataDeletion": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "status": {
+                    "enum": [
+                        "unknown",
+                        "pending",
+                        "failure",
+                        "success",
+                        "already_redacted"
+                    ],
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Status."
+                },
+                "membership_results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MembershipDataRedactionResponse"
+                    },
+                    "readOnly": true,
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "IndividualUserDataRedactionResponse",
+            "description": "Methods to delete data for closed users.",
+            "x-ds-category": "UserManagement",
+            "x-ds-order": "100",
+            "x-ms-summary": "Methods to delete data for closed users."
         }
     },
     "securityDefinitions": {
@@ -6269,6 +6525,7 @@
             "tokenUrl": "https://account.docusign.com/oauth/auth",
             "scopes": {
                 "organization_read": "",
+                "user_data_redact": "",
                 "permission_read": "",
                 "group_read": "",
                 "user_read": "",
@@ -6324,6 +6581,10 @@
         {
             "name": "SingleAccountUserImport",
             "description": "Methods to import users."
+        },
+        {
+            "name": "DataDeletion",
+            "description": "Methods to delete user data. After a user is closed, an account or organization administrator can use these methods to delete the user's account data."
         }
     ],
     "x-ds-categories": [
