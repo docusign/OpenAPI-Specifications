@@ -34,7 +34,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Gets the current version and other information about the Click API.",
-                "description": "The response includes information about the Click API, including the service version, build version, and linked sites.\n\nThis method does not require authentication.",
+                "description": "The response provides information about the current version of the Click API.\n\n```json\n{\n  \"serviceVersions\": [\n    {\n      \"version\": \"v1\",\n      \"versionUrl\": \"https://demo.docusign.net/clickapi/v1\"\n    }\n  ],\n  \"buildVersion\": \"22.4.200.38251 (22.4.02.01.38251+46cfe7955197)\",\n  \"linkedSites\": [\n    \"https://demo.docusign.net\"\n  ]\n}\n```\n",
                 "operationId": "ServiceInformation_GetServiceInformation",
                 "consumes": [],
                 "produces": [],
@@ -154,7 +154,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Creates an elastic template for an account.",
-                "description": "Creates an elastic template for an account.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "description": "Creates an elastic template for an account and returns the response with created agreement.\n\nThe resulting elastic template has its `status` property set to `draft`,\nand the `versionNumber` is `1.0`.\n\n```json\n{\n    \"accountId\": \"\"624e3e00-xxxx-xxxx-xxxx-43918c520dab\",\n    \"clickwrapId\": \"\"c3197231-xxxx-xxxx-xxxx-6f34186eee23\",\n    \"clickwrapName\": \"HTML Only\",\n    \"versionId\": \"\"e27b59e2-xxxx-xxxx-xxxx-6a3b8b012ee8\",\n    \"versionNumber\": \"1.0\",\n    \"status\": \"draft\",\n    \"createdTime\": \"2023-02-09T19:20:09.2150957Z\",\n    \"lastModified\": \"2023-02-09T19:20:09.2150957Z\",\n    \"lastModifiedBy\": \"\"7c430bdb-xxxx-xxxx-xxxx-538c11111ff7\",\n    \"ownerUserId\": \"\"7c430bdb-xxxx-xxxx-xxxx-538c11111ff7\",\n    \"draftVersionId\": \"\"e27b59e2-xxxx-xxxx-xxxx-6a3b8b012ee8\",\n    \"owner\": {\n        \"userId\": \"\"7c430bdb-xxxx-xxxx-xxxx-538c11111ff7\",\n        \"userName\": \"Catherine Earnshaw\",\n        \"email\": \"catherine@example.com\"\n    },\n    \"dataFields\": []\n}\n```\n\nUse [ClickWraps: updateClickwrap](/docs/click-api/reference/accounts/clickwraps/updateclickwrap/)\nwith a request body like this to make the elastic template active:\n\n```json\n{\n\"status\": \"active\"\n}\n```\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.\n",
                 "operationId": "Clickwraps_PostClickwrap",
                 "consumes": [],
                 "produces": [],
@@ -201,7 +201,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Deletes elastic templates for an account.",
-                "description": "Deletes all elastic templates for an account\nor only the ones specified in the\n`clickwrapIds` query parameter.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "description": "Deletes the elastic templates for an account specified in the\n`clickwrapIds` query parameter.\nActive elastic templates cannot be deleted.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.\n\nThe response is a list of deleted elastic templates\nalong with their dispostition:\n\n```json\n{\n  \"clickwraps\": [\n    {\n      \"clickwrapId\": \"\"798d8186-xxxx-xxxx-xxxx-abc22eb46640\",\n      \"clickwrapName\": \"Archive this\",\n      \"status\": \"Active\",\n      \"deletionMessage\": \"Active clickwrap version cannot be deleted.\"\n    },\n    {\n      \"clickwrapId\": \"\"3390d1cb-xxxx-xxxx-xxxx-fcbf0bd9ee13\",\n      \"clickwrapName\": \"Mesoamerica 101\",\n      \"status\": \"Deleted\",\n      \"deletionSuccess\": true,\n      \"deletionMessage\": \"Successfully deleted the clickwrap.\"\n    }\n  ]\n}\n```",
                 "operationId": "Clickwraps_DeleteClickwraps",
                 "consumes": [],
                 "produces": [],
@@ -216,7 +216,7 @@
                     {
                         "name": "clickwrapIds",
                         "in": "query",
-                        "description": "A comma-separated list of elastic template IDs to delete.",
+                        "description": "A comma-separated list of elastic template GUIDs to delete.",
                         "required": false,
                         "type": "string"
                     }
@@ -264,7 +264,7 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     }
@@ -293,8 +293,8 @@
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Transfer ownership of an elastic template.",
-                "description": "Transfers ownership of an elastic template. You specify the old and the new user ID in the request body.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "summary": "Update properties of an elastic template.",
+                "description": "Updates the properties of an elastic\ntemplate.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "Clickwraps_PutClickwrap",
                 "consumes": [],
                 "produces": [],
@@ -309,7 +309,7 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
@@ -363,14 +363,14 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "versions",
                         "in": "query",
-                        "description": "A comma-separated list of versions to delete.",
+                        "description": "Not used.",
                         "required": false,
                         "type": "string"
                     }
@@ -403,7 +403,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Creates a unique URL for the agreement\nthat you can embed in your application.\n",
-                "description": "Creates a unique URL for the elastic signing agreement\nthat you can embed in your application.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` and `click.send`.\n\nThe request must include at least the\n`clientUserId`. This is a value that you\ngenerate to identify the unique recipient\nof the agreement.\n\nIf you are using a [dynamic content][] document,\nyou can supply the values in the `documentData`\nproperty of the request, like this:\n\n```json\n{\n  \"clientUserId\": \"cl-bc7f-48a9\",\n  \"documentData\": {\n    \"fullName\": \"T. J. Fanning\",\n    \"email\": \"tj@example.com\",\n    \"company\": \"Fanning Indusdtries\",\n    \"title\": \"Cat wrangler\",\n    \"date\": \"2022-10-13T05:17:14-07:00\"\n  }\n}\n```\n\nA response looks like this.\nThe `agreementUrl` is unique to the user identified by the `clientUserId`.\nYour user can open the URL to approve the agreement.\nThe `documentData` property appears only if you provided it in the request.\n\n```json\n{\n  \"accountId\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\",\n  \"clickwrapId\": \"0e64e4a7-xxxx-xxxx-xxxx-ce5a93b162af\",\n  \"clientUserId\": \"tcl-bc7f-48a9j\",\n  \"agreementId\": \"1f346c7d-xxxx-xxxx-xxxx-a5c968666785\",\n  \"documents\": [ . . .],\n  \"consumerDisclosureEnabled\": true,\n  \"agreementUrl\": \"https://demo.docusign.net/clickapi/v1/redeem?agreementToken=AcTZT8g ... cxEqrUsA1lQ8DPPy05dE0\",\n  \"createdOn\": \"2022-10-20T16:27:25.1287685Z\",\n  \"status\": \"created\",\n  \"versionId\": \"5957716d-xxxx-xxxx-xxxx-e1594f00ff12\",\n  \"versionNumber\": 1,\n  \"settings\": {\n    \"displayName\": \"Agree with me\",\n    \"hasDeclineButton\": true,\n    .  . .\n    \"statementAlignment\": \"bottom\"\n  },\n  \"documentData\": {\n    \"fullName\": \"T. J. Fanning\",\n    \"email\": \"tj@example.com\",\n    \"company\": \"Fanning Indusdtries\",\n    \"title\": \"Cat wrangler\",\n    \"date\": \"2022-10-13T05:17:14-07:00\"\n  }\n}\n```\n\nThis method returns the following\nresponse code and response body,\ndepending on whether the user has agreed.\n\n\n| User has agreed | Response code | Response body          |\n| :----- | :------------ | :--------------------- |\n| No     | 201           | Full response as above |\n| Yes    | 200           | No response (empty)    |\n\n\n### Related topics\n\n- [Add dynamic content to your elastic template][dynamic content]\n- [How to embed an elastic template][embed-howto]\n\n\n[dynamic content]:  /docs/click-api/click101/customize-clickwrap-fields/#add-dynamic-content-to-your-clickwrap\n[embedding]:        /docs/click-api/click101/customize-clickwrap-fields/#embed-clickwraps-that-contain-dynamic-content\n[embed-howto]:      /docs/click-api/how-to/embed-clickwraps/\n",
+                "description": "Creates a unique URL for the elastic signing agreement\nthat you can embed in your application. The URL expires after one hour.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` and `click.send`.\n\nThe request must include at least the\n`clientUserId`. This is a value that you\ngenerate to identify the unique recipient\nof the agreement.\n\nIf you are using a [dynamic content][] document,\nyou can supply the values in the `documentData`\nproperty of the request, like this:\n\n```json\n{\n  \"clientUserId\": \"cl-bc7f-48a9\",\n  \"documentData\": {\n    \"fullName\": \"T. J. Fanning\",\n    \"email\": \"tj@example.com\",\n    \"company\": \"Fanning Industries\",\n    \"title\": \"Cat wrangler\",\n    \"date\": \"2022-10-13T05:17:14-07:00\"\n  }\n}\n```\n\nA response looks like this.\nThe `agreementUrl` is unique to the user identified by the `clientUserId`.\nYour user can open the URL to approve the agreement.\nThe `documentData` property appears only if you provided it in the request.\n\n```json\n{\n  \"accountId\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\",\n  \"clickwrapId\": \"0e64e4a7-xxxx-xxxx-xxxx-ce5a93b162af\",\n  \"clientUserId\": \"tcl-bc7f-48a9j\",\n  \"agreementId\": \"1f346c7d-xxxx-xxxx-xxxx-a5c968666785\",\n  \"documents\": [ . . .],\n  \"consumerDisclosureEnabled\": true,\n  \"agreementUrl\": \"https://demo.docusign.net/clickapi/v1/redeem?agreementToken=AcTZT8g ... cxEqrUsA1lQ8DPPy05dE0\",\n  \"createdOn\": \"2022-10-20T16:27:25.1287685Z\",\n  \"status\": \"created\",\n  \"versionId\": \"5957716d-xxxx-xxxx-xxxx-e1594f00ff12\",\n  \"versionNumber\": 1,\n  \"settings\": {\n    \"displayName\": \"Agree with me\",\n    \"hasDeclineButton\": true,\n    . . .\n    \"statementAlignment\": \"bottom\"\n  },\n  \"documentData\": {\n    \"fullName\": \"T. J. Fanning\",\n    \"email\": \"tj@example.com\",\n    \"company\": \"Fanning Indusdtries\",\n    \"title\": \"Cat wrangler\",\n    \"date\": \"2022-10-13T05:17:14-07:00\"\n  }\n}\n```\n\n\nA successful response always includes\nthe following response. The response code\nis different, depending on whether\nthe user has agreed:\n\n| Response code | Meaning                  | Notes                                                             |\n| :------------ | :----------------------  | :---------------------------------------------------------------- |\n| 200           | User has agreed.         | The `agreementUrl` property does not appear in the response body. |\n| 201           | User has not yet agreed. |                                                                   |\n\n\n### Related topics\n\n- [Add dynamic content to your elastic template][dynamic content]\n- [How to embed an elastic template][embed-howto]\n\n\n[dynamic content]:  /docs/click-api/click101/customize-elastic-template-fields/#add-dynamic-content-to-your-elastic-template\n[embed-howto]:      /docs/click-api/how-to/embed-elastic-templates/\n",
                 "operationId": "UserAgreements_PostHasAgreed",
                 "consumes": [],
                 "produces": [],
@@ -418,7 +418,7 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
@@ -460,7 +460,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Gets a specific agreement for a specified elastic template.",
-                "description": "Gets the agreement specified by `agreementId`.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` or `click.send`.",
+                "description": "Gets the agreement specified by `agreementId`.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage` or `click.send`.\n\n",
                 "operationId": "UserAgreements_GetAgreement",
                 "consumes": [],
                 "produces": [],
@@ -482,7 +482,7 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     }
@@ -539,7 +539,7 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
@@ -579,7 +579,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Starts an export of clickwrap agreements for a specified date range.",
-                "description": "Starts an asynchronus process to export clickwrap agreements for a specified date range.\nAn email will be sent to the creator after it has been processed.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`",
+                "description": "Starts an asynchronus process to export elastic template agreements\nfor a date range and status specified in the request body.\n\nAn email will be sent to the creator after it has been processed.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`",
                 "operationId": "UserAgreements_PostBulkClickwrapAgreements",
                 "consumes": [],
                 "produces": [],
@@ -594,7 +594,7 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
@@ -648,7 +648,7 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
@@ -716,7 +716,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Gets all the versions of an elastic template.",
-                "description": "Gets all the versions of an elastic template for an account.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "description": "Gets all the versions of an elastic template for an account.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.\n\nThis example shows three versions:\ntwo major versions (1.0 and 2.0), and one minor version (2.1).\n\n```json\n{\n  \"accountId\": \"\"624e3e00-xxxx-xxxx-xxxx-43918c520dab\",\n  \"clickwrapId\": \"\"b4cb1e3a-xxxx-xxxx-xxxx-3b3c21b853ea\",\n  \"clickwrapName\": \"The name of this\",\n  \"versions\": [\n    {\n      \"versionId\": \"\"0df7af2d-xxxx-xxxx-xxxx-c2b960b73fef\",\n      \"versionNumber\": \"2.1\",\n      \"status\": \"active\",\n      \"createdTime\": \"2023-02-24T01:45:21.0138703Z\",\n      \"lastModified\": \"2023-02-24T01:45:25.8540652Z\",\n      \"lastModifiedBy\": \"\"7c430bdb-xxxx-xxxx-xxxx-538c11111ff7\",\n      \"requireReacceptance\": false,\n      \"ownerUserId\": \"\"7c430bdb-xxxx-xxxx-xxxx-538c11111ff7\",\n      \"dataFields\": []\n    },\n    {\n      \"versionId\": \"\"4976a2f5-xxxx-xxxx-xxxx-dc1fd3b97c15\",\n      \"versionNumber\": \"2.0\",\n      \"status\": \"inactive\",\n      \"createdTime\": \"2023-02-24T01:36:07.6852505Z\",\n      \"lastModified\": \"2023-02-24T01:45:25.8853154Z\",\n      \"lastModifiedBy\": \"\"7c430bdb-xxxx-xxxx-xxxx-538c11111ff7\",\n      \"requireReacceptance\": true,\n      \"ownerUserId\": \"\"7c430bdb-xxxx-xxxx-xxxx-538c11111ff7\",\n      \"dataFields\": []\n    },\n    {\n      \"versionId\": \"\"987e83d7-xxxx-xxxx-xxxx-5348c4f89dca\",\n      \"versionNumber\": \"1.0\",\n      \"status\": \"inactive\",\n      \"createdTime\": \"2023-02-24T01:17:59.806101Z\",\n      \"lastModified\": \"2023-02-24T01:36:11.1843708Z\",\n      \"lastModifiedBy\": \"\"7c430bdb-xxxx-xxxx-xxxx-538c11111ff7\",\n      \"requireReacceptance\": true,\n      \"ownerUserId\": \"\"7c430bdb-xxxx-xxxx-xxxx-538c11111ff7\",\n      \"dataFields\": []\n    }\n  ],\n  \"page\": 0,\n  \"pageSize\": 40,\n  \"minimumPagesRemaining\": 0\n}\n\n```",
                 "operationId": "ClickwrapVersions_GetClickwrapVersions",
                 "consumes": [],
                 "produces": [],
@@ -731,7 +731,7 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     }
@@ -761,7 +761,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Creates a new elastic template version.",
-                "description": "Creates a new version of an existing elastic template. In a new version, you can replace the uploaded documents, change the display settings, and change the name of the elastic template. The version number is automatically incremented based on the last version of the elastic template.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "description": "Creates a new version of an existing elastic template.\nIn a new version, you can replace the uploaded documents,\nchange the display settings,\nand change the name of the elastic template.\n\nIf the `requireReacceptance` property of the request body is **false,**\nthe minor version number is incremented. When this property is **true,**\nthe major version number is incremented, and the minor version number\nis reset to zero.\n\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "ClickwrapVersions_PostClickwrapVersion",
                 "consumes": [],
                 "produces": [],
@@ -776,7 +776,7 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
@@ -815,7 +815,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Deletes the versions of an elastic template.",
-                "description": "Deletes all versions of an elastic template,\nor only the ones specified in the\n`clickwrapVersionIds` query parameter.\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "description": "Deletes all versions of an elastic template,\nor only the ones specified in the\n`clickwrapVersionIds` query parameter.\n\n**Note:** Be sure to check the `deletionSuccess` and `deletionMessage` properties in the response.\n\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "ClickwrapVersions_DeleteClickwrapVersions",
                 "consumes": [],
                 "produces": [],
@@ -830,7 +830,7 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
@@ -870,7 +870,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Gets a specific version of an elastic template by version ID.",
-                "description": "Gets the version specified by `versionId`  from the elastic template `clickwrapId`.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "description": "Gets the version specified by `versionId`  from the elastic template `clickwrapId`.\nThe `versionId` can be the version's `versionId` GUID or the `versionNumber` string.\n\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "ClickwrapVersions_GetClickwrapVersion",
                 "consumes": [],
                 "produces": [],
@@ -885,14 +885,14 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "versionId",
                         "in": "path",
-                        "description": "The ID of the version.",
+                        "description": "The ID of the version.\nThis value can be the version's GUID or the version string, such as `1.3`.\n",
                         "required": true,
                         "type": "string"
                     }
@@ -921,8 +921,8 @@
                 "tags": [
                     "ClickWraps"
                 ],
-                "summary": "Transfer ownership of a version of an elastic template by version ID.",
-                "description": "Transfers ownership of an elastic template version specified by `versionId`. You specify the old and the new user ID in the request body.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "summary": "Update properties of an elastic template by its version ID.",
+                "description": "Updates the properties of an elastic\ntemplate version specified by `versionId`.\n\n\nThe `versionId` can be the version's `versionId` GUID or the `versionNumber` string.\n\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "ClickwrapVersions_PutClickwrapVersion",
                 "consumes": [],
                 "produces": [],
@@ -937,14 +937,14 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "versionId",
                         "in": "path",
-                        "description": "The ID of the version.",
+                        "description": "The ID of the version.\nThis value can be the version's GUID or the version string, such as `1.3`.\n",
                         "required": true,
                         "type": "string"
                     },
@@ -983,7 +983,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Deletes an elastic template version by version ID.",
-                "description": "Deletes the elastic template version specified by `versionId` of the elastic template specified by `clickwrapId`.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "description": "Deletes the elastic template version specified by `versionId` of the elastic template specified by `clickwrapId`.\n\n**Note:** Be sure to check the `deletionSuccess` and `deletionMessage` properties of the response.\nIn some cases `deletionSuccess` may be **false** even though the HTTP request response may be `200 (OK)`.\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.\n",
                 "operationId": "ClickwrapVersions_DeleteClickwrapVersion",
                 "consumes": [],
                 "produces": [],
@@ -998,14 +998,14 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "versionId",
                         "in": "path",
-                        "description": "The ID of the version.",
+                        "description": "The ID of the version.\nThis value can be the version's GUID or the version string, such as `1.3`.\n",
                         "required": true,
                         "type": "string"
                     }
@@ -1053,7 +1053,7 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
@@ -1067,7 +1067,7 @@
                     {
                         "name": "versionId",
                         "in": "path",
-                        "description": "The ID of the version.",
+                        "description": "The ID of the version.\nThis value can be the version's GUID or the version string, such as `1.3`.\n",
                         "required": true,
                         "type": "string"
                     }
@@ -1100,7 +1100,7 @@
                     "ClickWraps"
                 ],
                 "summary": "Gets the agreement responses for an elastic template version by version ID.",
-                "description": "Gets the agreement responses for a specific version.\n\n**Note:** This endpoint requires the version ID (a GUID), not the version number (an integer).\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
+                "description": "Gets the agreement responses for a specific version.\n\n\n[Required authentication scopes](/docs/click-api/click101/auth/): `click.manage`.",
                 "operationId": "UserAgreements_GetClickwrapVersionAgreements",
                 "consumes": [],
                 "produces": [],
@@ -1115,14 +1115,14 @@
                     {
                         "name": "clickwrapId",
                         "in": "path",
-                        "description": "The ID of the elastic template.",
+                        "description": "The GUID of the elastic template.",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "versionId",
                         "in": "path",
-                        "description": "The ID of the version.",
+                        "description": "The ID of the version.\nThis value can be the version's GUID or the version string, such as `1.3`.\n",
                         "required": true,
                         "type": "string"
                     },
@@ -1245,7 +1245,7 @@
             "type": "object",
             "properties": {
                 "clickwrapId": {
-                    "description": "The ID of the elastic template.",
+                    "description": "The GUID of the elastic template.",
                     "type": "string"
                 },
                 "clickwrapName": {
@@ -1273,7 +1273,7 @@
             "type": "object",
             "properties": {
                 "clickwrapName": {
-                    "description": "The name of the elastic template. This field is required.",
+                    "description": "The name of the elastic template.\n\nRequired in [ClickWraps: createClickwrap](/docs/click-api/reference/accounts/clickwraps/createclickwrap/).",
                     "type": "string"
                 },
                 "dataFields": {
@@ -1311,7 +1311,7 @@
                     "type": "string"
                 },
                 "requireReacceptance": {
-                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again. The version number is incremented.",
+                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again.\nThe major version number is incremented, and the minor version number is set to zero.\nFor example:  `2.1` to `3.0`\n\nWhen **false,** signers who have previously agreed do not need to sign again.\nOnly the minor version number is incremented. For example:  `2.1` to `2.2`\n",
                     "type": "boolean"
                 },
                 "scheduledDate": {
@@ -1413,15 +1413,15 @@
                     "type": "object"
                 },
                 "lastModifiedBy": {
-                    "description": "The user ID of the last user who modified this elastic template.",
+                    "description": "The user GUID of the last user who modified this elastic template.",
                     "type": "string"
                 },
                 "ownerUserId": {
-                    "description": "The user ID of the owner of this clickwrap.",
+                    "description": "The user GUID of the owner of this clickwrap.",
                     "type": "string"
                 },
                 "requireReacceptance": {
-                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again. The version number is incremented.",
+                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again.\nThe major version number is incremented, and the minor version number is set to zero.\nFor example:  `2.1` to `3.0`\n\nWhen **false,** signers who have previously agreed do not need to sign again.\nOnly the minor version number is incremented. For example:  `2.1` to `2.2`\n",
                     "type": "boolean"
                 },
                 "scheduledDate": {
@@ -1437,11 +1437,11 @@
                     "type": "string"
                 },
                 "versionId": {
-                    "description": "The ID of the version.",
+                    "description": "The GUID of the version.",
                     "type": "string"
                 },
                 "versionNumber": {
-                    "description": "Version of the elastic template.",
+                    "description": "Human-readable version number. For example `1.2`.",
                     "type": "string"
                 }
             },
@@ -1480,7 +1480,7 @@
                     "type": "object"
                 },
                 "lastModifiedBy": {
-                    "description": "The user ID of the last user who modified this elastic template.",
+                    "description": "The user GUID of the last user who modified this elastic template.",
                     "type": "string"
                 },
                 "ownerUserId": {
@@ -1488,7 +1488,7 @@
                     "type": "string"
                 },
                 "requireReacceptance": {
-                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again. The version number is incremented.",
+                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again.\nThe major version number is incremented, and the minor version number is set to zero.\nFor example:  `2.1` to `3.0`\n\nWhen **false,** signers who have previously agreed do not need to sign again.\nOnly the minor version number is incremented. For example:  `2.1` to `2.2`\n",
                     "type": "boolean"
                 },
                 "scheduledDate": {
@@ -1508,7 +1508,7 @@
                     "type": "string"
                 },
                 "versionNumber": {
-                    "description": "Version of the elastic template.",
+                    "description": "Human-readable version number. For example `1.2`.",
                     "type": "string"
                 }
             },
@@ -1524,7 +1524,7 @@
                     "type": "string"
                 },
                 "clickwrapId": {
-                    "description": "The ID of the elastic template.",
+                    "description": "The GUID of the elastic template.",
                     "type": "string"
                 },
                 "clickwrapName": {
@@ -1562,7 +1562,7 @@
                     "type": "object"
                 },
                 "lastModifiedBy": {
-                    "description": "The user ID of the last user who modified this elastic template.",
+                    "description": "The user GUID of the last user who modified this elastic template.",
                     "type": "string"
                 },
                 "ownerUserId": {
@@ -1570,7 +1570,7 @@
                     "type": "string"
                 },
                 "requireReacceptance": {
-                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again. The version number is incremented.",
+                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again.\nThe major version number is incremented, and the minor version number is set to zero.\nFor example:  `2.1` to `3.0`\n\nWhen **false,** signers who have previously agreed do not need to sign again.\nOnly the minor version number is incremented. For example:  `2.1` to `2.2`\n",
                     "type": "boolean"
                 },
                 "scheduledDate": {
@@ -1590,7 +1590,7 @@
                     "type": "string"
                 },
                 "versionNumber": {
-                    "description": "Version of the elastic template.",
+                    "description": "Human-readable version number. For example `1.2`.",
                     "type": "string"
                 }
             },
@@ -1602,7 +1602,7 @@
             "type": "object",
             "properties": {
                 "clickwrapId": {
-                    "description": "The ID of the elastic template.",
+                    "description": "The GUID of the elastic template.",
                     "type": "string"
                 },
                 "clickwrapName": {
@@ -1630,7 +1630,7 @@
                     "type": "string"
                 },
                 "clickwrapId": {
-                    "description": "The ID of the elastic template.",
+                    "description": "The GUID of the elastic template.",
                     "type": "string"
                 },
                 "clickwrapName": {
@@ -1701,7 +1701,7 @@
                     "type": "string"
                 },
                 "clickwrapId": {
-                    "description": "The ID of the elastic template.",
+                    "description": "The GUID of the elastic template.",
                     "type": "string"
                 },
                 "clickwrapName": {
@@ -1728,7 +1728,7 @@
                     "type": "object"
                 },
                 "lastModifiedBy": {
-                    "description": "The user ID of the last user who modified this elastic template.",
+                    "description": "The user GUID of the last user who modified this elastic template.",
                     "type": "string"
                 },
                 "ownerUserId": {
@@ -1736,7 +1736,7 @@
                     "type": "string"
                 },
                 "requireReacceptance": {
-                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again. The version number is incremented.",
+                    "description": "When **true,** requires signers who have previously agreed to this\nelastic signing agreement to sign again.\nThe major version number is incremented, and the minor version number is set to zero.\nFor example:  `2.1` to `3.0`\n\nWhen **false,** signers who have previously agreed do not need to sign again.\nOnly the minor version number is incremented. For example:  `2.1` to `2.2`\n",
                     "type": "boolean"
                 },
                 "scheduledDate": {
@@ -1748,15 +1748,15 @@
                     "description": "Specifies the interval between reacceptances in days, weeks, months, or years."
                 },
                 "status": {
-                    "description": "Clickwrap status. Possible values:\n\n- `active`\n- `inactive`\n- `deleted`",
+                    "description": "Clickwrap status. Possible values:\n\n- `draft`\n- `active`\n- `inactive`\n- `deleted`",
                     "type": "string"
                 },
                 "versionId": {
-                    "description": "The ID of the version.",
+                    "description": "The GUID of the version. ",
                     "type": "string"
                 },
                 "versionNumber": {
-                    "description": "Version of the elastic template.",
+                    "description": "Human-readable version number. For example `1.2`.",
                     "type": "string"
                 }
             },
@@ -1768,15 +1768,15 @@
             "type": "object",
             "properties": {
                 "label": {
-                    "description": "<!-- Tir global value is used for dataField properties -->\nThe text label to display for this data field.\n",
+                    "description": "The label of the datafield. This is the text that is displayed to the user.",
                     "type": "string"
                 },
                 "name": {
-                    "description": "<!-- Tir global value is used for dataField properties -->\nThe name of the data field.\n",
+                    "description": "A string used to refer to the field internally. The name must be unique within an elastic template.\n\nThe following fields are predefined by the API:\n- `fullName`\n- `email`\n- `company`\n- `title`\n- `date`\n",
                     "type": "string"
                 },
                 "type": {
-                    "description": "<!-- Tir global value is used for dataField properties -->\nThe type of the value that the field holds.\nMust be one of the following case-sensitive keywords:\n\n- `NUMBER`\n- `DATE`\n- `STRING`\n\n\n",
+                    "description": "The type of the field. Valid values:\n\n- `STRING`\n- `NUMBER`\n- `DATE`\n",
                     "type": "string"
                 }
             },
@@ -1844,7 +1844,7 @@
                     "type": "boolean"
                 },
                 "mustView": {
-                    "description": "**True** if the user must view the document.\n",
+                    "description": "Reserved for DocuSign.",
                     "type": "boolean"
                 },
                 "recordDeclineResponses": {
@@ -1896,7 +1896,7 @@
                     "type": "boolean"
                 },
                 "mustView": {
-                    "description": "**True** if the user must view the document.\n",
+                    "description": "Reserved for DocuSign.",
                     "type": "boolean"
                 },
                 "order": {
@@ -1987,7 +1987,7 @@
                     "type": "string"
                 },
                 "documentData": {
-                    "description": "This property specifies the data used to create\nan elastic template with [dynamic content][].\n\n\n\n[dynamic content]: /docs/click-api/click101/customize-clickwrap-fields/#embed-clickwraps-that-contain-dynamic-content\n",
+                    "description": "This property specifies the data used to create\nan elastic template with [dynamic content][].\n\n[dynamic content]: /docs/click-api/click101/customize-elastic-template-fields/#add-dynamic-content-to-your-elastic-template\n",
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
@@ -2025,7 +2025,7 @@
                     "type": "string"
                 },
                 "clickwrapId": {
-                    "description": "The ID of the elastic template.",
+                    "description": "The GUID of the elastic template.",
                     "type": "string"
                 },
                 "clientUserId": {
@@ -2056,7 +2056,7 @@
                     "type": "object"
                 },
                 "documentData": {
-                    "description": "This property specifies the data used to create\nan elastic template with [dynamic content][].\n\n\n\n[dynamic content]: /docs/click-api/click101/customize-clickwrap-fields/#embed-clickwraps-that-contain-dynamic-content\n",
+                    "description": "This property specifies the data used to create\nan elastic template with [dynamic content][].\n\n[dynamic content]: /docs/click-api/click101/customize-elastic-template-fields/#add-dynamic-content-to-your-elastic-template\n",
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
@@ -2087,9 +2087,40 @@
                 },
                 "style": {
                     "description": "This property specifies the custom style provided when the agreement was created by [customizing the template appearance][].\n\n\n\n[customizing the template appearance]: /docs/click-api/click101/customize-elastic-template-appearance/\n",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
+                    "additionalProperties": false,
+                    "properties": {
+                        "agreeButton": {
+                            "$ref": "#/definitions/AgreeButtonStyles",
+                            "description": "Control the display of the Agree button."
+                        },
+                        "agreementStatement": {
+                            "$ref": "#/definitions/AgreementStatementStyles",
+                            "description": "Control the display of the agreement statement."
+                        },
+                        "container": {
+                            "$ref": "#/definitions/ContainerStyles",
+                            "description": "Control the overall clickwrap container and inherited styles such as font."
+                        },
+                        "disclosureLink": {
+                            "$ref": "#/definitions/DisclosureLinkStyles",
+                            "description": "Control the display of the disclosure link."
+                        },
+                        "documentLink": {
+                            "$ref": "#/definitions/DocumentLinkStyles",
+                            "description": "Control the display of the agreement statement."
+                        },
+                        "header": {
+                            "$ref": "#/definitions/HeaderStyles",
+                            "description": "Control the display of the header."
+                        },
+                        "scrollControl": {
+                            "description": "Control the scrolling of the document either by browser or by a scrollbar in the clickwrap shell.\nCan only be applied if the clickwrap `format` is `inline`.",
+                            "enum": [
+                                "browser",
+                                "fill_parent"
+                            ],
+                            "type": "string"
+                        }
                     }
                 },
                 "version": {
@@ -2102,12 +2133,859 @@
                 },
                 "versionNumber": {
                     "format": "int32",
-                    "description": "Version of the elastic template.",
+                    "description": "Human-readable version number. For example `1.2`.",
                     "type": "integer"
                 }
             },
             "x-ds-definition-name": "userAgreementResponse",
             "description": "",
+            "x-ms-summary": ""
+        },
+        "AgreeButtonStyles": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                ":disabled": {
+                    "$ref": "#/definitions/BaseAgreeButtonStyles",
+                    "description": ""
+                },
+                ":focus": {
+                    "$ref": "#/definitions/BaseAgreeButtonStyles",
+                    "description": ""
+                },
+                ":hover": {
+                    "$ref": "#/definitions/BaseAgreeButtonStyles",
+                    "description": ""
+                },
+                "backgroundColor": {
+                    "description": "",
+                    "type": "string"
+                },
+                "border": {
+                    "description": "",
+                    "type": "string"
+                },
+                "borderColor": {
+                    "description": "",
+                    "type": "string"
+                },
+                "borderRadius": {
+                    "description": "",
+                    "type": "string"
+                },
+                "borderStyle": {
+                    "description": "",
+                    "type": "string"
+                },
+                "borderWidth": {
+                    "description": "",
+                    "type": "string"
+                },
+                "boxShadow": {
+                    "description": "",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontFamily": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontSize": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontStyle": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontWeight": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "enum": [
+                                            "-moz-initial",
+                                            "bold",
+                                            "bolder",
+                                            "inherit",
+                                            "initial",
+                                            "lighter",
+                                            "normal",
+                                            "revert",
+                                            "unset"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "number"
+                                    }
+                                ]
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "items": {
+                                "enum": [
+                                    "-moz-initial",
+                                    "bold",
+                                    "bolder",
+                                    "inherit",
+                                    "initial",
+                                    "lighter",
+                                    "normal",
+                                    "revert",
+                                    "unset"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "enum": [
+                                "-moz-initial",
+                                "bold",
+                                "bolder",
+                                "inherit",
+                                "initial",
+                                "lighter",
+                                "normal",
+                                "revert",
+                                "unset"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ],
+                    "description": ""
+                },
+                "height": {
+                    "description": "",
+                    "type": "string"
+                },
+                "margin": {
+                    "description": "",
+                    "type": "string"
+                },
+                "opacity": {
+                    "description": "",
+                    "type": "string"
+                },
+                "outline": {
+                    "description": "",
+                    "type": "string"
+                },
+                "outlineOffset": {
+                    "description": "",
+                    "type": "string"
+                },
+                "padding": {
+                    "description": "",
+                    "type": "string"
+                },
+                "width": {
+                    "description": "",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "x-ds-definition-name": "AgreeButtonStyles",
+            "x-ms-summary": ""
+        },
+        "AgreementStatementStyles": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "color": {
+                    "description": "",
+                    "type": "string"
+                },
+                "display": {
+                    "description": "",
+                    "enum": [
+                        "none"
+                    ],
+                    "type": "string"
+                },
+                "fontFamily": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontSize": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontStyle": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontWeight": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "enum": [
+                                            "-moz-initial",
+                                            "bold",
+                                            "bolder",
+                                            "inherit",
+                                            "initial",
+                                            "lighter",
+                                            "normal",
+                                            "revert",
+                                            "unset"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "number"
+                                    }
+                                ]
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "items": {
+                                "enum": [
+                                    "-moz-initial",
+                                    "bold",
+                                    "bolder",
+                                    "inherit",
+                                    "initial",
+                                    "lighter",
+                                    "normal",
+                                    "revert",
+                                    "unset"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "enum": [
+                                "-moz-initial",
+                                "bold",
+                                "bolder",
+                                "inherit",
+                                "initial",
+                                "lighter",
+                                "normal",
+                                "revert",
+                                "unset"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ],
+                    "description": ""
+                }
+            },
+            "type": "object",
+            "x-ds-definition-name": "AgreementStatementStyles",
+            "x-ms-summary": ""
+        },
+        "BaseAgreeButtonStyles": {
+            "additionalProperties": false,
+            "properties": {
+                "backgroundColor": {
+                    "description": "",
+                    "type": "string"
+                },
+                "border": {
+                    "description": "",
+                    "type": "string"
+                },
+                "borderColor": {
+                    "description": "",
+                    "type": "string"
+                },
+                "borderRadius": {
+                    "description": "",
+                    "type": "string"
+                },
+                "borderStyle": {
+                    "description": "",
+                    "type": "string"
+                },
+                "borderWidth": {
+                    "description": "",
+                    "type": "string"
+                },
+                "boxShadow": {
+                    "description": "",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontFamily": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontSize": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontStyle": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontWeight": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "enum": [
+                                            "-moz-initial",
+                                            "bold",
+                                            "bolder",
+                                            "inherit",
+                                            "initial",
+                                            "lighter",
+                                            "normal",
+                                            "revert",
+                                            "unset"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "number"
+                                    }
+                                ]
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "items": {
+                                "enum": [
+                                    "-moz-initial",
+                                    "bold",
+                                    "bolder",
+                                    "inherit",
+                                    "initial",
+                                    "lighter",
+                                    "normal",
+                                    "revert",
+                                    "unset"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "enum": [
+                                "-moz-initial",
+                                "bold",
+                                "bolder",
+                                "inherit",
+                                "initial",
+                                "lighter",
+                                "normal",
+                                "revert",
+                                "unset"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ],
+                    "description": ""
+                },
+                "height": {
+                    "description": "",
+                    "type": "string"
+                },
+                "margin": {
+                    "description": "",
+                    "type": "string"
+                },
+                "opacity": {
+                    "description": "",
+                    "type": "string"
+                },
+                "outline": {
+                    "description": "",
+                    "type": "string"
+                },
+                "outlineOffset": {
+                    "description": "",
+                    "type": "string"
+                },
+                "padding": {
+                    "description": "",
+                    "type": "string"
+                },
+                "width": {
+                    "description": "",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "x-ds-definition-name": "BaseAgreeButtonStyles",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "ContainerStyles": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "backgroundColor": {
+                    "description": "",
+                    "type": "string"
+                },
+                "borderColor": {
+                    "description": "",
+                    "type": "string"
+                },
+                "borderRadius": {
+                    "description": "",
+                    "type": "string"
+                },
+                "borderStyle": {
+                    "description": "",
+                    "type": "string"
+                },
+                "borderWidth": {
+                    "description": "",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "x-ds-definition-name": "ContainerStyles",
+            "x-ms-summary": ""
+        },
+        "DisclosureLinkStyles": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "display": {
+                    "enum": [
+                        "none"
+                    ],
+                    "type": "string",
+                    "description": ""
+                }
+            },
+            "type": "object",
+            "x-ds-definition-name": "DisclosureLinkStyles",
+            "x-ms-summary": ""
+        },
+        "DocumentLinkStyles": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                ":focus": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "border": {
+                            "description": "Control the border of the element.",
+                            "type": "string"
+                        },
+                        "color": {
+                            "description": "Control the fore-ground color of the element.",
+                            "type": "string"
+                        },
+                        "fontFamily": {
+                            "description": "Control the font family of the text.",
+                            "type": "string"
+                        },
+                        "fontSize": {
+                            "description": "Control the font size of the text.",
+                            "type": "string"
+                        },
+                        "fontStyle": {
+                            "description": "Control the font style of the text.",
+                            "type": "string"
+                        },
+                        "fontWeight": {
+                            "anyOf": [
+                                {
+                                    "items": {
+                                        "anyOf": [
+                                            {
+                                                "enum": [
+                                                    "-moz-initial",
+                                                    "bold",
+                                                    "bolder",
+                                                    "inherit",
+                                                    "initial",
+                                                    "lighter",
+                                                    "normal",
+                                                    "revert",
+                                                    "unset"
+                                                ],
+                                                "type": "string"
+                                            },
+                                            {
+                                                "type": "number"
+                                            }
+                                        ]
+                                    },
+                                    "type": "array"
+                                },
+                                {
+                                    "items": {
+                                        "enum": [
+                                            "-moz-initial",
+                                            "bold",
+                                            "bolder",
+                                            "inherit",
+                                            "initial",
+                                            "lighter",
+                                            "normal",
+                                            "revert",
+                                            "unset"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                {
+                                    "enum": [
+                                        "-moz-initial",
+                                        "bold",
+                                        "bolder",
+                                        "inherit",
+                                        "initial",
+                                        "lighter",
+                                        "normal",
+                                        "revert",
+                                        "unset"
+                                    ],
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "number"
+                                }
+                            ],
+                            "description": "Control the font weight of the text."
+                        },
+                        "margin": {
+                            "description": "Control the margin of the element.",
+                            "type": "string"
+                        },
+                        "padding": {
+                            "description": "Control the padding of the element.",
+                            "type": "string"
+                        },
+                        "textDecoration": {
+                            "description": "Control the underline and other styles of the text.",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "description": ""
+                },
+                ":hover": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "border": {
+                            "description": "Control the border of the element.",
+                            "type": "string"
+                        },
+                        "color": {
+                            "description": "Control the fore-ground color of the element.",
+                            "type": "string"
+                        },
+                        "fontFamily": {
+                            "description": "Control the font family of the text.",
+                            "type": "string"
+                        },
+                        "fontSize": {
+                            "description": "Control the font size of the text.",
+                            "type": "string"
+                        },
+                        "fontStyle": {
+                            "description": "Control the font style of the text.",
+                            "type": "string"
+                        },
+                        "fontWeight": {
+                            "anyOf": [
+                                {
+                                    "items": {
+                                        "anyOf": [
+                                            {
+                                                "enum": [
+                                                    "-moz-initial",
+                                                    "bold",
+                                                    "bolder",
+                                                    "inherit",
+                                                    "initial",
+                                                    "lighter",
+                                                    "normal",
+                                                    "revert",
+                                                    "unset"
+                                                ],
+                                                "type": "string"
+                                            },
+                                            {
+                                                "type": "number"
+                                            }
+                                        ]
+                                    },
+                                    "type": "array"
+                                },
+                                {
+                                    "items": {
+                                        "enum": [
+                                            "-moz-initial",
+                                            "bold",
+                                            "bolder",
+                                            "inherit",
+                                            "initial",
+                                            "lighter",
+                                            "normal",
+                                            "revert",
+                                            "unset"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                {
+                                    "enum": [
+                                        "-moz-initial",
+                                        "bold",
+                                        "bolder",
+                                        "inherit",
+                                        "initial",
+                                        "lighter",
+                                        "normal",
+                                        "revert",
+                                        "unset"
+                                    ],
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "number"
+                                }
+                            ],
+                            "description": "Control the font weight of the text."
+                        },
+                        "margin": {
+                            "description": "Control the margin of the element.",
+                            "type": "string"
+                        },
+                        "padding": {
+                            "description": "Control the padding of the element.",
+                            "type": "string"
+                        },
+                        "textDecoration": {
+                            "description": "Control the underline and other styles of the text.",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object",
+                    "description": ""
+                },
+                "border": {
+                    "description": "",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontFamily": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontSize": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontStyle": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontWeight": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "enum": [
+                                            "-moz-initial",
+                                            "bold",
+                                            "bolder",
+                                            "inherit",
+                                            "initial",
+                                            "lighter",
+                                            "normal",
+                                            "revert",
+                                            "unset"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "number"
+                                    }
+                                ]
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "items": {
+                                "enum": [
+                                    "-moz-initial",
+                                    "bold",
+                                    "bolder",
+                                    "inherit",
+                                    "initial",
+                                    "lighter",
+                                    "normal",
+                                    "revert",
+                                    "unset"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "enum": [
+                                "-moz-initial",
+                                "bold",
+                                "bolder",
+                                "inherit",
+                                "initial",
+                                "lighter",
+                                "normal",
+                                "revert",
+                                "unset"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ],
+                    "description": ""
+                },
+                "margin": {
+                    "description": "",
+                    "type": "string"
+                },
+                "padding": {
+                    "description": "",
+                    "type": "string"
+                },
+                "textDecoration": {
+                    "description": "",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "x-ds-definition-name": "DocumentLinkStyles",
+            "x-ms-summary": ""
+        },
+        "HeaderStyles": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "color": {
+                    "description": "",
+                    "type": "string"
+                },
+                "display": {
+                    "description": "",
+                    "enum": [
+                        "none"
+                    ],
+                    "type": "string"
+                },
+                "fontFamily": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontSize": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontStyle": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fontWeight": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "enum": [
+                                            "-moz-initial",
+                                            "bold",
+                                            "bolder",
+                                            "inherit",
+                                            "initial",
+                                            "lighter",
+                                            "normal",
+                                            "revert",
+                                            "unset"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "number"
+                                    }
+                                ]
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "items": {
+                                "enum": [
+                                    "-moz-initial",
+                                    "bold",
+                                    "bolder",
+                                    "inherit",
+                                    "initial",
+                                    "lighter",
+                                    "normal",
+                                    "revert",
+                                    "unset"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "enum": [
+                                "-moz-initial",
+                                "bold",
+                                "bolder",
+                                "inherit",
+                                "initial",
+                                "lighter",
+                                "normal",
+                                "revert",
+                                "unset"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ],
+                    "description": ""
+                },
+                "textDecoration": {
+                    "description": "",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "x-ds-definition-name": "HeaderStyles",
             "x-ms-summary": ""
         },
         "ClickWraps": {
