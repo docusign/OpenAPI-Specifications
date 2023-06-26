@@ -1,0 +1,176 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v2.0",
+        "title": "Monitor API",
+        "description": "An API for an integrator to access the features of DocuSign Monitor",
+        "termsOfService": "https://www.docusign.com/company/terms-and-conditions/web",
+        "contact": {
+            "name": "DocuSign Developer Center",
+            "url": "https://developers.docusign.com",
+            "email": "devcenter@docusign.com"
+        }
+    },
+    "host": "lens.docusign.net",
+    "basePath": "",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "externalDocs": {
+        "description": "",
+        "url": ""
+    },
+    "license": {
+        "name": "Terms and Conditions",
+        "url": "https://www.docusign.com/company/terms-and-conditions/web"
+    },
+    "paths": {
+        "/api/v{version}/datasets/{dataSetName}/stream": {
+            "get": {
+                "tags": [
+                    "DataSet"
+                ],
+                "summary": "Gets customer event data for an organization.",
+                "description": "Gets customer event data for the organization that owns the integration key.\n\nThe results for this endpoint are paginated by event timestamp. Use the `cursor` parameter to specify where the query begins in the dataset. Use the `limit` parameter to set the number of records returned.\n",
+                "operationId": "Api_Version_DatasetsByDataSetNameStreamGet",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "dataSetName",
+                        "in": "path",
+                        "description": "Must be `monitor`.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "Must be `2`.\n",
+                        "required": true,
+                        "type": "string",
+                        "default": "2.0"
+                    },
+                    {
+                        "name": "cursor",
+                        "in": "query",
+                        "description": "Specifies a pointer into the dataset where your query will begin. You can either provide an ISO DateTime or a string cursor (from the `endCursor` value in the response). If no value is provided, the query begins from seven days ago.\n\nFor example, to fetch event data beginning from January 1, 2022, set this value to `2022-01-01T00:00:00Z`. The response will include data about events starting from that date in chronological order. The response also includes an `endCursor` property. To fetch the next page of event data, call this endpoint again with `cursor` set to the previous `endCursor` value.\n",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The maximum number of records to return. The default value is 1000.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 1000
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/CursoredResult"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "impersonation"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "getStream",
+                "x-ds-method": "getStream",
+                "x-ds-service": "DataSet",
+                "x-ds-in-sdk": true
+            }
+        }
+    },
+    "definitions": {
+        "CursoredResult": {
+            "type": "object",
+            "properties": {
+                "endCursor": {
+                    "type": "string",
+                    "description": ""
+                },
+                "data": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    },
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "CursoredResult",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "DataSet": {
+            "type": "object",
+            "properties": {
+                "endCursor": {
+                    "type": "string",
+                    "description": ""
+                },
+                "data": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    },
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "CursoredResult",
+            "description": "Methods to fetch organization event data.",
+            "x-ms-summary": "Methods to fetch organization event data.",
+            "x-ds-category": "Monitor",
+            "x-ds-order": "100"
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "name": "Authorization",
+            "in": "header",
+            "type": "apiKey",
+            "description": "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
+        }
+    },
+    "security": [
+        {
+            "Bearer": []
+        }
+    ],
+    "x-ds-categories": [
+        {
+            "name": "Monitor",
+            "summary": "The DocuSign Monitor API receives a data feed containing security events for your DocuSign account. This data goes directly to whichever application or website you choose to integrate with DocuSign's eSignature REST API.",
+            "description": "Each time an event occurs, DocuSign Monitor returns JSON Data Types from a download endpoint. The endpoints include the Monitor UI, SIEMs such as Splunk, and other Customer API endpoints.\n\n**Note:** Your accounts must exist inside an organization to access this data.\n"
+        }
+    ],
+    "x-ds-devdocs": {
+        "stamp": "ca00a16 2022-10-04 12:15:28-0400"
+    },
+    "tags": [
+        {
+            "name": "DataSet",
+            "description": "The DataSet resource provides methods that allow you to fetch organization event data. The `dataSet` path parameter must be set to `monitor`."
+        }
+    ]
+}
