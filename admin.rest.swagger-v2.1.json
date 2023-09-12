@@ -386,7 +386,7 @@
                     "AccountSettingsExport"
                 ],
                 "summary": "Creates a  new account settings export request.",
-                "description": "Creates a new account settings export request.\n\nTo learn more about exporting account settings,\nsee [Account Settings Export][guide-export]\nin the DocuSign Admin Guide.\n\nYou can export settings for up to 40 accounts at a time.\n\nSpecify the accounts whose settings you are requesting as JSON in the body of the request, like this:\n\n``` json\n{\n  \"accounts\":\t[\n  \t{ \"account_id\": \"9ca037f4-xxxx-xxxx-xxxx-212e57d4f22e\"},\n  \t{ \"account_id\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\"}\n\n  ]\n}\n```\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `account_write`.\n\n### Related topics\n\n- [Account Settings import][guide-import] guide\n- [Account Settings Export][guide-export] guide\n\n\n[guide-import]: https://support.docusign.com/en/guides/org-admin-guide-account-settings-import\n[guide-export]: https://support.docusign.com/en/guides/org-admin-guide-account-settings-export",
+                "description": "Creates a new account settings export request.\n\nTo learn more about exporting account settings,\nsee [Account Settings Export][guide-export]\nin the DocuSign Admin Guide.\n\nYou can export settings for up to 40 accounts at a time.\n\nSpecify the accounts whose settings you are requesting as JSON in the body of the request, like this:\n\n``` json\n{\n  \"accounts\":\t[\n  \t{ \"account_id\": \"9ca037f4-xxxx-xxxx-xxxx-212e57d4f22e\"},\n  \t{ \"account_id\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\"}\n\n  ]\n}\n```\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `account_write`.\n\n### Related topics\n\n- [Account Settings import][guide-import] guide\n- [Account Settings Export][guide-export] guide\n\n\n[guide-import]: https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=nwl1583359167434.html\n[guide-export]: https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=kfj1583359164049.html",
                 "operationId": "OrganizationExport_OrganizationExport_AccountCompare",
                 "consumes": [
                     "application/json"
@@ -682,7 +682,7 @@
                     "AccountSettingsImport"
                 ],
                 "summary": "Creates a new account settings import request.",
-                "description": "Creates a new account settings import request.\n\nThe request for this method consists of\nthe contents of a CSV\nfile.\n\nYou can export your current settings as a CSV file with\n[AccountSettingsExport: createAccountSettingsExport](/docs/admin-api/reference/bulkoperations/accountsettingsexport/createaccountsettingsexport/)\nand use it as the basis\nof the changes you want to import.\n\n\nTo learn more about the format\nof a settings CSV file, see\n[Preparing a CSV for account settings import][guide-import]\nin the DocuSign Admin Guide.\n\nYou can import settings for up to 40 accounts at a time.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `account_write`.\n\n### Related topics\n\n- [Account Settings import][guide-import] guide\n- [Account Settings Export][guide-export] guide\n\n[guide-import]: https://support.docusign.com/en/guides/org-admin-guide-account-settings-import\n[guide-export]: https://support.docusign.com/en/guides/org-admin-guide-account-settings-export\n",
+                "description": "Creates a new account settings import request.\n\nThe request for this method consists of\nthe contents of a CSV\nfile.\n\nYou can export your current settings as a CSV file with\n[AccountSettingsExport: createAccountSettingsExport](/docs/admin-api/reference/bulkoperations/accountsettingsexport/createaccountsettingsexport/)\nand use it as the basis\nof the changes you want to import.\n\n\nTo learn more about the format\nof a settings CSV file, see\n[Preparing a CSV for account settings import][guide-import]\nin the DocuSign Admin Guide.\n\nYou can import settings for up to 40 accounts at a time.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `account_write`.\n\n### Related topics\n\n- [Account Settings import][guide-import] guide\n- [Account Settings Export][guide-export] guide\n\n[guide-import]: https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=nwl1583359167434.html\n[guide-export]: https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=kfj1583359164049.html\n",
                 "operationId": "OrganizationImport_OrganizationImportAccountSettings_Post",
                 "consumes": [
                     "multipart/form-data"
@@ -838,7 +838,7 @@
                     "UserImport"
                 ],
                 "summary": "Creates a request to import new users into an account.",
-                "description": "Creates a request to import *new* users.\n\nYour CSV import file is made up of a header row with the column headers and a row of user or account data for each user you want to add to an account. Only new users can be imported. Any changes to existing users will be ignored. To make changes to existing users, use [UserImport:updateBulkUserImports][imports].\n\nTo ensure your CSV is properly formatted, use the\n[Sample Bulk Add CSV file](https://admin.docusign.com/static-resources/organization-user-import.csv)\n as a template. The following table describes the columns.\n\n\n\n| Column              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                         |\n| :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| AccountID           | yes      | The API account ID for the account to which you want you add the user. You can find this ID in the Admin area for the account under **API and Keys.**                                                                                                                                                                                                                                                            |\n| AccountName         |          | The name of the user's account in your organization. The account name must match the account ID provided.                                                                                                                                                                                                                                                                                                           |\n| FirstName           | yes      | The user's first name.                                                                                                                                                                                                                                                                                                                                                                                              |\n| LastName            | yes      | The user's last name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| UserEmail           | yes      | The user's complete email address.                                                                                                                                                                                                                                                                                                                                                                                  |\n| PermissionSet       | yes      | The user's permission set. The PermissionSet value must match an existing permission set for the account. This value is not case sensitive.                                                                                                                                                                                                                                                                         |\n| UserTitle           |          | The user's job title.                                                                                                                                                                                                                                                                                                                                                                                               |\n| CompanyName         |          | The user's company name.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Group               |          | The user's assigned groups. The Group values must match existing Group names for the account. Additional Group columns can be added to the file to add users to more than one group. You do not need to add users to the Everyone group, since all new users are automatically added to that group.                                                                                                                 |\n| AddressLine1        |          | The user's address, first line.                                                                                                                                                                                                                                                                                                                                                                                     |\n| AddressLine2        |          | The user's address, second line.                                                                                                                                                                                                                                                                                                                                                                                    |\n| City                |          | The user's city name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| StateRegionProvince |          | The user's regional location.                                                                                                                                                                                                                                                                                                                                                                                       |\n| PostalCode          |          | The user's postal code.                                                                                                                                                                                                                                                                                                                                                                                             |\n| Phone               |          | The user's phone number.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Language            |          | The user's display language for their DocuSign account. Must be one of: <ul><li>Chinese Simplified: <code>zh_CN</code></li><li>Chinese Traditional: <code>zh_TW</code></li><li>Dutch: <code>nl</code></li><li>English: <code>en</code></li><li>French: <code>fr</code></li><li>German: <code>de</code></li><li>Italian: <code>it</code></li><li>Japanese: <code>ja</code></li><li>Korean: <code>ko</code></li><li>Portuguese: <code>pt</code></li><li>Portuguese Brazil: <code>pt_BR</code></li><li>Russian: <code>ru</code></li><li>Spanish: <code>es</code></li></ul>                                                                                                                                                                                                                                                                                                                                                            |\n| LoginPolicy         |          | The user's login policy. Valid values include the following: <ul> <li>Column left blank = The user is created with no policy assigned.</li> <li>FedAuthRequired = The user must log in with an Identity Provider.</li> <li>FedAuthBypass = The user may log in with an Identity Provider or their DocuSign username and password.</li> </ul> For more information on login policies, see [Setting User Login Policy](https://support.docusign.com/en/guides/org-admin-guide-user-login-policy). |\n| AutoActivate        |          | For domain users, new users can be activated automatically for domain accounts using SSO by setting the value to **true.** The user is activated automatically once the import is complete. Memberships activated in this way do not receive an activation email.                                                                                                                                                   |\n\n\nYou can add up to 2,000 users to an account and include up to 50 accounts per import. The maximum number of users per import is 8,000.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n\n\n[imports]: /docs/admin-api/reference/bulkoperations/userimport/updatebulkuserimports/\n",
+                "description": "Creates a request to import *new* users.\n\nYour CSV import file is made up of a header row with the column headers and a row of user or account data for each user you want to add to an account. Only new users can be imported. Any changes to existing users will be ignored. To make changes to existing users, use [UserImport:updateBulkUserImports][imports].\n\nTo ensure your CSV is properly formatted, use the\n[Sample Bulk Add CSV file](https://admin.docusign.com/static-resources/organization-user-import.csv)\n as a template. The following table describes the columns.\n\n\n\n| Column              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                         |\n| :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| AccountID           | yes      | The API account ID for the account to which you want you add the user. You can find this ID in the Admin area for the account under **API and Keys.**                                                                                                                                                                                                                                                            |\n| AccountName         |          | The name of the user's account in your organization. The account name must match the account ID provided.                                                                                                                                                                                                                                                                                                           |\n| FirstName           | yes      | The user's first name.                                                                                                                                                                                                                                                                                                                                                                                              |\n| LastName            | yes      | The user's last name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| UserEmail           | yes      | The user's complete email address.                                                                                                                                                                                                                                                                                                                                                                                  |\n| PermissionSet       | yes      | The user's permission set. The PermissionSet value must match an existing permission set for the account. This value is not case sensitive.                                                                                                                                                                                                                                                                         |\n| UserTitle           |          | The user's job title.                                                                                                                                                                                                                                                                                                                                                                                               |\n| CompanyName         |          | The user's company name.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Group               |          | The user's assigned groups. The Group values must match existing Group names for the account. Additional Group columns can be added to the file to add users to more than one group. You do not need to add users to the Everyone group, since all new users are automatically added to that group.                                                                                                                 |\n| AddressLine1        |          | The user's address, first line.                                                                                                                                                                                                                                                                                                                                                                                     |\n| AddressLine2        |          | The user's address, second line.                                                                                                                                                                                                                                                                                                                                                                                    |\n| City                |          | The user's city name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| StateRegionProvince |          | The user's regional location.                                                                                                                                                                                                                                                                                                                                                                                       |\n| PostalCode          |          | The user's postal code.                                                                                                                                                                                                                                                                                                                                                                                             |\n| Phone               |          | The user's phone number.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Language            |          | The user's display language for their DocuSign account. Must be one of: <ul><li>Chinese Simplified: <code>zh_CN</code></li><li>Chinese Traditional: <code>zh_TW</code></li><li>Dutch: <code>nl</code></li><li>English: <code>en</code></li><li>French: <code>fr</code></li><li>German: <code>de</code></li><li>Italian: <code>it</code></li><li>Japanese: <code>ja</code></li><li>Korean: <code>ko</code></li><li>Portuguese: <code>pt</code></li><li>Portuguese Brazil: <code>pt_BR</code></li><li>Russian: <code>ru</code></li><li>Spanish: <code>es</code></li></ul>                                                                                                                                                                                                                                                                                                                                                            |\n| LoginPolicy         |          | The user's login policy. Valid values include the following: <ul> <li>Column left blank = The user is created with no policy assigned.</li> <li>FedAuthRequired = The user must log in with an Identity Provider.</li> <li>FedAuthBypass = The user may log in with an Identity Provider or their DocuSign username and password.</li> </ul> For more information on login policies, see [Setting User Login Policy](https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=zah1583359147774.html). |\n| AutoActivate        |          | For domain users, new users can be activated automatically for domain accounts using SSO by setting the value to **true.** The user is activated automatically once the import is complete. Memberships activated in this way do not receive an activation email.                                                                                                                                                   |\n\n\nYou can add up to 2,000 users to an account and include up to 50 accounts per import. The maximum number of users per import is 8,000.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n\n\n[imports]: /docs/admin-api/reference/bulkoperations/userimport/updatebulkuserimports/\n",
                 "operationId": "OrganizationImport_OrganizationImportUsers_Insert",
                 "consumes": [
                     "multipart/form-data"
@@ -950,7 +950,7 @@
                     "UserImport"
                 ],
                 "summary": "Bulk updates information for existing users.",
-                "description": "Bulk updates information for existing users.\n\nYour CSV import file is made up of a header row with the column headers and a row of user or account data for each user you want to add to an account. \n\n\n**Update limit:** You can update up to 2,000 users on an account and include up to 50 accounts per import. The maximum number of updated users per import is 8,000.\n\nThis method requires the following HTTP headers:\n\n| Header | Value |\n| :--- |  :--- |\n| Content-Type | `text/csv` |\n| Content-Disposition |  `filename=filename.csv` |\n\n\n\nTo ensure your CSV is properly formatted, use the\n[Sample Bulk Update CSV file](https://admin.docusign.com/static-resources/organization-user-update-import.csv)\n as a template. The following table describes the columns.\n\nNote that the columns for bulk adding users and bulk update users are slightly different.\nThe update CSV file requires an `APIUserName` column, and does not have an `AutoActivate` column.\n\n\n\n| Column              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                         |\n| :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| AccountID           | yes      | The 32-character API account ID of the user's account in your organization. You can find this value in the API and Keys section of the Admin area of the account.                                                                                                                                                                                                                                                             |\n| AccountName         |          | The name of the user's account in your organization. The account name must match the account ID provided.                                                                                                                                                                                                                                                                                                           |\n| FirstName           | yes      | The user's first name.                                                                                                                                                                                                                                                                                                                                                                                              |\n| LastName            | yes      | The user's last name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| UserEmail           | yes      | The user's complete email address.                                                                                                                                                                                                                                                                                                                                                                                  |\n| PermissionSet       | yes      | The user's permission set. The PermissionSet value must match an existing permission set for the account. This value is not case sensitive.                                                                                                                                                                                                                                                                         |\n| UserTitle           |          | The user's job title.                                                                                                                                                                                                                                                                                                                                                                                               |\n| CompanyName         |          | The user's company name.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Group               |          | The user's assigned groups. The Group values must match existing Group names for the account. Additional Group columns can be added to the file to add users to more than one group. You do not need to add users to the Everyone group, since all new users are automatically added to that group.                                                                                                                 |\n| AddressLine1        |          | The user's address, first line.                                                                                                                                                                                                                                                                                                                                                                                     |\n| AddressLine2        |          | The user's address, second line.                                                                                                                                                                                                                                                                                                                                                                                    |\n| City                |          | The user's city name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| StateRegionProvince |          | The user's regional location.                                                                                                                                                                                                                                                                                                                                                                                       |\n| PostalCode          |          | The user's postal code.                                                                                                                                                                                                                                                                                                                                                                                             |\n| Phone               |          | The user's phone number.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Language            |          | The user's display language for their DocuSign account. Must be one of: <ul><li>Chinese Simplified: <code>zh_CN</code></li><li>Chinese Traditional: <code>zh_TW</code></li><li>Dutch: <code>nl</code></li><li>English: <code>en</code></li><li>French: <code>fr</code></li><li>German: <code>de</code></li><li>Italian: <code>it</code></li><li>Japanese: <code>ja</code></li><li>Korean: <code>ko</code></li><li>Portuguese: <code>pt</code></li><li>Portuguese Brazil: <code>pt_BR</code></li><li>Russian: <code>ru</code></li><li>Spanish: <code>es</code></li></ul>                                                                                                                                                                                                                                                                                                                                                            |\n| LoginPolicy         |          | The user's login policy. Valid values include the following: <ul> <li>Column left blank = The user is created with no policy assigned.</li> <li>FedAuthRequired = The user must log in with an Identity Provider.</li> <li>FedAuthBypass = The user may log in with an Identity Provider or their DocuSign username and password.</li> </ul> For more information on login policies, see [Setting User Login Policy](https://support.docusign.com/en/guides/org-admin-guide-user-login-policy). |\n| AutoActivate        |          | For domain users, new users can be activated automatically for domain accounts using SSO by setting the value to **true.** The user is activated automatically once the import is complete. Memberships activated in this way do not receive an activation email.                                                                                                                                                   |\n\n\n\n## Updating user email addresses\n\nChanging a user's email address should be done carefully. The user's email address is used to log in to DocuSign and receive documents to sign from others.\nOnce changed, existing documents that were sent or received:\n\n- Will still appear in the user's documents list.\n- Notifications about these documents will be sent to the new email address. If someone sends a new document to the old email address:\n- DocuSign will send a notification to the old address.\n- It will not appear in the documents list of the account.\n\nThis change of email address will be applied to all of the user's account memberships.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.",
+                "description": "Bulk updates information for existing users.\n\nYour CSV import file is made up of a header row with the column headers and a row of user or account data for each user you want to add to an account. \n\n\n**Update limit:** You can update up to 2,000 users on an account and include up to 50 accounts per import. The maximum number of updated users per import is 8,000.\n\nThis method requires the following HTTP headers:\n\n| Header | Value |\n| :--- |  :--- |\n| Content-Type | `text/csv` |\n| Content-Disposition |  `filename=filename.csv` |\n\n\n\nTo ensure your CSV is properly formatted, use the\n[Sample Bulk Update CSV file](https://admin.docusign.com/static-resources/organization-user-update-import.csv)\n as a template. The following table describes the columns.\n\nNote that the columns for bulk adding users and bulk update users are slightly different.\nThe update CSV file requires an `APIUserName` column, and does not have an `AutoActivate` column.\n\n\n\n| Column              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                         |\n| :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| AccountID           | yes      | The 32-character API account ID of the user's account in your organization. You can find this value in the API and Keys section of the Admin area of the account.                                                                                                                                                                                                                                                             |\n| AccountName         |          | The name of the user's account in your organization. The account name must match the account ID provided.                                                                                                                                                                                                                                                                                                           |\n| FirstName           | yes      | The user's first name.                                                                                                                                                                                                                                                                                                                                                                                              |\n| LastName            | yes      | The user's last name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| UserEmail           | yes      | The user's complete email address.                                                                                                                                                                                                                                                                                                                                                                                  |\n| PermissionSet       | yes      | The user's permission set. The PermissionSet value must match an existing permission set for the account. This value is not case sensitive.                                                                                                                                                                                                                                                                         |\n| UserTitle           |          | The user's job title.                                                                                                                                                                                                                                                                                                                                                                                               |\n| CompanyName         |          | The user's company name.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Group               |          | The user's assigned groups. The Group values must match existing Group names for the account. Additional Group columns can be added to the file to add users to more than one group. You do not need to add users to the Everyone group, since all new users are automatically added to that group.                                                                                                                 |\n| AddressLine1        |          | The user's address, first line.                                                                                                                                                                                                                                                                                                                                                                                     |\n| AddressLine2        |          | The user's address, second line.                                                                                                                                                                                                                                                                                                                                                                                    |\n| City                |          | The user's city name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| StateRegionProvince |          | The user's regional location.                                                                                                                                                                                                                                                                                                                                                                                       |\n| PostalCode          |          | The user's postal code.                                                                                                                                                                                                                                                                                                                                                                                             |\n| Phone               |          | The user's phone number.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Language            |          | The user's display language for their DocuSign account. Must be one of: <ul><li>Chinese Simplified: <code>zh_CN</code></li><li>Chinese Traditional: <code>zh_TW</code></li><li>Dutch: <code>nl</code></li><li>English: <code>en</code></li><li>French: <code>fr</code></li><li>German: <code>de</code></li><li>Italian: <code>it</code></li><li>Japanese: <code>ja</code></li><li>Korean: <code>ko</code></li><li>Portuguese: <code>pt</code></li><li>Portuguese Brazil: <code>pt_BR</code></li><li>Russian: <code>ru</code></li><li>Spanish: <code>es</code></li></ul>                                                                                                                                                                                                                                                                                                                                                            |\n| LoginPolicy         |          | The user's login policy. Valid values include the following: <ul> <li>Column left blank = The user is created with no policy assigned.</li> <li>FedAuthRequired = The user must log in with an Identity Provider.</li> <li>FedAuthBypass = The user may log in with an Identity Provider or their DocuSign username and password.</li> </ul> For more information on login policies, see [Setting User Login Policy](https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=zah1583359147774.html). |\n| AutoActivate        |          | For domain users, new users can be activated automatically for domain accounts using SSO by setting the value to **true.** The user is activated automatically once the import is complete. Memberships activated in this way do not receive an activation email.                                                                                                                                                   |\n\n\n\n## Updating user email addresses\n\nChanging a user's email address should be done carefully. The user's email address is used to log in to DocuSign and receive documents to sign from others.\nOnce changed, existing documents that were sent or received:\n\n- Will still appear in the user's documents list.\n- Notifications about these documents will be sent to the new email address. If someone sends a new document to the old email address:\n- DocuSign will send a notification to the old address.\n- It will not appear in the documents list of the account.\n\nThis change of email address will be applied to all of the user's account memberships.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.",
                 "operationId": "OrganizationImport_OrganizationImportUsers_Update",
                 "consumes": [
                     "multipart/form-data"
@@ -3060,9 +3060,567 @@
                 "x-ds-service": "ProductPermissionProfiles",
                 "x-ds-in-sdk": true
             }
+        },
+        "/v1/organizations/{organizationId}/assetGroups/accounts": {
+            "get": {
+                "tags": [
+                    "AccountCloning"
+                ],
+                "summary": "Get asset group accounts for an organization.",
+                "description": "Returns a list of asset group accounts for an organization.\n\nAn asset group is a set of modules, products, plans, and charges purchased for your organization. An asset group account is an account that has been linked to an asset group.\n\nTo call this endpoint:\n* You must be an administrator for the specified organization.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `asset_group_account_read`.",
+                "operationId": "OrganizationProvisionAssetGroup_GetAssetGroupAccountsByOrg",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "compliant",
+                        "in": "query",
+                        "description": "When **true,** only compliant accounts are returned and account responses do not include the `compliant` field. The default value is **false.**",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AssetGroupAccountsResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "asset_group_account_read"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "getAssetGroupAccounts",
+                "x-ds-method": "getAssetGroupAccounts",
+                "x-ds-service": "ProvisionAssetGroup",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v1/organizations/{organizationId}/assetGroups/accountClone": {
+            "post": {
+                "tags": [
+                    "AccountCloning"
+                ],
+                "summary": "Clone an existing DocuSign account.",
+                "description": "Clones an existing DocuSign account. Cloning an account copies the plan items and eSignature settings. Users, templates, and permission profiles are _not_ copied into the target account. The new account will linked to the same organization.\n\nIn the request body, specify the source account you are cloning by its ID. You can get the IDs for your organization's asset group accounts using the [getAssetGroupAccounts](/docs/admin-api/reference/accountprovisioning/accountcloning/getassetgroupaccounts/) endpoint. \n\nYou also need to specify information about the new target account, including the name, location, and administrator. To set the location, provide either the `countryCode` or `region` properties. (If both are specified, the `region` value will be used.)\n\nThe request body looks like this:\n```\n{\n    \"sourceAccount\": {\n        \"id\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\"\n    },\n    \"targetAccount\": {\n        \"name\": \"My Cloned Account\",\n        \"admin\": {\n            \"firstName\": \"Francis\",\n            \"lastName\": \"Beagle\",\n            \"email\": \"francis@example.com\"\n        },\n        \"region\": \"NA\"\n    }\n}\n```\n\nTo call this endpoint:\n* You must be an administrator for the specified organization.\n* The source account must be on the same plan as your contract.\n* The source account must be an asset group account. An asset group is a set of modules, products, plans, and charges purchased for your organization. An asset group account is an account that has been linked to an asset group.\n\n[Required scopes](/docs/admin-api/admin101/auth/): `asset_group_account_clone_write`.",
+                "operationId": "OrganizationProvisionAssetGroup_CloneAssetGroupAccount",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AssetGroupAccountClone"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AssetGroupAccountClone"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "asset_group_account_clone_write"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "cloneAssetGroupAccount",
+                "x-ds-method": "cloneAssetGroupAccount",
+                "x-ds-service": "ProvisionAssetGroup",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v1/organizations/{organizationId}/assetGroups/accountClones": {
+            "get": {
+                "tags": [
+                    "AccountCloning"
+                ],
+                "summary": "Gets all asset group account clones for an organization.",
+                "description": "Retrieves all the cloned accounts for an organization.\n\nTo call this endpoint:\n* You must be an administrator for the specified organization.\n\n[Required scopes](/docs/admin-api/admin101/auth/): `asset_group_account_clone_read`.",
+                "operationId": "OrganizationProvisionAssetGroup_GetAssetGroupAccountClonesByOrgId",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "since_updated_date",
+                        "in": "query",
+                        "description": "Use this parameter to retrieve only account clones that were created on or after a specified date.",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "include_details",
+                        "in": "query",
+                        "description": "When **true,** include additional details for the asset group account clones. The default value is **false.**",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AssetGroupAccountClones"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "asset_group_account_clone_read"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "getAssetGroupAccountClonesByOrgId",
+                "x-ds-method": "getAssetGroupAccountClonesByOrgId",
+                "x-ds-service": "ProvisionAssetGroup",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v1/organizations/{organizationId}/assetGroups/{assetGroupId}/accountClones/{assetGroupWorkId}": {
+            "get": {
+                "tags": [
+                    "AccountCloning"
+                ],
+                "summary": "Gets information about a single cloned account.",
+                "description": "Gets information about a cloned account by the `assetGroupWorkId`.\n\nTo call this endpoint:\n* You must be an administrator for the specified organization.\n\n[Required scopes](/docs/admin-api/admin101/auth/): `asset_group_account_clone_read`.",
+                "operationId": "OrganizationProvisionAssetGroup_GetAssetGroupAccountClone",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "assetGroupId",
+                        "in": "path",
+                        "description": "The ID of the asset group.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "assetGroupWorkId",
+                        "in": "path",
+                        "description": "The ID of the asset group account clone request.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "include_details",
+                        "in": "query",
+                        "description": "When **true,** include additional details about the cloned account. The default value is **false.**",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AssetGroupAccountClone"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "asset_group_account_clone_read"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "getAssetGroupAccountClone",
+                "x-ds-method": "getAssetGroupAccountClone",
+                "x-ds-service": "ProvisionAssetGroup",
+                "x-ds-in-sdk": true
+            }
         }
     },
     "definitions": {
+        "AssetGroupAccountsResponse": {
+            "type": "object",
+            "properties": {
+                "assetGroupAccounts": {
+                    "description": "The list of asset group accounts.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AssetGroupAccountResponse"
+                    },
+                    "readOnly": true
+                }
+            },
+            "x-ds-definition-name": "AssetGroupAccountsResponse",
+            "description": "A list of asset group accounts.",
+            "x-ms-summary": "A list of asset group accounts."
+        },
+        "AssetGroupAccountResponse": {
+            "type": "object",
+            "properties": {
+                "assetGroupId": {
+                    "format": "uuid",
+                    "description": "The asset group ID.",
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "assetGroupName": {
+                    "description": "Reserved for DocuSign.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "accountId": {
+                    "format": "uuid",
+                    "description": "The ID of the account.",
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "accountName": {
+                    "description": "The name of the account.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "externalAccountId": {
+                    "format": "int64",
+                    "description": "The external account ID.\n",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "compliant": {
+                    "description": "When **true,** indicates that the account is compliant.",
+                    "type": "boolean",
+                    "readOnly": true
+                },
+                "siteId": {
+                    "format": "int32",
+                    "description": "Reserved for DocuSign.",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "siteName": {
+                    "description": "Reserved for DocuSign.",
+                    "type": "string",
+                    "readOnly": true
+                }
+            },
+            "x-ds-definition-name": "AssetGroupAccountResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "AssetGroupAccountClone": {
+            "required": [
+                "sourceAccount",
+                "targetAccount"
+            ],
+            "type": "object",
+            "properties": {
+                "sourceAccount": {
+                    "$ref": "#/definitions/AssetGroupAccountCloneSourceAccount",
+                    "description": "The source account that is cloned."
+                },
+                "targetAccount": {
+                    "$ref": "#/definitions/AssetGroupAccountCloneTargetAccount",
+                    "description": "The target account that is created."
+                },
+                "assetGroupWorkId": {
+                    "format": "uuid",
+                    "description": "The ID of the job that is created by the request. Use this value to retrieve information about the clone request with the [getAssetGroupAccountClone](/docs/admin-api/reference/accountprovisioning/accountcloning/getassetgroupaccountclone/) endpoint.",
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "assetGroupId": {
+                    "format": "uuid",
+                    "description": "The ID of the asset group to which the account belongs. Use this value to retrieve information about the clone request with the [getAssetGroupAccountClone](/docs/admin-api/reference/accountprovisioning/accountcloning/getassetgroupaccountclone/) endpoint.",
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "assetGroupWorkType": {
+                    "description": "The type of asset group work.",
+                    "enum": [
+                        "Undefined",
+                        "GroupAssetFulfillment",
+                        "AccountAssetFulfillment",
+                        "AccountAssetClone",
+                        "AccountAssetCreate"
+                    ],
+                    "type": "string",
+                    "readOnly": true
+                },
+                "status": {
+                    "description": "The status of the clone request. Valid values:\n* `Pending`\n* `Processing`\n* `PendingError`\n* `ProcessingError`\n* `Completed`\n* `Canceled`\n* `PermanentFailure`",
+                    "enum": [
+                        "Undefined",
+                        "Pending",
+                        "Processing",
+                        "PendingError",
+                        "ProcessingError",
+                        "Completed",
+                        "Canceled",
+                        "PermanentFailure"
+                    ],
+                    "type": "string",
+                    "readOnly": true
+                },
+                "cloneRequestId": {
+                    "format": "uuid",
+                    "description": "Reserved for DocuSign.",
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "orderId": {
+                    "format": "uuid",
+                    "description": "Reserved for DocuSign.",
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "attempts": {
+                    "format": "int32",
+                    "description": "The number of retries.",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "createdDate": {
+                    "format": "date-time",
+                    "description": "The date that the clone request was initiated.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "createdByName": {
+                    "description": "The name of the user who initiated the clone request.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "createdByEmail": {
+                    "description": "The email address of the user who initiated the clone request.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "message": {
+                    "description": "A message providing information about the clone request. If the request resulted in an error, this message includes specific information about the error.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "cloneProcessingFailureDetails": {
+                    "$ref": "#/definitions/CloneErrorDetails",
+                    "description": "The processing failures if the work is in PendingError/ProcessingError status.",
+                    "readOnly": true
+                }
+            },
+            "x-ds-definition-name": "AssetGroupAccountClone",
+            "description": "The account that is cloned.",
+            "x-ms-summary": "The account that is cloned."
+        },
+        "AssetGroupAccountCloneSourceAccount": {
+            "required": [
+                "id"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "description": "The ID of the account to clone. This property is required in POST requests.\n",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "externalAccountId": {
+                    "format": "int64",
+                    "description": "The external account ID of the source account.\n",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "site": {
+                    "description": "The site the source account is on.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "name": {
+                    "description": "The name of the source account.",
+                    "type": "string",
+                    "readOnly": true
+                }
+            },
+            "x-ds-definition-name": "AssetGroupAccountCloneSourceAccount",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "AssetGroupAccountCloneTargetAccount": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "description": "The ID of the target account.",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "name": {
+                    "description": "The name of the target account. This property is required in the request body when cloning an account.",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "The region of the target account. \n\n**Note:** When cloning an account, you must include this property or `countryCode` in the request. If both are provided, `region` will be used.",
+                    "type": "string"
+                },
+                "countryCode": {
+                    "description": "The country code of the target account. The country code for the United States is `en`. \n\n**Note:** When cloning an account, you must include this property or `region`. If both are provided, `region` will be used.",
+                    "type": "string"
+                },
+                "site": {
+                    "description": "The data center site of the account. This property is read-only.",
+                    "type": "string"
+                },
+                "admin": {
+                    "$ref": "#/definitions/AssetGroupAccountCloneTargetAccountAdmin",
+                    "description": "The administrator of the new account. This property is required in the request body when cloning an account."
+                }
+            },
+            "x-ds-definition-name": "AssetGroupAccountCloneTargetAccount",
+            "description": "An object describing the target cloned account.",
+            "x-ms-summary": "An object describing the target cloned account."
+        },
+        "AssetGroupAccountCloneTargetAccountAdmin": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "description": "The email address of the target account administrator. This property is required in the request body when cloning an account.",
+                    "type": "string"
+                },
+                "firstName": {
+                    "description": "The first name of the target account administrator. This property is required in the request body when cloning an account.",
+                    "type": "string"
+                },
+                "lastName": {
+                    "description": "The last name of the target account administrator. This property is required in the request body when cloning an account.",
+                    "type": "string"
+                },
+                "locale": {
+                    "description": "The locale of the target account administrator. The locale code for the United States is `en`.",
+                    "enum": [
+                        "None",
+                        "zh_cn",
+                        "zh_tw",
+                        "nl",
+                        "en",
+                        "fr",
+                        "de",
+                        "it",
+                        "ja",
+                        "ko",
+                        "pt",
+                        "pt_br",
+                        "ru",
+                        "es",
+                        "pl"
+                    ],
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "AssetGroupAccountCloneTargetAccountAdmin",
+            "description": "An object describing the administrator of the cloned account.",
+            "x-ms-summary": "An object describing the administrator of the cloned account."
+        },
+        "CloneErrorDetails": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "The error code.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "errorDescription": {
+                    "description": "The error description.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "isSystemError": {
+                    "description": "When **true,** indicates that the error was caused by the system. When **false,** indicates that the error was caused by the user.",
+                    "type": "boolean",
+                    "readOnly": true
+                }
+            },
+            "x-ds-definition-name": "CloneErrorDetails",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "AssetGroupAccountClones": {
+            "type": "object",
+            "properties": {
+                "assetGroupWorks": {
+                    "description": "The list of asset group accounts.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AssetGroupAccountClone"
+                    },
+                    "readOnly": true
+                }
+            },
+            "x-ds-definition-name": "AssetGroupAccountClones",
+            "description": "",
+            "x-ms-summary": ""
+        },
         "OrganizationsResponse": {
             "type": "object",
             "properties": {
@@ -6514,6 +7072,24 @@
             "x-ds-category": "UserManagement",
             "x-ds-order": "100",
             "x-ms-summary": "Methods to delete data for closed users."
+        },
+        "AccountCloning": {
+            "type": "object",
+            "properties": {
+                "assetGroupAccounts": {
+                    "description": "The list of asset group accounts.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AssetGroupAccountResponse"
+                    },
+                    "readOnly": true
+                }
+            },
+            "x-ds-definition-name": "AssetGroupAccountsResponse",
+            "description": "Methods to clone accounts.",
+            "x-ds-category": "AccountProvisioning",
+            "x-ds-order": "100",
+            "x-ms-summary": "Methods to clone accounts."
         }
     },
     "securityDefinitions": {
@@ -6585,6 +7161,10 @@
         {
             "name": "DataDeletion",
             "description": "Methods to delete user data. After a user is closed, an account or organization administrator can use these methods to delete the user's account data."
+        },
+        {
+            "name": "AccountCloning",
+            "description": "Methods to clone accounts."
         }
     ],
     "x-ds-categories": [
@@ -6612,6 +7192,11 @@
             "name": "Organization",
             "summary": "Methods for working with organizations.",
             "description": "Methods for working with organizations."
+        },
+        {
+            "name": "AccountProvisioning",
+            "summary": "Methods to provision accounts in your organization.",
+            "description": "Methods to provision accounts in your organization."
         }
     ]
 }
