@@ -1,0 +1,1571 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Web Forms API version 1.1",
+        "description": "The Web Forms API facilitates generating semantic HTML forms around everyday contracts.\n",
+        "termsOfService": "https://www.docusign.com/company/terms-and-conditions/web",
+        "contact": {
+            "name": "DocuSign Developer Center",
+            "email": "devcenter@docusign.com",
+            "url": "https://developers.docusign.com/"
+        },
+        "version": "1.1.0",
+        "x-ds-platform-version": "20.3.000"
+    },
+    "security": [
+        {
+            "DocuSignAuth": []
+        }
+    ],
+    "host": "apps.docusign.com",
+    "basePath": "/api/webforms/v1.1",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/accounts/{accountId}/forms": {
+            "get": {
+                "summary": "Returns a list of web form configurations.",
+                "description": "<ds-inlinemessage>The Web Forms API is available in all developer accounts, but only in certain production account plans. Contact \n[Docusign Support](https://support.docusign.com/s/?language=en_US) or your account manager to find out whether the Web Forms API is available for your production account plan.</ds-inlinemessage>\n\nThis method returns a list of web form configurations for a given account. Use the query parameters to sort and filter the response.\n\n[Required authentication scopes](/docs/web-forms-api/plan-integration/authentication/): `webforms_read`.",
+                "operationId": "WebForm_ListForms",
+                "x-ds-methodname": "listForms",
+                "tags": [
+                    "Configurations"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "description": "The ID of the account to which the web form belongs.\n",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "user_filter",
+                        "description": "Set to `owned_by_me` to return only forms owned by the authenticated user. By default, all forms are returned.",
+                        "type": "string",
+                        "enum": [
+                            "owned_by_me",
+                            "all"
+                        ],
+                        "default": "all"
+                    },
+                    {
+                        "in": "query",
+                        "name": "is_standalone",
+                        "description": "Set to `true` or `false` to filter by whether forms are [stand-alone (not tied to a template)](https://support.docusign.com/s/document-item?bundleId=yff1696971835267&topicId=gua1698120920620.html). By default, all forms are returned.",
+                        "type": "boolean",
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "is_published",
+                        "description": "When `true`, only published forms are returned. By default, published and unpublished forms are both returned.",
+                        "type": "boolean",
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "sort_by",
+                        "description": "Sorts the results. You can sort by the time that the web forms were created or last modified, in descending or ascending order. Valid values:\n\n* `lastModifiedDateTime:desc` (default)\n* `lastModifiedDateTime:asc`\n* `createdDateTime:desc`\n* `createdDateTime:asc`",
+                        "type": "string",
+                        "maxLength": 50,
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "description": "When set, filters results by whether each web form configuration contains the given text in its `formProperties.name` property.",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "start_position",
+                        "description": "The zero-based index of the result from which to start returning results.\n\nUse with `count` to limit the number of results.\n\nThe default value is 0.",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "count",
+                        "description": "The maximum number of results to return.\n\nUse `start_position` to specify the number of results to skip.",
+                        "type": "string",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of forms assigned to the account",
+                        "schema": {
+                            "$ref": "#/definitions/WebFormSummaryList"
+                        }
+                    },
+                    "401": {
+                        "description": "The authentication information is either missing or invalid",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "403": {
+                        "description": "The requestor is not authorized",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "404": {
+                        "description": "The requested resource was not found",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "DocuSignAuth": [
+                            "webforms_read"
+                        ]
+                    }
+                ],
+                "x-ds-method": "listForms",
+                "x-ds-service": "Form Management",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/accounts/{accountId}/forms/{formId}": {
+            "get": {
+                "summary": "Retrieves a web form configuration.",
+                "description": "<ds-inlinemessage>The Web Forms API is available in all developer accounts, but only in certain production account plans. Contact \n[Docusign Support](https://support.docusign.com/s/?language=en_US) or your account manager to find out whether the Web Forms API is available for your production account plan.</ds-inlinemessage>\n\nRetrieves a web form configuration.\n\nIf you make changes to an active form configuration, the unchanged active version will also be maintained. The two versions will have the same `formId` but different `formState` values. Use the `state` query parameter to indicate which version to return.\n\n[Required authentication scopes](/docs/web-forms-api/plan-integration/authentication/): `webforms_read`.",
+                "operationId": "WebForm_GetForm",
+                "x-ds-methodname": "getForm",
+                "tags": [
+                    "Configurations"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "description": "The ID of the account to which the web form belongs.",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "formId",
+                        "description": "The ID of the web form configuration.\n",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "state",
+                        "description": "The state of the web form configuration. Valid values:\n\n- `active`\n- `draft`",
+                        "type": "string",
+                        "default": "draft",
+                        "enum": [
+                            "active",
+                            "draft"
+                        ],
+                        "maxLength": 15,
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Web Form that represents a single active version with metadata",
+                        "schema": {
+                            "$ref": "#/definitions/WebForm"
+                        }
+                    },
+                    "401": {
+                        "description": "The authentication information is either missing or invalid",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "404": {
+                        "description": "The requested resource was not found",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "DocuSignAuth": [
+                            "webforms_read"
+                        ]
+                    }
+                ],
+                "x-ds-method": "getForm",
+                "x-ds-service": "Form Management",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/accounts/{accountId}/forms/{formId}/instances": {
+            "get": {
+                "summary": "Lists the instances of a given web form configuration.",
+                "description": "<ds-inlinemessage>The Web Forms API is available in all developer accounts, but only in certain production account plans. Contact \n[Docusign Support](https://support.docusign.com/s/?language=en_US) or your account manager to find out whether the Web Forms API is available for your production account plan.</ds-inlinemessage>\n\nRetrieves all the instances of a given web form configuration.\n\n[Required authentication scopes](/docs/web-forms-api/plan-integration/authentication/): `webforms_instance_read`.",
+                "operationId": "WebFormInstance_ListInstances",
+                "x-ds-methodname": "listInstances",
+                "tags": [
+                    "Instances"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "description": "The ID of the account to which the web form belongs.",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "formId",
+                        "description": "The ID of the form configuration.\n",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "client_user_id",
+                        "description": "A unique identifier for a user from the client's system. This value can be anything your backend system would use to track individual form instances, such as employee IDs, email addresses, or surrogate key values.",
+                        "type": "string",
+                        "maxLength": 100,
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of all Web Form Instances with associated metadata.",
+                        "schema": {
+                            "$ref": "#/definitions/WebFormInstanceList"
+                        }
+                    },
+                    "401": {
+                        "description": "The authentication information is either missing or invalid",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "403": {
+                        "description": "The requestor is not authorized",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "404": {
+                        "description": "The requested resource is not found",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "500": {
+                        "description": "The service encountered an unexpected condition that prevented it from fulfilling the request",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "503": {
+                        "description": "Service is temporarily unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "DocuSignAuth": [
+                            "webforms_instance_read"
+                        ]
+                    }
+                ],
+                "x-ds-method": "listInstances",
+                "x-ds-service": "Form Instance Management",
+                "x-ds-in-sdk": true
+            },
+            "post": {
+                "summary": "Gets a web form instance.",
+                "description": "<ds-inlinemessage>The Web Forms API is available in all developer accounts, but only in certain production account plans. Contact \n[Docusign Support](https://support.docusign.com/s/?language=en_US) or your account manager to find out whether the Web Forms API is available for your production account plan.</ds-inlinemessage>\n\nCreates an instance of a web form.\n\nThis endpoint returns a `formUrl` and `instanceToken` that you combine to obtain a secure URL. Use this URL to render the web form instance in your application.\n\n[Required authentication scopes](/docs/web-forms-api/plan-integration/authentication/): `webforms_instance_write`.",
+                "operationId": "WebFormInstance_CreateInstance",
+                "x-ds-methodname": "createInstance",
+                "tags": [
+                    "Instances"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "description": "The ID of the account to which the web form belongs.",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "formId",
+                        "description": "The ID of the web form configuration.",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    },
+                    {
+                        "in": "body",
+                        "name": "create_instance_body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateInstanceRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Web Form Instance with metadata",
+                        "schema": {
+                            "$ref": "#/definitions/WebFormInstance"
+                        }
+                    },
+                    "400": {
+                        "description": "The form instance cannot be created, possibly due to validation failure.",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "401": {
+                        "description": "The authentication information is either missing or invalid",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "403": {
+                        "description": "The requestor is not authorized",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "404": {
+                        "description": "The requested resource is not found",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "500": {
+                        "description": "The service encountered an unexpected condition that prevented it from fulfilling the request",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "503": {
+                        "description": "service is temporarily unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "DocuSignAuth": [
+                            "webforms_instance_write"
+                        ]
+                    }
+                ],
+                "x-ds-method": "createInstance",
+                "x-ds-service": "Form Instance Management",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/accounts/{accountId}/forms/{formId}/instances/{instanceId}": {
+            "get": {
+                "summary": "Creates a secure web form instance.",
+                "description": "<ds-inlinemessage>The Web Forms API is available in all developer accounts, but only in certain production account plans. Contact \n[Docusign Support](https://support.docusign.com/s/?language=en_US) or your account manager to find out whether the Web Forms API is available for your production account plan.</ds-inlinemessage>\n\nGets an instance of a web form specified by the configuration and instance IDs. To get all instances associated with a given configuration, use the [listInstances endpoint](/docs/web-forms-api/reference/webforms/instances/listinstances/).\n\n[Required authentication scopes](/docs/web-forms-api/plan-integration/authentication/): `webforms_instance_read`.",
+                "operationId": "WebFormInstance_GetInstance",
+                "x-ds-methodname": "getInstance",
+                "tags": [
+                    "Instances"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "description": "The ID of the account to which the web form belongs.",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "formId",
+                        "description": "The ID of the web form configuration.",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "instanceId",
+                        "description": "The ID of the form instance.",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Web Form Instance with metadata",
+                        "schema": {
+                            "$ref": "#/definitions/WebFormInstance"
+                        }
+                    },
+                    "401": {
+                        "description": "The authentication information is either missing or invalid",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "403": {
+                        "description": "The requestor is not authorized",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "404": {
+                        "description": "The requested resource is not found",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "500": {
+                        "description": "The service encountered an unexpected condition that prevented it from fulfilling the request",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "503": {
+                        "description": "service is temporarily unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "DocuSignAuth": [
+                            "webforms_instance_read"
+                        ]
+                    }
+                ],
+                "x-ds-method": "getInstance",
+                "x-ds-service": "Form Instance Management",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/accounts/{accountId}/forms/{formId}/instances/{instanceId}/refresh": {
+            "post": {
+                "summary": "Refreshes the instance token.",
+                "description": "<ds-inlinemessage>The Web Forms API is available in all developer accounts, but only in certain production account plans. Contact \n[Docusign Support](https://support.docusign.com/s/?language=en_US) or your account manager to find out whether the Web Forms API is available for your production account plan.</ds-inlinemessage>\n\nGenerates a new instance token for an existing web form instance. Tokens expire after five minutes.\n\n[Required authentication scopes](/docs/web-forms-api/plan-integration/authentication/): `webforms_instance_write`.",
+                "operationId": "WebFormInstance_RefreshToken",
+                "x-ds-methodname": "refreshToken",
+                "tags": [
+                    "Instances"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "description": "The ID of the account to which the web form belongs.",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "formId",
+                        "description": "The ID of the web form configuration.",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "instanceId",
+                        "description": "The ID of the form instance.",
+                        "type": "string",
+                        "format": "uuid",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Web Form Instance with new instance token and metadata",
+                        "schema": {
+                            "$ref": "#/definitions/WebFormInstance"
+                        }
+                    },
+                    "400": {
+                        "description": "The instance token cannot be created, possibly because the validation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "401": {
+                        "description": "The authentication information is either missing or invalid",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "403": {
+                        "description": "The requestor is not authorized",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "404": {
+                        "description": "The requested resource is not found",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "500": {
+                        "description": "The service encountered an unexpected condition that prevented it from fulfilling the request",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    },
+                    "503": {
+                        "description": "service is temporarily unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/HttpError"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "DocuSignAuth": [
+                            "webforms_instance_write"
+                        ]
+                    }
+                ],
+                "x-ds-method": "refreshToken",
+                "x-ds-service": "Form Instance Management",
+                "x-ds-in-sdk": true
+            }
+        }
+    },
+    "securityDefinitions": {
+        "DocuSignAuth": {
+            "type": "oauth2",
+            "flow": "accessCode",
+            "authorizationUrl": "https://account-tk1.tk.docusign.dev/oauth/auth",
+            "tokenUrl": "https://account-tk1.tk.docusign.dev/oauth/token",
+            "scopes": {
+                "webforms_read": "Read web form configuration",
+                "webforms_write": "Create web form and modify web form configuration",
+                "webforms_instance_read": "Read instance configuration",
+                "webforms_instance_write": "Create instance and modify instance configuration"
+            }
+        }
+    },
+    "definitions": {
+        "Guid": {
+            "type": "string",
+            "format": "uuid",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "x-ds-definition-name": "Guid",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "UserId": {
+            "description": "DocuSign user identifier",
+            "type": "string",
+            "format": "uuid",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "x-ds-definition-name": "UserId",
+            "x-ms-summary": "DocuSign user identifier"
+        },
+        "AccountId": {
+            "description": "Account identifier in which the webform resides",
+            "type": "string",
+            "format": "uuid",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "x-ds-definition-name": "AccountId",
+            "x-ms-summary": "Account identifier in which the webform resides"
+        },
+        "WebFormId": {
+            "description": "Unique identifier for a webform entity that is consistent for it's lifetime",
+            "type": "string",
+            "format": "uuid",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "x-ds-definition-name": "WebFormId",
+            "x-ms-summary": "Unique identifier for a webform entity that is consistent for it's lifetime"
+        },
+        "InstanceId": {
+            "description": "Unique identifier for a webform instance that is consistent until its expiration",
+            "type": "string",
+            "format": "uuid",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "x-ds-definition-name": "InstanceId",
+            "x-ms-summary": "Unique identifier for a webform instance that is consistent until its expiration"
+        },
+        "EnvelopeId": {
+            "description": "Envelope Id",
+            "type": "string",
+            "format": "uuid",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "x-ds-definition-name": "EnvelopeId",
+            "x-ms-summary": "Envelope Id"
+        },
+        "ExpirationDateTime": {
+            "description": "The DateTime after which the webform instance is inaccessible.",
+            "type": "string",
+            "format": "date-time",
+            "x-ds-definition-name": "ExpirationDateTime",
+            "x-ms-summary": "The DateTime after which the webform instance is inaccessible."
+        },
+        "CreatedDateTime": {
+            "description": "The DateTime when the webform instance is created.",
+            "type": "string",
+            "format": "date-time",
+            "x-ds-definition-name": "CreatedDateTime",
+            "x-ms-summary": "The DateTime when the webform instance is created."
+        },
+        "LastModifiedDateTime": {
+            "description": "The DateTime when the webform instance is last modified.",
+            "type": "string",
+            "format": "date-time",
+            "x-ds-definition-name": "LastModifiedDateTime",
+            "x-ms-summary": "The DateTime when the webform instance is last modified."
+        },
+        "IsStandalone": {
+            "description": "Is the form a standalone form",
+            "type": "boolean",
+            "x-ds-definition-name": "IsStandalone",
+            "x-ms-summary": "Is the form a standalone form"
+        },
+        "InstanceToken": {
+            "type": "string",
+            "description": "Unique token associated with an instance that is required to render the form instance. This token is valid for 5 minutes after which it needs to be refreshed using refreshToken api",
+            "x-ds-definition-name": "InstanceToken",
+            "x-ms-summary": "Unique token associated with an instance that is required to render the form instance. This token is valid for 5 minutes after which it needs to be refreshed using refreshToken api"
+        },
+        "TokenExpirationDateTime": {
+            "description": "The DateTime after which the token is expired and form instance is inaccessible.",
+            "type": "string",
+            "format": "date-time",
+            "x-ds-definition-name": "TokenExpirationDateTime",
+            "x-ms-summary": "The DateTime after which the token is expired and form instance is inaccessible."
+        },
+        "FormUrl": {
+            "type": "string",
+            "description": "The instance url which can be rendered by the user",
+            "example": "https://webforms-ux/v1.0/forms/82356c8f286b4e4df592af7d0984f51d",
+            "x-ds-definition-name": "FormUrl",
+            "x-ms-summary": "The instance url which can be rendered by the user"
+        },
+        "InstanceStatus": {
+            "type": "string",
+            "description": "The status of the form instance",
+            "enum": [
+                "INITIATED",
+                "SUBMITTED",
+                "EXPIRED",
+                "FAILED"
+            ],
+            "example": "INITIATED",
+            "maxLength": 15,
+            "x-ds-definition-name": "InstanceStatus",
+            "x-ms-summary": "The status of the form instance"
+        },
+        "InstanceSource": {
+            "type": "string",
+            "description": "The method by which the form instance is created.\n",
+            "enum": [
+                "PUBLIC_URL",
+                "API_EMBEDDED",
+                "API_REMOTE",
+                "UI_REMOTE"
+            ],
+            "example": "API_EMBEDDED",
+            "maxLength": 20,
+            "x-ds-definition-name": "InstanceSource",
+            "x-ms-summary": "The method by which the form instance is created.\n"
+        },
+        "ClientUserId": {
+            "type": "string",
+            "description": "A unique identifier for a user that should originate from client's system. This value can be anything your backend system would use to track individual form instances. Examples include employee IDs, email addresses, surrogate key values, etc.",
+            "example": "customer_id@domain.com",
+            "maxLength": 100,
+            "x-ds-definition-name": "ClientUserId",
+            "x-ms-summary": "A unique identifier for a user that should originate from client's system. This value can be anything your backend system would use to track individual form instances. Examples include employee IDs, email addresses, surrogate key values, etc."
+        },
+        "AuthenticationInstant": {
+            "type": "string",
+            "description": "A sender-generated value that indicates the date and time that the signer was authenticated.",
+            "x-ds-definition-name": "AuthenticationInstant",
+            "x-ms-summary": "A sender-generated value that indicates the date and time that the signer was authenticated."
+        },
+        "AuthenticationMethod": {
+            "type": "string",
+            "description": "A value that most closely matches the technique your application used to authenticate the recipient / signer.",
+            "example": "Biometric, Email, HTTPBasicAuth, Kerberos etc",
+            "maxLength": 40,
+            "enum": [
+                "Biometric",
+                "Email",
+                "HTTPBasicAuth",
+                "Kerberos",
+                "KnowledgeBasedAuth",
+                "None",
+                "PaperDocuments",
+                "Password",
+                "RSASecureID",
+                "SingleSignOn_CASiteminder",
+                "SingleSignOn_InfoCard",
+                "SingleSignOn_MicrosoftActiveDirectory",
+                "SingleSignOn_Other",
+                "SingleSignOn_Passport",
+                "SingleSignOn_SAML",
+                "Smartcard",
+                "SSLMutualAuth",
+                "X509Certificate"
+            ],
+            "x-ds-definition-name": "AuthenticationMethod",
+            "x-ms-summary": "A value that most closely matches the technique your application used to authenticate the recipient / signer."
+        },
+        "AssertionId": {
+            "type": "string",
+            "description": "A unique identifier of the authentication event executed by the client application.",
+            "example": "client-12345",
+            "x-ds-definition-name": "AssertionId",
+            "x-ms-summary": "A unique identifier of the authentication event executed by the client application."
+        },
+        "SecurityDomain": {
+            "type": "string",
+            "description": "The domain in which the user authenticated.",
+            "x-ds-definition-name": "SecurityDomain",
+            "x-ms-summary": "The domain in which the user authenticated."
+        },
+        "ReturnUrl": {
+            "type": "string",
+            "description": "The url to which the user is redirected after the signing is completed",
+            "example": "http://www.thankyoupage.com",
+            "x-ds-definition-name": "ReturnUrl",
+            "x-ms-summary": "The url to which the user is redirected after the signing is completed"
+        },
+        "ExpirationOffset": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 23976,
+            "format": "int64",
+            "description": "Specify the number of hours after which the form instance expires. For example, if the form expiration is set to 5 days, you should specify 120. The default value is 720 hours (30 days).",
+            "example": 120,
+            "x-ds-definition-name": "ExpirationOffset",
+            "x-ms-summary": "Specify the number of hours after which the form instance expires. For example, if the form expiration is set to 5 days, you should specify 120. The default value is 720 hours (30 days)."
+        },
+        "WebFormUserInfo": {
+            "type": "object",
+            "description": "A DocuSign user within the account associated with the form.",
+            "properties": {
+                "userId": {
+                    "$ref": "#/definitions/UserId",
+                    "description": "The ID of the Docusign user."
+                },
+                "userName": {
+                    "type": "string",
+                    "maxLength": 150,
+                    "example": "John Doe",
+                    "description": "The user's name that will be displayed in the UI. The maximum length is 150 characters."
+                }
+            },
+            "x-ds-definition-name": "WebFormUserInfo",
+            "x-ms-summary": "A DocuSign user within the account associated with the form."
+        },
+        "WebFormSource": {
+            "type": "string",
+            "description": "The source from which the webform is created.",
+            "enum": [
+                "templates",
+                "blank"
+            ],
+            "example": "templates",
+            "maxLength": 15,
+            "x-ds-definition-name": "WebFormSource",
+            "x-ms-summary": "The source from which the webform is created."
+        },
+        "CreateInstanceRequestBody": {
+            "type": "object",
+            "description": "The request body for the `Instances::createInstance` endpoint.",
+            "required": [
+                "clientUserId"
+            ],
+            "properties": {
+                "formValues": {
+                    "$ref": "#/definitions/WebFormValues",
+                    "description": "Key-value pairs used to prefill fields in the web form instance. The keys correspond to the values of the `publishedComponentNames` object on the `WebForm` (configuration) object.\n\nFor keys of type TextBox, Email, Date, Select, and RadioButtonGroup, the value should be a string. For keys of type Number, the value should be a number. For keys of type of CheckboxGroup, the value should be an array of strings.\n\nFor example, a web form configuration might have the following properties indicated by the `publishedComponentNames` object:\n```\n\"publishedComponentNames\": {\n    \"Signer_name\": \"TextBox\",\n    \"Signer_email\": \"Email\",\n    \"Dropdown\": \"Select\",\n    \"Hobbies\": \"CheckboxGroup\"\n}\n```\n\nThen, this property might be:\n```\n{\n    \"Signer_name\": \"Francis Beagle\",\n    \"Signer_email\": \"francis@example.com\",\n    \"Hobbies\": [\"walking\", \"napping\"]\n}\n```\n\nNote that you do not have to include values for every component. This property is **optional.**"
+                },
+                "clientUserId": {
+                    "$ref": "#/definitions/ClientUserId",
+                    "description": "A unique identifier for a user from the client's system. This value can be anything your backend system would use to track individual web form instances, such as employee IDs, email addresses, or surrogate key values.\n\nThis property is **required.** The maximum length is 100 characters."
+                },
+                "authenticationInstant": {
+                    "$ref": "#/definitions/AuthenticationInstant",
+                    "description": "Set this value to indicate the date and time that the signer was authenticated.\n\nThis property is **optional.** If it is provided, the value will be included in the corresponding envelopes' certificates of completion."
+                },
+                "authenticationMethod": {
+                    "$ref": "#/definitions/AuthenticationMethod",
+                    "description": "Set this value to indicate the technique your application used to authenticate the user.\n\nThis property is **optional.** The maximum length is 40 characters. If it is provided, this property will be included in the corresponding envelopes' certificates of completion."
+                },
+                "assertionId": {
+                    "$ref": "#/definitions/AssertionId",
+                    "description": "Set this value to identify the authentication event executed by your application.\n\nThis property is **optional.** If it is provided, this property will be included in the corresponding envelopes' certificates of completion."
+                },
+                "securityDomain": {
+                    "$ref": "#/definitions/SecurityDomain",
+                    "description": "Set this value to indicate the domain in which the user authenticated.\n\nThis property is **optional.** If it is provided, this property will be included in the corresponding envelopes' certificates of completion."
+                },
+                "returnUrl": {
+                    "$ref": "#/definitions/ReturnUrl",
+                    "description": "The URL to which the user is redirected after the signing is completed. This property is **optional.**"
+                },
+                "expirationOffset": {
+                    "$ref": "#/definitions/ExpirationOffset",
+                    "description": "The number of hours after which the web form instance expires. For example, if you want the instance to expire after 5 days, set this property to `120`.\n\nThis property is **optional.** The default value is `720` (30 days)."
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Set this metadata to help your application identify the web form instance. The default value is `[]`. \n\nExample value: `[\"Client A\", \"Agreement Category B\"]`\n\nThis property is **optional.**",
+                    "maxLength": 50,
+                    "example": [
+                        "loan_application",
+                        "finance_dept"
+                    ]
+                }
+            },
+            "x-ds-definition-name": "CreateInstanceRequestBody",
+            "x-ms-summary": "The request body for the `Instances::createInstance` endpoint."
+        },
+        "WebFormInstanceMetadata": {
+            "description": "Metadata associated with the web form instance.",
+            "type": "object",
+            "required": [
+                "expirationDateTime",
+                "createdBy",
+                "createdDateTime"
+            ],
+            "properties": {
+                "expirationDateTime": {
+                    "$ref": "#/definitions/ExpirationDateTime",
+                    "description": "The DateTime after which the web form instance will be inaccessible."
+                },
+                "createdDateTime": {
+                    "$ref": "#/definitions/CreatedDateTime",
+                    "description": "The DateTime at which the web form instance was created."
+                },
+                "createdBy": {
+                    "description": "The user that created the web form instance.",
+                    "$ref": "#/definitions/WebFormUserInfo"
+                },
+                "lastModifiedDateTime": {
+                    "$ref": "#/definitions/LastModifiedDateTime",
+                    "description": "The DateTime at which the web form instance was last modified."
+                },
+                "lastModifiedBy": {
+                    "description": "The user who last modified the web form instance.",
+                    "$ref": "#/definitions/WebFormUserInfo"
+                }
+            },
+            "example": {
+                "expirationDateTime": "2023-08-16T10:30:00Z",
+                "createdBy": {
+                    "userId": "00000000-0000-0000-0000-000000000000",
+                    "userName": "DocuSign User"
+                },
+                "createdDateTime": "2023-08-15T10:30:00Z",
+                "lastModifiedBy": {
+                    "userId": "00000000-0000-0000-0000-000000000000",
+                    "userName": "DocuSign User"
+                },
+                "lastModifiedDateTime": "2023-08-15T20:30:00Z"
+            },
+            "x-ds-definition-name": "WebFormInstanceMetadata",
+            "x-ms-summary": "Metadata associated with the web form instance."
+        },
+        "WebFormInstanceList": {
+            "description": "A list of web form instance items.",
+            "type": "object",
+            "properties": {
+                "items": {
+                    "description": "Array of web form instance items.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/WebFormInstance"
+                    }
+                }
+            },
+            "x-ds-definition-name": "WebFormInstanceList",
+            "x-ms-summary": "A list of web form instance items."
+        },
+        "WebFormInstance": {
+            "type": "object",
+            "description": "An object that contains the instance url required to render the webform instance and its metadata such as created by, created time",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "formUrl": {
+                    "$ref": "#/definitions/FormUrl",
+                    "description": "The base URL to render the web form instance. This value is the same for every instance created from the same configuration."
+                },
+                "instanceToken": {
+                    "$ref": "#/definitions/InstanceToken",
+                    "description": "The instance token for the web form instance. To obtain the secure URL for your web form instance, append this value to the `formUrl` value in the following format:\n`https://[formUrl]#instanceToken=[instanceToken]`\n\nThe token expires after five minutes. To get a new token, call the [refreshToken](/docs/webforms-api/reference/webforms/instances/refreshtoken/) endpoint."
+                },
+                "tokenExpirationDateTime": {
+                    "$ref": "#/definitions/TokenExpirationDateTime",
+                    "description": "The DateTime after which the token expires."
+                },
+                "id": {
+                    "$ref": "#/definitions/InstanceId",
+                    "description": "The unique ID of the web form instance."
+                },
+                "formId": {
+                    "description": "The ID of the form configuration from which the form instance was created.",
+                    "$ref": "#/definitions/WebFormId"
+                },
+                "accountId": {
+                    "$ref": "#/definitions/AccountId",
+                    "description": "The account ID GUID."
+                },
+                "clientUserId": {
+                    "$ref": "#/definitions/ClientUserId",
+                    "description": "A unique identifier for a user from the client's system."
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Metadata to help your application identify the web form instance.\n\nExample: `[\"Client A\", \"Agreement Category B\"]`",
+                    "maxLength": 50,
+                    "example": [
+                        "loan_application",
+                        "finance_dept"
+                    ]
+                },
+                "status": {
+                    "$ref": "#/definitions/InstanceStatus",
+                    "description": "The status of the web form instance. Valid values:\n\n* `INITIATED`: The web form instance is accessible and can be opened until it is submitted or expires.\n* `SUBMITTED`: The instance has been submitted and cannot be opened again.\n* `EXPIRED`: The instance has expired.\n* `FAILED`"
+                },
+                "envelopes": {
+                    "description": "The associated envelope that is created when the instance is submitted",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "$ref": "#/definitions/EnvelopeId"
+                            }
+                        }
+                    }
+                },
+                "instanceMetadata": {
+                    "$ref": "#/definitions/WebFormInstanceMetadata",
+                    "description": "Metadata associated with the web form instance."
+                },
+                "formValues": {
+                    "$ref": "#/definitions/WebFormValues",
+                    "description": "Key-value pairs used to prefill fields in the web form instance. The keys correspond to the values of the `publishedComponentNames` object on the `WebForm` (configuration) object.\n\nExample:\n```\n{\n    \"Signer_name\": \"Francis Beagle\",\n    \"Signer_email\": \"francis@example.com\"\n}\n```"
+                }
+            },
+            "x-ds-definition-name": "WebFormInstance",
+            "x-ms-summary": "An object that contains the instance url required to render the webform instance and its metadata such as created by, created time"
+        },
+        "WebFormSummaryList": {
+            "description": "A list of zero or more paginated web form summary items.",
+            "type": "object",
+            "properties": {
+                "items": {
+                    "description": "A list of objects describing individual web form configurations.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/WebFormSummary"
+                    }
+                },
+                "resultSetSize": {
+                    "description": "The number of web form configurations returned for the current page.",
+                    "type": "number",
+                    "example": 1
+                },
+                "totalSetSize": {
+                    "description": "The total number of web form configurations.",
+                    "type": "number",
+                    "example": 1
+                },
+                "startPosition": {
+                    "description": "The starting index position of the current result set.",
+                    "type": "number",
+                    "example": 1
+                },
+                "endPosition": {
+                    "description": "The last index position in the result set.",
+                    "type": "number",
+                    "example": 1
+                },
+                "nextUrl": {
+                    "description": "The URI for the next chunk of web form configurations. It is an empty string if this is the last set of results.",
+                    "type": "string"
+                },
+                "previousUrl": {
+                    "description": "The URI for the previous chunk of web form configurations. It is an empty string if this is the first set of results.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "WebFormSummaryList",
+            "x-ms-summary": "A list of zero or more paginated web form summary items."
+        },
+        "WebFormSummary": {
+            "type": "object",
+            "description": "An object summarizing a web form configuration.",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/WebFormId",
+                    "description": "The ID of the web form."
+                },
+                "accountId": {
+                    "$ref": "#/definitions/AccountId",
+                    "description": "The ID of the account to which the web form belongs."
+                },
+                "isPublished": {
+                    "description": "Whether the form is published (`true` or `false`).",
+                    "type": "boolean",
+                    "example": true
+                },
+                "isEnabled": {
+                    "description": "When `true`, the web form configuration is activated. You can only create web form instances from enabled web forms.",
+                    "type": "boolean",
+                    "example": true
+                },
+                "hasDraftChanges": {
+                    "description": "When `true`, the web form configuration has changes that are not yet published.",
+                    "type": "boolean",
+                    "example": true
+                },
+                "formState": {
+                    "$ref": "#/definitions/WebFormState",
+                    "description": "The state of the web form configuration. Valid values:\n\n* `active`\n* `draft`"
+                },
+                "formProperties": {
+                    "$ref": "#/definitions/WebFormProperties",
+                    "description": "Properties of the web form configuration that are consistent across versions."
+                },
+                "formMetadata": {
+                    "$ref": "#/definitions/WebFormMetadata",
+                    "description": "Metadata for the web form configuration."
+                }
+            },
+            "x-ds-definition-name": "WebFormSummary",
+            "x-ms-summary": "An object summarizing a web form configuration."
+        },
+        "WebForm": {
+            "type": "object",
+            "description": "A web form configuration.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/WebFormSummary"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "versionId": {
+                            "$ref": "#/definitions/WebFormVersionId"
+                        },
+                        "formContent": {
+                            "$ref": "#/definitions/WebFormContent"
+                        }
+                    }
+                }
+            ],
+            "x-ds-definition-name": "WebForm",
+            "x-ms-summary": "A web form configuration."
+        },
+        "WebFormValues": {
+            "type": "object",
+            "description": "Key-value pairs of data used to create a form instance.",
+            "additionalProperties": {},
+            "example": {
+                "Textbox_Name": "First Last",
+                "Email_primary": "example@example.com",
+                "Date_birth": "2020-01-01",
+                "Number_age": 52,
+                "Select_state": "California",
+                "Radio_Gender": "Female",
+                "Checkbox_hobbies": [
+                    "singing",
+                    "dancing"
+                ]
+            },
+            "x-ds-definition-name": "WebFormValues",
+            "x-ms-summary": "Key-value pairs of data used to create a form instance."
+        },
+        "WebFormState": {
+            "type": "string",
+            "description": "The state of the form content",
+            "enum": [
+                "active",
+                "draft"
+            ],
+            "example": "active",
+            "maxLength": 15,
+            "x-ds-definition-name": "WebFormState",
+            "x-ms-summary": "The state of the form content"
+        },
+        "WebFormVersionId": {
+            "type": "integer",
+            "description": "Identifier for the version that can be used for display and retrieval in the API",
+            "example": 1,
+            "x-ds-definition-name": "WebFormVersionId",
+            "x-ms-summary": "Identifier for the version that can be used for display and retrieval in the API"
+        },
+        "WebFormProperties": {
+            "type": "object",
+            "description": "Properties of the web form configuration that are consistent across versions.",
+            "properties": {
+                "name": {
+                    "$ref": "#/definitions/WebFormName",
+                    "description": "The name of the web form. The maximum length is 150 characters."
+                },
+                "isPrivateAccess": {
+                    "$ref": "#/definitions/IsPrivateAccess",
+                    "description": "When `true`, a valid instance token is required to access the instance via its URL. "
+                }
+            },
+            "x-ds-definition-name": "WebFormProperties",
+            "x-ms-summary": "Properties of the web form configuration that are consistent across versions."
+        },
+        "WebFormName": {
+            "type": "string",
+            "example": "Patient Intake Forms",
+            "maxLength": 150,
+            "description": "User friendly Form name. This can be set via UI and/or API.",
+            "x-ds-definition-name": "WebFormName",
+            "x-ms-summary": "User friendly Form name. This can be set via UI and/or API."
+        },
+        "BrandId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Brand Id for web form",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "x-ds-definition-name": "BrandId",
+            "x-ms-summary": "Brand Id for web form"
+        },
+        "IsPrivateAccess": {
+            "type": "boolean",
+            "description": "When a form is private, the Player will not be accessible via its URL unless a valid instance token is provided",
+            "example": true,
+            "x-ds-definition-name": "IsPrivateAccess",
+            "x-ms-summary": "When a form is private, the Player will not be accessible via its URL unless a valid instance token is provided"
+        },
+        "WebFormComponentType": {
+            "type": "string",
+            "description": "Type of components used in the web form",
+            "enum": [
+                "CheckboxGroup",
+                "Date",
+                "Email",
+                "Number",
+                "RadioButtonGroup",
+                "Select",
+                "TextBox"
+            ],
+            "example": "CheckboxGroup",
+            "x-ds-definition-name": "WebFormComponentType",
+            "x-ms-summary": "Type of components used in the web form"
+        },
+        "WebFormContent": {
+            "type": "object",
+            "description": "Container for the components map and future form data",
+            "properties": {
+                "components": {
+                    "description": "A key-value dictionary of components representing the form. Each component object contains the following strings:\n* `componentKey`: the type of component this object represents (max 100 characters)\n* `componentName`: the name used to map the component to external sources (max 100 characters)\n\nExample:\n```\n{\n  \"components\": {\n    \"Root_Of_Journey\": {\n      \"componentKey\": \"Root_Of_Journey\",\n      \"componentType\": \"Root\",\n      \"children\": [\n        \"Step_abc123\"\n      ]\n    },\n    \"TextBox_ABC123\": {\n      \"componentKey\": \"TextBox_ABC123\",\n      \"componentType\": \"TextBox\",\n      \"component_name\": \"FullName\",\n      \"maxLength\": 100,\n      \"multiLine\": false,\n      \"placeholder\": \"Francis Beagle\",\n      \"required\": true\n    },\n    \"Step_abc123\": {\n      \"componentKey\": \"Step_abc123\",\n      \"componentType\": \"Step\",\n      \"componentName\": \"Step_abc123\",\n      \"text\": \"New patient data\"\n    }\n  }\n}\n```",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "description": "Each component type contains additional properties",
+                        "required": [
+                            "componentKey",
+                            "componentType"
+                        ],
+                        "properties": {
+                            "componentKey": {
+                                "description": "The unique key of the component",
+                                "type": "string",
+                                "maxLength": 100,
+                                "example": "Checkbox_ABC123"
+                            },
+                            "componentType": {
+                                "description": "The type of component this object represents",
+                                "type": "string",
+                                "maxLength": 100,
+                                "example": "Checkbox"
+                            },
+                            "componentName": {
+                                "description": "Name value that is used for mapping components to external sources",
+                                "type": "string",
+                                "maxLength": 100,
+                                "example": "Country_Code"
+                            }
+                        },
+                        "additionalProperties": {}
+                    },
+                    "example": {
+                        "Root_Of_Journey": {
+                            "componentKey": "Root_Of_Journey",
+                            "componentType": "Root",
+                            "children": [
+                                "Step_abc123"
+                            ]
+                        },
+                        "TextBox_ABC123": {
+                            "componentKey": "TextBox_ABC123",
+                            "componentType": "TextBox",
+                            "componentName": "Full_Name",
+                            "label": "Full Name",
+                            "maxLength": 100,
+                            "multiLine": false,
+                            "placeholder": "John Adams",
+                            "required": true
+                        },
+                        "Step_abc123": {
+                            "componentKey": "Step_abc123",
+                            "componentType": "Step",
+                            "componentName": "Step_abc123",
+                            "text": "Patient Demographics"
+                        }
+                    }
+                },
+                "isStandalone": {
+                    "$ref": "#/definitions/IsStandalone",
+                    "description": "When `true`, the form is [stand-alone (not tied to a template)](https://support.docusign.com/s/document-item?bundleId=yff1696971835267&topicId=gua1698120920620.html)."
+                },
+                "brandId": {
+                    "$ref": "#/definitions/BrandId",
+                    "description": "The ID of the brand associated with the web form configuration."
+                },
+                "templates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TemplateProperties"
+                    },
+                    "description": "Information about the template used to create the web form configuration. If the web form is stand-alone, this property is an empty array.\n"
+                }
+            },
+            "x-ds-definition-name": "WebFormContent",
+            "x-ms-summary": "Container for the components map and future form data"
+        },
+        "TemplateProperties": {
+            "type": "object",
+            "description": "Information about the template used to create the web form configuration.",
+            "properties": {
+                "originalTemplateId": {
+                    "description": "The ID of the original template used to create the web form configuration. ",
+                    "$ref": "#/definitions/Guid"
+                },
+                "clonedTemplateId": {
+                    "description": "The ID of the cloned template used to create the web form configuration. The original template is cloned when the web form is created, so any future modifications do not affect the web form.\n",
+                    "$ref": "#/definitions/Guid"
+                },
+                "importedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The DateTime at which the template information was assigned to the web form configuration."
+                },
+                "recipientIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "An array of recipient IDs mapped by the template.\n\nExample: `[\"12345678\", \"23456789\"]`"
+                }
+            },
+            "example": {
+                "originalTemplateId": "00000000-0000-0000-0000-000000000000",
+                "clonedTemplateId": "00000000-0000-0000-0000-000000000000",
+                "importDateTime": "2021-09-01T10:30:00Z",
+                "recipientIds": [
+                    "00000000",
+                    "00000001"
+                ]
+            },
+            "x-ds-definition-name": "TemplateProperties",
+            "x-ms-summary": "Information about the template used to create the web form configuration."
+        },
+        "WebFormMetadata": {
+            "description": "Metadata for the web form.\n",
+            "type": "object",
+            "properties": {
+                "source": {
+                    "description": "The source from which the web form was created. Valid values:\n\n* `upload`\n* `templates`\n* `blank`",
+                    "$ref": "#/definitions/WebFormSource"
+                },
+                "owner": {
+                    "description": "The owner of the web form configuration. This can be the creator of the web form or another user who has received transferred ownership.",
+                    "$ref": "#/definitions/WebFormUserInfo"
+                },
+                "sender": {
+                    "description": "The eSignature sender who authorizes the web form. You can [change the sender via the UI](https://support.docusign.com/s/document-item?language=en_US&bundleId=gmi1660583110357&topicId=ngb1680555719338.html).",
+                    "$ref": "#/definitions/WebFormUserInfo"
+                },
+                "lastModifiedBy": {
+                    "description": "The user who last modified the web form.",
+                    "$ref": "#/definitions/WebFormUserInfo"
+                },
+                "formContentModifiedBy": {
+                    "description": "The user that last modified the form content.",
+                    "$ref": "#/definitions/WebFormUserInfo"
+                },
+                "formPropertiesModifiedBy": {
+                    "description": "The user that last modified the form properties.",
+                    "$ref": "#/definitions/WebFormUserInfo"
+                },
+                "lastPublishedBy": {
+                    "description": "The user who last published a draft of the web form.",
+                    "$ref": "#/definitions/WebFormUserInfo"
+                },
+                "lastEnabledBy": {
+                    "description": "The user who last enabled the web form.",
+                    "$ref": "#/definitions/WebFormUserInfo"
+                },
+                "lastDisabledBy": {
+                    "description": "The user who last unpublished the web form.\n",
+                    "$ref": "#/definitions/WebFormUserInfo"
+                },
+                "archivedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The UTC DateTime when the web form was last archived."
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The UTC DateTime when the web form was created."
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The UTC DateTime when the web form was last modified."
+                },
+                "formContentModifiedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The UTC DateTime when the web form content was last modified."
+                },
+                "formPropertiesModifiedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The UTC DateTime when the web form properties were last changed."
+                },
+                "lastPublishedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The UTC DateTime when a draft version was last published to active."
+                },
+                "lastEnabledDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The UTC DateTime when the form was last enabled."
+                },
+                "lastDisabledDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The UTC DateTime when the form was last disabled."
+                },
+                "lastSenderConsentDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The most recent UTC DateTime that a user added their consent to [become a sender](https://support.docusign.com/s/document-item?language=en_US&bundleId=gmi1660583110357&topicId=ngb1680555719338.html) for the form."
+                },
+                "publishedSlug": {
+                    "type": "string",
+                    "example": "BFS6Zw9QxKnerieBsgRyif",
+                    "description": "A string that identifies the web form when made public. This value is consistent throughout the lifetime of the web form."
+                },
+                "publishedComponentNames": {
+                    "description": "Dictionary containing mapping of componentName to ADM type for all the published components",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/WebFormComponentType"
+                    }
+                }
+            },
+            "example": {
+                "source": "template",
+                "owner": {
+                    "userId": "00000000-0000-0000-0000-000000000000",
+                    "userName": "DocuSign User"
+                },
+                "sender": {
+                    "userId": "00000000-0000-0000-0000-000000000000",
+                    "userName": "Sam Sender"
+                },
+                "formContentModifiedBy": {
+                    "userId": "00000000-0000-0000-0000-000000000000",
+                    "userName": "Mary Modifier"
+                },
+                "formPropertiesModifiedBy": {
+                    "userId": "00000000-0000-0000-0000-000000000000",
+                    "userName": "Fred Modifier"
+                },
+                "lastPublishedBy": {
+                    "userId": "00000000-0000-0000-0000-000000000000",
+                    "userName": "Pam Publisher"
+                },
+                "lastEnabledBy": {
+                    "userId": "00000000-0000-0000-0000-000000000000",
+                    "userName": "Everly Enabler"
+                },
+                "lastDisabledBy": {
+                    "userId": "00000000-0000-0000-0000-000000000000",
+                    "userName": "Dan Disabler"
+                },
+                "archivedDateTime": "2022-01-01T10:30:00Z",
+                "createdDateTime": "2021-09-01T10:30:00Z",
+                "lastModifiedDateTime": "2021-09-01T10:30:00Z",
+                "formContentModifiedDateTime": "2021-09-01T10:30:00Z",
+                "formPropertiesModifiedDateTime": "2021-09-01T10:30:00Z",
+                "lastPublishedDateTime": "2021-09-01T10:30:00Z",
+                "lastEnabledDateTime": "2021-09-01T10:30:00Z",
+                "lastDisabledDateTime": "2021-09-01T10:30:00Z",
+                "lastSenderConsentDateTime": "2021-09-01T10:30:00Z",
+                "publishedSlug": "a535041793dd266079763bbf1c965292"
+            },
+            "x-ds-definition-name": "WebFormMetadata",
+            "x-ms-summary": "Metadata for the web form.\n"
+        },
+        "HttpSuccess": {
+            "description": "A simple response indicating success when no extra data is needed",
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "HttpSuccess",
+            "x-ms-summary": "A simple response indicating success when no extra data is needed"
+        },
+        "HttpError": {
+            "description": "An error occurred processing a request.",
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "type": "string",
+                    "description": "A code indicating what error occurred. Possible values:\n\n* 400: Bad request\n* 401: Authentication information is missing or invalid\n* 403: Requestor not authorized\n* 404: Resource not found\n* 500: Internal server error\n* 503: Service is temporarily unavailable"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "A human-readable description of the error."
+                }
+            },
+            "x-ds-definition-name": "HttpError",
+            "x-ms-summary": "An error occurred processing a request."
+        },
+        "Instances": {
+            "x-ds-category": "WebForms",
+            "x-ms-summary": "Methods to create and get secure instances of a web form.",
+            "description": "Methods to create and get secure instances of a web form."
+        },
+        "Configurations": {
+            "description": "Methods to get web form configurations.\n",
+            "type": "object",
+            "properties": {
+                "items": {
+                    "description": "List of web form summary items",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/WebFormSummary"
+                    }
+                },
+                "resultSetSize": {
+                    "description": "Result set size for current page",
+                    "type": "number",
+                    "example": 1
+                },
+                "totalSetSize": {
+                    "description": "Total result set size",
+                    "type": "number",
+                    "example": 1
+                },
+                "startPosition": {
+                    "description": "Starting position of fields returned for the current page",
+                    "type": "number",
+                    "example": 1
+                },
+                "endPosition": {
+                    "description": "Ending position of fields returned for the current page",
+                    "type": "number",
+                    "example": 1
+                },
+                "nextUrl": {
+                    "description": "Url for the next page of results",
+                    "type": "string"
+                },
+                "previousUrl": {
+                    "description": "Url for the previous page of results",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "WebFormSummaryList",
+            "x-ds-category": "WebForms",
+            "x-ds-order": "100",
+            "x-ms-summary": "Methods to get web form configurations.\n"
+        }
+    },
+    "externalDocs": {
+        "description": "Web Forms API Documentation",
+        "url": "https://developers.docusign.com/docs/web-forms-api/"
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "tags": [
+        {
+            "name": "Instances",
+            "description": "<ds-inlinemessage>The Web Forms API is available in all developer accounts, but only in certain production account plans. Contact \n[Docusign Support](https://support.docusign.com/s/?language=en_US) or your account manager to find out whether the Web Forms API is available for your production account plan.</ds-inlinemessage>\n\nMethods to create and retrieve instances of a web form. Each instance is secure and unique to a user session."
+        },
+        {
+            "name": "Configurations",
+            "description": "<ds-inlinemessage>The Web Forms API is available in all developer accounts, but only in certain production account plans. Contact \n[Docusign Support](https://support.docusign.com/s/?language=en_US) or your account manager to find out whether the Web Forms API is available for your production account plan.</ds-inlinemessage>\n\nA web form configuration is a definition that you can use to create many instances. To create a web form configuration, use the [Web Forms Builder](https://support.docusign.com/s/document-item?language=en_US&bundleId=gmi1660583110357&topicId=gpc1660591510274.html). These methods enable you to get data about one or multiple web form configurations."
+        }
+    ],
+    "x-ds-categories": [
+        {
+            "name": "WebForms",
+            "summary": "Methods for working with web forms.",
+            "description": "<ds-inlinemessage>The Web Forms API is available in all developer accounts, but only in certain production account plans. Contact \n[DocuSign Support](https://support.docusign.com/s/?language=en_US) or your account manager to find out whether the Web Forms API is available for your production account plan.</ds-inlinemessage>\n\nMethods for working with web forms."
+        }
+    ]
+}
