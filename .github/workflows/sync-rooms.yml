@@ -1,0 +1,32 @@
+name: Postman API Integration for Rooms
+
+on:
+  push:
+     branches:
+      - main  
+     paths:
+      - './rooms.rest.swagger-v2.json'
+
+jobs:
+  upload-swagger:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Send Swagger Spec to Postman API Rooms
+      env:
+        POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+      run: |
+        SWAGGER_FILE="./rooms.rest.swagger-v2.json"
+        API_ID=${{vars.API_ID}}
+        SCHEMA_ID=${{vars.DEFINITION_ID}}
+        FILE_PATH="rooms/schema.json"
+        
+        CONTENT=$(jq -Rs . < ${SWAGGER_FILE})
+        curl --location --request PUT "https://api.getpostman.com/apis/$API_ID/schemas/$SCHEMA_ID/files/$FILE_PATH" \
+        --header "Accept: application/vnd.api.v10+json" \
+        --header "Content-Type: application/json" \
+        --header "X-Api-Key: $POSTMAN_API_KEY" \
+        --data "{\"content\": ${CONTENT}}"
