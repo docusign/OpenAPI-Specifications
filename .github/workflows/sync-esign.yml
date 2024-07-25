@@ -20,9 +20,9 @@ jobs:
         POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
       run: |
         SWAGGER_FILE="./esignature.rest.swagger-v2.1.json"
-        API_ID=${{vars.API_ID}}
-        SCHEMA_ID=${{vars.DEFINITION_ID}}
-        FILE_PATH="esignature/schema.json"
+        API_ID=${{vars.ESIGN_API_ID}}
+        SCHEMA_ID=${{vars.ESIGN_DEFINITION_ID}}
+        FILE_PATH="index.json"
         
         CONTENT=$(jq -Rs . < ${SWAGGER_FILE})
         curl --location --request PUT "https://api.getpostman.com/apis/$API_ID/schemas/$SCHEMA_ID/files/$FILE_PATH" \

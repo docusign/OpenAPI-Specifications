@@ -20,9 +20,9 @@ jobs:
         POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
       run: |
         SWAGGER_FILE="./monitor.rest.swagger-v2.0.json"
-        API_ID=${{vars.API_ID}}
-        SCHEMA_ID=${{vars.DEFINITION_ID}}
-        FILE_PATH="monitor/schema.json"
+        API_ID=${{vars.MONITOR_API_ID}}
+        SCHEMA_ID=${{vars.MONITOR_DEFINITION_ID}}
+        FILE_PATH="index.json"
         
         CONTENT=$(jq -Rs . < ${SWAGGER_FILE})
         curl --location --request PUT "https://api.getpostman.com/apis/$API_ID/schemas/$SCHEMA_ID/files/$FILE_PATH" \
