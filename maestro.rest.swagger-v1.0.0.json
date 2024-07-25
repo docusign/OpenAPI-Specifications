@@ -2436,7 +2436,7 @@
             "x-ms-summary": ""
         },
         "ESignDocuments": {
-            "description": "ESignDocument Object. This object should be any of the following object models: [#/definitions/ESignDocumentFromPreviousStep, #/definitions/ESignDocumentFromESignTemplate]",
+            "description": "ESignDocument Object. This object should be any of the following object models: [#/definitions/ESignDocumentFromPreviousStep, #/definitions/ESignDocumentFromESignTemplate] ",
             "x-ds-definition-name": "ESignDocuments",
             "x-ms-summary": "ESignDocument Object. This object should be any of the following object models: [#/definitions/ESignDocumentFromPreviousStep, #/definitions/ESignDocumentFromESignTemplate]"
         },
