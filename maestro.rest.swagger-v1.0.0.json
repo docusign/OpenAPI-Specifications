@@ -6,7 +6,7 @@
             "email": "devcenter@docusign.com",
             "url": "https://developers.docusign.com/"
         },
-        "description": "Maestro authors and executes experiences that allow non-coders the ability to define Simple Business Process without having to write code and to deploy them seamlessly without having to have development expertise",
+        "description": "Maestro authors and executes experiences that allow non-coders the ability to define Simple Business Process without having to write code and to deploy them seamlessly without having to have development expertise ",
         "termsOfService": "https://www.docusign.com/company/terms-and-conditions/web",
         "title": "Maestro API",
         "version": "1.0.0"
