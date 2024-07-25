@@ -5,7 +5,7 @@ on:
      branches:
       - master
      paths:
-      - './rooms.rest.swagger-v2.json'
+      - 'rooms.rest.swagger-v2.json'
 
 jobs:
   upload-swagger:

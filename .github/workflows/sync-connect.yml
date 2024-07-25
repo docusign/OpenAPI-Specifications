@@ -5,7 +5,7 @@ on:
      branches:
       - master 
      paths:
-      - './connect.schema-v2.json'
+      - 'connect.schema-v2.json'
 
 jobs:
   upload-swagger:
