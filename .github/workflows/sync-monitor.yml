@@ -3,7 +3,7 @@ name: Postman API Integration for Monitor
 on:
   push:
      branches:
-      - main  
+      - master
      paths:
       - './monitor.rest.swagger-v2.0.json'
 

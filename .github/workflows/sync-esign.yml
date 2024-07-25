@@ -3,7 +3,7 @@ name: Postman API Integration for ESign
 on:
   push:
      branches:
-      - main  
+      - master
      paths:
       - './esignature.rest.swagger-v2.1.json'
 
