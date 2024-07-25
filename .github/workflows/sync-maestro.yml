@@ -5,7 +5,7 @@ on:
      branches:
       - master
      paths:
-      - './maestro.rest.swagger-v1.0.0.json'
+      - 'maestro.rest.swagger-v1.0.0.json'
 
 jobs:
   upload-swagger:

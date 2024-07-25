@@ -5,7 +5,7 @@ on:
      branches:
       - master
      paths:
-      - './esignature.rest.swagger-v2.1.json'
+      - 'esignature.rest.swagger-v2.1.json'
 
 jobs:
   upload-swagger:
