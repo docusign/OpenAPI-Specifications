@@ -3,7 +3,7 @@ name: Postman API Integration for Click
 on:
   push:
      branches:
-      - main  
+      - master
      paths:
       - './click.rest.swagger-v1.json'
 

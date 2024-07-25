@@ -3,7 +3,7 @@ name: Postman API Integration for Rooms
 on:
   push:
      branches:
-      - main  
+      - master
      paths:
       - './rooms.rest.swagger-v2.json'
 

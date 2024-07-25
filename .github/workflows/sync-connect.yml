@@ -3,7 +3,7 @@ name: Postman API Integration for Connect
 on:
   push:
      branches:
-      - main  
+      - master 
      paths:
       - './connect.schema-v2.json'
 

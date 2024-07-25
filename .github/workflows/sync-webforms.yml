@@ -3,7 +3,7 @@ name: Postman API Integration for Webforms
 on:
   push:
      branches:
-      - main  
+      - master
      paths:
       - './webforms.rest.swagger-v1.1.0.json'
 
