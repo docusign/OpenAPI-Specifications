@@ -24,9 +24,18 @@ jobs:
         SCHEMA_ID=${{vars.ROOMS_DEFINITION_ID}}
         FILE_PATH="index.json"
         
-        CONTENT=$(jq -Rs . < ${SWAGGER_FILE})
+        # Read the Swagger file content and escape it properly for JSON
+        CONTENT=$(cat "$SWAGGER_FILE" | jq -Rs .)
+
+        # Create the JSON payload with the file content as a string
+        JSON_PAYLOAD="{\"content\": $CONTENT}"
+
+        # Write the JSON payload to a temporary file
+        echo "$JSON_PAYLOAD" > payload.json
+
+        # Use curl with --data-binary to handle large file content
         curl --location --request PUT "https://api.getpostman.com/apis/$API_ID/schemas/$SCHEMA_ID/files/$FILE_PATH" \
-        --header "Accept: application/vnd.api.v10+json" \
-        --header "Content-Type: application/json" \
-        --header "X-Api-Key: $POSTMAN_API_KEY" \
-        --data "{\"content\": ${CONTENT}}"
+             --header "Accept: application/vnd.api.v10+json" \
+             --header "Content-Type: application/json" \
+             --header "X-Api-Key: $POSTMAN_API_KEY" \
+             --data-binary @payload.json
