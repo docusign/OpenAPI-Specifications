@@ -2,10 +2,10 @@
     "swagger": "2.0",
     "info": {
         "version": "v2.1",
-        "title": "DocuSign Admin API",
+        "title": "Docusign Admin API",
         "description": "An API for an organization administrator to manage organizations, accounts and users",
         "contact": {
-            "name": "DocuSign Developer Center",
+            "name": "Docusign Developer Center",
             "url": "https://developers.docusign.com",
             "email": "devcenter@docusign.com"
         },
@@ -23,7 +23,7 @@
         "application/json"
     ],
     "externalDocs": {
-        "description": "See the DocuSign DocuSign Admin API Guide for more information.",
+        "description": "See the Docusign Admin API Guide for more information.",
         "url": "https://developers.docusign.com/docs/admin-api/reference"
     },
     "paths": {
@@ -33,7 +33,7 @@
                     "Organization"
                 ],
                 "summary": "Returns a list of organizations that the authenticated user belongs to.",
-                "description": "Returns a list of organizations that the authenticated user belongs to.\n\nNote that the DocuSign Admin API only returns JSON, not XML.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `organization_read`.\n\nThis method requires user authentication. It will fail with an [application access token](/docs/admin-api/admin101/application-auth/).",
+                "description": "Returns a list of organizations that the authenticated user belongs to.\n\nNote that the Docusign Admin API only returns JSON, not XML.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `organization_read`.\n\nThis method requires user authentication. It will fail with an [application access token](/docs/admin-api/admin101/application-auth/).",
                 "operationId": "Organization_Organization_GetListV2",
                 "produces": [
                     "application/json"
@@ -74,7 +74,7 @@
                     "DataDeletion"
                 ],
                 "summary": "Deletes membership data for a user on an account.",
-                "description": "Deletes the data for a single account membership for a specified user.\n\nTo call this endpoint: \n* You must be an administrator (or delegated administrator) of the specified account.\n* The user must have been closed for at least 24 hours.\n\n**Note:** After a user's data is deleted for every account to which they belong, their user-level data will automatically be deleted.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_data_redact`.\n",
+                "description": "Deletes the data for a single account membership for a specified user.\n\nTo call this endpoint: \n* You must be an administrator (or delegated administrator) of the specified account.\n* The user must have been closed for at least 24 hours.\n\n**Note:** After a user's data is deleted for every account to which they belong, their user-level data will automatically be deleted.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_data_redact`.\n\n### Related topics\n\n- [How to delete user data from an account as an account admin](/docs/admin-api/how-to/account-admin-delete-user-data/)\n",
                 "operationId": "DataRedaction_RedactIndividualMembershipData",
                 "consumes": [
                     "application/json"
@@ -128,7 +128,7 @@
                     "eSignUserManagement"
                 ],
                 "summary": "Returns the list of permission profiles in an account.",
-                "description": "Returns the list of permission profiles in an account.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `permission_read`.\n\n",
+                "description": "Returns the list of permission profiles in an account.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `permission_read`.\n\n\n### Related topics\n\n- [How to create a new active eSignature user](/docs/admin-api/how-to/create-active-user/)\n",
                 "operationId": "Account_Accounts_GetPermissionProfilesV2",
                 "produces": [
                     "application/json"
@@ -178,7 +178,7 @@
                     "eSignUserManagement"
                 ],
                 "summary": "Returns the list of groups in an account.",
-                "description": "Returns the list of groups in an account.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `group_read`.\n",
+                "description": "Returns the list of groups in an account.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `group_read`.\n\n\n\n### Related topics\n\n- [How to create a new active eSignature user](/docs/admin-api/how-to/create-active-user/)",
                 "operationId": "Account_Accounts_GetGroupsV2",
                 "produces": [
                     "application/json"
@@ -292,7 +292,7 @@
                     "UserExport"
                 ],
                 "summary": "Creates a user list export request.",
-                "description": "Create a user list export request.\n\nThis method initiates a user list export request. You specify the type of export request as JSON in the body of method, like this:\n\n``` json\n{\n\t\"type\": \"organization_memberships_export\"\n}\n```\n\nThe export request type is one of three values:\n\n| Value                                      | Description                                                                                             |\n| :----------------------------------------- | :------------------------------------------------------------------------------------------------------ |\n| `organization_memberships_export`          | Every user in every account in the organization. Users in multiple accounts will appear more than once. |\n| `organization_domain_users_export`         | All users of the reserved domains.                                                                      |\n| `organization_external_memberships_export` | Users whose email address domain is *not* linked to the organization.                                   |\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_read`.",
+                "description": "Create a user list export request.\n\nThis method initiates a user list export request. You specify the type of export request as JSON in the body of method, like this:\n\n``` json\n{\n\t\"type\": \"organization_memberships_export\"\n}\n```\n\nThe export request type is one of three values:\n\n| Value                                      | Description                                                                                             |\n| :----------------------------------------- | :------------------------------------------------------------------------------------------------------ |\n| `organization_memberships_export`          | Every user in every account in the organization. Users in multiple accounts will appear more than once. |\n| `organization_domain_users_export`         | All users of the reserved domains.                                                                      |\n| `organization_external_memberships_export` | Users whose email address domain is *not* linked to the organization.                                   |\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_read`.\n\n### Next steps\n* See [how this endpoint is used to bulk export user data](/docs/admin-api/how-to/bulk-export-users/).",
                 "operationId": "OrganizationExport_OrganizationExport_Insert",
                 "consumes": [
                     "application/json"
@@ -386,7 +386,7 @@
                     "AccountSettingsExport"
                 ],
                 "summary": "Creates a  new account settings export request.",
-                "description": "Creates a new account settings export request.\n\nTo learn more about exporting account settings,\nsee [Account Settings Export][guide-export]\nin the DocuSign Admin Guide.\n\nYou can export settings for up to 40 accounts at a time.\n\nSpecify the accounts whose settings you are requesting as JSON in the body of the request, like this:\n\n``` json\n{\n  \"accounts\":\t[\n  \t{ \"account_id\": \"9ca037f4-xxxx-xxxx-xxxx-212e57d4f22e\"},\n  \t{ \"account_id\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\"}\n\n  ]\n}\n```\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `account_write`.\n\n### Related topics\n\n- [Account Settings import][guide-import] guide\n- [Account Settings Export][guide-export] guide\n\n\n[guide-import]: https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=nwl1583359167434.html\n[guide-export]: https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=kfj1583359164049.html",
+                "description": "Creates a new account settings export request.\n\nTo learn more about exporting account settings,\nsee [Account Settings Export][guide-export]\nin the Docusign Admin Guide.\n\nYou can export settings for up to 40 accounts at a time.\n\nSpecify the accounts whose settings you are requesting as JSON in the body of the request, like this:\n\n``` json\n{\n  \"accounts\":\t[\n  \t{ \"account_id\": \"9ca037f4-xxxx-xxxx-xxxx-212e57d4f22e\"},\n  \t{ \"account_id\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\"}\n\n  ]\n}\n```\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `account_write`.\n\n### Related topics\n\n- [Account Settings import][guide-import] guide\n- [Account Settings Export][guide-export] guide\n\n\n[guide-import]: https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=nwl1583359167434.html\n[guide-export]: https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=kfj1583359164049.html",
                 "operationId": "OrganizationExport_OrganizationExport_AccountCompare",
                 "consumes": [
                     "application/json"
@@ -440,7 +440,7 @@
                     "UserExport"
                 ],
                 "summary": "Returns the results for single user list export request.",
-                "description": "Returns the results for single user list export request.\n\nGiven an export ID, this method returns the results of a single user list export request.\nTo get a list of all the export requests, use `getUserListExports`.\n\nNote that the `metadata_url` property of the response from `createUserListExport` is a read-to-use HTTP GET request to get the status.\n\nThe results are available through a URL that\nyou can access through the `results` property of the response.\nFor example, to get the URL of the first result you might use\n`results[0].url`\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_read`.",
+                "description": "Returns the results for single user list export request.\n\nGiven an export ID, this method returns the results of a single user list export request.\nTo get a list of all the export requests, use `getUserListExports`.\n\nNote that the `metadata_url` property of the response from `createUserListExport` is a read-to-use HTTP GET request to get the status.\n\nThe results are available through a URL that\nyou can access through the `results` property of the response.\nFor example, to get the URL of the first result you might use\n`results[0].url`\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_read`.\n\n### Next steps\n* See [how this endpoint is used to bulk export user data](/docs/admin-api/how-to/bulk-export-users/).",
                 "operationId": "OrganizationExport_OrganizationExport_GetByExportId",
                 "produces": [
                     "application/json"
@@ -682,7 +682,7 @@
                     "AccountSettingsImport"
                 ],
                 "summary": "Creates a new account settings import request.",
-                "description": "Creates a new account settings import request.\n\nThe request for this method consists of\nthe contents of a CSV\nfile.\n\nYou can export your current settings as a CSV file with\n[AccountSettingsExport: createAccountSettingsExport](/docs/admin-api/reference/bulkoperations/accountsettingsexport/createaccountsettingsexport/)\nand use it as the basis\nof the changes you want to import.\n\n\nTo learn more about the format\nof a settings CSV file, see\n[Preparing a CSV for account settings import][guide-import]\nin the DocuSign Admin Guide.\n\nYou can import settings for up to 40 accounts at a time.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `account_write`.\n\n### Related topics\n\n- [Account Settings import][guide-import] guide\n- [Account Settings Export][guide-export] guide\n\n[guide-import]: https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=nwl1583359167434.html\n[guide-export]: https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=kfj1583359164049.html\n",
+                "description": "Creates a new account settings import request.\n\nThe request for this method consists of\nthe contents of a CSV\nfile.\n\nYou can export your current settings as a CSV file with\n[AccountSettingsExport: createAccountSettingsExport](/docs/admin-api/reference/bulkoperations/accountsettingsexport/createaccountsettingsexport/)\nand use it as the basis\nof the changes you want to import.\n\n\nTo learn more about the format\nof a settings CSV file, see\n[Preparing a CSV for account settings import][guide-import]\nin the Docusign Admin Guide.\n\nYou can import settings for up to 40 accounts at a time.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `account_write`.\n\n### Related topics\n\n- [Account Settings import][guide-import] guide\n- [Account Settings Export][guide-export] guide\n\n[guide-import]: https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=nwl1583359167434.html\n[guide-export]: https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=kfj1583359164049.html\n",
                 "operationId": "OrganizationImport_OrganizationImportAccountSettings_Post",
                 "consumes": [
                     "multipart/form-data"
@@ -838,7 +838,7 @@
                     "UserImport"
                 ],
                 "summary": "Creates a request to import new users into an account.",
-                "description": "Creates a request to import *new* users.\n\nYour CSV import file is made up of a header row with the column headers and a row of user or account data for each user you want to add to an account. Only new users can be imported. Any changes to existing users will be ignored. To make changes to existing users, use [UserImport:updateBulkUserImports][imports].\n\nTo ensure your CSV is properly formatted, use the\n[Sample Bulk Add CSV file](https://admin.docusign.com/static-resources/organization-user-import.csv)\n as a template. The following table describes the columns.\n\n\n\n| Column              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                         |\n| :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| AccountID           | yes      | The API account ID for the account to which you want you add the user. You can find this ID in the Admin area for the account under **API and Keys.**                                                                                                                                                                                                                                                            |\n| AccountName         |          | The name of the user's account in your organization. The account name must match the account ID provided.                                                                                                                                                                                                                                                                                                           |\n| FirstName           | yes      | The user's first name.                                                                                                                                                                                                                                                                                                                                                                                              |\n| LastName            | yes      | The user's last name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| UserEmail           | yes      | The user's complete email address.                                                                                                                                                                                                                                                                                                                                                                                  |\n| PermissionSet       | yes      | The user's permission set. The PermissionSet value must match an existing permission set for the account. This value is not case sensitive.                                                                                                                                                                                                                                                                         |\n| UserTitle           |          | The user's job title.                                                                                                                                                                                                                                                                                                                                                                                               |\n| CompanyName         |          | The user's company name.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Group               |          | The user's assigned groups. The Group values must match existing Group names for the account. Additional Group columns can be added to the file to add users to more than one group. You do not need to add users to the Everyone group, since all new users are automatically added to that group.                                                                                                                 |\n| AddressLine1        |          | The user's address, first line.                                                                                                                                                                                                                                                                                                                                                                                     |\n| AddressLine2        |          | The user's address, second line.                                                                                                                                                                                                                                                                                                                                                                                    |\n| City                |          | The user's city name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| StateRegionProvince |          | The user's regional location.                                                                                                                                                                                                                                                                                                                                                                                       |\n| PostalCode          |          | The user's postal code.                                                                                                                                                                                                                                                                                                                                                                                             |\n| Phone               |          | The user's phone number.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Language            |          | The user's display language for their DocuSign account. Must be one of: <ul><li>Chinese Simplified: <code>zh_CN</code></li><li>Chinese Traditional: <code>zh_TW</code></li><li>Dutch: <code>nl</code></li><li>English: <code>en</code></li><li>French: <code>fr</code></li><li>German: <code>de</code></li><li>Italian: <code>it</code></li><li>Japanese: <code>ja</code></li><li>Korean: <code>ko</code></li><li>Portuguese: <code>pt</code></li><li>Portuguese Brazil: <code>pt_BR</code></li><li>Russian: <code>ru</code></li><li>Spanish: <code>es</code></li></ul>                                                                                                                                                                                                                                                                                                                                                            |\n| LoginPolicy         |          | The user's login policy. Valid values include the following: <ul> <li>Column left blank = The user is created with no policy assigned.</li> <li>FedAuthRequired = The user must log in with an Identity Provider.</li> <li>FedAuthBypass = The user may log in with an Identity Provider or their DocuSign username and password.</li> </ul> For more information on login policies, see [Setting User Login Policy](https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=zah1583359147774.html). |\n| AutoActivate        |          | For domain users, new users can be activated automatically for domain accounts using SSO by setting the value to **true.** The user is activated automatically once the import is complete. Memberships activated in this way do not receive an activation email.                                                                                                                                                   |\n\n\nYou can add up to 2,000 users to an account and include up to 50 accounts per import. The maximum number of users per import is 8,000.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n\n\n[imports]: /docs/admin-api/reference/bulkoperations/userimport/updatebulkuserimports/\n",
+                "description": "Creates a request to import new users.\n\nYour CSV import file is made up of a header row with the column headers and a row of user or account data for each user you want to add to an account. Only new users can be imported. Any changes to existing users will be ignored. To make changes to existing users, use [UserImport:updateBulkUserImports](/docs/admin-api/reference/bulkoperations/userimport/updatebulkuserimports/).\n\nTo ensure your CSV file is properly formatted, follow the requirements in the Support article [Build a CSV to Bulk Add Users](https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=wec1593211169952.html). You can download an example file from the Add Users dialogue in the Admin UI.\n\nYou can add up to 2,000 users to an account and include up to 50 accounts per import. The maximum number of users per import is 8,000.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n\n### Next steps\n* See an [example of adding users via bulk import in your chosen programming language](/docs/admin-api/how-to/add-users-bulk-import/).\n",
                 "operationId": "OrganizationImport_OrganizationImportUsers_Insert",
                 "consumes": [
                     "multipart/form-data"
@@ -950,7 +950,7 @@
                     "UserImport"
                 ],
                 "summary": "Bulk updates information for existing users.",
-                "description": "Bulk updates information for existing users.\n\nYour CSV import file is made up of a header row with the column headers and a row of user or account data for each user you want to add to an account. \n\n\n**Update limit:** You can update up to 2,000 users on an account and include up to 50 accounts per import. The maximum number of updated users per import is 8,000.\n\nThis method requires the following HTTP headers:\n\n| Header | Value |\n| :--- |  :--- |\n| Content-Type | `text/csv` |\n| Content-Disposition |  `filename=filename.csv` |\n\n\n\nTo ensure your CSV is properly formatted, use the\n[Sample Bulk Update CSV file](https://admin.docusign.com/static-resources/organization-user-update-import.csv)\n as a template. The following table describes the columns.\n\nNote that the columns for bulk adding users and bulk update users are slightly different.\nThe update CSV file requires an `APIUserName` column, and does not have an `AutoActivate` column.\n\n\n\n| Column              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                         |\n| :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| AccountID           | yes      | The 32-character API account ID of the user's account in your organization. You can find this value in the API and Keys section of the Admin area of the account.                                                                                                                                                                                                                                                             |\n| AccountName         |          | The name of the user's account in your organization. The account name must match the account ID provided.                                                                                                                                                                                                                                                                                                           |\n| FirstName           | yes      | The user's first name.                                                                                                                                                                                                                                                                                                                                                                                              |\n| LastName            | yes      | The user's last name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| UserEmail           | yes      | The user's complete email address.                                                                                                                                                                                                                                                                                                                                                                                  |\n| PermissionSet       | yes      | The user's permission set. The PermissionSet value must match an existing permission set for the account. This value is not case sensitive.                                                                                                                                                                                                                                                                         |\n| UserTitle           |          | The user's job title.                                                                                                                                                                                                                                                                                                                                                                                               |\n| CompanyName         |          | The user's company name.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Group               |          | The user's assigned groups. The Group values must match existing Group names for the account. Additional Group columns can be added to the file to add users to more than one group. You do not need to add users to the Everyone group, since all new users are automatically added to that group.                                                                                                                 |\n| AddressLine1        |          | The user's address, first line.                                                                                                                                                                                                                                                                                                                                                                                     |\n| AddressLine2        |          | The user's address, second line.                                                                                                                                                                                                                                                                                                                                                                                    |\n| City                |          | The user's city name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| StateRegionProvince |          | The user's regional location.                                                                                                                                                                                                                                                                                                                                                                                       |\n| PostalCode          |          | The user's postal code.                                                                                                                                                                                                                                                                                                                                                                                             |\n| Phone               |          | The user's phone number.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Language            |          | The user's display language for their DocuSign account. Must be one of: <ul><li>Chinese Simplified: <code>zh_CN</code></li><li>Chinese Traditional: <code>zh_TW</code></li><li>Dutch: <code>nl</code></li><li>English: <code>en</code></li><li>French: <code>fr</code></li><li>German: <code>de</code></li><li>Italian: <code>it</code></li><li>Japanese: <code>ja</code></li><li>Korean: <code>ko</code></li><li>Portuguese: <code>pt</code></li><li>Portuguese Brazil: <code>pt_BR</code></li><li>Russian: <code>ru</code></li><li>Spanish: <code>es</code></li></ul>                                                                                                                                                                                                                                                                                                                                                            |\n| LoginPolicy         |          | The user's login policy. Valid values include the following: <ul> <li>Column left blank = The user is created with no policy assigned.</li> <li>FedAuthRequired = The user must log in with an Identity Provider.</li> <li>FedAuthBypass = The user may log in with an Identity Provider or their DocuSign username and password.</li> </ul> For more information on login policies, see [Setting User Login Policy](https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=zah1583359147774.html). |\n| AutoActivate        |          | For domain users, new users can be activated automatically for domain accounts using SSO by setting the value to **true.** The user is activated automatically once the import is complete. Memberships activated in this way do not receive an activation email.                                                                                                                                                   |\n\n\n\n## Updating user email addresses\n\nChanging a user's email address should be done carefully. The user's email address is used to log in to DocuSign and receive documents to sign from others.\nOnce changed, existing documents that were sent or received:\n\n- Will still appear in the user's documents list.\n- Notifications about these documents will be sent to the new email address. If someone sends a new document to the old email address:\n- DocuSign will send a notification to the old address.\n- It will not appear in the documents list of the account.\n\nThis change of email address will be applied to all of the user's account memberships.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.",
+                "description": "Bulk updates information for existing users.\n\nYour CSV import file is made up of a header row with the column headers and a row of user or account data for each user you want to add to an account. \n\n\n**Update limit:** You can update up to 2,000 users on an account and include up to 50 accounts per import. The maximum number of updated users per import is 8,000.\n\nThis method requires the following HTTP headers:\n\n| Header | Value |\n| :--- |  :--- |\n| Content-Type | `text/csv` |\n| Content-Disposition |  `filename=filename.csv` |\n\n\n\nTo ensure your CSV is properly formatted, use the\n[Sample Bulk Update CSV file](https://admin.docusign.com/static-resources/organization-user-update-import.csv)\n as a template. The following table describes the columns.\n\nNote that the columns for bulk adding users and bulk update users are slightly different.\nThe update CSV file requires an `APIUserName` column, and does not have an `AutoActivate` column.\n\n\n\n| Column              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                         |\n| :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| AccountID           | yes      | The 32-character API account ID of the user's account in your organization. You can find this value in the API and Keys section of the Admin area of the account.                                                                                                                                                                                                                                                             |\n| AccountName         |          | The name of the user's account in your organization. The account name must match the account ID provided.                                                                                                                                                                                                                                                                                                           |\n| FirstName           | yes      | The user's first name.                                                                                                                                                                                                                                                                                                                                                                                              |\n| LastName            | yes      | The user's last name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| UserEmail           | yes      | The user's complete email address.                                                                                                                                                                                                                                                                                                                                                                                  |\n| PermissionSet       | yes      | The user's permission set. The PermissionSet value must match an existing permission set for the account. This value is not case sensitive.                                                                                                                                                                                                                                                                         |\n| UserTitle           |          | The user's job title.                                                                                                                                                                                                                                                                                                                                                                                               |\n| CompanyName         |          | The user's company name.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Group               |          | The user's assigned groups. The Group values must match existing Group names for the account. Additional Group columns can be added to the file to add users to more than one group. You do not need to add users to the Everyone group, since all new users are automatically added to that group.                                                                                                                 |\n| AddressLine1        |          | The user's address, first line.                                                                                                                                                                                                                                                                                                                                                                                     |\n| AddressLine2        |          | The user's address, second line.                                                                                                                                                                                                                                                                                                                                                                                    |\n| City                |          | The user's city name.                                                                                                                                                                                                                                                                                                                                                                                               |\n| StateRegionProvince |          | The user's regional location.                                                                                                                                                                                                                                                                                                                                                                                       |\n| PostalCode          |          | The user's postal code.                                                                                                                                                                                                                                                                                                                                                                                             |\n| Phone               |          | The user's phone number.                                                                                                                                                                                                                                                                                                                                                                                            |\n| Language            |          | The user's display language for their Docusign account. Must be one of: <ul><li>Chinese Simplified: <code>zh_CN</code></li><li>Chinese Traditional: <code>zh_TW</code></li><li>Dutch: <code>nl</code></li><li>English: <code>en</code></li><li>French: <code>fr</code></li><li>German: <code>de</code></li><li>Italian: <code>it</code></li><li>Japanese: <code>ja</code></li><li>Korean: <code>ko</code></li><li>Portuguese: <code>pt</code></li><li>Portuguese Brazil: <code>pt_BR</code></li><li>Russian: <code>ru</code></li><li>Spanish: <code>es</code></li></ul>                                                                                                                                                                                                                                                                                                                                                            |\n| LoginPolicy         |          | The user's login policy. Valid values include the following: <ul> <li>Column left blank = The user is created with no policy assigned.</li> <li>FedAuthRequired = The user must log in with an Identity Provider.</li> <li>FedAuthBypass = The user may log in with an Identity Provider or their Docusign username and password.</li> </ul> For more information on login policies, see [Setting User Login Policy](https://support.docusign.com/s/document-item?bundleId=rrf1583359212854&topicId=zah1583359147774.html). |\n| AutoActivate        |          | For domain users, new users can be activated automatically for domain accounts using SSO by setting the value to **true.** The user is activated automatically once the import is complete. Memberships activated in this way do not receive an activation email.                                                                                                                                                   |\n\n\n\n## Updating user email addresses\n\nChanging a user's email address should be done carefully. The user's email address is used to log in to Docusign and receive documents to sign from others.\nOnce changed, existing documents that were sent or received:\n\n- Will still appear in the user's documents list.\n- Notifications about these documents will be sent to the new email address. If someone sends a new document to the old email address:\n- Docusign will send a notification to the old address.\n- It will not appear in the documents list of the account.\n\nThis change of email address will be applied to all of the user's account memberships.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.",
                 "operationId": "OrganizationImport_OrganizationImportUsers_Update",
                 "consumes": [
                     "multipart/form-data"
@@ -1391,7 +1391,7 @@
                     "DataDeletion"
                 ],
                 "summary": "Deletes data for one or more of a user's account memberships.",
-                "description": "Deletes data for one or more of a user's account memberships.\n\nTo call this endpoint: \n* You must be an organization administrator (or delegated administrator) with permission to manage the specified accounts or the user's email domain.\n* The user must have been closed for at least 24 hours.\n\n**Note:** After a user's data is deleted for every account to which they belong, their user-level data will automatically be deleted.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_data_redact`.",
+                "description": "Deletes data for one or more of a user's account memberships.\n\nTo call this endpoint: \n* You must be an organization administrator (or delegated administrator) with permission to manage the specified accounts or the user's email domain.\n* The user must have been closed for at least 24 hours.\n\n**Note:** After a user's data is deleted for every account to which they belong, their user-level data will automatically be deleted.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_data_redact`.\n\n### Related topics\n\n- [How to delete user data from one or more accounts as an organization admin](/docs/admin-api/how-to/org-admin-delete-user-data/)",
                 "operationId": "DataRedaction_RedactIndividualUserData",
                 "consumes": [
                     "application/json"
@@ -1745,6 +1745,13 @@
                         "description": "Select users whose data have been modified since the date specified. `account_id` or `organization_reserved_domain_id` must be specified.",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "include_ds_groups",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -1771,8 +1778,8 @@
                 "tags": [
                     "eSignUserManagement"
                 ],
-                "summary": "Creates a new user.",
-                "description": "Creates a new user.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n",
+                "summary": "Creates a new eSignature user.",
+                "description": "Creates a new eSignature user and automatically activates the user's account.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n\n### Related topics\n\n- [How to create a new active eSignature user](/docs/admin-api/how-to/create-active-user/)\n",
                 "operationId": "OrganizationUser_Users_AddV2",
                 "consumes": [
                     "application/json"
@@ -1896,7 +1903,7 @@
                     "eSignUserManagement"
                 ],
                 "summary": "Returns historical information about users with a specific email address.\n",
-                "description": "Returns historical information about users with a specific email address.\n**Note:** The `email` query parameter is _required_.\n\n\nTo get a list of users in an organization,\nuse [Users: getUsers](/docs/admin-api/reference/usermanagement/users/getusers/)\ninstead.\n\nFor example, the following request gets information about\naccounts that use `max@example.net` as an email address:\n\n\n```json\nGET /Management/v2/organizations/96e994fa-xxxx-xxxx-xxxx-c5fe9d1ccd10/users/profile?email=max@example.net\n\n{\n  \"users\": [\n    {\n      \"id\": \"6b67a1ee-xxxx-xxxx-xxxx-385763624163\",\n      \"site_id\": 1,\n      \"site_name\": \"Monadnock\",\n      \"user_name\": \"Max Example\",\n      \"first_name\": \"Max\",\n      \"last_name\": \"Example\",\n      \"user_status\": \"active\",\n      \"default_account_id\": \"f636f297-xxxx-xxxx-xxxx-8e7a14715950\",\n      \"default_account_name\": \"BizCo\",\n      \"is_organization_admin\": false,\n      \"created_on\": \"2019-04-01T22:11:56.457\",\n      \"memberships\": [\n        {\n          \"email\": \"max@example.net\",\n          \"account_id\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\",\n          \"external_account_id\": \"17xxxxx1\",\n          \"account_name\": \"LoanCo\",\n          \"is_external_account\": false,\n          \"status\": \"active\",\n          \"permission_profile\": { },\n          \"created_on\": \"2019-04-01T22:11:56.457\",\n          \"groups\": [ ],\n          \"is_admin\": false\n        },\n        {\n          \"email\": \"max@example.net\",\n          \"account_id\": \"f636f297-xxxx-xxxx-xxxx-8e7a14715950\",\n          \"external_account_id\": \"25xxxxx0\",\n          \"account_name\": \"BizCo\",\n          \"is_external_account\": true,\n          \"status\": \"active\",\n          \"permission_profile\": { },\n          \"created_on\": \"2021-07-07T15:10:51.96\",\n          \"groups\": [ ],\n          \"is_admin\": false\n        },\n        {\n          \"email\": \"max@example.net\",\n          \"account_id\": \"6aed3a52-xxxx-xxxx-xxxx-e89988167cfd\",\n          \"external_account_id\": \"11xxxxx1\",\n          \"account_name\": \"SleepCo\",\n          \"is_external_account\": true,\n          \"status\": \"closed\",\n          \"permission_profile\": { },\n          \"created_on\": \"2021-07-11T12:40:44.26\",\n          \"groups\": [],\n          \"is_admin\": true,\n          \"closed_on\": \"2021-07-13T08:40:51.8\"\n        }\n      ],\n      \"identities\": [],\n      \"device_verification_enabled\": false\n    }\n  ]\n}\n```\n\nThe response includes up to the first 20 users modified in the last 10 days.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_read`.\n\n\n\n\n",
+                "description": "Returns historical information about users with a specific email address.\n**Note:** The `email` query parameter is _required_.\n\n\nTo get a list of users in an organization,\nuse [Users: getUsers](/docs/admin-api/reference/usermanagement/users/getusers/)\ninstead.\n\nFor example, the following request gets information about\naccounts that use `max@example.net` as an email address:\n\n\n```json\nGET /Management/v2/organizations/96e994fa-xxxx-xxxx-xxxx-c5fe9d1ccd10/users/profile?email=max@example.net\n\n{\n  \"users\": [\n    {\n      \"id\": \"6b67a1ee-xxxx-xxxx-xxxx-385763624163\",\n      \"site_id\": 1,\n      \"site_name\": \"Monadnock\",\n      \"user_name\": \"Max Example\",\n      \"first_name\": \"Max\",\n      \"last_name\": \"Example\",\n      \"user_status\": \"active\",\n      \"default_account_id\": \"f636f297-xxxx-xxxx-xxxx-8e7a14715950\",\n      \"default_account_name\": \"BizCo\",\n      \"is_organization_admin\": false,\n      \"created_on\": \"2019-04-01T22:11:56.457\",\n      \"memberships\": [\n        {\n          \"email\": \"max@example.net\",\n          \"account_id\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\",\n          \"external_account_id\": \"17xxxxx1\",\n          \"account_name\": \"LoanCo\",\n          \"is_external_account\": false,\n          \"status\": \"active\",\n          \"permission_profile\": { },\n          \"created_on\": \"2019-04-01T22:11:56.457\",\n          \"groups\": [ ],\n          \"is_admin\": false\n        },\n        {\n          \"email\": \"max@example.net\",\n          \"account_id\": \"f636f297-xxxx-xxxx-xxxx-8e7a14715950\",\n          \"external_account_id\": \"25xxxxx0\",\n          \"account_name\": \"BizCo\",\n          \"is_external_account\": true,\n          \"status\": \"active\",\n          \"permission_profile\": { },\n          \"created_on\": \"2021-07-07T15:10:51.96\",\n          \"groups\": [ ],\n          \"is_admin\": false\n        },\n        {\n          \"email\": \"max@example.net\",\n          \"account_id\": \"6aed3a52-xxxx-xxxx-xxxx-e89988167cfd\",\n          \"external_account_id\": \"11xxxxx1\",\n          \"account_name\": \"SleepCo\",\n          \"is_external_account\": true,\n          \"status\": \"closed\",\n          \"permission_profile\": { },\n          \"created_on\": \"2021-07-11T12:40:44.26\",\n          \"groups\": [],\n          \"is_admin\": true,\n          \"closed_on\": \"2021-07-13T08:40:51.8\"\n        }\n      ],\n      \"identities\": [],\n      \"device_verification_enabled\": false\n    }\n  ]\n}\n```\n\nThe response includes up to the first 20 users modified in the last 10 days.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_read`.\n\n\n\n### Related topics\n\n- [How to Audit Users](/docs/admin-api/how-to/audit-users/)\n\n",
                 "operationId": "OrganizationUser_OrganizationUsers_GetProfileV2",
                 "produces": [
                     "application/json"
@@ -1944,8 +1951,8 @@
                 "tags": [
                     "eSignUserManagement"
                 ],
-                "summary": "Deletes user identities.",
-                "description": "Deletes user identities.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n",
+                "summary": "Delete user identities for a specified identity provider.",
+                "description": "Deletes all user identities linked to a specified identity provider.\n\nThe `id` request body property specifies the identity provider. To get the ID, call [getUserProfiles](/docs/admin-api/reference/usermanagement/esignusermanagement/getuserprofiles/) and copy the `provider_id` value you want to use.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n",
                 "operationId": "OrganizationUser_DeleteIdentitiesV2",
                 "consumes": [
                     "application/json"
@@ -1957,7 +1964,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization ID Guid",
+                        "description": "The organization GUID.",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -1965,7 +1972,7 @@
                     {
                         "name": "userId",
                         "in": "path",
-                        "description": "The user ID Guid",
+                        "description": "The ID of the user to access.",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2007,7 +2014,7 @@
                     "eSignUserManagement"
                 ],
                 "summary": "Adds users to an account.",
-                "description": "Adds users to an account.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n\n",
+                "description": "Adds users to an account.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n\n\n\n### Related topics\n\n- [How to create a new active eSignature user](/docs/admin-api/how-to/create-active-user/)\n",
                 "operationId": "OrganizationUser_OrganizationUsers_PostAccountUsersV2",
                 "consumes": [
                     "application/json"
@@ -2069,7 +2076,7 @@
                     "MultiProductUserManagement"
                 ],
                 "summary": "Returns a list of DSGroups.",
-                "description": "Returns a list of DSGroups.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_read`.",
+                "description": "Returns a list of DSGroups.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_read`.\n\n\n### Related topics\n\n- [How to create a new active user for CLM and eSignature](/docs/admin-api/how-to/create-active-clm-esign-user/)",
                 "operationId": "DocuSignGroupsv21_GetDSGroups_V2_1",
                 "consumes": [
                     "application/json"
@@ -2528,7 +2535,7 @@
                     "MultiProductUserManagement"
                 ],
                 "summary": "Gets products associated with the account and the available permission profiles.",
-                "description": "Gets products associated with the account and the available permission profiles.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_read`.",
+                "description": "Gets products associated with the account and the available permission profiles.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_read`.\n\n\n### Related topics\n\n- [How to create a new active user for CLM and eSignature](/docs/admin-api/how-to/create-active-clm-esign-user/)",
                 "operationId": "OrganizationProductPermissionProfile_GetProductPermissionProfiles",
                 "consumes": [
                     "application/json"
@@ -2709,8 +2716,8 @@
                 "tags": [
                     "MultiProductUserManagement"
                 ],
-                "summary": "Creates and updates a multi-product user.",
-                "description": "Creates and updates a multi-product user.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.",
+                "summary": "Creates or updates a multi-product user.",
+                "description": "Creates or updates a multi-product (eSignature and CLM) user. When you use this method to create a user, the user's account is automatically activated.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n\n### Next steps\n* Explore [an example that demonstrates how to construct the request body and call the endpoint](/docs/admin-api/how-to/create-active-clm-esign-user/).\n",
                 "operationId": "OrganizationUser_OrganizationUsers_PostAccountUsersV2_1",
                 "consumes": [
                     "application/json"
@@ -2828,7 +2835,7 @@
                     "MultiProductUserManagement"
                 ],
                 "summary": "Retrieves the DS profile for a user specified by ID.",
-                "description": "Gets information about a user specified by the `userId` query parameter.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_read`.",
+                "description": "Gets information about a user specified by the `userId` query parameter.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_read`.\n\n\n### Related topics\n\n- [How to retrieve the user's Docusign profile using an email address](/docs/admin-api/how-to/retrieve-docusign-profile-using-email/)\n- [How to retrieve the user's Docusign profile using a User ID](/docs/admin-api/how-to/retrieve-docusign-profile-using-userid/)",
                 "operationId": "OrganizationUser_OrganizationUsers_GetDSProfileByUserId",
                 "produces": [
                     "application/json"
@@ -2885,7 +2892,7 @@
                     "MultiProductUserManagement"
                 ],
                 "summary": "Revokes a user's access to one or more products.",
-                "description": "Revokes a specified user's access to one or more products.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.",
+                "description": "Revokes a specified user's access to one or more products.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n\n\n### Related topics\n\n- [How to delete user data from an account as an account admin](/docs/admin-api/how-to/account-admin-delete-user-data/)",
                 "operationId": "OrganizationProductPermissionProfile_RemoveUserProducts",
                 "consumes": [
                     "application/json"
@@ -3005,7 +3012,7 @@
                     "MultiProductUserManagement"
                 ],
                 "summary": "Assigns permission profiles for a user by email address.",
-                "description": "Sets permission profiles for one or more products for a given user. The user is specified by the `email` property in the request body.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.",
+                "description": "Sets permission profiles for one or more products for a given user. The user is specified by the `email` property in the request body.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `user_write`.\n\n\n### Related topics\n\n- [How to update user product permission profiles using an email address](/docs/admin-api/how-to/update-user-product-permission-profiles-using-email/)\n- [How to delete user product permission profiles using an email address](/docs/admin-api/how-to/delete-user-product-permission-profiles-using-email/)",
                 "operationId": "OrganizationProductPermissionProfile_PostUserProductPermissionProfilesByEmail",
                 "consumes": [
                     "application/json"
@@ -3061,13 +3068,13 @@
                 "x-ds-in-sdk": true
             }
         },
-        "/v1/organizations/{organizationId}/assetGroups/accounts": {
+        "/v2/organizations/{organizationId}/assetGroups/accounts": {
             "get": {
                 "tags": [
                     "AccountCloning"
                 ],
                 "summary": "Get asset group accounts for an organization.",
-                "description": "Returns a list of asset group accounts for an organization.\n\nAn asset group is a set of modules, products, plans, and charges purchased for your organization. An asset group account is an account that has been linked to an asset group.\n\nTo call this endpoint:\n* You must be an administrator for the specified organization.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `asset_group_account_read`.",
+                "description": "Returns a list of asset group accounts for an organization.\n\nAn asset group is a set of modules, products, plans, and charges purchased for your organization. An asset group account is an account that has been linked to an asset group.\n\nTo call this endpoint:\n* You must be an administrator for the specified organization.\n\n[Required authentication scopes](/docs/admin-api/admin101/auth/): `asset_group_account_read`.\n\n### Next steps\n* See [how to use this endpoint in your chosen programming language](/docs/admin-api/how-to/clone-account/).",
                 "operationId": "OrganizationProvisionAssetGroup_GetAssetGroupAccountsByOrg",
                 "consumes": [
                     "application/json"
@@ -3113,13 +3120,13 @@
                 "x-ds-in-sdk": true
             }
         },
-        "/v1/organizations/{organizationId}/assetGroups/accountClone": {
+        "/v2/organizations/{organizationId}/assetGroups/accountClone": {
             "post": {
                 "tags": [
                     "AccountCloning"
                 ],
-                "summary": "Clone an existing DocuSign account.",
-                "description": "Clones an existing DocuSign account. Cloning an account copies the plan items and eSignature settings. Users, templates, and permission profiles are _not_ copied into the target account. The new account will linked to the same organization.\n\nIn the request body, specify the source account you are cloning by its ID. You can get the IDs for your organization's asset group accounts using the [getAssetGroupAccounts](/docs/admin-api/reference/accountprovisioning/accountcloning/getassetgroupaccounts/) endpoint. \n\nYou also need to specify information about the new target account, including the name, location, and administrator. To set the location, provide either the `countryCode` or `region` properties. (If both are specified, the `region` value will be used.)\n\nThe request body looks like this:\n```\n{\n    \"sourceAccount\": {\n        \"id\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\"\n    },\n    \"targetAccount\": {\n        \"name\": \"My Cloned Account\",\n        \"admin\": {\n            \"firstName\": \"Francis\",\n            \"lastName\": \"Beagle\",\n            \"email\": \"francis@example.com\"\n        },\n        \"region\": \"NA\"\n    }\n}\n```\n\nTo call this endpoint:\n* You must be an administrator for the specified organization.\n* The source account must be on the same plan as your contract.\n* The source account must be an asset group account. An asset group is a set of modules, products, plans, and charges purchased for your organization. An asset group account is an account that has been linked to an asset group.\n\n[Required scopes](/docs/admin-api/admin101/auth/): `asset_group_account_clone_write`.",
+                "summary": "Clone an existing Docusign account.",
+                "description": "Clones an existing Docusign account. Cloning an account copies the plan items and eSignature settings. Users, templates, and permission profiles are _not_ copied into the target account. The new account will linked to the same organization.\n\nIn the request body, specify the source account you are cloning by its ID. You can get the IDs for your organization's asset group accounts using the [getAssetGroupAccounts](/docs/admin-api/reference/accountprovisioning/accountcloning/getassetgroupaccounts/) endpoint. \n\nYou also need to specify information about the new target account, including the name, location, and administrator. To set the location, provide either the `countryCode` or `region` properties. (If both are specified, the `region` value will be used.) When testing in the developer environment, the region will always be `NA`.\n\nThe request body looks like this:\n```\n{\n    \"sourceAccount\": {\n        \"id\": \"624e3e00-xxxx-xxxx-xxxx-43918c520dab\"\n    },\n    \"targetAccount\": {\n        \"name\": \"My Cloned Account\",\n        \"admin\": {\n            \"firstName\": \"Francis\",\n            \"lastName\": \"Beagle\",\n            \"email\": \"francis@example.com\"\n        },\n        \"region\": \"NA\"\n    }\n}\n```\n\nTo call this endpoint:\n* You must be an administrator for the specified organization. The administrator for the target account must also be an organization admin.\n* The source account must be on the same plan as your contract.\n* The source account must be an asset group account. An asset group is a set of modules, products, plans, and charges purchased for your organization. An asset group account is an account that has been linked to an asset group.\n* Your organization must be set up for account cloning. For more information, email self-serve-provisioning-enablement@docusign.com.\n\n[Required scopes](/docs/admin-api/admin101/auth/): `asset_group_account_clone_write`.\n\n### Next steps\n* See [how to use this endpoint to clone an account](/docs/admin-api/how-to/clone-account/).",
                 "operationId": "OrganizationProvisionAssetGroup_CloneAssetGroupAccount",
                 "consumes": [
                     "application/json"
@@ -3167,7 +3174,7 @@
                 "x-ds-in-sdk": true
             }
         },
-        "/v1/organizations/{organizationId}/assetGroups/accountClones": {
+        "/v2/organizations/{organizationId}/assetGroups/accountClones": {
             "get": {
                 "tags": [
                     "AccountCloning"
@@ -3227,7 +3234,7 @@
                 "x-ds-in-sdk": true
             }
         },
-        "/v1/organizations/{organizationId}/assetGroups/{assetGroupId}/accountClones/{assetGroupWorkId}": {
+        "/v2/organizations/{organizationId}/assetGroups/{assetGroupId}/accountClones/{assetGroupWorkId}": {
             "get": {
                 "tags": [
                     "AccountCloning"
@@ -3294,6 +3301,236 @@
                 "x-ds-service": "ProvisionAssetGroup",
                 "x-ds-in-sdk": true
             }
+        },
+        "/v2/organizations/{organizationId}/planItems": {
+            "get": {
+                "tags": [
+                    "AccountCreation"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationSubAccount_GetOrganizationPlanItems",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/OrganizationSubscriptionResponse"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "organization_sub_account_read"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "GetOrganizationPlanItems",
+                "x-ds-method": "GetOrganizationPlanItems",
+                "x-ds-service": "ProvisionAssetGroup",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v2/organizations/{organizationId}/assetGroups/accountCreate": {
+            "post": {
+                "tags": [
+                    "AccountCreation"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationSubAccount_CreateSubAccount",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SubAccountCreateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Subscription.Provision.Model.AssetGroupWorkResult"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "organization_sub_account_write"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "CreateAssetGroupAccount",
+                "x-ds-method": "CreateAssetGroupAccount",
+                "x-ds-service": "ProvisionAssetGroup",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v2/organizations/{organizationId}/subAccountsCreated": {
+            "get": {
+                "tags": [
+                    "AccountCreation"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationSubAccount_GetSubAccountCreateProcessesByOrgId",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "since_updated_date",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "include_details",
+                        "in": "query",
+                        "description": "When true, include details for the asset group account clone.",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SubAccountCreateWorkerResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "organization_sub_account_read"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "GetSubAccountCreateProcessesByOrgId",
+                "x-ds-method": "GetSubAccountCreateProcessesByOrgId",
+                "x-ds-service": "ProvisionAssetGroup",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v2/organizations/{organizationId}/assetGroup/{assetGroupId}/subAccountCreated/{assetGroupWorkId}": {
+            "get": {
+                "tags": [
+                    "AccountCreation"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationSubAccount_GetSubAccountCreateProcessByAssetGroupWorkId",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "assetGroupId",
+                        "in": "path",
+                        "description": "The ID of the asset group.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "assetGroupWorkId",
+                        "in": "path",
+                        "description": "The ID of the asset group account clone request.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "include_details",
+                        "in": "query",
+                        "description": "When true, include details for the asset group account clone.",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SubAccountCreateWorker"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "organization_sub_account_read"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "GetSubAccountCreateProcessByAssetGroupWorkId",
+                "x-ds-method": "GetSubAccountCreateProcessByAssetGroupWorkId",
+                "x-ds-service": "ProvisionAssetGroup",
+                "x-ds-in-sdk": true
+            }
         }
     },
     "definitions": {
@@ -3324,7 +3561,7 @@
                     "example": "00000000-0000-0000-0000-000000000000"
                 },
                 "assetGroupName": {
-                    "description": "Reserved for DocuSign.",
+                    "description": "Reserved for Docusign.",
                     "type": "string",
                     "readOnly": true
                 },
@@ -3353,12 +3590,12 @@
                 },
                 "siteId": {
                     "format": "int32",
-                    "description": "Reserved for DocuSign.",
+                    "description": "Reserved for Docusign.",
                     "type": "integer",
                     "readOnly": true
                 },
                 "siteName": {
-                    "description": "Reserved for DocuSign.",
+                    "description": "Reserved for Docusign.",
                     "type": "string",
                     "readOnly": true
                 }
@@ -3384,36 +3621,38 @@
                 },
                 "assetGroupWorkId": {
                     "format": "uuid",
-                    "description": "The ID of the job that is created by the request. Use this value to retrieve information about the clone request with the [getAssetGroupAccountClone](/docs/admin-api/reference/accountprovisioning/accountcloning/getassetgroupaccountclone/) endpoint.",
+                    "description": "The ID of the job that is created by the request. Use this value to retrieve information about the clone request with the [getAssetGroupAccountClone](/docs/admin-api/reference/accountprovisioning/accountcloning/getassetgroupaccountclone/) endpoint.\n\nThis property is read-only.",
                     "type": "string",
                     "readOnly": true,
                     "example": "00000000-0000-0000-0000-000000000000"
                 },
                 "assetGroupId": {
                     "format": "uuid",
-                    "description": "The ID of the asset group to which the account belongs. Use this value to retrieve information about the clone request with the [getAssetGroupAccountClone](/docs/admin-api/reference/accountprovisioning/accountcloning/getassetgroupaccountclone/) endpoint.",
+                    "description": "The ID of the asset group to which the account belongs. Use this value to retrieve information about the clone request with the [getAssetGroupAccountClone](/docs/admin-api/reference/accountprovisioning/accountcloning/getassetgroupaccountclone/) endpoint.\n\nThis property is read-only.",
                     "type": "string",
                     "readOnly": true,
                     "example": "00000000-0000-0000-0000-000000000000"
                 },
                 "assetGroupWorkType": {
-                    "description": "The type of asset group work.",
+                    "description": "The type of asset group work. This property is read-only.",
                     "enum": [
                         "Undefined",
                         "GroupAssetFulfillment",
                         "AccountAssetFulfillment",
                         "AccountAssetClone",
-                        "AccountAssetCreate"
+                        "AccountAssetCreate",
+                        "SubscriptionSync"
                     ],
                     "type": "string",
                     "readOnly": true
                 },
                 "status": {
-                    "description": "The status of the clone request. Valid values:\n* `Pending`\n* `Processing`\n* `PendingError`\n* `ProcessingError`\n* `Completed`\n* `Canceled`\n* `PermanentFailure`",
+                    "description": "The status of the clone request. Valid values:\n* `Pending`\n* `Processing`\n* `PendingError`\n* `ProcessingError`\n* `Completed`\n* `Canceled`\n* `PermanentFailure`\n\nThis property is read-only.",
                     "enum": [
                         "Undefined",
                         "Pending",
                         "Processing",
+                        "ProcessingOnHold",
                         "PendingError",
                         "ProcessingError",
                         "Completed",
@@ -3425,48 +3664,48 @@
                 },
                 "cloneRequestId": {
                     "format": "uuid",
-                    "description": "Reserved for DocuSign.",
+                    "description": "Reserved for Docusign.",
                     "type": "string",
                     "readOnly": true,
                     "example": "00000000-0000-0000-0000-000000000000"
                 },
                 "orderId": {
                     "format": "uuid",
-                    "description": "Reserved for DocuSign.",
+                    "description": "Reserved for Docusign.",
                     "type": "string",
                     "readOnly": true,
                     "example": "00000000-0000-0000-0000-000000000000"
                 },
                 "attempts": {
                     "format": "int32",
-                    "description": "The number of retries.",
+                    "description": "The number of retries. This property is read-only.",
                     "type": "integer",
                     "readOnly": true
                 },
                 "createdDate": {
                     "format": "date-time",
-                    "description": "The date that the clone request was initiated.",
+                    "description": "The date that the clone request was initiated. This property is read-only.",
                     "type": "string",
                     "readOnly": true
                 },
                 "createdByName": {
-                    "description": "The name of the user who initiated the clone request.",
+                    "description": "The name of the user who initiated the clone request. This property is read-only.",
                     "type": "string",
                     "readOnly": true
                 },
                 "createdByEmail": {
-                    "description": "The email address of the user who initiated the clone request.",
+                    "description": "The email address of the user who initiated the clone request. This property is read-only.",
                     "type": "string",
                     "readOnly": true
                 },
                 "message": {
-                    "description": "A message providing information about the clone request. If the request resulted in an error, this message includes specific information about the error.",
+                    "description": "A message providing information about the clone request. If the request resulted in an error, this message includes specific information about the error.\n\nThis property is read-only.",
                     "type": "string",
                     "readOnly": true
                 },
                 "cloneProcessingFailureDetails": {
-                    "$ref": "#/definitions/CloneErrorDetails",
-                    "description": "The processing failures if the work is in PendingError/ProcessingError status.",
+                    "$ref": "#/definitions/SubAccountErrorDetails",
+                    "description": "The processing failures if the work is in `PendingError` or `ProcessingError` status. This property is read-only.",
                     "readOnly": true
                 }
             },
@@ -3512,7 +3751,7 @@
             "properties": {
                 "id": {
                     "format": "uuid",
-                    "description": "The ID of the target account.",
+                    "description": "The ID of the target account. This property is read-only.",
                     "type": "string",
                     "example": "00000000-0000-0000-0000-000000000000"
                 },
@@ -3521,11 +3760,11 @@
                     "type": "string"
                 },
                 "region": {
-                    "description": "The region of the target account. \n\n**Note:** When cloning an account, you must include this property or `countryCode` in the request. If both are provided, `region` will be used.",
+                    "description": "The region of the target account. When testing in the developer environment, the region will always be `NA`.\n\n**Note:** When cloning an account, you must include this property or `countryCode` in the request. If both are provided, `region` will be used.",
                     "type": "string"
                 },
                 "countryCode": {
-                    "description": "The country code of the target account. The country code for the United States is `en`. \n\n**Note:** When cloning an account, you must include this property or `region`. If both are provided, `region` will be used.",
+                    "description": "The two-letter [ISO 3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) country code of the target account.\n\n**Note:** When cloning an account, you must include this property or `region`. If both are provided, `region` will be used.",
                     "type": "string"
                 },
                 "site": {
@@ -3582,11 +3821,11 @@
             "description": "An object describing the administrator of the cloned account.",
             "x-ms-summary": "An object describing the administrator of the cloned account."
         },
-        "CloneErrorDetails": {
+        "SubAccountErrorDetails": {
             "type": "object",
             "properties": {
                 "error": {
-                    "description": "The error code.",
+                    "description": "The error number.",
                     "type": "string",
                     "readOnly": true
                 },
@@ -3596,12 +3835,12 @@
                     "readOnly": true
                 },
                 "isSystemError": {
-                    "description": "When **true,** indicates that the error was caused by the system. When **false,** indicates that the error was caused by the user.",
+                    "description": "Whether the error is caused by the system or user.",
                     "type": "boolean",
                     "readOnly": true
                 }
             },
-            "x-ds-definition-name": "CloneErrorDetails",
+            "x-ds-definition-name": "SubAccountErrorDetails",
             "description": "",
             "x-ms-summary": ""
         },
@@ -3618,6 +3857,940 @@
                 }
             },
             "x-ds-definition-name": "AssetGroupAccountClones",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "OrganizationSubscriptionResponse": {
+            "type": "object",
+            "properties": {
+                "plan_id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "plan_name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "associated_accounts_count": {
+                    "format": "int32",
+                    "type": "integer",
+                    "description": ""
+                },
+                "asset_group_name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "asset_group_id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "subscription_name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "subscription_id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "modules": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SubscriptionPlanItemResponse"
+                    },
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "OrganizationSubscriptionResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "SubscriptionPlanItemResponse": {
+            "type": "object",
+            "properties": {
+                "plan_item_id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "plan_item_name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "plan_item_description": {
+                    "type": "string",
+                    "description": ""
+                },
+                "plan_item_internal_id": {
+                    "type": "string",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "SubscriptionPlanItemResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "SubAccountCreateRequest": {
+            "type": "object",
+            "properties": {
+                "subscriptionDetails": {
+                    "$ref": "#/definitions/SubAccountCreateRequest.SubAccountCreationSubscription",
+                    "description": ""
+                },
+                "targetAccount": {
+                    "$ref": "#/definitions/SubAccountCreateRequest.SubAccountCreationTargetAccountDetails",
+                    "description": "The target account to clone to."
+                }
+            },
+            "x-ds-definition-name": "SubAccountCreateRequest",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "SubAccountCreateRequest.SubAccountCreationSubscription": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "planId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "modules": {
+                    "type": "array",
+                    "items": {
+                        "format": "uuid",
+                        "type": "string",
+                        "example": "00000000-0000-0000-0000-000000000000"
+                    },
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "SubAccountCreateRequest.SubAccountCreationSubscription",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "SubAccountCreateRequest.SubAccountCreationTargetAccountDetails": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "address": {
+                    "$ref": "#/definitions/AddressInformation",
+                    "description": ""
+                },
+                "admin": {
+                    "$ref": "#/definitions/SubAccountCreateRequest.SubAccountCreationTargetAccountAdmin",
+                    "description": "The admin user for the target account."
+                },
+                "name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "countryCode": {
+                    "type": "string",
+                    "description": "The country code where the target account is in. This value is ignored if region is provided."
+                },
+                "region": {
+                    "type": "string",
+                    "description": "The region where the target account is in."
+                },
+                "site": {
+                    "type": "string",
+                    "description": "The site where the target account is on."
+                }
+            },
+            "x-ds-definition-name": "SubAccountCreateRequest.SubAccountCreationTargetAccountDetails",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "AddressInformation": {
+            "type": "object",
+            "properties": {
+                "street_address": {
+                    "type": "string",
+                    "description": ""
+                },
+                "street_address_2": {
+                    "type": "string",
+                    "description": ""
+                },
+                "locality": {
+                    "type": "string",
+                    "description": ""
+                },
+                "region": {
+                    "type": "string",
+                    "description": "The region where the target account is in."
+                },
+                "postal_code": {
+                    "type": "string",
+                    "description": ""
+                },
+                "country": {
+                    "type": "string",
+                    "description": ""
+                },
+                "phone": {
+                    "type": "string",
+                    "description": ""
+                },
+                "fax": {
+                    "type": "string",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "AddressInformation",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "SubAccountCreateRequest.SubAccountCreationTargetAccountAdmin": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "$ref": "#/definitions/AddressInformation",
+                    "description": ""
+                },
+                "email": {
+                    "type": "string",
+                    "description": "The email address."
+                },
+                "firstName": {
+                    "type": "string",
+                    "description": ""
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": ""
+                },
+                "locale": {
+                    "enum": [
+                        "None",
+                        "zh_cn",
+                        "zh_tw",
+                        "nl",
+                        "en",
+                        "fr",
+                        "de",
+                        "it",
+                        "ja",
+                        "ko",
+                        "pt",
+                        "pt_br",
+                        "ru",
+                        "es",
+                        "pl"
+                    ],
+                    "type": "string",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "SubAccountCreateRequest.SubAccountCreationTargetAccountAdmin",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "Subscription.Provision.Model.AssetGroupWorkResult": {
+            "type": "object",
+            "properties": {
+                "AssetGroupWork": {
+                    "$ref": "#/definitions/Subscription.Provision.Model.AssetGroupWork",
+                    "description": ""
+                },
+                "Message": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": ""
+                },
+                "Success": {
+                    "type": "boolean",
+                    "readOnly": true,
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "Subscription.Provision.Model.AssetGroupWorkResult",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "Subscription.Provision.Model.AssetGroupWork": {
+            "type": "object",
+            "properties": {
+                "AssetGroupWorkId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "AssetGroupId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "AssetGroupWorkType": {
+                    "enum": [
+                        "Undefined",
+                        "GroupAssetFulfillment",
+                        "AccountAssetFulfillment",
+                        "AccountAssetClone",
+                        "AccountAssetCreate",
+                        "SubscriptionSync"
+                    ],
+                    "type": "string",
+                    "description": ""
+                },
+                "Status": {
+                    "enum": [
+                        "Undefined",
+                        "Pending",
+                        "Processing",
+                        "ProcessingOnHold",
+                        "PendingError",
+                        "ProcessingError",
+                        "Completed",
+                        "Canceled",
+                        "PermanentFailure"
+                    ],
+                    "type": "string",
+                    "description": ""
+                },
+                "OrderId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "TargetAccountId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "SourceAccountId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "SourceAccountExternalId": {
+                    "format": "int64",
+                    "type": "integer",
+                    "description": ""
+                },
+                "SourceAccountName": {
+                    "type": "string",
+                    "description": ""
+                },
+                "SourceAccountSite": {
+                    "type": "string",
+                    "description": ""
+                },
+                "CloneRequestId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "CloneAccountDetails": {
+                    "$ref": "#/definitions/Subscription.Provision.Model.Account.Create.CreateAccountDetails",
+                    "description": ""
+                },
+                "CreateSubAccountDetails": {
+                    "$ref": "#/definitions/Subscription.Provision.Model.Account.Create.CreateSubAccountDetails",
+                    "description": ""
+                },
+                "Attempts": {
+                    "format": "int32",
+                    "type": "integer",
+                    "description": ""
+                },
+                "RetryOn": {
+                    "format": "date-time",
+                    "type": "string",
+                    "description": ""
+                },
+                "Message": {
+                    "type": "string",
+                    "description": ""
+                },
+                "CreatedByName": {
+                    "type": "string",
+                    "description": ""
+                },
+                "CreatedByEmail": {
+                    "type": "string",
+                    "description": ""
+                },
+                "ErrorDetails": {
+                    "$ref": "#/definitions/Subscription.Provision.Model.ServiceErrorDetails",
+                    "description": ""
+                },
+                "OldAssetGroupSubscriptionId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "NewAssetGroupSubscriptionId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "SourceSystem": {
+                    "type": "string",
+                    "description": ""
+                },
+                "SourceId": {
+                    "type": "string",
+                    "description": ""
+                },
+                "CreatedBy": {
+                    "type": "string",
+                    "description": ""
+                },
+                "CreatedByType": {
+                    "enum": [
+                        "Application",
+                        "User",
+                        "Generic",
+                        "RestAPIAuth",
+                        "Resource",
+                        "Restricted"
+                    ],
+                    "type": "string",
+                    "description": ""
+                },
+                "CreatedDate": {
+                    "format": "date-time",
+                    "type": "string",
+                    "description": ""
+                },
+                "UpdatedBy": {
+                    "type": "string",
+                    "description": ""
+                },
+                "UpdatedByType": {
+                    "enum": [
+                        "Application",
+                        "User",
+                        "Generic",
+                        "RestAPIAuth",
+                        "Resource",
+                        "Restricted"
+                    ],
+                    "type": "string",
+                    "description": ""
+                },
+                "UpdatedDate": {
+                    "format": "date-time",
+                    "type": "string",
+                    "description": ""
+                },
+                "UpdateHistory": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Subscription.Provision.Model.ChangeEvent"
+                    },
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "Subscription.Provision.Model.AssetGroupWork",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "Subscription.Provision.Model.Account.Create.CreateAccountDetails": {
+            "type": "object",
+            "properties": {
+                "Name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "CountryCode": {
+                    "type": "string",
+                    "description": ""
+                },
+                "Region": {
+                    "type": "string",
+                    "description": ""
+                },
+                "Site": {
+                    "type": "string",
+                    "description": ""
+                },
+                "Address": {
+                    "$ref": "#/definitions/DocuSign.Account.Domain.Model.Address",
+                    "description": ""
+                },
+                "AdminUser": {
+                    "$ref": "#/definitions/Subscription.Provision.Model.Account.Create.AccountAdmin",
+                    "description": ""
+                },
+                "BillingProfileType": {
+                    "enum": [
+                        "Web",
+                        "Direct"
+                    ],
+                    "type": "string",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "Subscription.Provision.Model.Account.Create.CreateAccountDetails",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "Subscription.Provision.Model.Account.Create.CreateSubAccountDetails": {
+            "type": "object",
+            "properties": {
+                "SubscriptionDetails": {
+                    "$ref": "#/definitions/Subscription.Provision.Model.Account.Create.CreateAccountSubscriptionDetails",
+                    "description": ""
+                },
+                "Name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "CountryCode": {
+                    "type": "string",
+                    "description": ""
+                },
+                "Region": {
+                    "type": "string",
+                    "description": ""
+                },
+                "Site": {
+                    "type": "string",
+                    "description": ""
+                },
+                "Address": {
+                    "$ref": "#/definitions/DocuSign.Account.Domain.Model.Address",
+                    "description": ""
+                },
+                "AdminUser": {
+                    "$ref": "#/definitions/Subscription.Provision.Model.Account.Create.AccountAdmin",
+                    "description": ""
+                },
+                "BillingProfileType": {
+                    "enum": [
+                        "Web",
+                        "Direct"
+                    ],
+                    "type": "string",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "Subscription.Provision.Model.Account.Create.CreateSubAccountDetails",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "Subscription.Provision.Model.ServiceErrorDetails": {
+            "type": "object",
+            "properties": {
+                "ErrorCode": {
+                    "type": "string",
+                    "description": ""
+                },
+                "PublicErrorCode": {
+                    "type": "string",
+                    "description": ""
+                },
+                "ErrorDescription": {
+                    "type": "string",
+                    "description": ""
+                },
+                "IsSystemError": {
+                    "type": "boolean",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "Subscription.Provision.Model.ServiceErrorDetails",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "Subscription.Provision.Model.ChangeEvent": {
+            "type": "object",
+            "properties": {
+                "EventDate": {
+                    "format": "date-time",
+                    "type": "string",
+                    "description": ""
+                },
+                "Action": {
+                    "type": "string",
+                    "description": ""
+                },
+                "TraceToken": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "Subscription.Provision.Model.ChangeEvent",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "DocuSign.Account.Domain.Model.Address": {
+            "type": "object",
+            "properties": {
+                "Address1": {
+                    "type": "string",
+                    "description": ""
+                },
+                "Address2": {
+                    "type": "string",
+                    "description": ""
+                },
+                "City": {
+                    "type": "string",
+                    "description": ""
+                },
+                "StateProvince": {
+                    "type": "string",
+                    "description": ""
+                },
+                "Country": {
+                    "type": "string",
+                    "description": ""
+                },
+                "PostalCode": {
+                    "type": "string",
+                    "description": ""
+                },
+                "Phone": {
+                    "type": "string",
+                    "description": ""
+                },
+                "Fax": {
+                    "type": "string",
+                    "description": ""
+                },
+                "ZipPlus4": {
+                    "type": "string",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "DocuSign.Account.Domain.Model.Address",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "Subscription.Provision.Model.Account.Create.AccountAdmin": {
+            "type": "object",
+            "properties": {
+                "EmailAddress": {
+                    "type": "string",
+                    "description": ""
+                },
+                "FirstName": {
+                    "type": "string",
+                    "description": ""
+                },
+                "LastName": {
+                    "type": "string",
+                    "description": ""
+                },
+                "Locale": {
+                    "enum": [
+                        "None",
+                        "zh_cn",
+                        "zh_tw",
+                        "nl",
+                        "en",
+                        "fr",
+                        "de",
+                        "it",
+                        "ja",
+                        "ko",
+                        "pt",
+                        "pt_br",
+                        "ru",
+                        "es",
+                        "pl"
+                    ],
+                    "type": "string",
+                    "description": ""
+                },
+                "Address": {
+                    "$ref": "#/definitions/DocuSign.Account.Domain.Model.Address",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "Subscription.Provision.Model.Account.Create.AccountAdmin",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "Subscription.Provision.Model.Account.Create.CreateAccountSubscriptionDetails": {
+            "type": "object",
+            "properties": {
+                "SubscriptionId": {
+                    "type": "string",
+                    "description": ""
+                },
+                "PlanId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "Modules": {
+                    "type": "array",
+                    "items": {
+                        "format": "uuid",
+                        "type": "string",
+                        "example": "00000000-0000-0000-0000-000000000000"
+                    },
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "Subscription.Provision.Model.Account.Create.CreateAccountSubscriptionDetails",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "SubAccountCreateWorkerResponse": {
+            "type": "object",
+            "properties": {
+                "assetGroupWorks": {
+                    "description": "The list of asset group accounts.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SubAccountCreateWorker"
+                    },
+                    "readOnly": true
+                }
+            },
+            "x-ds-definition-name": "SubAccountCreateWorkerResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "SubAccountCreateWorker": {
+            "required": [
+                "targetAccount",
+                "subscriptionDetails"
+            ],
+            "type": "object",
+            "properties": {
+                "targetAccount": {
+                    "$ref": "#/definitions/SubAccountCreateTargetAccount",
+                    "description": "The target account to clone to."
+                },
+                "subscriptionDetails": {
+                    "$ref": "#/definitions/SubAccountCreateSubscriptionDetails",
+                    "description": ""
+                },
+                "assetGroupWorkId": {
+                    "format": "uuid",
+                    "description": "The ID of the asset group account clone request.",
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "assetGroupId": {
+                    "format": "uuid",
+                    "description": "The ID of the asset group.",
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "assetGroupWorkType": {
+                    "description": "The type of asset group work. This property is read-only.",
+                    "enum": [
+                        "Undefined",
+                        "GroupAssetFulfillment",
+                        "AccountAssetFulfillment",
+                        "AccountAssetClone",
+                        "AccountAssetCreate",
+                        "SubscriptionSync"
+                    ],
+                    "type": "string",
+                    "readOnly": true
+                },
+                "status": {
+                    "description": "Status.",
+                    "enum": [
+                        "Undefined",
+                        "Pending",
+                        "Processing",
+                        "ProcessingOnHold",
+                        "PendingError",
+                        "ProcessingError",
+                        "Completed",
+                        "Canceled",
+                        "PermanentFailure"
+                    ],
+                    "type": "string",
+                    "readOnly": true
+                },
+                "orderId": {
+                    "format": "uuid",
+                    "description": "The order ID created by the clone work.\n",
+                    "type": "string",
+                    "readOnly": true,
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "attempts": {
+                    "format": "int32",
+                    "description": "The number of times the work has been worked on.",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "createdDate": {
+                    "format": "date-time",
+                    "description": "The date the account clone work is created.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "createdByName": {
+                    "description": "The name of the creator of the account clone work.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "createdByEmail": {
+                    "description": "The email of the creator of the account clone work.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "message": {
+                    "description": "The message associated with the account clone work.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "createAccountProcessingFailureDetails": {
+                    "$ref": "#/definitions/SubAccountErrorDetails",
+                    "description": "",
+                    "readOnly": true
+                }
+            },
+            "x-ds-definition-name": "SubAccountCreateWorker",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "SubAccountCreateTargetAccount": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "description": "",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "name": {
+                    "description": "",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "The region where the target account is in.",
+                    "type": "string"
+                },
+                "countryCode": {
+                    "description": "The country code where the target account is in. This value is ignored if region is provided.",
+                    "type": "string"
+                },
+                "site": {
+                    "description": "The site where the target account is on.",
+                    "type": "string"
+                },
+                "admin": {
+                    "$ref": "#/definitions/SubAccountCreateTargetAccountAdmin",
+                    "description": "The admin user for the target account."
+                }
+            },
+            "x-ds-definition-name": "SubAccountCreateTargetAccount",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "SubAccountCreateSubscriptionDetails": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "",
+                    "type": "string"
+                },
+                "planId": {
+                    "format": "uuid",
+                    "description": "",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "planName": {
+                    "description": "",
+                    "type": "string"
+                },
+                "modules": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SubAccountCreateSubscriptionModuleDetails"
+                    }
+                }
+            },
+            "x-ds-definition-name": "SubAccountCreateSubscriptionDetails",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "SubAccountCreateTargetAccountAdmin": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "description": "The email address.",
+                    "type": "string"
+                },
+                "firstName": {
+                    "description": "",
+                    "type": "string"
+                },
+                "lastName": {
+                    "description": "",
+                    "type": "string"
+                },
+                "locale": {
+                    "description": "",
+                    "enum": [
+                        "None",
+                        "zh_cn",
+                        "zh_tw",
+                        "nl",
+                        "en",
+                        "fr",
+                        "de",
+                        "it",
+                        "ja",
+                        "ko",
+                        "pt",
+                        "pt_br",
+                        "ru",
+                        "es",
+                        "pl"
+                    ],
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "SubAccountCreateTargetAccountAdmin",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "SubAccountCreateSubscriptionModuleDetails": {
+            "type": "object",
+            "properties": {
+                "moduleId": {
+                    "format": "uuid",
+                    "description": "",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "moduleName": {
+                    "description": "",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "SubAccountCreateSubscriptionModuleDetails",
             "description": "",
             "x-ms-summary": ""
         },
@@ -6091,7 +7264,7 @@
                     "format": "uuid",
                     "type": "string",
                     "example": "00000000-0000-0000-0000-000000000000",
-                    "description": "The ID of the identity."
+                    "description": "The `provider_id` that is returned from calling `getUserProfiles`."
                 }
             },
             "x-ds-definition-name": "UserIdentityRequest",
@@ -7090,6 +8263,11 @@
             "x-ds-category": "AccountProvisioning",
             "x-ds-order": "100",
             "x-ms-summary": "Methods to clone accounts."
+        },
+        "AccountCreation": {
+            "x-ds-category": "AccountProvisioning",
+            "x-ms-summary": "",
+            "description": ""
         }
     },
     "securityDefinitions": {
@@ -7109,7 +8287,12 @@
                 "account_write": "",
                 "user_write": "",
                 "identity_provider_read": "",
-                "domain_read": ""
+                "domain_read": "",
+                "asset_group_account_read": "",
+                "asset_group_account_clone_write": "",
+                "asset_group_account_clone_read": "",
+                "organization_sub_account_read": "",
+                "organization_sub_account_write": ""
             }
         }
     },
@@ -7160,11 +8343,15 @@
         },
         {
             "name": "DataDeletion",
-            "description": "Methods to delete user data. After a user is closed, an account or organization administrator can use these methods to delete the user's account data."
+            "description": "Methods to delete user data. After a user is closed, an account or organization administrator can use these methods to delete the user's account data.\n\n### Next steps\n* Learn [how to delete user data from an account as an account administrator](/docs/admin-api/how-to/account-admin-delete-user-data/).\n* Learn [how to delete user data from multiple accounts as an organization administrator](/docs/admin-api/how-to/org-admin-delete-user-data/)."
         },
         {
             "name": "AccountCloning",
             "description": "Methods to clone accounts."
+        },
+        {
+            "name": "AccountCreation",
+            "description": ""
         }
     ],
     "x-ds-categories": [
