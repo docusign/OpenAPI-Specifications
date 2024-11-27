@@ -11,7 +11,7 @@
             "email": "devcenter@docusign.com"
         }
     },
-    "host": "lens.docusign.net",
+    "host": "lens-d.docusign.net",
     "basePath": "",
     "schemes": [
         "https"

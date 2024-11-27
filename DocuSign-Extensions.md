@@ -1,13 +1,13 @@
-# DocuSign Vendor specific Extensions
+# Docusign Vendor specific Extensions
 
 The Swagger and OpenAPI specifications enable vendor specific extensions throughout Swagger files. 
-The extensions must start with the letter x. All DocuSign extensions start with `x-ds-`.
+The extensions must start with the letter x. All Docusign extensions start with `x-ds-`.
 
 ## Categories, Resources, Methods
 The OpenAPI specification does not focus on the idea of resources for APIs. 
 In particular, the OpenAPI `tags` element can be used to add multiple tags to a method.
 
-DocuSign assigns each method to exactly one **resource**. Resources are usually plural nouns. 
+Docusign assigns each method to exactly one **resource**. Resources are usually plural nouns. 
 They start with a capital letter.
 
 Methods are verbs. They are lower case.
