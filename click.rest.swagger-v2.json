@@ -11,7 +11,7 @@
       "email": "devcenter@docusign.com"
     }
   },
-  "host": "www.docusign.net",
+  "host": "www.demo.docusign.net",
   "basePath": "/clickapi",
   "schemes": [
     "https"

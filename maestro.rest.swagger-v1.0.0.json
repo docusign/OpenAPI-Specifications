@@ -11,7 +11,7 @@
         "title": "Maestro API",
         "version": "1.0.0"
     },
-    "host": "apps.docusign.com",
+    "host": "apps-d.docusign.com",
     "basePath": "/api/maestro",
     "schemes": [
         "https"
@@ -32,8 +32,7 @@
                         "in": "path",
                         "name": "accountId",
                         "required": true,
-                        "type": "string",
-                        "example": "00000000-0000-0000-0000-000000000000"
+                        "type": "string"
                     },
                     {
                         "description": "Workflow definition ID.",
@@ -41,24 +40,21 @@
                         "in": "path",
                         "name": "workflowDefinitionId",
                         "required": true,
-                        "type": "string",
-                        "example": "00000000-0000-0000-0000-000000000000"
+                        "type": "string"
                     },
                     {
                         "description": "Managed Token Id registered with Docusign Account Server",
                         "format": "uuid",
                         "in": "query",
                         "name": "mtid",
-                        "type": "string",
-                        "example": "00000000-0000-0000-0000-000000000000"
+                        "type": "string"
                     },
                     {
                         "description": "Managed Token Secret registered with Docusign account server",
                         "format": "uuid",
                         "in": "query",
                         "name": "mtsec",
-                        "type": "string",
-                        "example": "00000000-0000-0000-0000-000000000000"
+                        "type": "string"
                     },
                     {
                         "description": "",
@@ -151,8 +147,7 @@
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string",
-                        "example": "00000000-0000-0000-0000-000000000000"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -224,8 +219,7 @@
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string",
-                        "example": "00000000-0000-0000-0000-000000000000"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -878,8 +872,7 @@
                         "in": "path",
                         "name": "instanceId",
                         "required": true,
-                        "type": "string",
-                        "example": "00000000-0000-0000-0000-000000000000"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -3614,14 +3607,14 @@
     },
     "securityDefinitions": {
         "DSAuth": {
-            "authorizationUrl": "https://account-tk1.tk.docusign.dev/oauth/auth",
+            "authorizationUrl": "https://account-d.docusign.com/oauth/auth",
             "description": "Docusign AuthN/AuthZ",
             "flow": "accessCode",
             "scopes": {
                 "aow_manage": "Manage workflows scope",
                 "signature": "Using signature scope"
             },
-            "tokenUrl": "https://account-tk1.tk.docusign.dev/oauth/token",
+            "tokenUrl": "https://account-d.docusign.com/oauth/token",
             "type": "oauth2"
         },
         "DSBearerAuth": {

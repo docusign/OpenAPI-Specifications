@@ -11,7 +11,7 @@
         },
         "version": "v2"
     },
-    "host": "rooms.docusign.com",
+    "host": "demo.rooms.docusign.com",
     "basePath": "/restapi",
     "schemes": [
         "https"

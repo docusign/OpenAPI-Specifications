@@ -17,7 +17,7 @@
             "DocuSignAuth": []
         }
     ],
-    "host": "apps.docusign.com",
+    "host": "apps-d.docusign.com",
     "basePath": "/api/webforms",
     "schemes": [
         "https"
@@ -574,8 +574,8 @@
         "DocuSignAuth": {
             "type": "oauth2",
             "flow": "accessCode",
-            "authorizationUrl": "https://account-tk1.tk.docusign.dev/oauth/auth",
-            "tokenUrl": "https://account-tk1.tk.docusign.dev/oauth/token",
+            "authorizationUrl": "https://account-d.docusign.com/oauth/auth",
+            "tokenUrl": "https://account-d.docusign.com/oauth/token",
             "scopes": {
                 "webforms_read": "Read web form configuration",
                 "webforms_write": "Create web form and modify web form configuration",

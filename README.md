@@ -1,20 +1,24 @@
 ![alt text](OpenAPI.png)
 
-# DocuSign OpenAPI Specifications  
+# Docusign OpenAPI Specifications  
 
-DocuSign uses the OpenAPI (OAI) Specification - formerly known as "Swagger" - to describe its REST APIs. The goal of the OAI specification is to define a standard, language-agnostic interface to REST APIs which allows both humans and computers to discover and understand the capabilities of the service.  For more info see the official [OAI](https://github.com/OAI/OpenAPI-Specification) spec.
+Docusign uses the OpenAPI (OAI) Specification - formerly known as "Swagger" - to describe its REST APIs. The goal of the OAI specification is to define a standard, language-agnostic interface to REST APIs which allows both humans and computers to discover and understand the capabilities of the service.  For more info see the official [OAI](https://github.com/OAI/OpenAPI-Specification) spec.
 
 ## The Swagger file
 
-![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/esignature.rest.swagger-v2.1.json) `esignature.rest.swagger-v2.1.json` - the full swagger file for DocuSign's eSignature REST API v2.1
+![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/esignature.rest.swagger-v2.1.json) `esignature.rest.swagger-v2.1.json` - the full swagger file for Docusign's eSignature REST API v2.1
 
-![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/esignature.rest.swagger-v2.json) `esignature.rest.swagger-v2.json` - the full swagger file for DocuSign's eSignature REST API v2
+![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/esignature.rest.swagger-v2.json) `esignature.rest.swagger-v2.json` - the full swagger file for Docusign's eSignature REST API v2
 
-![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/rooms.rest.swagger-v2.json) `rooms.rest.swagger-v2.json` - the full swagger file for DocuSign's Rooms API v2
+![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/rooms.rest.swagger-v2.json) `rooms.rest.swagger-v2.json` - the full swagger file for Docusign's Rooms API v2
 
-![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/click.rest.swagger-v2.json) `click.rest.swagger-v2.json` - the full swagger file for DocuSign's Click API v1
+![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/click.rest.swagger-v2.json) `click.rest.swagger-v2.json` - the full swagger file for Docusign's Click API v1
 
-![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/admin.rest.swagger-v2.json) `admin.rest.swagger-v2.json` - the full swagger file for DocuSign's Admin API v2 and v2.1
+![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/admin.rest.swagger-v2.json) `admin.rest.swagger-v2.json` - the full swagger file for Docusign's Admin API v2 and v2.1
+
+![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/maestro.rest.swagger-v1.0.0.json) `maestro.rest.swagger-v1.0.0.json` - the full swagger file for Docusign's Maestro API v1
+
+![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/webforms.rest.swagger-v1.1.0.json) `webforms.rest.swagger-v1.1.0.json` - the full swagger file for Docusign's WebForms API v1.1
 
 ## What can I do with a Swagger file? 
 
@@ -22,7 +26,7 @@ We use OpenAPI/Swagger files to build many of our developer tools including our 
 
 ### Vendor-specific extensions
 
-Some post-processing is performed on our eSignature Swagger spec which includes adding a number of vendor-specific extensions prefixed with `x-ds-`. See the [DocuSign-Extensions.md](DocuSign-Extensions.md) file for more information.
+Some post-processing is performed on our eSignature Swagger spec which includes adding a number of vendor-specific extensions prefixed with `x-ds-`. See the [Docusign-Extensions.md](Docusign-Extensions.md) file for more information.
 
 ### Releases
 
@@ -30,7 +34,7 @@ The DocuSign eSignature REST API is updated monthly. The Swagger file in this re
 
 ## Support
 
-Please log issues through GitHub. We also have an active developer community on Stack Overflow, search the [DocuSignAPI](http://stackoverflow.com/questions/tagged/docusignapi) tag.
+Please log issues through GitHub. We also have an active developer community on Stack Overflow, search the [DocusignAPI](http://stackoverflow.com/questions/tagged/docusignapi) tag.
 
 ## License
 

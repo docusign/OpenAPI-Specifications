@@ -11,7 +11,7 @@
         },
         "termsOfService": "https://www.docusign.com/company/terms-and-conditions/developers"
     },
-    "host": "api.docusign.net",
+    "host": "api-d.docusign.net",
     "basePath": "/Management",
     "schemes": [
         "https"
@@ -8275,8 +8275,8 @@
             "type": "oauth2",
             "description": "OAuth2 Access code Grant",
             "flow": "accessCode",
-            "authorizationUrl": "https://account.docusign.com/oauth/auth",
-            "tokenUrl": "https://account.docusign.com/oauth/auth",
+            "authorizationUrl": "https://account-d.docusign.com/oauth/auth",
+            "tokenUrl": "https://account-d.docusign.com/oauth/auth",
             "scopes": {
                 "organization_read": "",
                 "user_data_redact": "",
