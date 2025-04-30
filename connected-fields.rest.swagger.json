@@ -1,0 +1,341 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+      "title": "Connected Fields API",
+      "description": "Connected Fields API",
+      "termsOfService": "https://www.docusign.com/company/terms-and-conditions/web",
+      "contact": {
+          "name": "Docusign Developers",
+          "email": "dcdev@docusign.com",
+          "url": "https://developers.docusign.com/"
+      },
+      "version": "v1"
+  },
+  "servers": [
+      {
+          "url": "https://api-d.docusign.com/v1"
+      }
+  ],
+  "paths": {
+      "/accounts/{accountId}/connected-fields/tab-groups": {
+          "get": {
+              "operationId": "ConnectedFieldsApi_GetTabGroups",
+              "summary": "Returns all tabs associated with the given account",
+              "description": "Returns all tabs associated with the given account. \n\n **Note**: Unlike the Connected Fields UI, this endpoint returns only fields that are either mandatory or have the **IsRequiredForVerifyingType** <a href=\"https://concerto.accordproject.org/docs/design/specification/model-decorators/\" target=\"_blank\">decorator</a> ",
+              "parameters": [
+                  {
+                      "name": "accountId",
+                      "required": true,
+                      "in": "path",
+                      "schema": {
+                          "type": "string"
+                      }
+                  },
+                  {
+                      "name": "appId",
+                      "in": "query",
+                      "schema": {
+                          "type": "string"
+                      }
+                  }
+              ],
+              "x-ds-methodname": "GetConnectedFieldsTabGroups",
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "$ref": "#/components/schemas/TabInfo"
+                                  }
+                              }
+                          }
+                      }
+                  },
+                  "400": {
+                      "description": "Bad Request",
+                      "content": {
+                          "text/plain": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ErrorResponseDTO"
+                              }
+                          },
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ErrorResponseDTO"
+                              }
+                          },
+                          "text/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ErrorResponseDTO"
+                              }
+                          }
+                      }
+                  },
+                  "401": {
+                      "description": "Unauthorized - Authentication is required",
+                      "content": {
+                          "text/plain": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ErrorResponseDTO"
+                              }
+                          },
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ErrorResponseDTO"
+                              }
+                          },
+                          "text/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/ErrorResponseDTO"
+                              }
+                          }
+                      }
+                  }
+              },
+              "tags": [
+                  "TabInfo"
+              ],
+              "x-ds-method": "GetConnectedFieldsTabGroups",
+              "x-ds-service": "TabInfo"
+          }
+      }
+  },
+  "components": {
+      "securitySchemes": {
+          "oauth2": {
+              "type": "oauth2",
+              "description": "JWT Bearer token from Docusign authorization server,",
+              "flows": {
+                  "authorizationCode": {
+                      "authorizationUrl": "https://account-d.docusign.com/oauth/auth",
+                      "tokenUrl": "https://account-d.docusign.com/oauth/token",
+                      "scopes": {
+                          "adm_store_unified_repo_read": "Required to read agreement data from Connected Fields APIs",
+                          "signature": "Used for operations on the Docusign eSignature API"
+                      }
+                  }
+              }
+          }
+      },
+      "schemas": {
+          "ErrorResponseDTO": {
+              "type": "object",
+              "properties": {
+                  "code": {
+                      "type": "string",
+                      "nullable": true
+                  },
+                  "message": {
+                      "type": "string",
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false,
+              "x-ds-definition-name": "ErrorResponseDTO"
+          },
+          "TabConnectionInstance": {
+              "type": "object",
+              "properties": {
+                  "connectionKey": {
+                      "type": "string",
+                      "description": "Identifies an extension app's unique connection key."
+                  },
+                  "connectionValue": {
+                      "type": "string",
+                      "description": "Identifies an extension app's connection instance."
+                  }
+              },
+              "required": [
+                  "connectionKey",
+                  "connectionValue"
+              ],
+              "x-ds-definition-name": "TabConnectionInstance"
+          },
+          "TabConnectedFieldsData": {
+              "type": "object",
+              "properties": {
+                  "typeSystemNamespace": {
+                      "type": "string",
+                      "description": "The fully qualified namespace for the type system being verified."
+                  },
+                  "typeName": {
+                      "type": "string",
+                      "description": "Name of the type being verified."
+                  },
+                  "supportedOperation": {
+                      "type": "string",
+                      "description": "The operation that the field supports.",
+                      "enum": [
+                          "VerifyType"
+                      ]
+                  },
+                  "propertyName": {
+                      "type": "string",
+                      "description": "The name of the individual field being verified."
+                  },
+                  "supportedUri": {
+                      "type": "string",
+                      "description": "Indicates the type verification url of the field."
+                  }
+              },
+              "required": [
+                  "typeSystemNamespace",
+                  "typeName",
+                  "supportedOperation",
+                  "propertyName",
+                  "supportedUri"
+              ],
+              "x-ds-definition-name": "TabConnectedFiledsData"
+          },
+          "TabExtensionData": {
+              "type": "object",
+              "properties": {
+                  "extensionGroupId": {
+                      "type": "string",
+                      "description": "A unique UUID for each tab group. Tabs associated with the same model or concept will share the same extensionGroupId."
+                  },
+                  "actionInputKey": {
+                      "type": "string",
+                      "description": "Determines input data key required for data verification."
+                  },
+                  "extensionPolicy": {
+                      "type": "string",
+                      "enum": [
+                          "None"
+                      ],
+                      "description": "Indicates if the field is required to sign the document"
+                  },
+                  "publisherName": {
+                      "type": "string",
+                      "description": "Publisher of the extension app."
+                  },
+                  "applicationName": {
+                      "type": "string",
+                      "description": "Name of the extension app."
+                  },
+                  "actionName": {
+                      "type": "string",
+                      "description": "Name of an action in an extension app."
+                  },
+                  "extensionContract": {
+                      "type": "string",
+                      "description": "Indicates the  template that defines an extension."
+                  },
+                  "actionContract": {
+                      "type": "string",
+                      "description": "Indicates the template defining an action."
+                  },
+                  "extensionName": {
+                      "type": "string",
+                      "description": "Name of the extension."
+                  },
+                  "requiredForExtension": {
+                      "type": "boolean",
+                      "description": "A boolean value that indicates if the field must pass verification to sign the document."
+                  },
+                  "connectionInstances": {
+                      "type": "array",
+                      "description": "Array representing the extension app connection name and instance.",
+                      "items": {
+                          "$ref": "#/components/schemas/TabConnectionInstance"
+                      }
+                  },
+                  "connectedFieldsData": {
+                      "$ref": "#/components/schemas/TabConnectedFieldsData"
+                  }
+              },
+              "required": [
+                  "extensionGroupId",
+                  "actionInputKey",
+                  "requiredForExtension"
+              ],
+              "x-ds-definition-name": "TabExtensionData"
+          },
+          "Tab": {
+              "type": "object",
+              "properties": {
+                  "extensionData": {
+                      "$ref": "#/components/schemas/TabExtensionData"
+                  },
+                  "tabType": {
+                      "type": "string",
+                      "description": "Indicates the type of tab"
+                  },
+                  "validationPattern": {
+                      "type": "string",
+                      "description": "A regular expression used to validate input for the tab."
+                  },
+                  "validationMessage": {
+                      "type": "string",
+                      "description": "The message displayed if the custom tab fails input validation"
+                  },
+                  "tabLabel": {
+                      "type": "string",
+                      "description": "The label associated to a verification field in a document."
+                  },
+                  "radios": {
+                      "type": "array",
+                      "description": "The radio button properties for the tab (if the tab is of radio type)",
+                      "items": {
+                          "type": "string"
+                      }
+                  }
+              },
+              "required": [
+                  "extensionData",
+                  "tabType",
+                  "tabLabel"
+              ],
+              "x-ds-definition-name": "Tab"
+          },
+          "TabInfo": {
+              "type": "object",
+              "properties": {
+                  "appId": {
+                      "type": "string",
+                      "description": "Unique ID of the installed extension app"
+                  },
+                  "tabs": {
+                      "type": "array",
+                      "description": "Tab data representing the tabs associated with installed apps in the account ",
+                      "items": {
+                          "$ref": "#/components/schemas/Tab"
+                      }
+                  }
+              },
+              "required": [
+                  "appId",
+                  "tabs"
+              ],
+              "x-ds-category": "ConnectedFields",
+              "x-ms-summary": "",
+              "description": "",
+              "x-ds-definition-name": "TabInfo"
+          }
+      }
+  },
+  "security": [
+      {
+          "oauth2": [
+              "adm_store_unified_repo_read",
+              "signature"
+          ]
+      }
+  ],
+  "tags": [
+      {
+          "name": "TabInfo",
+          "description": "ConnectedFieldsApi Get tabs for an account"
+      }
+  ],
+  "x-ds-categories": [
+      {
+          "name": "ConnectedFields",
+          "summary": "",
+          "description": ""
+      }
+  ]
+}
