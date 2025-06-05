@@ -2738,7 +2738,7 @@
                 "identity_providers": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/IdentityProvidersResponse"
+                        "$ref": "#/definitions/IdentityProviderResponse"
                     },
                     "description": "A list of identity providers for the organization."
                 },
