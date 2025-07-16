@@ -48,6 +48,8 @@
                         "type": "string",
                         "enum": [
                             "owned_by_me",
+                            "created_by_me",
+                            "shared_with_me",
                             "all"
                         ],
                         "default": "all"
@@ -578,7 +580,6 @@
             "tokenUrl": "https://account-d.docusign.com/oauth/token",
             "scopes": {
                 "webforms_read": "Read web form configuration",
-                "webforms_write": "Create web form and modify web form configuration",
                 "webforms_instance_read": "Read instance configuration",
                 "webforms_instance_write": "Create instance and modify instance configuration"
             }
@@ -654,6 +655,13 @@
             "x-ds-definition-name": "LastModifiedDateTime",
             "x-ms-summary": "The DateTime when the webform instance is last modified."
         },
+        "SubmittedDateTime": {
+            "description": "",
+            "type": "string",
+            "format": "date-time",
+            "x-ds-definition-name": "SubmittedDateTime",
+            "x-ms-summary": ""
+        },
         "IsStandalone": {
             "description": "Is the form a standalone form",
             "type": "boolean",
@@ -695,6 +703,19 @@
             "x-ds-definition-name": "InstanceStatus",
             "x-ms-summary": "The status of the form instance"
         },
+        "InstanceRecipientStatus": {
+            "type": "string",
+            "description": "",
+            "enum": [
+                "INITIATED",
+                "IN_PROGRESS",
+                "SUBMITTED"
+            ],
+            "example": "SUBMITTED",
+            "maxLength": 15,
+            "x-ds-definition-name": "InstanceRecipientStatus",
+            "x-ms-summary": ""
+        },
         "InstanceSource": {
             "type": "string",
             "description": "The method by which the form instance is created.\n",
@@ -709,6 +730,14 @@
             "maxLength": 20,
             "x-ds-definition-name": "InstanceSource",
             "x-ms-summary": "The method by which the form instance is created.\n"
+        },
+        "RecipientViewId": {
+            "type": "string",
+            "description": "",
+            "format": "uuid",
+            "example": "00000000-0000-0000-0000-000000000000",
+            "x-ds-definition-name": "RecipientViewId",
+            "x-ms-summary": ""
         },
         "ClientUserId": {
             "type": "string",
@@ -727,7 +756,7 @@
         "AuthenticationMethod": {
             "type": "string",
             "description": "A value that most closely matches the technique your application used to authenticate the recipient / signer.",
-            "example": "Biometric, Email, HTTPBasicAuth, Kerberos etc",
+            "example": "Email",
             "maxLength": 40,
             "enum": [
                 "Biometric",
@@ -771,6 +800,61 @@
             "example": "http://www.thankyoupage.com",
             "x-ds-definition-name": "ReturnUrl",
             "x-ms-summary": "The url to which the user is redirected after the signing is completed"
+        },
+        "RoleName": {
+            "description": "",
+            "type": "string",
+            "maxLength": 100,
+            "example": "Applicant",
+            "x-ds-definition-name": "RoleName",
+            "x-ms-summary": ""
+        },
+        "Name": {
+            "description": "",
+            "type": "string",
+            "maxLength": 100,
+            "example": "Bob Smith",
+            "x-ds-definition-name": "Name",
+            "x-ms-summary": ""
+        },
+        "Email": {
+            "description": "",
+            "type": "string",
+            "maxLength": 100,
+            "example": "bob.smith@docusign.com",
+            "x-ds-definition-name": "Email",
+            "x-ms-summary": ""
+        },
+        "PhoneNumber": {
+            "type": "object",
+            "description": "",
+            "properties": {
+                "countryCode": {
+                    "type": "string",
+                    "maxLength": 7,
+                    "example": "1",
+                    "description": ""
+                },
+                "nationalNumber": {
+                    "type": "string",
+                    "maxLength": 15,
+                    "example": "4151112222",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "PhoneNumber",
+            "x-ms-summary": ""
+        },
+        "SendOption": {
+            "type": "string",
+            "description": "",
+            "enum": [
+                "now"
+            ],
+            "example": "now",
+            "maxLength": 15,
+            "x-ds-definition-name": "SendOption",
+            "x-ms-summary": ""
         },
         "ExpirationOffset": {
             "type": "integer",
@@ -828,9 +912,6 @@
         "CreateInstanceRequestBody": {
             "type": "object",
             "description": "The request body for the `Instances::createInstance` endpoint.",
-            "required": [
-                "clientUserId"
-            ],
             "properties": {
                 "formValues": {
                     "$ref": "#/definitions/WebFormValues",
@@ -863,6 +944,36 @@
                 "expirationOffset": {
                     "$ref": "#/definitions/ExpirationOffset",
                     "description": "The number of hours after which the web form instance expires. For example, if you want the instance to expire after 5 days, set this property to `120`.\n\nThis property is **optional.** The default value is `720` (30 days)."
+                },
+                "sendOption": {
+                    "$ref": "#/definitions/SendOption",
+                    "description": ""
+                },
+                "recipients": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "roleName",
+                            "name",
+                            "email"
+                        ],
+                        "properties": {
+                            "roleName": {
+                                "$ref": "#/definitions/RoleName"
+                            },
+                            "name": {
+                                "$ref": "#/definitions/Name"
+                            },
+                            "email": {
+                                "$ref": "#/definitions/Email"
+                            },
+                            "phoneNumber": {
+                                "$ref": "#/definitions/PhoneNumber"
+                            }
+                        }
+                    }
                 },
                 "tags": {
                     "type": "array",
@@ -908,6 +1019,14 @@
                 "lastModifiedBy": {
                     "description": "The user who last modified the web form instance.",
                     "$ref": "#/definitions/WebFormUserInfo"
+                },
+                "submittedDateTime": {
+                    "$ref": "#/definitions/SubmittedDateTime",
+                    "description": ""
+                },
+                "instanceSource": {
+                    "$ref": "#/definitions/InstanceSource",
+                    "description": ""
                 }
             },
             "example": {
@@ -1000,6 +1119,11 @@
                         "properties": {
                             "id": {
                                 "$ref": "#/definitions/EnvelopeId"
+                            },
+                            "createdDateTime": {
+                                "description": "The dateTime when an envelope is created.",
+                                "type": "string",
+                                "format": "date-time"
                             }
                         }
                     }
@@ -1010,7 +1134,22 @@
                 },
                 "formValues": {
                     "$ref": "#/definitions/WebFormValues",
-                    "description": "Key-value pairs used to prefill fields in the web form instance. The keys correspond to the values of the `publishedComponentNames` object on the `WebForm` (configuration) object.\n\nExample:\n```\n{\n    \"Signer_name\": \"Francis Beagle\",\n    \"Signer_email\": \"francis@example.com\"\n}\n```"
+                    "description": "Key-value pairs that represent the current values of the fields in the web form instance. The keys correspond to the `componentName` values of the `formContent.components` object on the `WebForm` (configuration) object. See [Form field definitions](/docs/web-forms-api/plan-integration/retrieve-configuration-details/#form-field-definitions) for more information.\n\nSee [Request that retrieves web form instance values](/docs/web-forms-api/plan-integration/retrieve-submitted-values/#request-that-retrieves-web-form-instance-values) for an example of a `formValues` object returned by this request.\n"
+                },
+                "recipients": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "recipientViewId": {
+                                "$ref": "#/definitions/RecipientViewId"
+                            },
+                            "instanceRecipientStatus": {
+                                "$ref": "#/definitions/InstanceRecipientStatus"
+                            }
+                        }
+                    }
                 }
             },
             "x-ds-definition-name": "WebFormInstance",
@@ -1143,7 +1282,10 @@
                 "Checkbox_hobbies": [
                     "singing",
                     "dancing"
-                ]
+                ],
+                "ID_card_attachment": {
+                    "documentName": "id_card.pdf"
+                }
             },
             "x-ds-definition-name": "WebFormValues",
             "x-ms-summary": "Key-value pairs of data used to create a form instance."
@@ -1178,6 +1320,11 @@
                 "isPrivateAccess": {
                     "$ref": "#/definitions/IsPrivateAccess",
                     "description": "When `true`, a valid instance token is required to access the instance via its URL. "
+                },
+                "allowSending": {
+                    "type": "boolean",
+                    "description": "",
+                    "example": true
                 }
             },
             "x-ds-definition-name": "WebFormProperties",
@@ -1216,7 +1363,8 @@
                 "Number",
                 "RadioButtonGroup",
                 "Select",
-                "TextBox"
+                "TextBox",
+                "FileInput"
             ],
             "example": "CheckboxGroup",
             "x-ds-definition-name": "WebFormComponentType",
@@ -1447,7 +1595,7 @@
                 }
             },
             "example": {
-                "source": "template",
+                "source": "templates",
                 "owner": {
                     "userId": "00000000-0000-0000-0000-000000000000",
                     "userName": "DocuSign User"
