@@ -1,0 +1,4046 @@
+{
+    "openapi": "3.0.4",
+    "info": {
+        "title": "Workspaces API",
+        "description": "Docusign Workspaces API",
+        "termsOfService": "https://www.docusign.com/company/terms-and-conditions/web",
+        "contact": {
+            "name": "Docusign Developer Center",
+            "url": "https://developers.docusign.com",
+            "email": "devcenter@docusign.com"
+        },
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "https://api-d.docusign.com",
+            "description": "Server"
+        }
+    ],
+    "paths": {
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents": {
+            "get": {
+                "tags": [
+                    "WorkspaceDocuments"
+                ],
+                "summary": "Get documents in the workspace accessible to the calling user",
+                "description": "This operation retrieves the documents in the workspace that are accessible to the calling user. Documents may be added directly or automatically through tasks such as envelopes. Documents may be used to create envelopes.\n\nPagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.",
+                "operationId": "getWorkspaceDocuments",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "Number of documents to return. Defaults to the maximum which is 100",
+                        "style": "form",
+                        "schema": {
+                            "$ref": "#/components/schemas/Count"
+                        }
+                    },
+                    {
+                        "name": "start_position",
+                        "in": "query",
+                        "description": "Position of the first item in the total results. Defaults to 0",
+                        "style": "form",
+                        "schema": {
+                            "$ref": "#/components/schemas/StartPosition"
+                        }
+                    },
+                    {
+                        "name": "name_filter",
+                        "in": "query",
+                        "description": "Filter documents where Name contains the filter. Defaults to null, to not filter",
+                        "style": "form",
+                        "schema": {
+                            "$ref": "#/components/schemas/NameFilter"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Documents successfully retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspaceDocumentsResponse"
+                                },
+                                "examples": {
+                                    "GetWorkspaceDocumentsResponseExample": {
+                                        "$ref": "#/components/examples/GetWorkspaceDocumentsResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "getWorkspaceDocuments",
+                "x-ds-method": "getWorkspaceDocuments",
+                "x-ds-service": "Workspace Documents"
+            },
+            "post": {
+                "tags": [
+                    "WorkspaceDocuments"
+                ],
+                "summary": "Add a document to a workspace via file contents upload",
+                "description": "This operation adds a document to a workspace via file contents upload. The file is passed in the request body as a multipart/form-data file. The file name is used as the document name.\n\nOnce added, it may be used to create an envelope associated with the workspace.",
+                "operationId": "addWorkspaceDocument",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AddWorkspaceDocumentRequest"
+                            },
+                            "encoding": {
+                                "file": {
+                                    "style": "form"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Document successfully added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateWorkspaceDocumentResponse"
+                                },
+                                "examples": {
+                                    "CreateWorkspaceDocumentResponseExample": {
+                                        "$ref": "#/components/examples/CreateWorkspaceDocumentResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "addWorkspaceDocument",
+                "x-ds-method": "addWorkspaceDocument",
+                "x-ds-service": "Workspace Documents"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents/{documentId}": {
+            "get": {
+                "tags": [
+                    "WorkspaceDocuments"
+                ],
+                "summary": "Get information about the document",
+                "description": "This operation retrieves information about the document. The response includes the document ID, name, and metadata.",
+                "operationId": "getWorkspaceDocument",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "documentId",
+                        "in": "path",
+                        "description": "The ID of the document",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/DocumentId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Document successfully retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspaceDocumentResponse"
+                                },
+                                "examples": {
+                                    "GetWorkspaceDocumentResponseExample": {
+                                        "$ref": "#/components/examples/GetWorkspaceDocumentResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "getWorkspaceDocument",
+                "x-ds-method": "getWorkspaceDocument",
+                "x-ds-service": "Workspace Documents"
+            },
+            "delete": {
+                "tags": [
+                    "WorkspaceDocuments"
+                ],
+                "summary": "Deletes a document in the workspace",
+                "description": "This operation permanently deletes a document by ID.",
+                "operationId": "deleteWorkspaceDocument",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "documentId",
+                        "in": "path",
+                        "description": "The ID of the document",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/DocumentId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Document has been successfully deleted"
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "deleteWorkspaceDocument",
+                "x-ds-method": "deleteWorkspaceDocument",
+                "x-ds-service": "Workspace Documents"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents/{documentId}/contents": {
+            "get": {
+                "tags": [
+                    "WorkspaceDocuments"
+                ],
+                "summary": "Get the file contents of the document",
+                "description": "This operation retrieves the file contents of the document. The file is returned as a stream in the response body. The Content-Disposition response header contains the document name as the `filename`.",
+                "operationId": "getWorkspaceDocumentContents",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "documentId",
+                        "in": "path",
+                        "description": "The ID of the document",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/DocumentId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Document successfully retrieved.",
+                        "content": {
+                            "application/octet-stream": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspaceDocumentContentsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "getWorkspaceDocumentContents",
+                "x-ds-method": "getWorkspaceDocumentContents",
+                "x-ds-service": "Workspace Documents"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests": {
+            "post": {
+                "tags": [
+                    "WorkspaceUploadRequest"
+                ],
+                "summary": "Creates a new upload request within a workspace",
+                "description": "This operation creates a new upload request within a workspace. The upload request includes name, description, due date, and user assignments. Upload requests can be created as drafts or sent immediately based on the status field.",
+                "operationId": "createWorkspaceUploadRequest",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The upload request details including name, description, assignments, and status",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateWorkspaceUploadRequestBody"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateWorkspaceUploadRequestBody"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateWorkspaceUploadRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Upload request successfully created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspaceUploadRequestResponse"
+                                },
+                                "examples": {
+                                    "GetWorkspaceUploadRequestResponseExample": {
+                                        "$ref": "#/components/examples/GetWorkspaceUploadRequestResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "createWorkspaceUploadRequest",
+                "x-ds-method": "createWorkspaceUploadRequest",
+                "x-ds-service": "Workspace Upload Requests"
+            },
+            "get": {
+                "tags": [
+                    "WorkspaceUploadRequest"
+                ],
+                "summary": "Gets upload requests within a workspace",
+                "description": "This operation retrieves a list of upload requests within a workspace. Each upload request includes details such as ID, name, description, status, owner information, associated documents, assignments, and various dates.",
+                "operationId": "getWorkspaceUploadRequests",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Upload requests successfully retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspaceUploadRequestsResponse"
+                                },
+                                "examples": {
+                                    "GetWorkspaceUploadRequestsResponseExample": {
+                                        "$ref": "#/components/examples/GetWorkspaceUploadRequestsResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "getWorkspaceUploadRequests",
+                "x-ds-method": "getWorkspaceUploadRequests",
+                "x-ds-service": "Workspace Upload Requests"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}": {
+            "get": {
+                "tags": [
+                    "WorkspaceUploadRequest"
+                ],
+                "summary": "Gets details for a specific upload request",
+                "description": "This operation retrieves details about a specific upload request within a workspace. The response includes comprehensive information about the upload request including status, assigned users, associated documents, owner details, and various dates.",
+                "operationId": "getWorkspaceUploadRequest",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "uploadRequestId",
+                        "in": "path",
+                        "description": "The ID of the upload request",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/UploadRequestId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Upload request details successfully retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspaceUploadRequestResponse"
+                                },
+                                "examples": {
+                                    "GetWorkspaceUploadRequestResponseExample": {
+                                        "$ref": "#/components/examples/GetWorkspaceUploadRequestResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "getWorkspaceUploadRequest",
+                "x-ds-method": "getWorkspaceUploadRequest",
+                "x-ds-service": "Workspace Upload Requests"
+            },
+            "put": {
+                "tags": [
+                    "WorkspaceUploadRequest"
+                ],
+                "summary": "Updates a specific upload request",
+                "description": "This operation updates a specific upload request within a workspace. Only draft upload requests can be edited. The editable fields are name, description, due date, and status. Status changes are restricted - only transitions from draft to in_progress are allowed. Attempting to update a non-draft upload request will result in an INVALID_STATUS error. Attempting an invalid status change will result in an INVALID_STATUS_CHANGE error.",
+                "operationId": "updateWorkspaceUploadRequest",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "uploadRequestId",
+                        "in": "path",
+                        "description": "The ID of the upload request to update",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/UploadRequestId"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The upload request object with updated values",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWorkspaceUploadRequestBody"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWorkspaceUploadRequestBody"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWorkspaceUploadRequestBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Upload request successfully updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspaceUploadRequestResponse"
+                                },
+                                "examples": {
+                                    "GetWorkspaceUploadRequestResponseExample": {
+                                        "$ref": "#/components/examples/GetWorkspaceUploadRequestResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "updateWorkspaceUploadRequest",
+                "x-ds-method": "updateWorkspaceUploadRequest",
+                "x-ds-service": "Workspace Upload Requests"
+            },
+            "delete": {
+                "tags": [
+                    "WorkspaceUploadRequest"
+                ],
+                "summary": "Deletes a specific upload request",
+                "description": "This operation deletes a specific upload request within a workspace. Upload requests cannot be deleted if they are complete or have associated documents.",
+                "operationId": "deleteWorkspaceUploadRequest",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "uploadRequestId",
+                        "in": "path",
+                        "description": "The ID of the upload request to delete",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/UploadRequestId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Upload request successfully deleted"
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "deleteWorkspaceUploadRequest",
+                "x-ds-method": "deleteWorkspaceUploadRequest",
+                "x-ds-service": "Workspace Upload Requests"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}/documents": {
+            "post": {
+                "tags": [
+                    "WorkspaceUploadRequest"
+                ],
+                "summary": "Add a document to an upload request via file upload",
+                "description": "This operation adds a document to a specific upload request within a workspace via file upload. The file is passed in the request body as multipart/form-data. The file name is used as the document name.",
+                "operationId": "addWorkspaceUploadRequestDocument",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "uploadRequestId",
+                        "in": "path",
+                        "description": "The ID of the upload request",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/UploadRequestId"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AddWorkspaceUploadRequestDocumentRequest"
+                            },
+                            "encoding": {
+                                "file": {
+                                    "style": "form"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Document successfully added to upload request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AddWorkspaceUploadRequestDocumentResponse"
+                                },
+                                "examples": {
+                                    "AddWorkspaceUploadRequestDocumentResponseExample": {
+                                        "$ref": "#/components/examples/AddWorkspaceUploadRequestDocumentResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "addWorkspaceUploadRequestDocument",
+                "x-ds-method": "addWorkspaceUploadRequestDocument",
+                "x-ds-service": "Workspace Upload Requests"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/upload-requests/{uploadRequestId}/actions/complete": {
+            "post": {
+                "tags": [
+                    "WorkspaceUploadRequest"
+                ],
+                "summary": "Complete an upload request",
+                "description": "This operation completes a specific upload request within a workspace and is intended to be called by the user completing the upload request. Only upload requests that are in progress can be completed.",
+                "operationId": "completeWorkspaceUploadRequest",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "uploadRequestId",
+                        "in": "path",
+                        "description": "The ID of the upload request to complete",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/UploadRequestId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Upload request successfully completed"
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "completeWorkspaceUploadRequest",
+                "x-ds-method": "completeWorkspaceUploadRequest",
+                "x-ds-service": "Workspace Upload Requests"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/users": {
+            "get": {
+                "tags": [
+                    "WorkspaceUsers"
+                ],
+                "summary": "Retrieves the list of users in the given workspace",
+                "description": "This operations retrieves the users in a workspace. Users sent envelopes or assigned tasks will automatically be added to the workspace with the Participate role.\n\nPagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.",
+                "operationId": "getWorkspaceUsers",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "Number of workspace users to return. Defaults to the maximum which is 100.",
+                        "style": "form",
+                        "schema": {
+                            "$ref": "#/components/schemas/Count"
+                        }
+                    },
+                    {
+                        "name": "start_position",
+                        "in": "query",
+                        "description": "Position of the first item in the total results. Defaults to 0.",
+                        "style": "form",
+                        "schema": {
+                            "$ref": "#/components/schemas/StartPosition"
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Returns workspace users filtered by Name and Email",
+                        "style": "form",
+                        "schema": {
+                            "$ref": "#/components/schemas/Filter"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sorts results. Options are `first_name_asc`, `first_name_desc`, `last_name_asc`, `last_name_desc`, `email_asc`, `email_desc`. Defaults to `last_name_desc`",
+                        "style": "form",
+                        "schema": {
+                            "$ref": "#/components/schemas/GetWorkspaceUsersSortingOption"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The workspace user was successfully retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspaceUsersResponse"
+                                },
+                                "examples": {
+                                    "GetWorkspaceUsersResponseExample": {
+                                        "$ref": "#/components/examples/GetWorkspaceUsersResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The workspace was not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "getWorkspaceUsers",
+                "x-ds-method": "getWorkspaceUsers",
+                "x-ds-service": "Workspace Users"
+            },
+            "post": {
+                "tags": [
+                    "WorkspaceUsers"
+                ],
+                "summary": "Adds a user to the workspace by email address",
+                "description": "This operation manually adds an internal or external user to a specific workspace by email address. Users within the account are considered \"Internal\" and may be assigned any role. Users outside the account are considered \"External\" and may only be assigned the Participate role. This operation is not typically needed for adding external participants to a Workspace as they will be automatically added as tasks are assigned.\n\nAvailable role IDs can be retrieved via the Assignable Roles operation on a workspace. If the `role_id` is not passed, the user is added with the Participate role.",
+                "operationId": "addWorkspaceUser",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The user details",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WorkspaceUserForCreate"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WorkspaceUserForCreate"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WorkspaceUserForCreate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "The user was successfully added to the workspace",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateWorkspaceUserResponse"
+                                },
+                                "examples": {
+                                    "CreateWorkspaceUserResponseExample": {
+                                        "$ref": "#/components/examples/CreateWorkspaceUserResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "addWorkspaceUser",
+                "x-ds-method": "addWorkspaceUser",
+                "x-ds-service": "Workspace Users"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/users/{userId}": {
+            "put": {
+                "tags": [
+                    "WorkspaceUsers"
+                ],
+                "summary": "Updates the specified user's role",
+                "description": "This operation updates the specified user's role in the workspace. Users within the account are considered \"Internal\" and may be assigned any role. Users outside the account are considered \"External\" and may only be assigned \"External\" roles.",
+                "operationId": "updateWorkspaceUser",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "The ID of the user to update",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/UserId"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The user details to update to including the RoleId",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WorkspaceUserForUpdate"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WorkspaceUserForUpdate"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WorkspaceUserForUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The workspace user was successfully updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateWorkspaceUserResponse"
+                                },
+                                "examples": {
+                                    "UpdateWorkspaceUserResponseExample": {
+                                        "$ref": "#/components/examples/UpdateWorkspaceUserResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "updateWorkspaceUser",
+                "x-ds-method": "updateWorkspaceUser",
+                "x-ds-service": "Workspace Users"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/users/{userId}/actions/revoke-access": {
+            "post": {
+                "tags": [
+                    "WorkspaceUsers"
+                ],
+                "summary": "Revokes the specified user's access to the workspace",
+                "description": "This operation revokes the specified user's access to the workspace. The optional `revocation_date` may be set to schedule revocation in the future. If not specified, the revocation will be immediate.",
+                "operationId": "revokeWorkspaceUserAccess",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace to revoke access from",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "The ID of the user to be revoked from the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/UserId"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Optional details. Allows scheduling the revocation for the future",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RevokeWorkspaceUserDetails"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RevokeWorkspaceUserDetails"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RevokeWorkspaceUserDetails"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "The workspace user's access was successfully revoked"
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "revokeWorkspaceUserAccess",
+                "x-ds-method": "revokeWorkspaceUserAccess",
+                "x-ds-service": "Workspace Users"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/users/{userId}/actions/restore-access": {
+            "post": {
+                "tags": [
+                    "WorkspaceUsers"
+                ],
+                "summary": "Restores the specified user's access to the workspace",
+                "description": "This operation restores the specified user's access to the workspace. The user must have been previously revoked from the workspace. The access is immediately restored.",
+                "operationId": "restoreWorkspaceUserAccess",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace to restore access",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "The ID of the user to be restored to the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/UserId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "The workspace user's access was successfully restored"
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "restoreWorkspaceUserAccess",
+                "x-ds-method": "restoreWorkspaceUserAccess",
+                "x-ds-service": "Workspace Users"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces": {
+            "get": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Gets workspaces available to the calling user",
+                "description": "This operation retrieves a list of workspaces available to the calling user. It returns basic information about each workspace, including its unique identifier (ID), name, and metadata such as when it was created and by whom.\n\nPagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.",
+                "operationId": "getWorkspaces",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "Number of workspaces to return. Defaults to the maximum which is 100",
+                        "style": "form",
+                        "schema": {
+                            "$ref": "#/components/schemas/Count"
+                        }
+                    },
+                    {
+                        "name": "start_position",
+                        "in": "query",
+                        "description": "Position of the first item in the total results. Defaults to 0",
+                        "style": "form",
+                        "schema": {
+                            "$ref": "#/components/schemas/StartPosition"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Workspaces successfully retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspacesResponse"
+                                },
+                                "examples": {
+                                    "GetWorkspacesResponseExample": {
+                                        "$ref": "#/components/examples/GetWorkspacesResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "getWorkspaces",
+                "x-ds-method": "getWorkspaces",
+                "x-ds-service": "Workspaces"
+            },
+            "post": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Creates a new workspace",
+                "description": "This operation creates a new workspace. The calling user is automatically added as a member of the workspace with the role of Manage.\n\nOnce created, the `workspace_id` is utilized to associate tasks such as envelopes. Participants on tasks will automatically be added to the workspace with the Participate role.",
+                "operationId": "createWorkspace",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The details of the workspace to be created including the name",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateWorkspaceBody"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateWorkspaceBody"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateWorkspaceBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Workspace successfully created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateWorkspaceResponse"
+                                },
+                                "examples": {
+                                    "CreateWorkspaceResponseExample": {
+                                        "$ref": "#/components/examples/CreateWorkspaceResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "createWorkspace",
+                "x-ds-method": "createWorkspace",
+                "x-ds-service": "Workspaces"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}": {
+            "get": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Returns details about the workspace",
+                "description": "This operation retrieves details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.",
+                "operationId": "getWorkspace",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Workspace successfully retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspaceResponse"
+                                },
+                                "examples": {
+                                    "GetWorkspaceResponseExample": {
+                                        "$ref": "#/components/examples/GetWorkspaceResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "getWorkspace",
+                "x-ds-method": "getWorkspace",
+                "x-ds-service": "Workspaces"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/assignable-roles": {
+            "get": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Returns the roles the caller can assign to workspace users",
+                "description": "This operation returns roles that are assignable to users in the workspace based on the caller's role in the workspace. Roles available include Manage (internal) and Participate (external). Participate is the default role.\n\nUsers within the account are considered \"Internal\" and may be assigned any role. Users outside the account are considered \"External\" and may only be assigned \"External\" roles.\n\nPagination is supported by passing `start_position` and `count` in the request. The response will include `resultSetSize`, `start_position`, and `end_position` which may be utilized for subsequent requests.",
+                "operationId": "getWorkspaceAssignableRoles",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "A search filter that returns assignable roles by the beginning of the role name",
+                        "style": "form",
+                        "schema": {
+                            "$ref": "#/components/schemas/Filter"
+                        }
+                    },
+                    {
+                        "name": "start_position",
+                        "in": "query",
+                        "description": "The index position within the total result set from which to start returning values. The default value is 0",
+                        "style": "form",
+                        "schema": {
+                            "$ref": "#/components/schemas/StartPosition"
+                        }
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "The number of results to return. This value must be a number between 1 and 100 (default)",
+                        "style": "form",
+                        "schema": {
+                            "$ref": "#/components/schemas/Count"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Assignable roles successfully retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspaceAssignableRolesResponse"
+                                },
+                                "examples": {
+                                    "GetWorkspaceAssignableRolesResponseExample": {
+                                        "$ref": "#/components/examples/GetWorkspaceAssignableRolesResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "getWorkspaceAssignableRoles",
+                "x-ds-method": "getWorkspaceAssignableRoles",
+                "x-ds-service": "Workspaces"
+            }
+        },
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/envelopes": {
+            "post": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Creates an envelope with the given documents. Returns the ID of the created envelope",
+                "description": "This operation creates an envelope associated with the workspace. Using the `envelope_id` from the response, the [eSignature API](https://developers.docusign.com/docs/esign-rest-api/) may be utilized to modify the envelope and ultimately send it.\n\nEnvelope recipients will automatically be granted Participate access to the workspace. Envelope recipients will receive consolidated notifications from Docusign Workspaces rather than standard individual envelope notifications.\n\nDocusign Connect events may be utilized to receive updates to individual envelope events.\n\nThe `envelopes` operation on the workspace may be utilized to query the status of all the envelopes in the workspace.\n\nWhen `document_ids` is empty or excluded, the envelope is created without any documents from the workspace. eSignature API calls, including adding documents and templates, may be utilized to modify the envelope before it is sent. The eSignature API must be utilized to send the envelope.",
+                "operationId": "createWorkspaceEnvelope",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "The details of the envelope to be created including the list of document IDs to add to the envelope",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WorkspaceEnvelopeForCreate"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WorkspaceEnvelopeForCreate"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WorkspaceEnvelopeForCreate"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "The envelope was successfully created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateWorkspaceEnvelopeResponse"
+                                },
+                                "examples": {
+                                    "CreateWorkspaceEnvelopeResponseExample": {
+                                        "$ref": "#/components/examples/CreateWorkspaceEnvelopeResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "createWorkspaceEnvelope",
+                "x-ds-method": "createWorkspaceEnvelope",
+                "x-ds-service": "Workspaces"
+            },
+            "get": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Returns the envelopes associated with the given workspace",
+                "description": "This operation retrieves a list of all associated workspace envelopes. The [`status`](https://support.docusign.com/s/document-item?bundleId=oeq1643226594604&topicId=wdm1578456348227.html) on each envelope can be used to track envelope progress. Statuses are formatted as ProperCase. e.g. `Sent`, `WaitingForOthers`, `Completed`, etc.\n\nBased on the permissions of the caller, additional envelope details may be retrieved from the [eSignature API](https://developers.docusign.com/docs/esign-rest-api/) using the `envelope_id`.",
+                "operationId": "getWorkspaceEnvelopes",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Envelopes successfully retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspaceEnvelopesResponse"
+                                },
+                                "examples": {
+                                    "GetWorkspaceEnvelopesResponseExample": {
+                                        "$ref": "#/components/examples/GetWorkspaceEnvelopesResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "getWorkspaceEnvelopes",
+                "x-ds-method": "getWorkspaceEnvelopes",
+                "x-ds-service": "Workspaces"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AccountId": {
+                "type": "string",
+                "description": "The accountId parameter",
+                "format": "uuid",
+                "x-ds-definition-name": "AccountId"
+            },
+            "AddWorkspaceDocumentRequest": {
+                "type": "object",
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "description": "The file within the multipart/form-data",
+                        "format": "binary"
+                    }
+                },
+                "x-ds-definition-name": "AddWorkspaceDocumentRequest"
+            },
+            "AddWorkspaceUploadRequestDocumentRequest": {
+                "type": "object",
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "description": "The file within the multipart/form-data",
+                        "format": "binary"
+                    }
+                },
+                "x-ds-definition-name": "AddWorkspaceUploadRequestDocumentRequest"
+            },
+            "AddWorkspaceUploadRequestDocumentResponse": {
+                "required": [
+                    "document_id",
+                    "document_name",
+                    "upload_request_id"
+                ],
+                "type": "object",
+                "properties": {
+                    "upload_request_id": {
+                        "type": "string",
+                        "description": "The ID of the upload request",
+                        "format": "uuid"
+                    },
+                    "document_id": {
+                        "type": "string",
+                        "description": "The ID of the document that was added",
+                        "format": "uuid"
+                    },
+                    "document_name": {
+                        "type": "string",
+                        "description": "The name of the document",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response for adding a document to an upload request",
+                "x-ds-definition-name": "AddWorkspaceUploadRequestDocumentResponse"
+            },
+            "Count": {
+                "type": "integer",
+                "description": "The count parameter",
+                "format": "int32",
+                "x-ds-definition-name": "Count"
+            },
+            "CreateWorkspaceBody": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the workspace",
+                        "nullable": true
+                    },
+                    "brand_id": {
+                        "type": "string",
+                        "description": "A GUID value that identifies a brand. For more information, see <a href=\"https://developers.docusign.com/docs/esign-rest-api/esign101/concepts/branding/\">Branding</a>",
+                        "format": "uuid",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "CreateWorkspaceBody"
+            },
+            "CreateWorkspaceDocumentOwner": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "nullable": true
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "CreateWorkspaceDocumentOwner"
+            },
+            "CreateWorkspaceDocumentResponse": {
+                "type": "object",
+                "properties": {
+                    "document_id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "owner_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "nullable": true
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "last_updated_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "owner": {
+                        "$ref": "#/components/schemas/CreateWorkspaceDocumentOwner"
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "CreateWorkspaceDocumentResponse"
+            },
+            "CreateWorkspaceEnvelopeResponse": {
+                "type": "object",
+                "properties": {
+                    "envelope_id": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "CreateWorkspaceEnvelopeResponse"
+            },
+            "CreateWorkspaceResponse": {
+                "type": "object",
+                "properties": {
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "The ID of the workspace",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the workspace",
+                        "nullable": true
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "description": "The date the workspace was created",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "created_by_user_id": {
+                        "type": "string",
+                        "description": "The ID of the user who created the workspace",
+                        "format": "uuid",
+                        "nullable": true
+                    },
+                    "workspace_owner_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "description": "The list of user IDs of the workspace owners",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "CreateWorkspaceResponse"
+            },
+            "CreateWorkspaceUploadRequestAssignment": {
+                "required": [
+                    "upload_request_responsibility_type_id"
+                ],
+                "type": "object",
+                "properties": {
+                    "assignee_user_id": {
+                        "type": "string",
+                        "description": "The ID of the assigned user",
+                        "format": "uuid",
+                        "nullable": true
+                    },
+                    "upload_request_responsibility_type_id": {
+                        "$ref": "#/components/schemas/WorkspaceUploadRequestResponsibilityType"
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "description": "The first name of the assignee",
+                        "nullable": true
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "description": "The last name of the assignee",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "The email of the assignee",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "CreateWorkspaceUploadRequestAssignment"
+            },
+            "CreateWorkspaceUploadRequestBody": {
+                "required": [
+                    "assignments",
+                    "description",
+                    "due_date",
+                    "name",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the upload request",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the upload request",
+                        "nullable": true
+                    },
+                    "due_date": {
+                        "type": "string",
+                        "description": "The due date for the upload request",
+                        "format": "date-time"
+                    },
+                    "assignments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CreateWorkspaceUploadRequestAssignment"
+                        },
+                        "description": "List of user assignments for the upload request",
+                        "nullable": true
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/WorkspaceUploadRequestStatus"
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "CreateWorkspaceUploadRequestBody"
+            },
+            "CreateWorkspaceUserResponse": {
+                "type": "object",
+                "properties": {
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "The ID of the workspace",
+                        "format": "uuid"
+                    },
+                    "user_id": {
+                        "type": "string",
+                        "description": "The ID of the user",
+                        "format": "uuid"
+                    },
+                    "role_id": {
+                        "type": "string",
+                        "description": "The ID of the role assigned to the user",
+                        "format": "uuid"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "The email of the user",
+                        "nullable": true
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "description": "The first name of the user",
+                        "nullable": true
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "description": "The last name of the user",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "CreateWorkspaceUserResponse"
+            },
+            "DocumentId": {
+                "type": "string",
+                "description": "The documentId parameter",
+                "format": "uuid",
+                "x-ds-definition-name": "DocumentId"
+            },
+            "ErrorDetails": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "A brief message describing the error condition",
+                        "nullable": true
+                    },
+                    "error_code": {
+                        "type": "string",
+                        "description": "A standardized code that generalizes the specific error",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The error response object for the Workspaces API",
+                "x-ds-definition-name": "ErrorDetails"
+            },
+            "Filter": {
+                "type": "string",
+                "description": "The filter parameter",
+                "x-ds-definition-name": "Filter"
+            },
+            "GetWorkspaceAssignableRolesResponse": {
+                "required": [
+                    "roles"
+                ],
+                "type": "object",
+                "properties": {
+                    "roles": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceRoleSummary"
+                        },
+                        "description": "The list of roles that can be assigned to the workspace",
+                        "nullable": true
+                    },
+                    "result_set_size": {
+                        "type": "integer",
+                        "description": "The number of roles returned in the response. Always equal or less than the `count` of the request",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "start_position": {
+                        "type": "integer",
+                        "description": "Position of the first item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "end_position": {
+                        "type": "integer",
+                        "description": "Position of the last item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "total_row_count": {
+                        "type": "integer",
+                        "description": "The total number of roles applicable to the request regardless of pagination. It may not always be computed",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "current_role_id": {
+                        "type": "string",
+                        "description": "The optional ID of the current role. It may not always be computed",
+                        "format": "uuid",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetWorkspaceAssignableRolesResponse"
+            },
+            "GetWorkspaceDocumentContentsResponse": {
+                "type": "string",
+                "format": "binary",
+                "x-ds-definition-name": "GetWorkspaceDocumentContentsResponse"
+            },
+            "GetWorkspaceDocumentResponse": {
+                "required": [
+                    "document_id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "The ID of the workspace",
+                        "format": "uuid",
+                        "nullable": true
+                    },
+                    "document_id": {
+                        "type": "string",
+                        "description": "The ID of the document",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The name of the document"
+                    },
+                    "owner_id": {
+                        "type": "string",
+                        "description": "The ID of the owner of the document",
+                        "format": "uuid",
+                        "nullable": true
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "The size of the document in bytes",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "description": "The date the document was created",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "content_type": {
+                        "type": "string",
+                        "description": "The document content type",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetWorkspaceDocumentResponse"
+            },
+            "GetWorkspaceDocumentsResponse": {
+                "type": "object",
+                "properties": {
+                    "documents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceDocument"
+                        },
+                        "description": "The document summary list. Includes the ID, name, and metadata",
+                        "nullable": true
+                    },
+                    "result_set_size": {
+                        "type": "integer",
+                        "description": "The number of documents returned in the response. Always equal or less than the `count` of the request",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "start_position": {
+                        "type": "integer",
+                        "description": "Position of the first item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "end_position": {
+                        "type": "integer",
+                        "description": "Position of the last item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "total_row_count": {
+                        "type": "integer",
+                        "description": "The total number of documents in the workspace applicable to the request regardless of pagination. It may not always be computed",
+                        "format": "int32",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetWorkspaceDocumentsResponse"
+            },
+            "GetWorkspaceEnvelopesResponse": {
+                "required": [
+                    "envelopes"
+                ],
+                "type": "object",
+                "properties": {
+                    "envelopes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceEnvelopeSummary"
+                        },
+                        "description": "The summary list of envelopes associated with the workspace",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetWorkspaceEnvelopesResponse"
+            },
+            "GetWorkspaceResponse": {
+                "required": [
+                    "workspace_id"
+                ],
+                "type": "object",
+                "properties": {
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "The ID of the workspace",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the workspace",
+                        "nullable": true
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "description": "The date the workspace was created",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "created_by_user_id": {
+                        "type": "string",
+                        "description": "The ID of the user who created the workspace",
+                        "format": "uuid",
+                        "nullable": true
+                    },
+                    "workspace_owner_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "description": "The list of user IDs of the workspace owners",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The details of a single workspace",
+                "x-ds-definition-name": "GetWorkspaceResponse"
+            },
+            "GetWorkspaceUploadRequestResponse": {
+                "required": [
+                    "assignments",
+                    "can_delete",
+                    "can_edit",
+                    "can_view",
+                    "created_date",
+                    "documents",
+                    "name",
+                    "status",
+                    "updated_date",
+                    "upload_request_id",
+                    "upload_request_owner",
+                    "workspace_id"
+                ],
+                "type": "object",
+                "properties": {
+                    "upload_request_id": {
+                        "type": "string",
+                        "description": "The ID of the upload request",
+                        "format": "uuid"
+                    },
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "The ID of the workspace",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the upload request",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the upload request",
+                        "nullable": true
+                    },
+                    "upload_request_owner": {
+                        "$ref": "#/components/schemas/WorkspaceUploadRequestOwner"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/WorkspaceUploadRequestStatus"
+                    },
+                    "documents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceUploadRequestDocument"
+                        },
+                        "description": "List of documents associated with the upload request",
+                        "nullable": true
+                    },
+                    "assignments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceUploadRequestAssignment"
+                        },
+                        "description": "List of user assignments for the upload request",
+                        "nullable": true
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "description": "The date the upload request was created",
+                        "format": "date-time"
+                    },
+                    "updated_date": {
+                        "type": "string",
+                        "description": "The date the upload request was last updated",
+                        "format": "date-time"
+                    },
+                    "due_date": {
+                        "type": "string",
+                        "description": "The due date for the upload request",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "sent_date": {
+                        "type": "string",
+                        "description": "The date the upload request was sent",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "completed_date": {
+                        "type": "string",
+                        "description": "The date the upload request was completed",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "can_view": {
+                        "type": "boolean",
+                        "description": "Whether the current user can view the upload request"
+                    },
+                    "can_edit": {
+                        "type": "boolean",
+                        "description": "Whether the current user can edit the upload request"
+                    },
+                    "can_delete": {
+                        "type": "boolean",
+                        "description": "Whether the current user can delete the upload request"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Upload request details - single upload request response",
+                "x-ds-definition-name": "GetWorkspaceUploadRequestResponse"
+            },
+            "GetWorkspaceUploadRequestsResponse": {
+                "required": [
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceUploadRequest"
+                        },
+                        "description": "The upload request list",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Response containing a list of upload requests",
+                "x-ds-definition-name": "GetWorkspaceUploadRequestsResponse"
+            },
+            "GetWorkspaceUsersResponse": {
+                "required": [
+                    "users"
+                ],
+                "type": "object",
+                "properties": {
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceUserSummary"
+                        },
+                        "description": "The user summary list. Includes the ID, name, and metadata such as the role ID and role name",
+                        "nullable": true
+                    },
+                    "result_set_size": {
+                        "type": "integer",
+                        "description": "The number of users returned in the response. Always equal or less than the `count` of the request",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "start_position": {
+                        "type": "integer",
+                        "description": "Position of the first item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "end_position": {
+                        "type": "integer",
+                        "description": "Position of the last item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "total_row_count": {
+                        "type": "integer",
+                        "description": "The total number of users in the workspace applicable to the request regardless of pagination. It may not always be computed",
+                        "format": "int32",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetWorkspaceUsersResponse"
+            },
+            "GetWorkspaceUsersSortingOption": {
+                "enum": [
+                    "first_name_asc",
+                    "last_name_asc",
+                    "email_asc",
+                    "first_name_desc",
+                    "last_name_desc",
+                    "email_desc"
+                ],
+                "type": "string",
+                "x-ds-definition-name": "GetWorkspaceUsersSortingOption"
+            },
+            "GetWorkspacesResponse": {
+                "type": "object",
+                "properties": {
+                    "workspaces": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceSummary"
+                        },
+                        "description": "The workspace summary list. Includes the ID, name, and creation metadata",
+                        "nullable": true
+                    },
+                    "result_set_size": {
+                        "type": "integer",
+                        "description": "The number of workspaces returned in the response. Always equal or less than the `count` of the request",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "start_position": {
+                        "type": "integer",
+                        "description": "Position of the first item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "end_position": {
+                        "type": "integer",
+                        "description": "Position of the last item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "total_row_count": {
+                        "type": "integer",
+                        "description": "The total number of workspaces applicable to the request regardless of pagination. It may not always be computed",
+                        "format": "int32",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetWorkspacesResponse"
+            },
+            "NameFilter": {
+                "type": "string",
+                "description": "The name_filter parameter",
+                "x-ds-definition-name": "NameFilter"
+            },
+            "RevokeWorkspaceUserDetails": {
+                "type": "object",
+                "properties": {
+                    "revocation_date": {
+                        "type": "string",
+                        "description": "The optional date in the future to initiate the revocation. If not specified, the revocation will be immediate",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "RevokeWorkspaceUserDetails"
+            },
+            "StartPosition": {
+                "type": "integer",
+                "description": "The start_position parameter",
+                "format": "int32",
+                "x-ds-definition-name": "StartPosition"
+            },
+            "UpdateWorkspaceUploadRequestBody": {
+                "required": [
+                    "description",
+                    "due_date",
+                    "name",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "upload_request_id": {
+                        "type": "string",
+                        "description": "The ID of the upload request",
+                        "format": "uuid",
+                        "nullable": true
+                    },
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "The ID of the workspace",
+                        "format": "uuid",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the upload request (editable)",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the upload request (editable)",
+                        "nullable": true
+                    },
+                    "upload_request_owner": {
+                        "$ref": "#/components/schemas/WorkspaceUploadRequestOwner"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/WorkspaceUploadRequestStatus"
+                    },
+                    "documents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceUploadRequestDocument"
+                        },
+                        "description": "List of documents associated with the upload request",
+                        "nullable": true
+                    },
+                    "assignments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceUploadRequestAssignment"
+                        },
+                        "description": "List of user assignments for the upload request",
+                        "nullable": true
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "description": "The date the upload request was created",
+                        "nullable": true
+                    },
+                    "updated_date": {
+                        "type": "string",
+                        "description": "The date the upload request was last updated",
+                        "nullable": true
+                    },
+                    "due_date": {
+                        "type": "string",
+                        "description": "The due date for the upload request (editable)",
+                        "nullable": true
+                    },
+                    "sent_date": {
+                        "type": "string",
+                        "description": "The date the upload request was sent",
+                        "nullable": true
+                    },
+                    "completed_date": {
+                        "type": "string",
+                        "description": "The date the upload request was completed",
+                        "nullable": true
+                    },
+                    "can_view": {
+                        "type": "boolean",
+                        "description": "Whether the current user can view the upload request",
+                        "nullable": true
+                    },
+                    "can_edit": {
+                        "type": "boolean",
+                        "description": "Whether the current user can edit the upload request",
+                        "nullable": true
+                    },
+                    "can_delete": {
+                        "type": "boolean",
+                        "description": "Whether the current user can delete the upload request",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Upload request details for update operations",
+                "x-ds-definition-name": "UpdateWorkspaceUploadRequestBody"
+            },
+            "UpdateWorkspaceUserResponse": {
+                "type": "object",
+                "properties": {
+                    "role_id": {
+                        "type": "string",
+                        "description": "The ID of the role assigned to the user",
+                        "format": "uuid"
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "UpdateWorkspaceUserResponse"
+            },
+            "UploadRequestId": {
+                "type": "string",
+                "description": "The uploadRequestId parameter",
+                "format": "uuid",
+                "x-ds-definition-name": "UploadRequestId"
+            },
+            "UserId": {
+                "type": "string",
+                "description": "The userId parameter",
+                "format": "uuid",
+                "x-ds-definition-name": "UserId"
+            },
+            "WorkspaceDocument": {
+                "required": [
+                    "document_id"
+                ],
+                "type": "object",
+                "properties": {
+                    "document_id": {
+                        "type": "string",
+                        "description": "The ID of the document",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the document",
+                        "nullable": true
+                    },
+                    "owner_id": {
+                        "type": "string",
+                        "description": "The ID of the user who owns the document",
+                        "format": "uuid",
+                        "nullable": true
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "The size of the document in bytes",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "description": "The date the document was created",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "last_updated_date": {
+                        "type": "string",
+                        "description": "The date the document was last updated",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "owner": {
+                        "$ref": "#/components/schemas/WorkspaceDocumentOwner"
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "WorkspaceDocument"
+            },
+            "WorkspaceDocumentOwner": {
+                "type": "object",
+                "properties": {
+                    "first_name": {
+                        "type": "string",
+                        "description": "The first name of the document owner",
+                        "nullable": true
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "description": "The last name of the document owner",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "WorkspaceDocumentOwner"
+            },
+            "WorkspaceEnvelopeForCreate": {
+                "required": [
+                    "envelope_name"
+                ],
+                "type": "object",
+                "properties": {
+                    "envelope_name": {
+                        "type": "string",
+                        "description": "The name for the envelope",
+                        "nullable": true
+                    },
+                    "document_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "description": "The optional list of document IDs to be added to the envelope",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "WorkspaceEnvelopeForCreate"
+            },
+            "WorkspaceEnvelopeSummary": {
+                "required": [
+                    "envelope_id",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "envelope_id": {
+                        "type": "string",
+                        "description": "The ID of the envelope",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "The status of the envelope in the workspace",
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The envelope name",
+                        "nullable": true
+                    },
+                    "subject": {
+                        "type": "string",
+                        "description": "The envelope subject",
+                        "nullable": true
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "description": "The date the envelope was created",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "last_updated_date": {
+                        "type": "string",
+                        "description": "The date the envelope was last updated",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The summary of the envelope in the workspace",
+                "x-ds-definition-name": "WorkspaceEnvelopeSummary"
+            },
+            "WorkspaceId": {
+                "type": "string",
+                "description": "The workspaceId parameter",
+                "format": "uuid",
+                "x-ds-definition-name": "WorkspaceId"
+            },
+            "WorkspaceRoleSummary": {
+                "type": "object",
+                "properties": {
+                    "role_id": {
+                        "type": "string",
+                        "description": "The ID of the role",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the role",
+                        "nullable": true
+                    },
+                    "is_external": {
+                        "type": "boolean",
+                        "description": "If this role is applicable to any participant of a workspace including those outside the account. If false, this role may only be assigned to internal users of the same account",
+                        "nullable": true
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "description": "The date the role was created",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "WorkspaceRoleSummary"
+            },
+            "WorkspaceSummary": {
+                "type": "object",
+                "properties": {
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "The ID of the workspace",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the workspace",
+                        "nullable": true
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "description": "The date the workspace was created",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "created_by_user_id": {
+                        "type": "string",
+                        "description": "The ID of the user who created the workspace",
+                        "format": "uuid"
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "WorkspaceSummary"
+            },
+            "WorkspaceUploadRequest": {
+                "required": [
+                    "assignments",
+                    "can_delete",
+                    "can_edit",
+                    "can_view",
+                    "created_date",
+                    "documents",
+                    "name",
+                    "status",
+                    "updated_date",
+                    "upload_request_id",
+                    "upload_request_owner",
+                    "workspace_id"
+                ],
+                "type": "object",
+                "properties": {
+                    "upload_request_id": {
+                        "type": "string",
+                        "description": "The ID of the upload request",
+                        "format": "uuid"
+                    },
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "The ID of the workspace",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the upload request",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the upload request",
+                        "nullable": true
+                    },
+                    "upload_request_owner": {
+                        "$ref": "#/components/schemas/WorkspaceUploadRequestOwner"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/WorkspaceUploadRequestStatus"
+                    },
+                    "documents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceUploadRequestDocument"
+                        },
+                        "description": "List of documents associated with the upload request",
+                        "nullable": true
+                    },
+                    "assignments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceUploadRequestAssignment"
+                        },
+                        "description": "List of user assignments for the upload request",
+                        "nullable": true
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "description": "The date the upload request was created",
+                        "format": "date-time"
+                    },
+                    "updated_date": {
+                        "type": "string",
+                        "description": "The date the upload request was last updated",
+                        "format": "date-time"
+                    },
+                    "due_date": {
+                        "type": "string",
+                        "description": "The due date for the upload request",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "sent_date": {
+                        "type": "string",
+                        "description": "The date the upload request was sent",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "completed_date": {
+                        "type": "string",
+                        "description": "The date the upload request was completed",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "can_view": {
+                        "type": "boolean",
+                        "description": "Whether the current user can view the upload request"
+                    },
+                    "can_edit": {
+                        "type": "boolean",
+                        "description": "Whether the current user can edit the upload request"
+                    },
+                    "can_delete": {
+                        "type": "boolean",
+                        "description": "Whether the current user can delete the upload request"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "",
+                "x-ds-definition-name": "GetWorkspaceUploadRequestResponse",
+                "x-ds-category": "Workspaces",
+                "x-ds-order": "100",
+                "x-ms-summary": ""
+            },
+            "WorkspaceUploadRequestAssignment": {
+                "required": [
+                    "assignee_user_id"
+                ],
+                "type": "object",
+                "properties": {
+                    "assignee_user_id": {
+                        "type": "string",
+                        "description": "The ID of the assigned user",
+                        "format": "uuid"
+                    },
+                    "upload_request_responsibility_type_id": {
+                        "$ref": "#/components/schemas/WorkspaceUploadRequestResponsibilityType"
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "WorkspaceUploadRequestAssignment"
+            },
+            "WorkspaceUploadRequestDocument": {
+                "type": "object",
+                "properties": {
+                    "document_name": {
+                        "type": "string",
+                        "description": "The document name",
+                        "nullable": true
+                    },
+                    "document_id": {
+                        "type": "string",
+                        "description": "The document ID",
+                        "format": "uuid",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "WorkspaceUploadRequestDocument"
+            },
+            "WorkspaceUploadRequestOwner": {
+                "required": [
+                    "user_id"
+                ],
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "description": "The ID of the upload request owner",
+                        "format": "uuid"
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "WorkspaceUploadRequestOwner"
+            },
+            "WorkspaceUploadRequestResponsibilityType": {
+                "enum": [
+                    "watcher",
+                    "assignee"
+                ],
+                "type": "string",
+                "description": "Enum representing the responsibility type for a workspace upload request assignment",
+                "x-ds-definition-name": "WorkspaceUploadRequestResponsibilityType"
+            },
+            "WorkspaceUploadRequestStatus": {
+                "enum": [
+                    "draft",
+                    "in_progress",
+                    "overdue",
+                    "complete",
+                    "unknown"
+                ],
+                "type": "string",
+                "description": "Enum representing the status of a workspace upload request",
+                "x-ds-definition-name": "WorkspaceUploadRequestStatus"
+            },
+            "WorkspaceUserForCreate": {
+                "required": [
+                    "email",
+                    "first_name",
+                    "last_name"
+                ],
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The email address of the added user. May be an internal user to the account or an external user"
+                    },
+                    "first_name": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The first name of the added user"
+                    },
+                    "last_name": {
+                        "minLength": 1,
+                        "type": "string",
+                        "description": "The last name of the added user"
+                    },
+                    "role_id": {
+                        "type": "string",
+                        "description": "The optional Role ID to assign to the user. Defaults to the \"Participate\" role",
+                        "format": "uuid",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "WorkspaceUserForCreate"
+            },
+            "WorkspaceUserForUpdate": {
+                "type": "object",
+                "properties": {
+                    "role_id": {
+                        "type": "string",
+                        "description": "The ID of the role to update to",
+                        "format": "uuid"
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "WorkspaceUserForUpdate"
+            },
+            "WorkspaceUserSummary": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "description": "The ID of the user",
+                        "format": "uuid"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "The email of the user",
+                        "nullable": true
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "description": "The first name of the user",
+                        "nullable": true
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "description": "The last name of the user",
+                        "nullable": true
+                    },
+                    "role_id": {
+                        "type": "string",
+                        "description": "The ID of the users's role",
+                        "format": "uuid",
+                        "nullable": true
+                    },
+                    "role_name": {
+                        "type": "string",
+                        "description": "The name of the user's role",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "WorkspaceUserSummary"
+            },
+            "Workspaces": {
+                "type": "object",
+                "properties": {
+                    "workspaces": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceSummary"
+                        },
+                        "description": "The workspace summary list. Includes the ID, name, and creation metadata",
+                        "nullable": true
+                    },
+                    "result_set_size": {
+                        "type": "integer",
+                        "description": "The number of workspaces returned in the response. Always equal or less than the `count` of the request",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "start_position": {
+                        "type": "integer",
+                        "description": "Position of the first item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "end_position": {
+                        "type": "integer",
+                        "description": "Position of the last item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "total_row_count": {
+                        "type": "integer",
+                        "description": "The total number of workspaces applicable to the request regardless of pagination. It may not always be computed",
+                        "format": "int32",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetWorkspacesResponse",
+                "description": "",
+                "x-ds-category": "Workspaces",
+                "x-ds-order": "100",
+                "x-ms-summary": ""
+            },
+            "WorkspaceDocuments": {
+                "type": "object",
+                "properties": {
+                    "documents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceDocument"
+                        },
+                        "description": "The document summary list. Includes the ID, name, and metadata",
+                        "nullable": true
+                    },
+                    "result_set_size": {
+                        "type": "integer",
+                        "description": "The number of documents returned in the response. Always equal or less than the `count` of the request",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "start_position": {
+                        "type": "integer",
+                        "description": "Position of the first item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "end_position": {
+                        "type": "integer",
+                        "description": "Position of the last item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "total_row_count": {
+                        "type": "integer",
+                        "description": "The total number of documents in the workspace applicable to the request regardless of pagination. It may not always be computed",
+                        "format": "int32",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetWorkspaceDocumentsResponse",
+                "description": "",
+                "x-ds-category": "Workspaces",
+                "x-ds-order": "100",
+                "x-ms-summary": ""
+            },
+            "WorkspaceUsers": {
+                "required": [
+                    "users"
+                ],
+                "type": "object",
+                "properties": {
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkspaceUserSummary"
+                        },
+                        "description": "The user summary list. Includes the ID, name, and metadata such as the role ID and role name",
+                        "nullable": true
+                    },
+                    "result_set_size": {
+                        "type": "integer",
+                        "description": "The number of users returned in the response. Always equal or less than the `count` of the request",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "start_position": {
+                        "type": "integer",
+                        "description": "Position of the first item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "end_position": {
+                        "type": "integer",
+                        "description": "Position of the last item in the total results",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "total_row_count": {
+                        "type": "integer",
+                        "description": "The total number of users in the workspace applicable to the request regardless of pagination. It may not always be computed",
+                        "format": "int32",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetWorkspaceUsersResponse",
+                "description": "",
+                "x-ds-category": "Workspaces",
+                "x-ds-order": "100",
+                "x-ms-summary": ""
+            }
+        },
+        "examples": {
+            "GetWorkspaceDocumentsResponseExample": {
+                "value": {
+                    "documents": [
+                        {
+                            "document_id": "9e2f4a8b-3c7d-4e5f-a1b2-8c9d6e3f4a7b",
+                            "name": "Contract Agreement.pdf",
+                            "owner_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4",
+                            "size": 245760,
+                            "created_date": "2025-09-01T12:00:00Z",
+                            "last_updated_date": "2025-09-01T12:00:00Z",
+                            "owner": {
+                                "first_name": "John",
+                                "last_name": "Doe"
+                            }
+                        },
+                        {
+                            "document_id": "1f3e5b9c-4d8a-5e6f-b2c3-9d0e7f4a8b1c",
+                            "name": "Employee Handbook.docx",
+                            "owner_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4",
+                            "size": 512000,
+                            "created_date": "2025-09-01T12:00:00Z",
+                            "last_updated_date": "2025-09-01T13:00:00Z",
+                            "owner": {
+                                "first_name": "John",
+                                "last_name": "Doe"
+                            }
+                        }
+                    ],
+                    "result_set_size": 2,
+                    "start_position": 0,
+                    "end_position": 1,
+                    "total_row_count": 2
+                }
+            },
+            "CreateWorkspaceDocumentResponseExample": {
+                "value": {
+                    "document_id": "9e2f4a8b-3c7d-4e5f-a1b2-8c9d6e3f4a7b",
+                    "name": "Contract Agreement.pdf",
+                    "owner_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4",
+                    "size": 245760,
+                    "created_date": "2025-09-01T12:00:00Z",
+                    "last_updated_date": "2025-09-01T12:00:00Z",
+                    "owner": {
+                        "user_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4",
+                        "first_name": "John",
+                        "last_name": "Doe"
+                    }
+                }
+            },
+            "GetWorkspaceDocumentResponseExample": {
+                "value": {
+                    "workspace_id": "113e81b7-706e-4cab-9257-73b06325266e",
+                    "document_id": "9e2f4a8b-3c7d-4e5f-a1b2-8c9d6e3f4a7b",
+                    "name": "Contract Agreement.pdf",
+                    "owner_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4",
+                    "size": 245760,
+                    "created_date": "2025-09-01T12:00:00Z",
+                    "content_type": "application/pdf"
+                }
+            },
+            "GetWorkspaceUploadRequestResponseExample": {
+                "value": {
+                    "upload_request_id": "8d7c6b5a-4f3e-2d1c-b9a8-7e6f5d4c3b2a",
+                    "workspace_id": "113e81b7-706e-4cab-9257-73b06325266e",
+                    "name": "Contract Documents Upload",
+                    "description": "Please upload the signed contract documents for review",
+                    "upload_request_owner": {
+                        "user_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4"
+                    },
+                    "status": "in_progress",
+                    "documents": [
+                        {
+                            "document_name": "Contract Agreement.pdf",
+                            "document_id": "9e2f4a8b-3c7d-4e5f-a1b2-8c9d6e3f4a7b"
+                        }
+                    ],
+                    "assignments": [
+                        {
+                            "assignee_user_id": "3b2c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+                            "upload_request_responsibility_type_id": "assignee"
+                        }
+                    ],
+                    "created_date": "2025-09-01T12:00:00Z",
+                    "updated_date": "2025-09-01T12:00:00Z",
+                    "due_date": "2025-09-08T12:00:00Z",
+                    "sent_date": "2025-09-01T12:00:00Z",
+                    "completed_date": null,
+                    "can_view": true,
+                    "can_edit": true,
+                    "can_delete": false
+                }
+            },
+            "GetWorkspaceUploadRequestsResponseExample": {
+                "value": {
+                    "data": [
+                        {
+                            "upload_request_id": "8d7c6b5a-4f3e-2d1c-b9a8-7e6f5d4c3b2a",
+                            "workspace_id": "113e81b7-706e-4cab-9257-73b06325266e",
+                            "name": "Contract Documents Upload",
+                            "description": "Please upload the signed contract documents for review",
+                            "upload_request_owner": {
+                                "user_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4"
+                            },
+                            "status": "in_progress",
+                            "documents": [
+                                {
+                                    "document_name": "Contract Agreement.pdf",
+                                    "document_id": "9e2f4a8b-3c7d-4e5f-a1b2-8c9d6e3f4a7b"
+                                }
+                            ],
+                            "assignments": [
+                                {
+                                    "assignee_user_id": "3b2c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+                                    "upload_request_responsibility_type_id": "assignee"
+                                }
+                            ],
+                            "created_date": "2025-09-01T12:00:00Z",
+                            "updated_date": "2025-09-01T12:00:00Z",
+                            "due_date": "2025-09-08T12:00:00Z",
+                            "sent_date": "2025-09-01T12:00:00Z",
+                            "completed_date": null,
+                            "can_view": true,
+                            "can_edit": true,
+                            "can_delete": false
+                        },
+                        {
+                            "upload_request_id": "5a4b3c2d-1e9f-8a7b-6c5d-4e3f2a1b9c8d",
+                            "workspace_id": "113e81b7-706e-4cab-9257-73b06325266e",
+                            "name": "Employee Onboarding Documents",
+                            "description": "Upload required documents for new employee onboarding",
+                            "upload_request_owner": {
+                                "user_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4"
+                            },
+                            "status": "complete",
+                            "documents": [],
+                            "assignments": [
+                                {
+                                    "assignee_user_id": "4c3d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+                                    "upload_request_responsibility_type_id": "assignee"
+                                }
+                            ],
+                            "created_date": "2025-08-22T12:00:00Z",
+                            "updated_date": "2025-08-29T12:00:00Z",
+                            "due_date": "2025-08-29T12:00:00Z",
+                            "sent_date": "2025-08-22T12:00:00Z",
+                            "completed_date": "2025-08-29T12:00:00Z",
+                            "can_view": true,
+                            "can_edit": false,
+                            "can_delete": false
+                        }
+                    ]
+                }
+            },
+            "AddWorkspaceUploadRequestDocumentResponseExample": {
+                "value": {
+                    "upload_request_id": "8d7c6b5a-4f3e-2d1c-b9a8-7e6f5d4c3b2a",
+                    "document_id": "9e2f4a8b-3c7d-4e5f-a1b2-8c9d6e3f4a7b",
+                    "document_name": "Uploaded Contract.pdf"
+                }
+            },
+            "GetWorkspaceUsersResponseExample": {
+                "value": {
+                    "users": [
+                        {
+                            "user_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4",
+                            "email": "john.doe@example.com",
+                            "first_name": "John",
+                            "last_name": "Doe",
+                            "role_id": "4a8e1b7c-2d5f-4c3a-9b6e-1f8a2c4d6e9b",
+                            "role_name": "Manage"
+                        },
+                        {
+                            "user_id": "3b2c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+                            "email": "jane.smith@example.com",
+                            "first_name": "Jane",
+                            "last_name": "Smith",
+                            "role_id": "7f2a9e1c-5b8d-4f6a-a1c3-8e4b7d1a5c9f",
+                            "role_name": "Participate"
+                        },
+                        {
+                            "user_id": "4c3d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+                            "email": "bob.johnson@example.com",
+                            "first_name": "Bob",
+                            "last_name": "Johnson",
+                            "role_id": "7f2a9e1c-5b8d-4f6a-a1c3-8e4b7d1a5c9f",
+                            "role_name": "Participate"
+                        }
+                    ],
+                    "result_set_size": 3,
+                    "start_position": 0,
+                    "end_position": 2,
+                    "total_row_count": 3
+                }
+            },
+            "CreateWorkspaceUserResponseExample": {
+                "value": {
+                    "workspace_id": "113e81b7-706e-4cab-9257-73b06325266e",
+                    "user_id": "3b2c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+                    "role_id": "7f2a9e1c-5b8d-4f6a-a1c3-8e4b7d1a5c9f",
+                    "email": "jane.smith@example.com",
+                    "first_name": "Jane",
+                    "last_name": "Smith"
+                }
+            },
+            "UpdateWorkspaceUserResponseExample": {
+                "value": {
+                    "role_id": "4a8e1b7c-2d5f-4c3a-9b6e-1f8a2c4d6e9b"
+                }
+            },
+            "GetWorkspacesResponseExample": {
+                "value": {
+                    "workspaces": [
+                        {
+                            "workspace_id": "113e81b7-706e-4cab-9257-73b06325266e",
+                            "name": "My Workspace",
+                            "created_date": "2025-09-01T12:00:00Z",
+                            "created_by_user_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4"
+                        },
+                        {
+                            "workspace_id": "252e4567-e89b-12d3-a456-426614174000",
+                            "name": "Example Workspace",
+                            "created_date": "2025-09-01T12:00:00Z",
+                            "created_by_user_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4"
+                        }
+                    ],
+                    "result_set_size": 2,
+                    "start_position": 0,
+                    "end_position": 1,
+                    "total_row_count": 2
+                }
+            },
+            "CreateWorkspaceResponseExample": {
+                "value": {
+                    "workspace_id": "113e81b7-706e-4cab-9257-73b06325266e",
+                    "name": "New Workspace",
+                    "created_date": "2025-09-01T12:00:00Z",
+                    "created_by_user_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4",
+                    "workspace_owner_ids": [
+                        "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4"
+                    ]
+                }
+            },
+            "GetWorkspaceResponseExample": {
+                "value": {
+                    "workspace_id": "113e81b7-706e-4cab-9257-73b06325266e",
+                    "name": "My Workspace",
+                    "created_date": "2025-09-01T12:00:00Z",
+                    "created_by_user_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4",
+                    "workspace_owner_ids": [
+                        "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4"
+                    ]
+                }
+            },
+            "GetWorkspaceAssignableRolesResponseExample": {
+                "value": {
+                    "roles": [
+                        {
+                            "role_id": "4a8e1b7c-2d5f-4c3a-9b6e-1f8a2c4d6e9b",
+                            "name": "Manage",
+                            "is_external": false,
+                            "created_date": "2025-09-01T12:00:00Z"
+                        },
+                        {
+                            "role_id": "7f2a9e1c-5b8d-4f6a-a1c3-8e4b7d1a5c9f",
+                            "name": "Participate",
+                            "is_external": true,
+                            "created_date": "2025-09-01T12:00:00Z"
+                        }
+                    ],
+                    "result_set_size": 2,
+                    "start_position": 0,
+                    "end_position": 1,
+                    "total_row_count": 2,
+                    "current_role_id": "4a8e1b7c-2d5f-4c3a-9b6e-1f8a2c4d6e9b"
+                }
+            },
+            "CreateWorkspaceEnvelopeResponseExample": {
+                "value": {
+                    "envelope_id": "3aa85f64-5717-4562-b3fc-2c963f66afa6"
+                }
+            },
+            "GetWorkspaceEnvelopesResponseExample": {
+                "value": {
+                    "envelopes": [
+                        {
+                            "envelope_id": "3aa85f64-5717-4562-b3fc-2c963f66afa6",
+                            "status": "Completed",
+                            "name": "Contract Agreement",
+                            "subject": "Please review and sign the contract agreement",
+                            "created_date": "2025-09-01T12:00:00Z",
+                            "last_updated_date": "2025-09-01T12:00:00Z"
+                        },
+                        {
+                            "envelope_id": "7bb85f64-5717-4562-b3fc-2c963f66afa8",
+                            "status": "WaitingForOthers",
+                            "name": "Employee Handbook",
+                            "subject": "Employee handbook acknowledgment",
+                            "created_date": "2025-09-01T12:00:00Z",
+                            "last_updated_date": "2025-09-01T14:00:00Z"
+                        }
+                    ]
+                }
+            }
+        },
+        "securitySchemes": {
+            "OAuth2": {
+                "type": "oauth2",
+                "description": "JWT Bearer token from Docusign authorization server",
+                "flows": {
+                    "authorizationCode": {
+                        "authorizationUrl": "https://account-d.docusign.com/oauth/auth",
+                        "tokenUrl": "https://account-d.docusign.com/oauth/token",
+                        "scopes": {
+                            "signature": "Access to signature data",
+                            "dtr.company.read": "Read workspace profile information",
+                            "dtr.rooms.read": "Read workspace data",
+                            "dtr.rooms.write": "Update workspace data",
+                            "dtr.documents.write": "Modify workspace documents"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "OAuth2": [
+                "signature",
+                "dtr.company.read",
+                "dtr.rooms.read",
+                "dtr.rooms.write",
+                "dtr.documents.write"
+            ]
+        }
+    ],
+    "tags": [
+        {
+            "name": "WorkspaceUploadRequest",
+            "description": "Upload request details - single upload request response"
+        },
+        {
+            "name": "Workspaces",
+            "description": ""
+        },
+        {
+            "name": "WorkspaceDocuments",
+            "description": ""
+        },
+        {
+            "name": "WorkspaceUsers",
+            "description": ""
+        }
+    ],
+    "x-ds-categories": [
+        {
+            "name": "Workspaces",
+            "summary": "",
+            "description": ""
+        }
+    ]
+}
