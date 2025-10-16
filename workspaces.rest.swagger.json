@@ -18,6 +18,188 @@
         }
     ],
     "paths": {
+        "/v1/accounts/{accountId}/workspaces/{workspaceId}/brand": {
+            "get": {
+                "tags": [
+                    "WorkspaceBrands"
+                ],
+                "summary": "Returns details about the brand set for a workspace",
+                "description": "This operation retrieves details about a specific workspace. It returns the brand details such as its unique identifier (ID), name, and metadata such as brand colors and logos.",
+                "operationId": "getWorkspaceBrand",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Workspace successfully retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetWorkspaceBrandResponse"
+                                },
+                                "examples": {
+                                    "GetWorkspaceBrandResponseExample": {
+                                        "$ref": "#/components/examples/GetWorkspaceBrandResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "getWorkspaceBrand",
+                "x-ds-method": "getWorkspaceBrand",
+                "x-ds-service": "Workspace Brand"
+            },
+            "put": {
+                "tags": [
+                    "WorkspaceBrands"
+                ],
+                "summary": "Updates brand for an existing workspace",
+                "description": "This operation updates brand for a specific workspace. It returns the brand details such as its unique identifier (ID), name, and metadata such as brand colors and logos.",
+                "operationId": "updateWorkspaceBrand",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWorkspaceBrandBody"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWorkspaceBrandBody"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWorkspaceBrandBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Workspace brand successfully updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateWorkspaceBrandResponse"
+                                },
+                                "examples": {
+                                    "UpdateWorkspaceBrandResponseExample": {
+                                        "$ref": "#/components/examples/UpdateWorkspaceBrandResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "updateWorkspaceBrand",
+                "x-ds-method": "updateWorkspaceBrand",
+                "x-ds-service": "Workspace Brand"
+            }
+        },
         "/v1/accounts/{accountId}/workspaces/{workspaceId}/documents": {
             "get": {
                 "tags": [
@@ -1823,6 +2005,106 @@
             }
         },
         "/v1/accounts/{accountId}/workspaces/{workspaceId}": {
+            "put": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "summary": "Updates an existing workspace",
+                "description": "This operation updates details about a specific workspace. It returns the workspace's unique identifier (ID), name, and metadata such as when it was created and by whom.",
+                "operationId": "updateWorkspace",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The ID of the account",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/AccountId"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "description": "The ID of the workspace",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "$ref": "#/components/schemas/WorkspaceId"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWorkspaceBody"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWorkspaceBody"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWorkspaceBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Workspace successfully updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateWorkspaceResponse"
+                                },
+                                "examples": {
+                                    "UpdateWorkspaceResponseExample": {
+                                        "$ref": "#/components/examples/UpdateWorkspaceResponseExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. See ErrorCode and Message for details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authorized to make this request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "updateWorkspace",
+                "x-ds-method": "updateWorkspace",
+                "x-ds-service": "Workspaces"
+            },
             "get": {
                 "tags": [
                     "Workspaces"
@@ -2255,6 +2537,40 @@
                 "description": "Response for adding a document to an upload request",
                 "x-ds-definition-name": "AddWorkspaceUploadRequestDocumentResponse"
             },
+            "BrandColor": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "value": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "BrandColor"
+            },
+            "BrandLogos": {
+                "type": "object",
+                "properties": {
+                    "primary": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "secondary": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "BrandLogos"
+            },
             "Count": {
                 "type": "integer",
                 "description": "The count parameter",
@@ -2577,6 +2893,69 @@
                 "additionalProperties": false,
                 "x-ds-definition-name": "GetWorkspaceAssignableRolesResponse"
             },
+            "GetWorkspaceBrandResponse": {
+                "required": [
+                    "brand_languages",
+                    "colors"
+                ],
+                "type": "object",
+                "properties": {
+                    "brand_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "brand_name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "brand_company": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "colors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/BrandColor"
+                        },
+                        "nullable": true
+                    },
+                    "logos": {
+                        "$ref": "#/components/schemas/BrandLogos"
+                    },
+                    "brand_languages": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "default_brand_language": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "is_sending_default": {
+                        "type": "boolean"
+                    },
+                    "is_signing_default": {
+                        "type": "boolean"
+                    },
+                    "primary_logo_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "secondary_logo_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "email_logo_id": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The details of a single workspace brand",
+                "x-ds-definition-name": "GetWorkspaceBrandResponse"
+            },
             "GetWorkspaceDocumentContentsResponse": {
                 "type": "string",
                 "format": "binary",
@@ -2793,12 +3172,14 @@
                     "created_date": {
                         "type": "string",
                         "description": "The date the upload request was created",
-                        "format": "date-time"
+                        "format": "date-time",
+                        "nullable": true
                     },
                     "updated_date": {
                         "type": "string",
                         "description": "The date the upload request was last updated",
-                        "format": "date-time"
+                        "format": "date-time",
+                        "nullable": true
                     },
                     "due_date": {
                         "type": "string",
@@ -2971,6 +3352,139 @@
                 "format": "int32",
                 "x-ds-definition-name": "StartPosition"
             },
+            "UpdateWorkspaceBody": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The updated name of the workspace",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "UpdateWorkspaceBody"
+            },
+            "UpdateWorkspaceBrandBody": {
+                "type": "object",
+                "properties": {
+                    "brand_id": {
+                        "type": "string",
+                        "description": "A GUID value that identifies a brand. For more information, see <a href=\"https://developers.docusign.com/docs/esign-rest-api/esign101/concepts/branding/\">Branding</a>",
+                        "format": "uuid",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "UpdateWorkspaceBrandBody"
+            },
+            "UpdateWorkspaceBrandResponse": {
+                "required": [
+                    "brand_languages",
+                    "colors"
+                ],
+                "type": "object",
+                "properties": {
+                    "brand_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "brand_name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "brand_company": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "colors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/BrandColor"
+                        },
+                        "nullable": true
+                    },
+                    "logos": {
+                        "$ref": "#/components/schemas/BrandLogos"
+                    },
+                    "brand_languages": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "default_brand_language": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "is_sending_default": {
+                        "type": "boolean"
+                    },
+                    "is_signing_default": {
+                        "type": "boolean"
+                    },
+                    "primary_logo_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "secondary_logo_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "email_logo_id": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The brand details set for a workspace",
+                "x-ds-definition-name": "UpdateWorkspaceBrandResponse"
+            },
+            "UpdateWorkspaceResponse": {
+                "required": [
+                    "workspace_id"
+                ],
+                "type": "object",
+                "properties": {
+                    "workspace_id": {
+                        "type": "string",
+                        "description": "The ID of the workspace",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the workspace",
+                        "nullable": true
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "description": "The date the workspace was created",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "created_by_user_id": {
+                        "type": "string",
+                        "description": "The ID of the user who created the workspace",
+                        "format": "uuid",
+                        "nullable": true
+                    },
+                    "workspace_owner_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "description": "The list of user IDs of the workspace owners",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "The details of a single workspace",
+                "x-ds-definition-name": "UpdateWorkspaceResponse"
+            },
             "UpdateWorkspaceUploadRequestBody": {
                 "required": [
                     "description",
@@ -3037,7 +3551,7 @@
                     "due_date": {
                         "type": "string",
                         "description": "The due date for the upload request (editable)",
-                        "nullable": true
+                        "format": "date-time"
                     },
                     "sent_date": {
                         "type": "string",
@@ -3086,6 +3600,29 @@
                 "description": "The uploadRequestId parameter",
                 "format": "uuid",
                 "x-ds-definition-name": "UploadRequestId"
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "company_name": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "User"
             },
             "UserId": {
                 "type": "string",
@@ -3349,12 +3886,14 @@
                     "created_date": {
                         "type": "string",
                         "description": "The date the upload request was created",
-                        "format": "date-time"
+                        "format": "date-time",
+                        "nullable": true
                     },
                     "updated_date": {
                         "type": "string",
                         "description": "The date the upload request was last updated",
-                        "format": "date-time"
+                        "format": "date-time",
+                        "nullable": true
                     },
                     "due_date": {
                         "type": "string",
@@ -3680,9 +4219,239 @@
                 "x-ds-category": "Workspaces",
                 "x-ds-order": "100",
                 "x-ms-summary": ""
+            },
+            "WorkspaceBrands": {
+                "required": [
+                    "brand_languages",
+                    "colors"
+                ],
+                "type": "object",
+                "properties": {
+                    "brand_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "brand_name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "brand_company": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "colors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/BrandColor"
+                        },
+                        "nullable": true
+                    },
+                    "logos": {
+                        "$ref": "#/components/schemas/BrandLogos"
+                    },
+                    "brand_languages": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "default_brand_language": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "is_sending_default": {
+                        "type": "boolean"
+                    },
+                    "is_signing_default": {
+                        "type": "boolean"
+                    },
+                    "primary_logo_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "secondary_logo_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "email_logo_id": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "",
+                "x-ds-definition-name": "GetWorkspaceBrandResponse",
+                "x-ds-category": "Workspaces",
+                "x-ds-order": "100",
+                "x-ms-summary": ""
             }
         },
         "examples": {
+            "GetWorkspaceBrandResponseExample": {
+                "value": {
+                    "brand_id": "21d17b0c-59bc-4879-9643-92d68bd9f8f6",
+                    "brand_name": "Test brand name",
+                    "brand_company": null,
+                    "colors": [
+                        {
+                            "name": "headerBackground",
+                            "value": "ffffff"
+                        },
+                        {
+                            "name": "headerText",
+                            "value": "ffffff"
+                        },
+                        {
+                            "name": "buttonPrimaryBackground",
+                            "value": "ffffff"
+                        },
+                        {
+                            "name": "buttonPrimaryText",
+                            "value": "ffffff"
+                        }
+                    ],
+                    "logos": {
+                        "primary": "/brand/21d17b0c-59bc-4879-9643-92d68bd9f8f6/logos/primary",
+                        "secondary": "/brand/21d17b0c-59bc-4879-9643-92d68bd9f8f6/logos/secondary",
+                        "email": "/brand/21d17b0c-59bc-4879-9643-92d68bd9f8f6/logos/email"
+                    },
+                    "brand_languages": [
+                        "ar",
+                        "bg",
+                        "cs",
+                        "da",
+                        "de",
+                        "el",
+                        "en",
+                        "en_GB",
+                        "es",
+                        "es_MX",
+                        "et",
+                        "fa",
+                        "fi",
+                        "fr",
+                        "fr_CA",
+                        "he",
+                        "hi",
+                        "hr",
+                        "hu",
+                        "id",
+                        "it",
+                        "ja",
+                        "ko",
+                        "lt",
+                        "lv",
+                        "ms",
+                        "nl",
+                        "no",
+                        "pl",
+                        "pt",
+                        "pt_BR",
+                        "ro",
+                        "ru",
+                        "sk",
+                        "sl",
+                        "sr",
+                        "sv",
+                        "th",
+                        "tr",
+                        "uk",
+                        "vi",
+                        "zh_CN",
+                        "zh_TW",
+                        "hy"
+                    ],
+                    "default_brand_language": null,
+                    "is_sending_default": false,
+                    "is_signing_default": false,
+                    "primary_logo_id": null,
+                    "secondary_logo_id": null,
+                    "email_logo_id": null
+                }
+            },
+            "UpdateWorkspaceBrandResponseExample": {
+                "value": {
+                    "brand_id": "21d17b0c-59bc-4879-9643-92d68bd9f8f6",
+                    "brand_name": "Test brand name",
+                    "brand_company": null,
+                    "colors": [
+                        {
+                            "name": "headerBackground",
+                            "value": "ffffff"
+                        },
+                        {
+                            "name": "headerText",
+                            "value": "ffffff"
+                        },
+                        {
+                            "name": "buttonPrimaryBackground",
+                            "value": "ffffff"
+                        },
+                        {
+                            "name": "buttonPrimaryText",
+                            "value": "ffffff"
+                        }
+                    ],
+                    "logos": {
+                        "primary": "/brand/21d17b0c-59bc-4879-9643-92d68bd9f8f6/logos/primary",
+                        "secondary": "/brand/21d17b0c-59bc-4879-9643-92d68bd9f8f6/logos/secondary",
+                        "email": "/brand/21d17b0c-59bc-4879-9643-92d68bd9f8f6/logos/email"
+                    },
+                    "brand_languages": [
+                        "ar",
+                        "bg",
+                        "cs",
+                        "da",
+                        "de",
+                        "el",
+                        "en",
+                        "en_GB",
+                        "es",
+                        "es_MX",
+                        "et",
+                        "fa",
+                        "fi",
+                        "fr",
+                        "fr_CA",
+                        "he",
+                        "hi",
+                        "hr",
+                        "hu",
+                        "id",
+                        "it",
+                        "ja",
+                        "ko",
+                        "lt",
+                        "lv",
+                        "ms",
+                        "nl",
+                        "no",
+                        "pl",
+                        "pt",
+                        "pt_BR",
+                        "ro",
+                        "ru",
+                        "sk",
+                        "sl",
+                        "sr",
+                        "sv",
+                        "th",
+                        "tr",
+                        "uk",
+                        "vi",
+                        "zh_CN",
+                        "zh_TW",
+                        "hy"
+                    ],
+                    "default_brand_language": null,
+                    "is_sending_default": false,
+                    "is_signing_default": false,
+                    "primary_logo_id": null,
+                    "secondary_logo_id": null,
+                    "email_logo_id": null
+                }
+            },
             "GetWorkspaceDocumentsResponseExample": {
                 "value": {
                     "documents": [
@@ -3925,6 +4694,17 @@
                     ]
                 }
             },
+            "UpdateWorkspaceResponseExample": {
+                "value": {
+                    "workspace_id": "113e81b7-706e-4cab-9257-73b06325266e",
+                    "name": "Updated Workspace",
+                    "created_date": "2025-09-01T12:00:00Z",
+                    "created_by_user_id": "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4",
+                    "workspace_owner_ids": [
+                        "211e2d22-f070-4c8d-b6a7-ecb14ceb81b4"
+                    ]
+                }
+            },
             "GetWorkspaceResponseExample": {
                 "value": {
                     "workspace_id": "113e81b7-706e-4cab-9257-73b06325266e",
@@ -4034,6 +4814,10 @@
         {
             "name": "WorkspaceUsers",
             "description": ""
+        },
+        {
+            "name": "WorkspaceBrands",
+            "description": "The details of a single workspace brand"
         }
     ],
     "x-ds-categories": [
