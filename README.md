@@ -22,6 +22,9 @@ Docusign uses the OpenAPI (OAI) Specification - formerly known as "Swagger" - to
 
 ![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/navigator.rest.swagger.json) `navigator.rest.swagger.json` - the full swagger file for Docusign's Navigator API
 
+![](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/docusign/OpenAPI-Specifications/master/workspaces.rest.swagger.json) `workspaces.rest.swagger.json` - the full swagger file for Docusign's Navigator API
+
+
 ## What can I do with a Swagger file? 
 
 We use OpenAPI/Swagger files to build many of our developer tools including our [client SDKs](https://developers.docusign.com/docs/esign-rest-api/sdk-tools) using `swagger-codegen`. We also use the OAI specification to build our [API Docs](https://docs.docusign.com/esign/) and [API Explorer](https://apiexplorer.docusign.com/#/) tools.  What will you build?  Let us know by filing an issue in this repository.
