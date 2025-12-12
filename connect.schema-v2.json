@@ -1,15 +1,15 @@
 {
-    "event": "recipient-sent",
-    "uri": "/restapi/{apiVersion}/accounts/{accountId}/envelopes/{envelopeId}",
-    "retryCount": "0",
-    "configurationId": "xxxxxxx",
+    "event": "",
+    "uri": "",
+    "retryCount": 0,
+    "configurationId": 12345,
     "apiVersion": "v2.1",
     "generatedDateTime": "",
     "data": {
-        "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        "recipientId": "1",
-        "envelopeId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "accountId": "sample string",
+        "userId": "sample string",
+        "recipientId": "",
+        "envelopeId": "sample string",
         "envelopeSummary": {
             "transactionId": "sample string 1",
             "status": "sample string 2",
@@ -213,9 +213,7 @@
                                     "conditionalParentLabel": "sample string 20",
                                     "conditionalParentValue": "sample string 21",
                                     "customTabId": "sample string 22",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 23",
                                     "tooltip": "sample string 24",
                                     "errorDetails": {
@@ -253,9 +251,7 @@
                                     "conditionalParentLabel": "sample string 20",
                                     "conditionalParentValue": "sample string 21",
                                     "customTabId": "sample string 22",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 23",
                                     "tooltip": "sample string 24",
                                     "errorDetails": {
@@ -299,9 +295,7 @@
                                     "conditionalParentLabel": "sample string 27",
                                     "conditionalParentValue": "sample string 28",
                                     "customTabId": "sample string 29",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 30",
                                     "tooltip": "sample string 31",
                                     "errorDetails": {
@@ -346,9 +340,7 @@
                                     "conditionalParentLabel": "sample string 28",
                                     "conditionalParentValue": "sample string 29",
                                     "customTabId": "sample string 30",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 31",
                                     "tooltip": "sample string 32",
                                     "errorDetails": {
@@ -394,9 +386,7 @@
                                     "conditionalParentLabel": "sample string 29",
                                     "conditionalParentValue": "sample string 30",
                                     "customTabId": "sample string 31",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 32",
                                     "tooltip": "sample string 33",
                                     "errorDetails": {
@@ -439,9 +429,7 @@
                                     "conditionalParentLabel": "sample string 26",
                                     "conditionalParentValue": "sample string 27",
                                     "customTabId": "sample string 28",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 29",
                                     "tooltip": "sample string 30",
                                     "errorDetails": {
@@ -484,9 +472,7 @@
                                     "conditionalParentLabel": "sample string 26",
                                     "conditionalParentValue": "sample string 27",
                                     "customTabId": "sample string 28",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 29",
                                     "tooltip": "sample string 30",
                                     "errorDetails": {
@@ -528,9 +514,7 @@
                                     "conditionalParentLabel": "sample string 25",
                                     "conditionalParentValue": "sample string 26",
                                     "customTabId": "sample string 27",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 28",
                                     "tooltip": "sample string 29",
                                     "errorDetails": {
@@ -580,9 +564,7 @@
                                     "conditionalParentLabel": "sample string 33",
                                     "conditionalParentValue": "sample string 34",
                                     "customTabId": "sample string 35",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 36",
                                     "tooltip": "sample string 37",
                                     "errorDetails": {
@@ -632,9 +614,7 @@
                                     "conditionalParentLabel": "sample string 33",
                                     "conditionalParentValue": "sample string 34",
                                     "customTabId": "sample string 35",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 36",
                                     "tooltip": "sample string 37",
                                     "errorDetails": {
@@ -693,9 +673,7 @@
                                     "conditionalParentLabel": "sample string 42",
                                     "conditionalParentValue": "sample string 43",
                                     "customTabId": "sample string 44",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 45",
                                     "tooltip": "sample string 46",
                                     "errorDetails": {
@@ -753,9 +731,7 @@
                                     "conditionalParentLabel": "sample string 41",
                                     "conditionalParentValue": "sample string 42",
                                     "customTabId": "sample string 43",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 44",
                                     "tooltip": "sample string 45",
                                     "errorDetails": {
@@ -811,9 +787,7 @@
                                     "conditionalParentLabel": "sample string 39",
                                     "conditionalParentValue": "sample string 40",
                                     "customTabId": "sample string 41",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 42",
                                     "tooltip": "sample string 43",
                                     "errorDetails": {
@@ -869,9 +843,7 @@
                                     "conditionalParentLabel": "sample string 39",
                                     "conditionalParentValue": "sample string 40",
                                     "customTabId": "sample string 41",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 42",
                                     "tooltip": "sample string 43",
                                     "errorDetails": {
@@ -928,9 +900,7 @@
                                     "conditionalParentLabel": "sample string 40",
                                     "conditionalParentValue": "sample string 41",
                                     "customTabId": "sample string 42",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 43",
                                     "tooltip": "sample string 44",
                                     "errorDetails": {
@@ -986,9 +956,7 @@
                                     "conditionalParentLabel": "sample string 39",
                                     "conditionalParentValue": "sample string 40",
                                     "customTabId": "sample string 41",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 42",
                                     "tooltip": "sample string 43",
                                     "errorDetails": {
@@ -1034,9 +1002,7 @@
                                     "conditionalParentLabel": "sample string 29",
                                     "conditionalParentValue": "sample string 30",
                                     "customTabId": "sample string 31",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 32",
                                     "tooltip": "sample string 33",
                                     "errorDetails": {
@@ -1077,9 +1043,7 @@
                                     "conditionalParentLabel": "sample string 24",
                                     "conditionalParentValue": "sample string 25",
                                     "customTabId": "sample string 26",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 27",
                                     "tooltip": "sample string 28",
                                     "errorDetails": {
@@ -1175,9 +1139,7 @@
                                     "conditionalParentLabel": "sample string 32",
                                     "conditionalParentValue": "sample string 33",
                                     "customTabId": "sample string 34",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 35",
                                     "tooltip": "sample string 36",
                                     "errorDetails": {
@@ -1220,9 +1182,7 @@
                                     "conditionalParentLabel": "sample string 26",
                                     "conditionalParentValue": "sample string 27",
                                     "customTabId": "sample string 28",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 29",
                                     "tooltip": "sample string 30",
                                     "errorDetails": {
@@ -1265,9 +1225,7 @@
                                     "conditionalParentLabel": "sample string 26",
                                     "conditionalParentValue": "sample string 27",
                                     "customTabId": "sample string 28",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 29",
                                     "tooltip": "sample string 30",
                                     "errorDetails": {
@@ -1310,9 +1268,7 @@
                                     "conditionalParentLabel": "sample string 26",
                                     "conditionalParentValue": "sample string 27",
                                     "customTabId": "sample string 28",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 29",
                                     "tooltip": "sample string 30",
                                     "errorDetails": {
@@ -1405,9 +1361,7 @@
                                     "conditionalParentLabel": "sample string 43",
                                     "conditionalParentValue": "sample string 44",
                                     "customTabId": "sample string 45",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 46",
                                     "tooltip": "sample string 47",
                                     "errorDetails": {
@@ -1443,9 +1397,7 @@
                                     "conditionalParentLabel": "sample string 19",
                                     "conditionalParentValue": "sample string 20",
                                     "customTabId": "sample string 21",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 22",
                                     "tooltip": "sample string 23",
                                     "errorDetails": {
@@ -1518,9 +1470,7 @@
                                     "conditionalParentLabel": "sample string 22",
                                     "conditionalParentValue": "sample string 23",
                                     "customTabId": "sample string 24",
-                                    "mergeField": {
-
-                                    },
+                                    "mergeField": {},
                                     "status": "sample string 25",
                                     "tooltip": "sample string 26",
                                     "errorDetails": {
@@ -1727,60 +1677,24 @@
                                 "failureDescription": "sample string 3",
                                 "vendorFailureStatusCode": "sample string 4"
                             },
-                            "phoneAuthResult": {
-
-                            },
-                            "idLookupResult": {
-
-                            },
-                            "idQuestionsResult": {
-
-                            },
-                            "ageVerifyResult": {
-
-                            },
-                            "sTANPinResult": {
-
-                            },
-                            "ofacResult": {
-
-                            },
-                            "liveIDResult": {
-
-                            },
-                            "facebookResult": {
-
-                            },
-                            "googleResult": {
-
-                            },
-                            "linkedinResult": {
-
-                            },
-                            "salesforceResult": {
-
-                            },
-                            "twitterResult": {
-
-                            },
-                            "openIDResult": {
-
-                            },
-                            "anySocialIDResult": {
-
-                            },
-                            "yahooResult": {
-
-                            },
-                            "smsAuthResult": {
-
-                            },
-                            "signatureProviderResult": {
-
-                            },
-                            "identityVerificationResult": {
-
-                            }
+                            "phoneAuthResult": {},
+                            "idLookupResult": {},
+                            "idQuestionsResult": {},
+                            "ageVerifyResult": {},
+                            "sTANPinResult": {},
+                            "ofacResult": {},
+                            "liveIDResult": {},
+                            "facebookResult": {},
+                            "googleResult": {},
+                            "linkedinResult": {},
+                            "salesforceResult": {},
+                            "twitterResult": {},
+                            "openIDResult": {},
+                            "anySocialIDResult": {},
+                            "yahooResult": {},
+                            "smsAuthResult": {},
+                            "signatureProviderResult": {},
+                            "identityVerificationResult": {}
                         },
                         "totalTabCount": "sample string 43",
                         "documentVisibility": [
@@ -1808,9 +1722,7 @@
                         "signingGroupId": "sample string 4",
                         "signingGroupName": "sample string 5",
                         "signingGroupUsers": [
-                            {
-
-                            }
+                            {}
                         ],
                         "fullName": "sample string 6",
                         "firstName": "sample string 7",
@@ -1821,22 +1733,12 @@
                         "requireIdLookup": "sample string 12",
                         "idCheckConfigurationName": "sample string 13",
                         "socialAuthentications": [
-                            {
-
-                            }
+                            {}
                         ],
-                        "phoneAuthentication": {
-
-                        },
-                        "samlAuthentication": {
-
-                        },
-                        "smsAuthentication": {
-
-                        },
-                        "identityVerification": {
-
-                        },
+                        "phoneAuthentication": {},
+                        "samlAuthentication": {},
+                        "smsAuthentication": {},
+                        "identityVerification": {},
                         "userId": "sample string 14",
                         "clientUserId": "sample string 15",
                         "embeddedRecipientStartURL": "sample string 16",
@@ -1844,13 +1746,9 @@
                             "sample string 1"
                         ],
                         "routingOrder": "sample string 17",
-                        "idCheckInformationInput": {
-
-                        },
+                        "idCheckInformationInput": {},
                         "recipientAttachments": [
-                            {
-
-                            }
+                            {}
                         ],
                         "note": "sample string 18",
                         "roleName": "sample string 19",
@@ -1864,22 +1762,16 @@
                         "faxNumber": "sample string 27",
                         "templateLocked": "sample string 28",
                         "templateRequired": "sample string 29",
-                        "emailNotification": {
-
-                        },
+                        "emailNotification": {},
                         "inheritEmailNotificationConfiguration": "sample string 30",
                         "errorDetails": {
                             "errorCode": "SUCCESS",
                             "message": ""
                         },
-                        "recipientAuthenticationStatus": {
-
-                        },
+                        "recipientAuthenticationStatus": {},
                         "totalTabCount": "sample string 31",
                         "documentVisibility": [
-                            {
-
-                            }
+                            {}
                         ]
                     }
                 ],
@@ -1891,9 +1783,7 @@
                         "signingGroupId": "sample string 4",
                         "signingGroupName": "sample string 5",
                         "signingGroupUsers": [
-                            {
-
-                            }
+                            {}
                         ],
                         "fullName": "sample string 6",
                         "firstName": "sample string 7",
@@ -1904,22 +1794,12 @@
                         "requireIdLookup": "sample string 12",
                         "idCheckConfigurationName": "sample string 13",
                         "socialAuthentications": [
-                            {
-
-                            }
+                            {}
                         ],
-                        "phoneAuthentication": {
-
-                        },
-                        "samlAuthentication": {
-
-                        },
-                        "smsAuthentication": {
-
-                        },
-                        "identityVerification": {
-
-                        },
+                        "phoneAuthentication": {},
+                        "samlAuthentication": {},
+                        "smsAuthentication": {},
+                        "identityVerification": {},
                         "userId": "sample string 14",
                         "clientUserId": "sample string 15",
                         "embeddedRecipientStartURL": "sample string 16",
@@ -1927,13 +1807,9 @@
                             "sample string 1"
                         ],
                         "routingOrder": "sample string 17",
-                        "idCheckInformationInput": {
-
-                        },
+                        "idCheckInformationInput": {},
                         "recipientAttachments": [
-                            {
-
-                            }
+                            {}
                         ],
                         "note": "sample string 18",
                         "roleName": "sample string 19",
@@ -1947,22 +1823,16 @@
                         "faxNumber": "sample string 27",
                         "templateLocked": "sample string 28",
                         "templateRequired": "sample string 29",
-                        "emailNotification": {
-
-                        },
+                        "emailNotification": {},
                         "inheritEmailNotificationConfiguration": "sample string 30",
                         "errorDetails": {
                             "errorCode": "SUCCESS",
                             "message": ""
                         },
-                        "recipientAuthenticationStatus": {
-
-                        },
+                        "recipientAuthenticationStatus": {},
                         "totalTabCount": "sample string 31",
                         "documentVisibility": [
-                            {
-
-                            }
+                            {}
                         ]
                     }
                 ],
@@ -1977,9 +1847,7 @@
                         "signingGroupId": "sample string 4",
                         "signingGroupName": "sample string 5",
                         "signingGroupUsers": [
-                            {
-
-                            }
+                            {}
                         ],
                         "fullName": "sample string 6",
                         "firstName": "sample string 7",
@@ -1990,22 +1858,12 @@
                         "requireIdLookup": "sample string 12",
                         "idCheckConfigurationName": "sample string 13",
                         "socialAuthentications": [
-                            {
-
-                            }
+                            {}
                         ],
-                        "phoneAuthentication": {
-
-                        },
-                        "samlAuthentication": {
-
-                        },
-                        "smsAuthentication": {
-
-                        },
-                        "identityVerification": {
-
-                        },
+                        "phoneAuthentication": {},
+                        "samlAuthentication": {},
+                        "smsAuthentication": {},
+                        "identityVerification": {},
                         "userId": "sample string 14",
                         "clientUserId": "sample string 15",
                         "embeddedRecipientStartURL": "sample string 16",
@@ -2013,13 +1871,9 @@
                             "sample string 1"
                         ],
                         "routingOrder": "sample string 17",
-                        "idCheckInformationInput": {
-
-                        },
+                        "idCheckInformationInput": {},
                         "recipientAttachments": [
-                            {
-
-                            }
+                            {}
                         ],
                         "note": "sample string 18",
                         "roleName": "sample string 19",
@@ -2033,22 +1887,16 @@
                         "faxNumber": "sample string 27",
                         "templateLocked": "sample string 28",
                         "templateRequired": "sample string 29",
-                        "emailNotification": {
-
-                        },
+                        "emailNotification": {},
                         "inheritEmailNotificationConfiguration": "sample string 30",
                         "errorDetails": {
                             "errorCode": "SUCCESS",
                             "message": ""
                         },
-                        "recipientAuthenticationStatus": {
-
-                        },
+                        "recipientAuthenticationStatus": {},
                         "totalTabCount": "sample string 31",
                         "documentVisibility": [
-                            {
-
-                            }
+                            {}
                         ]
                     }
                 ],
@@ -2068,9 +1916,7 @@
                         "signingGroupId": "sample string 6",
                         "signingGroupName": "sample string 7",
                         "signingGroupUsers": [
-                            {
-
-                            }
+                            {}
                         ],
                         "fullName": "sample string 8",
                         "firstName": "sample string 9",
@@ -2081,22 +1927,12 @@
                         "requireIdLookup": "sample string 14",
                         "idCheckConfigurationName": "sample string 15",
                         "socialAuthentications": [
-                            {
-
-                            }
+                            {}
                         ],
-                        "phoneAuthentication": {
-
-                        },
-                        "samlAuthentication": {
-
-                        },
-                        "smsAuthentication": {
-
-                        },
-                        "identityVerification": {
-
-                        },
+                        "phoneAuthentication": {},
+                        "samlAuthentication": {},
+                        "smsAuthentication": {},
+                        "identityVerification": {},
                         "userId": "sample string 16",
                         "clientUserId": "sample string 17",
                         "embeddedRecipientStartURL": "sample string 18",
@@ -2104,13 +1940,9 @@
                             "sample string 1"
                         ],
                         "routingOrder": "sample string 19",
-                        "idCheckInformationInput": {
-
-                        },
+                        "idCheckInformationInput": {},
                         "recipientAttachments": [
-                            {
-
-                            }
+                            {}
                         ],
                         "note": "sample string 20",
                         "roleName": "sample string 21",
@@ -2124,22 +1956,16 @@
                         "faxNumber": "sample string 29",
                         "templateLocked": "sample string 30",
                         "templateRequired": "sample string 31",
-                        "emailNotification": {
-
-                        },
+                        "emailNotification": {},
                         "inheritEmailNotificationConfiguration": "sample string 32",
                         "errorDetails": {
                             "errorCode": "SUCCESS",
                             "message": ""
                         },
-                        "recipientAuthenticationStatus": {
-
-                        },
+                        "recipientAuthenticationStatus": {},
                         "totalTabCount": "sample string 33",
                         "documentVisibility": [
-                            {
-
-                            }
+                            {}
                         ]
                     }
                 ],
@@ -2159,9 +1985,7 @@
                         "signingGroupId": "sample string 6",
                         "signingGroupName": "sample string 7",
                         "signingGroupUsers": [
-                            {
-
-                            }
+                            {}
                         ],
                         "fullName": "sample string 8",
                         "firstName": "sample string 9",
@@ -2172,22 +1996,12 @@
                         "requireIdLookup": "sample string 14",
                         "idCheckConfigurationName": "sample string 15",
                         "socialAuthentications": [
-                            {
-
-                            }
+                            {}
                         ],
-                        "phoneAuthentication": {
-
-                        },
-                        "samlAuthentication": {
-
-                        },
-                        "smsAuthentication": {
-
-                        },
-                        "identityVerification": {
-
-                        },
+                        "phoneAuthentication": {},
+                        "samlAuthentication": {},
+                        "smsAuthentication": {},
+                        "identityVerification": {},
                         "userId": "sample string 16",
                         "clientUserId": "sample string 17",
                         "embeddedRecipientStartURL": "sample string 18",
@@ -2195,13 +2009,9 @@
                             "sample string 1"
                         ],
                         "routingOrder": "sample string 19",
-                        "idCheckInformationInput": {
-
-                        },
+                        "idCheckInformationInput": {},
                         "recipientAttachments": [
-                            {
-
-                            }
+                            {}
                         ],
                         "note": "sample string 20",
                         "roleName": "sample string 21",
@@ -2215,64 +2025,17 @@
                         "faxNumber": "sample string 29",
                         "templateLocked": "sample string 30",
                         "templateRequired": "sample string 31",
-                        "emailNotification": {
-
-                        },
+                        "emailNotification": {},
                         "inheritEmailNotificationConfiguration": "sample string 32",
                         "errorDetails": {
                             "errorCode": "SUCCESS",
                             "message": ""
                         },
-                        "recipientAuthenticationStatus": {
-
-                        },
+                        "recipientAuthenticationStatus": {},
                         "totalTabCount": "sample string 33",
                         "documentVisibility": [
-                            {
-
-                            }
+                            {}
                         ]
-                    }
-                ],
-
-                "witnesses": [
-                    {
-                        "witnessFor": "",
-                        "witnessForGuid": "",
-                        "creationReason": "",
-                        "isBulkRecipient": "",
-                        "requireUploadSignature": "",
-                        "name": "",
-                        "email": "",
-                        "recipientId": "",
-                        "recipientIdGuid": "",
-                        "requireIdLookup": "f",
-                        "userId": "",
-                        "routingOrder": "",
-                        "status": "",
-                        "completedCount": "",
-                        "deliveryMethod": "",
-                        "totalTabCount": "",
-                        "recipientType": ""
-                    },
-                    {
-                        "witnessFor": "",
-                        "witnessForGuid": "",
-                        "creationReason": "",
-                        "isBulkRecipient": "",
-                        "requireUploadSignature": "",
-                        "name": "",
-                        "email": "",
-                        "recipientId": "",
-                        "recipientIdGuid": "",
-                        "requireIdLookup": "",
-                        "userId": "",
-                        "routingOrder": "",
-                        "status": "",
-                        "completedCount": "",
-                        "deliveryMethod": "",
-                        "totalTabCount": "",
-                        "recipientType": ""
                     }
                 ],
                 "inPersonSigners": [
@@ -2281,17 +2044,11 @@
                         "hostEmail": "sample string 2",
                         "signerName": "sample string 3",
                         "signerEmail": "sample string 4",
-                        "signatureInfo": {
-
-                        },
+                        "signatureInfo": {},
                         "autoNavigation": "sample string 5",
                         "defaultRecipient": "sample string 6",
-                        "offlineAttributes": {
-
-                        },
-                        "tabs": {
-
-                        },
+                        "offlineAttributes": {},
+                        "tabs": {},
                         "signInEachLocation": "sample string 7",
                         "requireSignerCertificate": "sample string 8",
                         "requireSignOnPaper": "sample string 9",
@@ -2301,14 +2058,10 @@
                         "signingGroupId": "sample string 13",
                         "signingGroupName": "sample string 14",
                         "signingGroupUsers": [
-                            {
-
-                            }
+                            {}
                         ],
                         "recipientSignatureProviders": [
-                            {
-
-                            }
+                            {}
                         ],
                         "excludedDocuments": [
                             "sample string 1"
@@ -2317,31 +2070,19 @@
                             "name": "sample string 1",
                             "email": "sample string 2",
                             "hostRecipientId": "sample string 3",
-                            "tabs": {
-
-                            },
+                            "tabs": {},
                             "recipientId": "sample string 4",
                             "recipientIdGuid": "sample string 5",
                             "accessCode": "sample string 6",
                             "requireIdLookup": "sample string 7",
                             "idCheckConfigurationName": "sample string 8",
                             "socialAuthentications": [
-                                {
-
-                                }
+                                {}
                             ],
-                            "phoneAuthentication": {
-
-                            },
-                            "samlAuthentication": {
-
-                            },
-                            "smsAuthentication": {
-
-                            },
-                            "identityVerification": {
-
-                            },
+                            "phoneAuthentication": {},
+                            "samlAuthentication": {},
+                            "smsAuthentication": {},
+                            "identityVerification": {},
                             "userId": "sample string 9",
                             "clientUserId": "sample string 10",
                             "embeddedRecipientStartURL": "sample string 11",
@@ -2349,13 +2090,9 @@
                                 "sample string 1"
                             ],
                             "routingOrder": "sample string 12",
-                            "idCheckInformationInput": {
-
-                            },
+                            "idCheckInformationInput": {},
                             "recipientAttachments": [
-                                {
-
-                                }
+                                {}
                             ],
                             "note": "sample string 13",
                             "roleName": "sample string 14",
@@ -2369,22 +2106,16 @@
                             "faxNumber": "sample string 22",
                             "templateLocked": "sample string 23",
                             "templateRequired": "sample string 24",
-                            "emailNotification": {
-
-                            },
+                            "emailNotification": {},
                             "inheritEmailNotificationConfiguration": "sample string 25",
                             "errorDetails": {
                                 "errorCode": "SUCCESS",
                                 "message": ""
                             },
-                            "recipientAuthenticationStatus": {
-
-                            },
+                            "recipientAuthenticationStatus": {},
                             "totalTabCount": "sample string 26",
                             "documentVisibility": [
-                                {
-
-                                }
+                                {}
                             ]
                         },
                         "inPersonSigningType": "sample string 15",
@@ -2396,22 +2127,12 @@
                         "requireIdLookup": "sample string 21",
                         "idCheckConfigurationName": "sample string 22",
                         "socialAuthentications": [
-                            {
-
-                            }
+                            {}
                         ],
-                        "phoneAuthentication": {
-
-                        },
-                        "samlAuthentication": {
-
-                        },
-                        "smsAuthentication": {
-
-                        },
-                        "identityVerification": {
-
-                        },
+                        "phoneAuthentication": {},
+                        "samlAuthentication": {},
+                        "smsAuthentication": {},
+                        "identityVerification": {},
                         "userId": "sample string 23",
                         "clientUserId": "sample string 24",
                         "embeddedRecipientStartURL": "sample string 25",
@@ -2419,13 +2140,9 @@
                             "sample string 1"
                         ],
                         "routingOrder": "sample string 26",
-                        "idCheckInformationInput": {
-
-                        },
+                        "idCheckInformationInput": {},
                         "recipientAttachments": [
-                            {
-
-                            }
+                            {}
                         ],
                         "note": "sample string 27",
                         "roleName": "sample string 28",
@@ -2439,22 +2156,16 @@
                         "faxNumber": "sample string 36",
                         "templateLocked": "sample string 37",
                         "templateRequired": "sample string 38",
-                        "emailNotification": {
-
-                        },
+                        "emailNotification": {},
                         "inheritEmailNotificationConfiguration": "sample string 39",
                         "errorDetails": {
                             "errorCode": "SUCCESS",
                             "message": ""
                         },
-                        "recipientAuthenticationStatus": {
-
-                        },
+                        "recipientAuthenticationStatus": {},
                         "totalTabCount": "sample string 40",
                         "documentVisibility": [
-                            {
-
-                            }
+                            {}
                         ]
                     }
                 ],
@@ -2462,35 +2173,21 @@
                     {
                         "name": "sample string 1",
                         "recipientSignatureProviders": [
-                            {
-
-                            }
+                            {}
                         ],
-                        "tabs": {
-
-                        },
+                        "tabs": {},
                         "recipientId": "sample string 2",
                         "recipientIdGuid": "sample string 3",
                         "accessCode": "sample string 4",
                         "requireIdLookup": "sample string 5",
                         "idCheckConfigurationName": "sample string 6",
                         "socialAuthentications": [
-                            {
-
-                            }
+                            {}
                         ],
-                        "phoneAuthentication": {
-
-                        },
-                        "samlAuthentication": {
-
-                        },
-                        "smsAuthentication": {
-
-                        },
-                        "identityVerification": {
-
-                        },
+                        "phoneAuthentication": {},
+                        "samlAuthentication": {},
+                        "smsAuthentication": {},
+                        "identityVerification": {},
                         "userId": "sample string 7",
                         "clientUserId": "sample string 8",
                         "embeddedRecipientStartURL": "sample string 9",
@@ -2498,13 +2195,9 @@
                             "sample string 1"
                         ],
                         "routingOrder": "sample string 10",
-                        "idCheckInformationInput": {
-
-                        },
+                        "idCheckInformationInput": {},
                         "recipientAttachments": [
-                            {
-
-                            }
+                            {}
                         ],
                         "note": "sample string 11",
                         "roleName": "sample string 12",
@@ -2518,22 +2211,16 @@
                         "faxNumber": "sample string 20",
                         "templateLocked": "sample string 21",
                         "templateRequired": "sample string 22",
-                        "emailNotification": {
-
-                        },
+                        "emailNotification": {},
                         "inheritEmailNotificationConfiguration": "sample string 23",
                         "errorDetails": {
                             "errorCode": "SUCCESS",
                             "message": ""
                         },
-                        "recipientAuthenticationStatus": {
-
-                        },
+                        "recipientAuthenticationStatus": {},
                         "totalTabCount": "sample string 24",
                         "documentVisibility": [
-                            {
-
-                            }
+                            {}
                         ]
                     }
                 ],
@@ -2541,18 +2228,12 @@
                     {
                         "witnessFor": "sample string 1",
                         "witnessForGuid": "sample string 2",
-                        "signatureInfo": {
-
-                        },
+                        "signatureInfo": {},
                         "autoNavigation": "sample string 3",
                         "defaultRecipient": "sample string 4",
-                        "tabs": {
-
-                        },
+                        "tabs": {},
                         "signInEachLocation": "sample string 5",
-                        "offlineAttributes": {
-
-                        },
+                        "offlineAttributes": {},
                         "requireSignerCertificate": "sample string 6",
                         "requireSignOnPaper": "sample string 7",
                         "creationReason": "sample string 8",
@@ -2561,9 +2242,7 @@
                         "bulkRecipientsUri": "sample string 11",
                         "recipientSuppliesTabs": "sample string 12",
                         "recipientSignatureProviders": [
-                            {
-
-                            }
+                            {}
                         ],
                         "agentCanEditEmail": "sample string 13",
                         "agentCanEditName": "sample string 14",
@@ -2579,9 +2258,7 @@
                         "signingGroupId": "sample string 18",
                         "signingGroupName": "sample string 19",
                         "signingGroupUsers": [
-                            {
-
-                            }
+                            {}
                         ],
                         "fullName": "sample string 20",
                         "firstName": "sample string 21",
@@ -2592,22 +2269,12 @@
                         "requireIdLookup": "sample string 26",
                         "idCheckConfigurationName": "sample string 27",
                         "socialAuthentications": [
-                            {
-
-                            }
+                            {}
                         ],
-                        "phoneAuthentication": {
-
-                        },
-                        "samlAuthentication": {
-
-                        },
-                        "smsAuthentication": {
-
-                        },
-                        "identityVerification": {
-
-                        },
+                        "phoneAuthentication": {},
+                        "samlAuthentication": {},
+                        "smsAuthentication": {},
+                        "identityVerification": {},
                         "userId": "sample string 28",
                         "clientUserId": "sample string 29",
                         "embeddedRecipientStartURL": "sample string 30",
@@ -2615,13 +2282,9 @@
                             "sample string 1"
                         ],
                         "routingOrder": "sample string 31",
-                        "idCheckInformationInput": {
-
-                        },
+                        "idCheckInformationInput": {},
                         "recipientAttachments": [
-                            {
-
-                            }
+                            {}
                         ],
                         "note": "sample string 32",
                         "roleName": "sample string 33",
@@ -2635,22 +2298,16 @@
                         "faxNumber": "sample string 41",
                         "templateLocked": "sample string 42",
                         "templateRequired": "sample string 43",
-                        "emailNotification": {
-
-                        },
+                        "emailNotification": {},
                         "inheritEmailNotificationConfiguration": "sample string 44",
                         "errorDetails": {
                             "errorCode": "SUCCESS",
                             "message": ""
                         },
-                        "recipientAuthenticationStatus": {
-
-                        },
+                        "recipientAuthenticationStatus": {},
                         "totalTabCount": "sample string 45",
                         "documentVisibility": [
-                            {
-
-                            }
+                            {}
                         ]
                     }
                 ],
@@ -2674,24 +2331,22 @@
                     }
                 ]
             },
-            {
-                "templates": [
-                    {
-                        "templateId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-                        "name": "Test(1)",
-                        "documentId": "1",
-                        "applied": "true",
-                        "uri": "/templates/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-                    },
-                    {
-                        "templateId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-                        "name": "API",
-                        "documentId": "2",
-                        "applied": "true",
-                        "uri": "/templates/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-                    }
-                ]
-            },
+            "templates": [
+                {
+                    "templateId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "name": "Test(1)",
+                    "documentId": "1",
+                    "applied": "true",
+                    "uri": "/templates/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+                },
+                {
+                    "templateId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "name": "API",
+                    "documentId": "2",
+                    "applied": "true",
+                    "uri": "/templates/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+                }
+            ],
             "envelopeDocuments": [
                 {
                     "documentId": "1",
@@ -2881,9 +2536,7 @@
             ],
             "purgeState": "sample string 41",
             "lockInformation": {
-                "lockedByUser": {
-
-                },
+                "lockedByUser": {},
                 "lockedByApp": "sample string 1",
                 "lockedUntilDateTime": "sample string 2",
                 "lockDurationInSeconds": "sample string 3",
@@ -2900,7 +2553,21 @@
             "isSignatureProviderEnvelope": "sample string 44",
             "allowViewHistory": "sample string 45",
             "disableResponsiveDocument": "sample string 46",
-            "copyRecipientData": "sample string 47"
+            "copyRecipientData": "sample string 47",
+            "uSigState":" sample string 48",
+            "hasFormDataChanges": "sample string 49",
+            "allowComments": "sample string 50",
+            "hasComments": "sample string 51",
+            "envelopeMetadata": {
+                "allowAdvancedCorrect": "sample string 1",
+                "enableSignWithNotary": "sample string 2",
+                "allowCorrect": "sample string 3"
+            },
+            "anySigner": "sample string 52",
+            "envelopeLocation": "sample string 53",
+            "isDynamicEnvelope": "sample string 54",
+            "burnDefaultTabData": "sample string 55",
+            "isTicketRelatedEnvelope": "sample string 56"
         }
     }
 }
