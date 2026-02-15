@@ -580,6 +580,7 @@
             "tokenUrl": "https://account-d.docusign.com/oauth/token",
             "scopes": {
                 "webforms_read": "Read web form configuration",
+                "webforms_write": "Create web form and modify web form configuration",
                 "webforms_instance_read": "Read instance configuration",
                 "webforms_instance_write": "Create instance and modify instance configuration"
             }
@@ -914,8 +915,24 @@
             "description": "The request body for the `Instances::createInstance` endpoint.",
             "properties": {
                 "formValues": {
-                    "$ref": "#/definitions/WebFormValues",
-                    "description": "Key-value pairs used to prefill fields in the web form instance. The keys correspond to the values of the `publishedComponentNames` object on the `WebForm` (configuration) object.\n\nFor keys of type TextBox, Email, Date, Select, and RadioButtonGroup, the value should be a string. For keys of type Number, the value should be a number. For keys of type of CheckboxGroup, the value should be an array of strings.\n\nFor example, a web form configuration might have the following properties indicated by the `publishedComponentNames` object:\n```\n\"publishedComponentNames\": {\n    \"Signer_name\": \"TextBox\",\n    \"Signer_email\": \"Email\",\n    \"Dropdown\": \"Select\",\n    \"Hobbies\": \"CheckboxGroup\"\n}\n```\n\nThen, this property might be:\n```\n{\n    \"Signer_name\": \"Francis Beagle\",\n    \"Signer_email\": \"francis@example.com\",\n    \"Hobbies\": [\"walking\", \"napping\"]\n}\n```\n\nNote that you do not have to include values for every component. This property is **optional.**"
+                    "type": "object",
+                    "description": "Key-value pairs used to prefill fields in the web form instance. The keys correspond to the values of the `publishedComponentNames` object on the `WebForm` (configuration) object.\n\nFor keys of type TextBox, Email, Date, Select, and RadioButtonGroup, the value should be a string. For keys of type Number, the value should be a number. For keys of type of CheckboxGroup, the value should be an array of strings.\n\nFor example, a web form configuration might have the following properties indicated by the `publishedComponentNames` object:\n```\n\"publishedComponentNames\": {\n    \"Signer_name\": \"TextBox\",\n    \"Signer_email\": \"Email\",\n    \"Dropdown\": \"Select\",\n    \"Hobbies\": \"CheckboxGroup\"\n}\n```\n\nThen, this property might be:\n```\n{\n    \"Signer_name\": \"Francis Beagle\",\n    \"Signer_email\": \"francis@example.com\",\n    \"Hobbies\": [\"walking\", \"napping\"]\n}\n```\n\nNote that you do not have to include values for every component. This property is **optional.**",
+                    "additionalProperties": {},
+                    "example": {
+                        "Textbox_Name": "First Last",
+                        "Email_primary": "example@example.com",
+                        "Date_birth": "2020-01-01",
+                        "Number_age": 52,
+                        "Select_state": "California",
+                        "Radio_Gender": "Female",
+                        "Checkbox_hobbies": [
+                            "singing",
+                            "dancing"
+                        ],
+                        "ID_card_attachment": {
+                            "documentName": "id_card.pdf"
+                        }
+                    }
                 },
                 "clientUserId": {
                     "$ref": "#/definitions/ClientUserId",
@@ -947,6 +964,10 @@
                 },
                 "sendOption": {
                     "$ref": "#/definitions/SendOption",
+                    "description": ""
+                },
+                "brandId": {
+                    "$ref": "#/definitions/BrandId",
                     "description": ""
                 },
                 "recipients": {
@@ -1133,8 +1154,28 @@
                     "description": "Metadata associated with the web form instance."
                 },
                 "formValues": {
-                    "$ref": "#/definitions/WebFormValues",
-                    "description": "Key-value pairs that represent the current values of the fields in the web form instance. The keys correspond to the `componentName` values of the `formContent.components` object on the `WebForm` (configuration) object. See [Form field definitions](/docs/web-forms-api/plan-integration/retrieve-configuration-details/#form-field-definitions) for more information.\n\nSee [Request that retrieves web form instance values](/docs/web-forms-api/plan-integration/retrieve-submitted-values/#request-that-retrieves-web-form-instance-values) for an example of a `formValues` object returned by this request.\n"
+                    "type": "object",
+                    "description": "Key-value pairs that represent the current values of the fields in the web form instance. The keys correspond to the `componentName` values of the `formContent.components` object on the `WebForm` (configuration) object. See [Form field definitions](/docs/web-forms-api/plan-integration/retrieve-configuration-details/#form-field-definitions) for more information.\n\nSee [Request that retrieves web form instance values](/docs/web-forms-api/plan-integration/retrieve-submitted-values/#request-that-retrieves-web-form-instance-values) for an example of a `formValues` object returned by this request.\n",
+                    "additionalProperties": {},
+                    "example": {
+                        "Textbox_Name": "First Last",
+                        "Email_primary": "example@example.com",
+                        "Date_birth": "2020-01-01",
+                        "Number_age": 52,
+                        "Select_state": "California",
+                        "Radio_Gender": "Female",
+                        "Checkbox_hobbies": [
+                            "singing",
+                            "dancing"
+                        ],
+                        "ID_card_attachment": {
+                            "documentName": "id_card.pdf"
+                        }
+                    }
+                },
+                "brandId": {
+                    "$ref": "#/definitions/BrandId",
+                    "description": ""
                 },
                 "recipients": {
                     "description": "",
@@ -1147,6 +1188,9 @@
                             },
                             "instanceRecipientStatus": {
                                 "$ref": "#/definitions/InstanceRecipientStatus"
+                            },
+                            "roleName": {
+                                "$ref": "#/definitions/RoleName"
                             }
                         }
                     }
@@ -1267,28 +1311,6 @@
             ],
             "x-ds-definition-name": "WebForm",
             "x-ms-summary": "A web form configuration."
-        },
-        "WebFormValues": {
-            "type": "object",
-            "description": "Key-value pairs of data used to create a form instance.",
-            "additionalProperties": {},
-            "example": {
-                "Textbox_Name": "First Last",
-                "Email_primary": "example@example.com",
-                "Date_birth": "2020-01-01",
-                "Number_age": 52,
-                "Select_state": "California",
-                "Radio_Gender": "Female",
-                "Checkbox_hobbies": [
-                    "singing",
-                    "dancing"
-                ],
-                "ID_card_attachment": {
-                    "documentName": "id_card.pdf"
-                }
-            },
-            "x-ds-definition-name": "WebFormValues",
-            "x-ms-summary": "Key-value pairs of data used to create a form instance."
         },
         "WebFormState": {
             "type": "string",
