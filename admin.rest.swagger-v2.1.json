@@ -11,7 +11,7 @@
         },
         "termsOfService": "https://www.docusign.com/company/terms-and-conditions/developers"
     },
-    "host": "api-d.docusign.net",
+    "host": "api.docusign.net",
     "basePath": "/Management",
     "schemes": [
         "https"
@@ -1497,6 +1497,13 @@
                 ],
                 "parameters": [
                     {
+                        "name": "apply_license_override",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
                         "name": "organizationId",
                         "in": "path",
                         "description": "The organization ID Guid",
@@ -1749,6 +1756,13 @@
                     {
                         "name": "include_ds_groups",
                         "in": "query",
+                        "description": "Select users with groups the users belong to; The organization must have entitlement `AllowMultiApplication` enabled.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "include_license",
+                        "in": "query",
                         "description": "",
                         "required": false,
                         "type": "boolean"
@@ -1923,6 +1937,13 @@
                         "description": "The email address associated with the users you want to retrieve.\n\n**Note:** This property is required.",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "include_license",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -2088,7 +2109,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2155,7 +2176,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2217,7 +2238,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2276,7 +2297,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2334,7 +2355,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2409,7 +2430,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2477,7 +2498,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2547,7 +2568,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2600,7 +2621,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2659,7 +2680,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2729,7 +2750,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID.",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2806,6 +2827,13 @@
                         "description": "When **true,** sorts the results in ascending order by account name.",
                         "required": false,
                         "type": "boolean"
+                    },
+                    {
+                        "name": "include_license",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -2863,6 +2891,13 @@
                         "description": "When **true,** sorts the results in ascending order by account name.",
                         "required": false,
                         "type": "boolean"
+                    },
+                    {
+                        "name": "include_license",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -2904,7 +2939,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -2966,7 +3001,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -3024,7 +3059,7 @@
                     {
                         "name": "organizationId",
                         "in": "path",
-                        "description": "The organization's GUID.\n",
+                        "description": "The organization ID GUID",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -3268,7 +3303,7 @@
                     {
                         "name": "assetGroupWorkId",
                         "in": "path",
-                        "description": "The ID of the asset group account clone request.",
+                        "description": "The GUID representing the asset group account clone ID.",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -3307,8 +3342,8 @@
                 "tags": [
                     "AccountCreation"
                 ],
-                "summary": "",
-                "description": "",
+                "summary": "Get information about plan items within an organization.",
+                "description": "Gets the plan items and subscription information for an organization.\n\n\nTo call this endpoint:\n* You must be an administrator for the specified organization\n\n[Required scopes](/docs/admin-api/admin101/auth/): `organization_sub_account_read`\n",
                 "operationId": "OrganizationSubAccount_GetOrganizationPlanItems",
                 "consumes": [
                     "application/json"
@@ -3355,8 +3390,8 @@
                 "tags": [
                     "AccountCreation"
                 ],
-                "summary": "",
-                "description": "",
+                "summary": "Creates a new Docusign account using the plan and modules specified in request body.",
+                "description": "Creates a new Docusign account within an organization.\n\nIn the request body, specify the subscription and plan IDs for the new account. You can get these IDs through the [GetOrganizationPlanItems](/docs/admin-api/reference/accountprovisioning/accountcreation/getorganizationplanitems/) endpoint. \n\nYou also need to specify information about the new target account, including the name, location, and administrator. To set the location, provide the `countryCode` property. When you are testing in the developer environment, the value of `countryCode` will always be `US`.\n\nThe request body looks like this:\n\n```\n{\n   \"subscriptionDetails\": {\n       \"id\": \"'${SUBSCRIPTION_ID}'\",\n       \"planId\": \"'${PLAN_ID}'\",\n       \"modules\": []\n   },\n   \"targetAccount\": {\n       \"name\": \"'${ACCOUNT_NAME}'\",\n       \"countryCode\": \"US\",\n       \"admin\": {\n           \"email\": \"'${EMAIL_ADDRESS}'\",\n           \"firstName\": \"'${FIRST_NAME}'\",   \n           \"lastName\": \"'${LAST_NAME}'\",\n           \"locale\": \"en\"\n       }\n   }\n}\n```\n\nTo call this endpoint:\n* You must be an administrator for the specified organization.\n\n[Required scopes](/docs/admin-api/admin101/auth/): `organization_sub_account_write`",
                 "operationId": "OrganizationSubAccount_CreateSubAccount",
                 "consumes": [
                     "application/json"
@@ -3409,8 +3444,8 @@
                 "tags": [
                     "AccountCreation"
                 ],
-                "summary": "",
-                "description": "",
+                "summary": "Get all ongoing account creation processes for an Organization.",
+                "description": "Get ongoing account creation processes by `organizationId`.\n\n\nTo call this endpoint:\n* You must be an administrator for the specified organization\n\n[Required scopes](/docs/admin-api/admin101/auth/): `organization_sub_account_read`",
                 "operationId": "OrganizationSubAccount_GetSubAccountCreateProcessesByOrgId",
                 "consumes": [
                     "application/json"
@@ -3430,7 +3465,7 @@
                     {
                         "name": "since_updated_date",
                         "in": "query",
-                        "description": "",
+                        "description": "Specifies that the request will only return information for accounts that were created after the date passed in the format YYYY-MM-DD.",
                         "required": false,
                         "type": "string",
                         "format": "date-time"
@@ -3438,7 +3473,7 @@
                     {
                         "name": "include_details",
                         "in": "query",
-                        "description": "When true, include details for the asset group account clone.",
+                        "description": "When `true`, include additional details about the account creation process. The default value is `false`.",
                         "required": false,
                         "type": "boolean"
                     }
@@ -3469,8 +3504,8 @@
                 "tags": [
                     "AccountCreation"
                 ],
-                "summary": "",
-                "description": "",
+                "summary": "Get a single account creation process.",
+                "description": "Gets information about an account creation process by the `assetGroupId`.\n\n\nTo call this endpoint:\n* You must be an administrator for the specified organization\n\n[Required scopes](/docs/admin-api/admin101/auth/): `organization_sub_account_read`",
                 "operationId": "OrganizationSubAccount_GetSubAccountCreateProcessByAssetGroupWorkId",
                 "consumes": [
                     "application/json"
@@ -3529,6 +3564,601 @@
                 "x-ds-methodname": "GetSubAccountCreateProcessByAssetGroupWorkId",
                 "x-ds-method": "GetSubAccountCreateProcessByAssetGroupWorkId",
                 "x-ds-service": "ProvisionAssetGroup",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v2/organizations/{organizationId}/connect": {
+            "get": {
+                "tags": [
+                    "Connect"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationConnect_GetOrganizationConnectConfigs",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "sortBy",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "siteId",
+                        "in": "query",
+                        "description": "The site ID of the account.\n",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "accountId",
+                        "in": "query",
+                        "description": "The account ID GUID.",
+                        "required": false,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "allowEnvelopePublish",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectConfigsResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "connect_org_config_read_api"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "getOrganizationConnectConfigs",
+                "x-ds-method": "getOrganizationConnectConfigs",
+                "x-ds-service": "OrgConnect",
+                "x-ds-in-sdk": true
+            },
+            "post": {
+                "tags": [
+                    "Connect"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationConnect_CreateOrganizationConnectConfig",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "connectRequest",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectConfigurationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectConfigurationDetailsResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "connect_org_config_write_api"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "createOrganizationConnectConfig",
+                "x-ds-method": "createOrganizationConnectConfig",
+                "x-ds-service": "OrgConnect",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v2/organizations/{organizationId}/connect/{connectId}": {
+            "get": {
+                "tags": [
+                    "Connect"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationConnect_GetOrganizationConnectConfig",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "connectId",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectConfigurationDetailsResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "connect_org_config_read_api"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "getOrganizationConnectConfig",
+                "x-ds-method": "getOrganizationConnectConfig",
+                "x-ds-service": "OrgConnect",
+                "x-ds-in-sdk": true
+            },
+            "delete": {
+                "tags": [
+                    "Connect"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationConnect_DeleteOrganizationConnectConfig",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "connectId",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "connect_org_config_write_api"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "deleteOrganizationConnectConfig",
+                "x-ds-method": "deleteOrganizationConnectConfig",
+                "x-ds-service": "OrgConnect",
+                "x-ds-in-sdk": true
+            },
+            "put": {
+                "tags": [
+                    "Connect"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationConnect_UpdateOrganizationConnectConfig",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "connectId",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "connectRequest",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectConfigurationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectConfigurationDetailsResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "connect_org_config_write_api"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "updateOrganizationConnectConfig",
+                "x-ds-method": "updateOrganizationConnectConfig",
+                "x-ds-service": "OrgConnect",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v2/organizations/{organizationId}/connect/oauth": {
+            "delete": {
+                "tags": [
+                    "Connect"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationConnectOAuthConfiguration_DeleteOrganizationConnectOAuthConfiguration",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "connect_org_oauth_write_api"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "deleteOrganizationConnectOAuthConfiguration",
+                "x-ds-method": "deleteOrganizationConnectOAuthConfiguration",
+                "x-ds-service": "OrgConnect",
+                "x-ds-in-sdk": true
+            },
+            "get": {
+                "tags": [
+                    "Connect"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationConnectOAuthConfiguration_GetOrganizationConnectOAuthConfiguration",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "connect_org_oauth_read_api"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "getOrganizationConnectOAuthConfiguration",
+                "x-ds-method": "getOrganizationConnectOAuthConfiguration",
+                "x-ds-service": "OrgConnect",
+                "x-ds-in-sdk": true
+            },
+            "post": {
+                "tags": [
+                    "Connect"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationConnectOAuthConfiguration_PostOrganizationConnectOAuthConfiguration",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "configuration",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectOAuthConfiguration"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectOAuthConfiguration"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "connect_org_oauth_write_api"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "postOrganizationConnectOAuthConfiguration",
+                "x-ds-method": "postOrganizationConnectOAuthConfiguration",
+                "x-ds-service": "OrgConnect",
+                "x-ds-in-sdk": true
+            },
+            "put": {
+                "tags": [
+                    "Connect"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationConnectOAuthConfiguration_PutOrganizationConnectOAuthConfiguration",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "configuration",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectOAuthConfiguration"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectOAuthConfiguration"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "connect_org_oauth_write_api"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "putOrganizationConnectOAuthConfiguration",
+                "x-ds-method": "putOrganizationConnectOAuthConfiguration",
+                "x-ds-service": "OrgConnect",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v2/organizations/{organizationId}/connect/secret": {
+            "get": {
+                "tags": [
+                    "Connect"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationConnectHmac_GetConnectHmacSecrets",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectHmacSecretsResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "connect_org_hmac_read_api"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "getConnectHmacSecrets",
+                "x-ds-method": "getConnectHmacSecrets",
+                "x-ds-service": "OrgConnect",
+                "x-ds-in-sdk": true
+            },
+            "post": {
+                "tags": [
+                    "Connect"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationConnectHmac_PostConnectHmacSecret",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectHmacSecretsResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "connect_org_hmac_write_api"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "postConnectHmacSecret",
+                "x-ds-method": "postConnectHmacSecret",
+                "x-ds-service": "OrgConnect",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v2/organizations/{organizationId}/connect/secret/{keyId}": {
+            "delete": {
+                "tags": [
+                    "Connect"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "OrganizationConnectHmac_DeleteConnectHmacSecret",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "organizationId",
+                        "in": "path",
+                        "description": "The organization's GUID.\n",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "keyId",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationConnectHmacSecretsResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessCode": [
+                            "connect_org_hmac_write_api"
+                        ]
+                    }
+                ],
+                "x-ds-methodname": "deleteConnectHmacSecret",
+                "x-ds-method": "deleteConnectHmacSecret",
+                "x-ds-service": "OrgConnect",
                 "x-ds-in-sdk": true
             }
         }
@@ -3825,7 +4455,7 @@
             "type": "object",
             "properties": {
                 "error": {
-                    "description": "The error number.",
+                    "description": "The error code.",
                     "type": "string",
                     "readOnly": true
                 },
@@ -3901,7 +4531,7 @@
                     "items": {
                         "$ref": "#/definitions/SubscriptionPlanItemResponse"
                     },
-                    "description": ""
+                    "description": "List of module IDs selected for creating the new account"
                 }
             },
             "x-ds-definition-name": "OrganizationSubscriptionResponse",
@@ -3939,7 +4569,7 @@
             "properties": {
                 "subscriptionDetails": {
                     "$ref": "#/definitions/SubAccountCreateRequest.SubAccountCreationSubscription",
-                    "description": ""
+                    "description": "The subscription info for the new account."
                 },
                 "targetAccount": {
                     "$ref": "#/definitions/SubAccountCreateRequest.SubAccountCreationTargetAccountDetails",
@@ -3961,7 +4591,7 @@
                     "format": "uuid",
                     "type": "string",
                     "example": "00000000-0000-0000-0000-000000000000",
-                    "description": ""
+                    "description": "Plan ID"
                 },
                 "modules": {
                     "type": "array",
@@ -3970,7 +4600,7 @@
                         "type": "string",
                         "example": "00000000-0000-0000-0000-000000000000"
                     },
-                    "description": ""
+                    "description": "List of module IDs selected for creating the new account"
                 }
             },
             "x-ds-definition-name": "SubAccountCreateRequest.SubAccountCreationSubscription",
@@ -4259,15 +4889,16 @@
                 },
                 "CreatedByType": {
                     "enum": [
-                        "Application",
-                        "User",
-                        "Generic",
-                        "RestAPIAuth",
-                        "Resource",
-                        "Restricted"
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
                     ],
-                    "type": "string",
-                    "description": ""
+                    "description": "",
+                    "format": "int32",
+                    "type": "integer"
                 },
                 "CreatedDate": {
                     "format": "date-time",
@@ -4280,15 +4911,16 @@
                 },
                 "UpdatedByType": {
                     "enum": [
-                        "Application",
-                        "User",
-                        "Generic",
-                        "RestAPIAuth",
-                        "Resource",
-                        "Restricted"
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
                     ],
-                    "type": "string",
-                    "description": ""
+                    "description": "",
+                    "format": "int32",
+                    "type": "integer"
                 },
                 "UpdatedDate": {
                     "format": "date-time",
@@ -4336,11 +4968,12 @@
                 },
                 "BillingProfileType": {
                     "enum": [
-                        "Web",
-                        "Direct"
+                        0,
+                        1
                     ],
-                    "type": "string",
-                    "description": ""
+                    "description": "",
+                    "format": "int32",
+                    "type": "integer"
                 }
             },
             "x-ds-definition-name": "Subscription.Provision.Model.Account.Create.CreateAccountDetails",
@@ -4380,11 +5013,12 @@
                 },
                 "BillingProfileType": {
                     "enum": [
-                        "Web",
-                        "Direct"
+                        0,
+                        1
                     ],
-                    "type": "string",
-                    "description": ""
+                    "description": "",
+                    "format": "int32",
+                    "type": "integer"
                 }
             },
             "x-ds-definition-name": "Subscription.Provision.Model.Account.Create.CreateSubAccountDetails",
@@ -4583,18 +5217,18 @@
                 },
                 "subscriptionDetails": {
                     "$ref": "#/definitions/SubAccountCreateSubscriptionDetails",
-                    "description": ""
+                    "description": "The subscription info for the new account."
                 },
                 "assetGroupWorkId": {
                     "format": "uuid",
-                    "description": "The ID of the asset group account clone request.",
+                    "description": "The ID of the job that is created by the request.",
                     "type": "string",
                     "readOnly": true,
                     "example": "00000000-0000-0000-0000-000000000000"
                 },
                 "assetGroupId": {
                     "format": "uuid",
-                    "description": "The ID of the asset group.",
+                    "description": "The ID of the asset group to which the accounts belong.",
                     "type": "string",
                     "readOnly": true,
                     "example": "00000000-0000-0000-0000-000000000000"
@@ -4613,7 +5247,7 @@
                     "readOnly": true
                 },
                 "status": {
-                    "description": "Status.",
+                    "description": "The status of the account creation request.",
                     "enum": [
                         "Undefined",
                         "Pending",
@@ -4637,7 +5271,7 @@
                 },
                 "attempts": {
                     "format": "int32",
-                    "description": "The number of times the work has been worked on.",
+                    "description": "The number of times the job has been attempted.",
                     "type": "integer",
                     "readOnly": true
                 },
@@ -4664,7 +5298,7 @@
                 },
                 "createAccountProcessingFailureDetails": {
                     "$ref": "#/definitions/SubAccountErrorDetails",
-                    "description": "",
+                    "description": "The processing failure details if the job has a status of `PendingError` or `ProcessingError`.",
                     "readOnly": true
                 }
             },
@@ -4677,12 +5311,12 @@
             "properties": {
                 "id": {
                     "format": "uuid",
-                    "description": "",
+                    "description": "The account ID of the new account. The GUID will be empty if the account has not been created yet.",
                     "type": "string",
                     "example": "00000000-0000-0000-0000-000000000000"
                 },
                 "name": {
-                    "description": "",
+                    "description": "The name of the target account.",
                     "type": "string"
                 },
                 "region": {
@@ -4710,21 +5344,21 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "description": "",
+                    "description": "Subscription ID",
                     "type": "string"
                 },
                 "planId": {
                     "format": "uuid",
-                    "description": "",
+                    "description": "Plan ID",
                     "type": "string",
                     "example": "00000000-0000-0000-0000-000000000000"
                 },
                 "planName": {
-                    "description": "",
+                    "description": "Plan name",
                     "type": "string"
                 },
                 "modules": {
-                    "description": "",
+                    "description": "List of module IDs selected for creating the new account",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/SubAccountCreateSubscriptionModuleDetails"
@@ -4739,7 +5373,7 @@
             "type": "object",
             "properties": {
                 "email": {
-                    "description": "The email address.",
+                    "description": "The email address of the target account's admin user.",
                     "type": "string"
                 },
                 "firstName": {
@@ -4781,12 +5415,12 @@
             "properties": {
                 "moduleId": {
                     "format": "uuid",
-                    "description": "",
+                    "description": "Module ID",
                     "type": "string",
                     "example": "00000000-0000-0000-0000-000000000000"
                 },
                 "moduleName": {
-                    "description": "",
+                    "description": "Module name",
                     "type": "string"
                 }
             },
@@ -6348,6 +6982,10 @@
                         "$ref": "#/definitions/UpdateUserRequest"
                     },
                     "description": "A list of users whose information you want to change."
+                },
+                "auto_activate_memberships_on_reactivation": {
+                    "type": "boolean",
+                    "description": ""
                 }
             },
             "x-ds-definition-name": "UpdateUsersRequest",
@@ -6464,6 +7102,10 @@
                 "access_code": {
                     "type": "string",
                     "description": "The access code that the user needs to activate an account."
+                },
+                "license_type": {
+                    "type": "string",
+                    "description": ""
                 }
             },
             "x-ds-definition-name": "UpdateMembershipRequest",
@@ -6748,10 +7390,20 @@
                     "type": "string",
                     "description": "The date the user's account was created."
                 },
+                "closed_on": {
+                    "format": "date-time",
+                    "type": "string",
+                    "description": ""
+                },
                 "membership_created_on": {
                     "format": "date-time",
                     "type": "string",
                     "description": "The date on which the user became a member of the organization."
+                },
+                "membership_closed_on": {
+                    "format": "date-time",
+                    "type": "string",
+                    "description": ""
                 },
                 "ds_groups": {
                     "type": "array",
@@ -6764,6 +7416,26 @@
                     "format": "uuid",
                     "type": "string",
                     "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "is_membership_managed_by_scim": {
+                    "type": "boolean",
+                    "description": ""
+                },
+                "is_managed_by_scim": {
+                    "type": "boolean",
+                    "description": ""
+                },
+                "license_type": {
+                    "type": "string",
+                    "description": ""
+                },
+                "subscription_id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "plan_name": {
+                    "type": "string",
                     "description": ""
                 }
             },
@@ -6823,6 +7495,10 @@
                 },
                 "account_name": {
                     "type": "string",
+                    "description": ""
+                },
+                "is_managed_by_scim": {
+                    "type": "boolean",
                     "description": ""
                 }
             },
@@ -7009,6 +7685,22 @@
                 "job_title": {
                     "type": "string",
                     "description": "The job title of the user."
+                },
+                "license_type": {
+                    "type": "string",
+                    "description": ""
+                },
+                "subscription_id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "plan_name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "license_status": {
+                    "type": "string",
+                    "description": ""
                 }
             },
             "x-ds-definition-name": "NewUserResponseAccountProperties",
@@ -7145,6 +7837,22 @@
                 "device_verification_enabled": {
                     "type": "boolean",
                     "description": ""
+                },
+                "require_two_step_verification": {
+                    "type": "boolean",
+                    "description": ""
+                },
+                "allow_two_step_verification_snooze": {
+                    "type": "boolean",
+                    "description": ""
+                },
+                "allow_extend_org_admin_rights_to_self": {
+                    "type": "boolean",
+                    "description": ""
+                },
+                "is_managed_by_scim": {
+                    "type": "boolean",
+                    "description": ""
                 }
             },
             "x-ds-definition-name": "UserDrilldownResponse",
@@ -7154,6 +7862,12 @@
         "MembershipResponse": {
             "type": "object",
             "properties": {
+                "id": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
                 "email": {
                     "type": "string",
                     "description": "The email address."
@@ -7199,6 +7913,18 @@
                 "is_admin": {
                     "type": "boolean",
                     "description": "When **true,**\nthe user has administration \nprivileges on the account."
+                },
+                "license_type": {
+                    "type": "string",
+                    "description": ""
+                },
+                "subscription_id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "plan_name": {
+                    "type": "string",
+                    "description": ""
                 }
             },
             "x-ds-definition-name": "MembershipResponse",
@@ -7348,6 +8074,10 @@
                 "auto_activate_memberships": {
                     "type": "boolean",
                     "description": "When **true,** the user's account is activated automatically."
+                },
+                "license_type": {
+                    "type": "string",
+                    "description": ""
                 }
             },
             "x-ds-definition-name": "NewAccountUserRequest",
@@ -7773,6 +8503,10 @@
                 "auto_activate_memberships": {
                     "type": "boolean",
                     "description": "When **true,** the user's account is activated automatically."
+                },
+                "license_type": {
+                    "type": "string",
+                    "description": ""
                 }
             },
             "x-ds-definition-name": "NewMultiProductUserAddRequest",
@@ -7884,6 +8618,22 @@
                 "job_title": {
                     "type": "string",
                     "description": "The user's job title."
+                },
+                "license_type": {
+                    "type": "string",
+                    "description": ""
+                },
+                "subscription_id": {
+                    "type": "string",
+                    "description": ""
+                },
+                "plan_name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "license_status": {
+                    "type": "string",
+                    "description": ""
                 }
             },
             "x-ds-definition-name": "AddUserResponseAccountProperties",
@@ -7973,6 +8723,337 @@
                 }
             },
             "x-ds-definition-name": "UserProductPermissionProfilesRequest",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "OrganizationConnectConfigsResponse": {
+            "type": "object",
+            "properties": {
+                "configurations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OrganizationConnectConfigResponse"
+                    },
+                    "description": ""
+                },
+                "totalSetSize": {
+                    "format": "int32",
+                    "type": "integer",
+                    "description": ""
+                },
+                "errorDetail": {
+                    "$ref": "#/definitions/ErrorDetail",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "OrganizationConnectConfigsResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "ErrorDetail": {
+            "type": "object",
+            "properties": {
+                "errorMessage": {
+                    "type": "string",
+                    "description": ""
+                },
+                "referenceId": {
+                    "type": "string",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "ErrorDetail",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "OrganizationConnectConfigResponse": {
+            "type": "object",
+            "properties": {
+                "connectId": {
+                    "type": "string",
+                    "description": ""
+                },
+                "configurationType": {
+                    "type": "string",
+                    "description": ""
+                },
+                "disabledBy": {
+                    "type": "string",
+                    "description": ""
+                },
+                "allowSalesforcePublish": {
+                    "type": "string",
+                    "description": ""
+                },
+                "name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "accountId": {
+                    "type": "string",
+                    "description": "The account ID GUID."
+                },
+                "accountName": {
+                    "type": "string",
+                    "description": "The account name of the asset group account."
+                },
+                "allowEnvelopePublish": {
+                    "type": "string",
+                    "description": ""
+                },
+                "siteId": {
+                    "format": "int32",
+                    "type": "integer",
+                    "description": "The site ID of the account.\n"
+                },
+                "pausePublish": {
+                    "type": "string",
+                    "description": ""
+                },
+                "requiresAcknowledgement": {
+                    "type": "string",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "OrganizationConnectConfigResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "OrganizationConnectConfigurationRequest": {
+            "type": "object",
+            "properties": {
+                "connectId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "configurationType": {
+                    "type": "string",
+                    "description": ""
+                },
+                "allowEnvelopePublish": {
+                    "type": "string",
+                    "description": ""
+                },
+                "urlToPublishTo": {
+                    "type": "string",
+                    "description": ""
+                },
+                "deliveryMode": {
+                    "type": "string",
+                    "description": ""
+                },
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": ""
+                },
+                "associatedFilterSelection": {
+                    "type": "string",
+                    "description": ""
+                },
+                "groupIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": ""
+                },
+                "accountIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": ""
+                },
+                "userIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": ""
+                },
+                "name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "signMessageWithX509Certificate": {
+                    "type": "string",
+                    "description": ""
+                },
+                "includeOAuth": {
+                    "type": "string",
+                    "description": ""
+                },
+                "includeHMAC": {
+                    "type": "string",
+                    "description": ""
+                },
+                "pausePublish": {
+                    "type": "string",
+                    "description": ""
+                },
+                "eventData": {
+                    "$ref": "#/definitions/ConnectEventData",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "OrganizationConnectConfigurationRequest",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "ConnectEventData": {
+            "type": "object",
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "description": ""
+                },
+                "includeData": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "ConnectEventData",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "OrganizationConnectConfigurationDetailsResponse": {
+            "type": "object",
+            "properties": {
+                "connectId": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000",
+                    "description": ""
+                },
+                "configurationType": {
+                    "type": "string",
+                    "description": ""
+                },
+                "allowEnvelopePublish": {
+                    "type": "string",
+                    "description": ""
+                },
+                "urlToPublishTo": {
+                    "type": "string",
+                    "description": ""
+                },
+                "deliveryMode": {
+                    "type": "string",
+                    "description": ""
+                },
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": ""
+                },
+                "associatedFilterSelection": {
+                    "type": "string",
+                    "description": ""
+                },
+                "accountIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": ""
+                },
+                "userIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": ""
+                },
+                "groupIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": ""
+                },
+                "name": {
+                    "type": "string",
+                    "description": ""
+                },
+                "signMessageWithX509Certificate": {
+                    "type": "string",
+                    "description": ""
+                },
+                "includeOAuth": {
+                    "type": "string",
+                    "description": ""
+                },
+                "includeHMAC": {
+                    "type": "string",
+                    "description": ""
+                },
+                "pausePublish": {
+                    "type": "string",
+                    "description": ""
+                },
+                "eventData": {
+                    "$ref": "#/definitions/ConnectEventData",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "OrganizationConnectConfigurationDetailsResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "OrganizationConnectHmacSecretsResponse": {
+            "type": "object",
+            "properties": {
+                "secrets": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "OrganizationConnectHmacSecretsResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "OrganizationConnectOAuthConfiguration": {
+            "type": "object",
+            "properties": {
+                "authorizationServerUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": ""
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": ""
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": ""
+                },
+                "scope": {
+                    "type": "string",
+                    "description": ""
+                },
+                "customParameter": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "OrganizationConnectOAuthConfiguration",
             "description": "",
             "x-ms-summary": ""
         },
@@ -8268,6 +9349,32 @@
             "x-ds-category": "AccountProvisioning",
             "x-ms-summary": "",
             "description": ""
+        },
+        "Connect": {
+            "type": "object",
+            "properties": {
+                "configurations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OrganizationConnectConfigResponse"
+                    },
+                    "description": ""
+                },
+                "totalSetSize": {
+                    "format": "int32",
+                    "type": "integer",
+                    "description": ""
+                },
+                "errorDetail": {
+                    "$ref": "#/definitions/ErrorDetail",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "OrganizationConnectConfigsResponse",
+            "description": "",
+            "x-ds-category": "Organization",
+            "x-ds-order": "100",
+            "x-ms-summary": ""
         }
     },
     "securityDefinitions": {
@@ -8275,8 +9382,8 @@
             "type": "oauth2",
             "description": "OAuth2 Access code Grant",
             "flow": "accessCode",
-            "authorizationUrl": "https://account-d.docusign.com/oauth/auth",
-            "tokenUrl": "https://account-d.docusign.com/oauth/auth",
+            "authorizationUrl": "https://account.docusign.com/oauth/auth",
+            "tokenUrl": "https://account.docusign.com/oauth/auth",
             "scopes": {
                 "organization_read": "",
                 "user_data_redact": "",
@@ -8292,7 +9399,13 @@
                 "asset_group_account_clone_write": "",
                 "asset_group_account_clone_read": "",
                 "organization_sub_account_read": "",
-                "organization_sub_account_write": ""
+                "organization_sub_account_write": "",
+                "connect_org_config_read_api": "",
+                "connect_org_config_write_api": "",
+                "connect_org_hmac_read_api": "",
+                "connect_org_hmac_write_api": "",
+                "connect_org_oauth_write_api": "",
+                "connect_org_oauth_read_api": ""
             }
         }
     },
@@ -8351,6 +9464,10 @@
         },
         {
             "name": "AccountCreation",
+            "description": "Methods to create accounts."
+        },
+        {
+            "name": "Connect",
             "description": ""
         }
     ],
