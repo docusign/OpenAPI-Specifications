@@ -1,1186 +1,1496 @@
 {
-  "openapi": "3.1.0",
-  "info": {
-      "title": "Maestro API",
-      "version": "1.0.1",
-      "description": "API for triggering and managing automated workflows",
-      "termsOfService": "https://www.docusign.com/legal/terms-and-conditions/developers",
-      "license": {
-          "name": "",
-          "url": "https://www.docusign.com/legal/terms-and-conditions/developers"
-      },
-      "contact": {
-          "name": "Docusign Developer Center",
-          "email": "devcenter@docusign.com",
-          "url": "https://developers.docusign.com"
-      }
-  },
-  "servers": [
-      {
-          "url": "https://api.docusign.com/v1/accounts/{accountId}",
-          "description": "Production server",
-          "variables": {
-              "accountId": {
-                  "default": "00000000-0000-0000-0000-000000000000",
-                  "description": "The ID of the account to which the agreement belongs."
-              }
-          }
-      },
-      {
-          "url": "https://api.dev.docusign.com/v1/accounts/{accountId}",
-          "description": "Dev server",
-          "variables": {
-              "accountId": {
-                  "default": "00000000-0000-0000-0000-000000000000",
-                  "description": "The ID of the account to which the agreement belongs."
-              }
-          }
-      },
-      {
-          "url": "https://api-s.docusign.com//v1/accounts/{accountId}",
-          "description": "Staging server",
-          "variables": {
-              "accountId": {
-                  "default": "00000000-0000-0000-0000-000000000000",
-                  "description": "The ID of the account to which the agreement belongs."
-              }
-          }
-      },
-      {
-          "url": "https://api-d.docusign.com/v1/accounts/{accountId}",
-          "description": "Demo server",
-          "variables": {
-              "accountId": {
-                  "default": "00000000-0000-0000-0000-000000000000",
-                  "description": "The ID of the account to which the agreement belongs."
-              }
-          }
-      }
-  ],
-  "security": [
-      {
-          "MaestroOAuth2": [
-              "adm_store_unified_repo_read",
-              "aow_manage",
-              "signature"
-          ]
-      }
-  ],
-  "paths": {
-      "/workflows": {
-          "get": {
-              "operationId": "GetWorkflowsList",
-              "summary": "Retrieve a list of available Maestro workflows",
-              "description": "This operation retrieves a list of all available Maestro workflows. It returns basic information \nabout each workflow, including its unique identifier (`id`), name, description, and the input \nschema required to trigger the workflow.\n\nThe response provides key details that help users identify which workflows are available \nand understand the input requirements for triggering each one. Each workflow entry also includes \nmetadata, such as when it was created, last modified, and by whom.\n\nThis operation is useful for obtaining an overview of all workflows within the system, helping \nusers and systems know what workflows are defined, what inputs they require, and how they can \nbe triggered.\n\n### Use Cases:\n- Listing all available workflows in a system for manual or automated workflow initiation.\n- Reviewing the input requirements for a workflow before triggering it programmatically.\n- Gathering basic metadata about workflows for auditing, logging, or reporting purposes.\n\n### Key Features:\n- **Comprehensive Workflow Overview**: Provides a full list of workflows, giving visibility \n  into all the automated processes available within the Maestro platform.\n- **Input Schema Information**: Each workflow includes its trigger input schema, showing \n  what data must be provided when triggering the workflow.\n- **Metadata for Tracking**: Useful metadata like creation time, last modification date, \n  and user details are included to support tracking and auditing workflows.\n- **Future-Proof**: The operation is designed to be expandable as more workflows are added \n  or the platform grows, ensuring scalability in the workflow management process.\n",
-              "x-ds-methodname": "getWorkflowsList",
-              "tags": [
-                  "Workflows"
-              ],
-              "responses": {
-                  "200": {
-                      "examples": {
-                          "WorkflowListExample": {
-                              "value": {
-                                  "data": [
-                                      {
-                                          "id": "9fabc6d2-748b-41c9-8d5e-5fbf2f7e6e72",
-                                          "name": "Agreement Signature Collection",
-                                          "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                          "status": "active",
-                                          "metadata": {
-                                              "created_at": "2024-07-05T12:00:00+02:00",
-                                              "created_by": "e3d89a85-c7d4-4df9-b987-78f5fc45a482"
-                                          }
-                                      },
-                                      {
-                                          "id": "b3c1ff15-4f5e-42b0-b74e-96177fa0e92d",
-                                          "name": "Contract Review Reminder",
-                                          "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                          "status": "active",
-                                          "metadata": {
-                                              "created_at": "2024-06-20T15:30:00+02:00",
-                                              "created_by": "fbd89b4f-0ecf-47b7-b3fd-59e9e1c8fd17"
-                                          }
-                                      },
-                                      {
-                                          "id": "2fe67b39-1920-46d1-b0c1-3b9236b3e3ad",
-                                          "name": "Contract Expiration Notification",
-                                          "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                          "status": "active",
-                                          "metadata": {
-                                              "created_at": "2024-08-01T09:45:00+02:00",
-                                              "created_by": "c6e8a5b3-fb1b-4c6e-a02a-267f8490731d"
-                                          }
-                                      },
-                                      {
-                                          "id": "6f0e1d91-d8e5-4c7a-a00e-8b9d4f95d5b8",
-                                          "name": "Legal Agreement Archival",
-                                          "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                          "status": "active",
-                                          "metadata": {
-                                              "created_at": "2024-10-01T08:00:00+02:00",
-                                              "created_by": "d7c94ff2-9b30-4872-9b56-e3a8f781632b"
-                                          }
-                                      }
-                                  ],
-                                  "response_metadata": {
-                                      "total_items": 5,
-                                      "response_timestamp": "2024-11-10T11:30:00+02:00",
-                                      "response_duration_ms": 150
-                                  }
-                              }
-                          }
-                      },
-                      "description": "A list of workflows has been successfully returned.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "type": "object",
-                                  "properties": {
-                                      "data": {
-                                          "$ref": "#/components/schemas/WorkflowList"
-                                      },
-                                      "response_metadata": {
-                                          "$ref": "#/components/schemas/ResponseMetadata"
-                                      }
-                                  }
-                              },
-                              "examples": {
-                                  "WorkflowCollectionExample": {
-                                      "value": {
-                                          "data": [
-                                              {
-                                                  "id": "9fabc6d2-748b-41c9-8d5e-5fbf2f7e6e72",
-                                                  "name": "Agreement Signature Collection",
-                                                  "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                                  "status": "active",
-                                                  "metadata": {
-                                                      "created_at": "2024-07-05T12:00:00+02:00",
-                                                      "created_by": "e3d89a85-c7d4-4df9-b987-78f5fc45a482"
-                                                  }
-                                              },
-                                              {
-                                                  "id": "b3c1ff15-4f5e-42b0-b74e-96177fa0e92d",
-                                                  "name": "Contract Review Reminder",
-                                                  "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                                  "status": "active",
-                                                  "metadata": {
-                                                      "created_at": "2024-06-20T15:30:00+02:00",
-                                                      "created_by": "fbd89b4f-0ecf-47b7-b3fd-59e9e1c8fd17"
-                                                  }
-                                              },
-                                              {
-                                                  "id": "2fe67b39-1920-46d1-b0c1-3b9236b3e3ad",
-                                                  "name": "Contract Expiration Notification",
-                                                  "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                                  "status": "active",
-                                                  "metadata": {
-                                                      "created_at": "2024-08-01T09:45:00+02:00",
-                                                      "created_by": "c6e8a5b3-fb1b-4c6e-a02a-267f8490731d"
-                                                  }
-                                              },
-                                              {
-                                                  "id": "6f0e1d91-d8e5-4c7a-a00e-8b9d4f95d5b8",
-                                                  "name": "Legal Agreement Archival",
-                                                  "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                                  "status": "active",
-                                                  "metadata": {
-                                                      "created_at": "2024-10-01T08:00:00+02:00",
-                                                      "created_by": "d7c94ff2-9b30-4872-9b56-e3a8f781632b"
-                                                  }
-                                              }
-                                          ],
-                                          "response_metadata": {
-                                              "total_items": 5,
-                                              "response_timestamp": "2024-11-10T11:30:00+02:00",
-                                              "response_duration_ms": 150
-                                          }
-                                      }
-                                  }
-                              }
-                          }
-                      }
-                  },
-                  "400": {
-                      "description": "Bad Request - The request could not be understood or was missing required parameters.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  },
-                  "401": {
-                      "description": "Unauthorized - Authentication is required and has failed or not been provided.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  },
-                  "403": {
-                      "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  },
-                  "404": {
-                      "description": "Not Found - The requested resource could not be found.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  },
-                  "500": {
-                      "description": "Internal Server Error",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  }
-              },
-              "x-ds-method": "getWorkflowsList",
-              "x-ds-service": "Maestro"
-          }
-      },
-      "/workflows/{workflowId}/trigger-requirements": {
-          "get": {
-              "operationId": "GetWorkflowTriggerRequirements",
-              "summary": "Retrieve trigger requirements for a specific Maestro workflow",
-              "description": "This operation retrieves the configuration and input requirements necessary to trigger a specific \nMaestro workflow. It provides detailed information about the `trigger_event_type`, such as HTTP \nor other supported types, and specifies the required input schema, including field names, data types, \nand any default values. \n\nThis information is essential for understanding the data and parameters required to initiate the \nworkflow. It enables developers to prepare the necessary inputs and configuration before triggering \nthe workflow instance, ensuring seamless execution and compliance with workflow requirements.\n\n### Use Cases:\n- Identifying the required input fields and their data types to successfully trigger the workflow.\n- Reviewing the trigger configuration for validation and compliance with expected input.\n- Preparing and validating data in advance of triggering the workflow, minimizing runtime errors.\n\n### Key Features:\n- **Detailed Trigger Input Requirements**: Provides an exhaustive schema of required fields, \n  their data types, and optional default values for easy reference and data validation.\n- **Trigger Event Type Information**: Specifies the type of event required to initiate the workflow \n  (e.g., HTTP), helping developers configure their systems to invoke the workflow appropriately.\n- **Configurable for Custom Triggers**: Suitable for custom configurations, enabling flexibility \n  in how workflows can be triggered according to system needs.\n",
-              "x-ds-methodname": "getWorkflowTriggerRequirements",
-              "tags": [
-                  "Workflows"
-              ],
-              "parameters": [
-                  {
-                      "name": "workflowId",
-                      "in": "path",
-                      "required": true,
-                      "schema": {
-                          "$ref": "#/components/schemas/WorkflowId"
-                      }
-                  }
-              ],
-              "responses": {
-                  "200": {
-                      "description": "Describes the requirements for triggering a workflow",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "allOf": [
-                                      {
-                                          "$ref": "#/components/schemas/WorkflowTriggerRequirements"
-                                      },
-                                      {
-                                          "$ref": "#/components/schemas/ResponseMetadata"
-                                      }
-                                  ]
-                              }
-                          }
-                      }
-                  },
-                  "400": {
-                      "description": "Bad Request - The request could not be understood or was missing required parameters.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  },
-                  "401": {
-                      "description": "Unauthorized - Authentication is required and has failed or not been provided.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  },
-                  "403": {
-                      "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  },
-                  "404": {
-                      "description": "Not Found - The requested resource could not be found.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  },
-                  "500": {
-                      "description": "Internal Server Error",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  }
-              },
-              "x-ds-method": "getWorkflowTriggerRequirements",
-              "x-ds-service": "Maestro"
-          }
-      },
-      "/workflows/{workflowId}/actions/trigger": {
-          "post": {
-              "operationId": "TriggerWorkflow",
-              "summary": "Trigger a new instance of a Maestro workflow",
-              "description": "This operation triggers a new instance of a specified Maestro workflow. When invoked, \nthe workflow is started based on the provided input data, and the workflow instance \nbegins executing according to its defined logic and configuration.\n\nThe request requires an `instance_name` and any input data necessary to start the workflow, \nas described by the workflow's `trigger_input_schema`. The `instance_name` is a user-defined \nlabel for tracking the workflow run, while the input data fields should match the schema defined \nin the workflow.\n\nThe operation is event-driven and typically triggered by an external HTTP event or system call, \nallowing for the automatic execution of complex processes that span multiple systems or components.\n\nUpon successful execution, the response returns the unique identifier (`id`) for the newly \ncreated workflow instance, along with a URL (`workflow_instance_url`) that can be used to \ninteract with or track the running instance.\n\n### Use Cases:\n- Automating user registration workflows where input fields like `name` and `email` are provided.\n- Processing financial transactions where details such as `amount` and `currency` are required.\n- Sending notifications based on user interactions in other systems.\n\n### Key Features:\n- **Automated Execution**: Once triggered, the workflow runs until a step requires manual intervention.\n- **Input-Driven**: Workflow execution is based on the provided input data, which is validated \n  against the workflow's input schema.\n- **Real-Time Triggering**: Designed to be invoked as part of an event-driven architecture, \n  allowing for workflows to respond to external events.\n- **Tracking and Interaction**: The response includes a URL that allows users to check the status \n  of the workflow instance or take further actions while it runs.\n",
-              "x-ds-methodname": "triggerWorkflow",
-              "tags": [
-                  "Workflows"
-              ],
-              "parameters": [
-                  {
-                      "name": "workflowId",
-                      "in": "path",
-                      "required": true,
-                      "schema": {
-                          "$ref": "#/components/schemas/WorkflowId"
-                      }
-                  }
-              ],
-              "requestBody": {
-                  "required": true,
-                  "content": {
-                      "application/json": {
-                          "schema": {
-                              "description": "The input information needed to trigger a new instance of a Maestro workflow.\nThis request body contains the metadata to describe the instance being created,\nalong with the input data required to trigger the workflow. \n\n- `instance_name` provides a user-defined name for the workflow instance.\n- `trigger_inputs` contains the key-value pairs corresponding to the inputs required by the workflow, as described in the `trigger_input_schema` from the workflow definition.\n",
-                              "$ref": "#/components/schemas/TriggerWorkflow"
-                          }
-                      }
-                  }
-              },
-              "responses": {
-                  "201": {
-                      "examples": {
-                          "BasicWorkflowSuccess": {
-                              "value": {
-                                  "instance_id": "9bd95fba-60f7-4f74-a11b-af00c0617ad9",
-                                  "instance_url": "https://apps-d.docusign.com/api/maestro/v1/accounts/97878f25-e391-4be4-a8f0-cf5f415f134e/instances/3695f629-e367-4243-abeb-5cb526b9559f/execution?mtid=34b2fb6c-cfd8-4084-9de6-94c111b17a9e&mtsec=U5OWGv7RQwmHgMX2UzhOWbTSdVoWYP8N-7qkE_ishaI"
-                              }
-                          }
-                      },
-                      "description": "Indicates a trigger has successfully launched a workflow instance",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "allOf": [
-                                      {
-                                          "$ref": "#/components/schemas/WorkflowInstanceInfo"
-                                      },
-                                      {
-                                          "$ref": "#/components/schemas/ResponseMetadata"
-                                      }
-                                  ]
-                              },
-                              "examples": {
-                                  "WorkflowTriggerSuccessExample": {
-                                      "value": {
-                                          "instance_id": "9bd95fba-60f7-4f74-a11b-af00c0617ad9",
-                                          "instance_url": "https://apps-d.docusign.com/api/maestro/v1/accounts/97878f25-e391-4be4-a8f0-cf5f415f134e/instances/3695f629-e367-4243-abeb-5cb526b9559f/execution?mtid=34b2fb6c-cfd8-4084-9de6-94c111b17a9e&mtsec=U5OWGv7RQwmHgMX2UzhOWbTSdVoWYP8N-7qkE_ishaI"
-                                      }
-                                  }
-                              }
-                          }
-                      }
-                  },
-                  "400": {
-                      "description": "Bad Request - The request could not be understood or was missing required parameters.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  },
-                  "401": {
-                      "description": "Unauthorized - Authentication is required and has failed or not been provided.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  },
-                  "403": {
-                      "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  },
-                  "404": {
-                      "description": "Not Found - The requested resource could not be found.",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  },
-                  "500": {
-                      "description": "Internal Server Error",
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "$ref": "#/components/schemas/Error"
-                              }
-                          }
-                      }
-                  }
-              },
-              "x-ds-method": "triggerWorkflow",
-              "x-ds-service": "Maestro"
-          }
-      }
-  },
-  "components": {
-      "parameters": {
-          "WorkflowId": {
-              "name": "workflowId",
-              "in": "path",
-              "required": true,
-              "schema": {
-                  "$ref": "#/components/schemas/WorkflowId"
-              }
-          }
-      },
-      "schemas": {
-          "Error": {
-              "type": "object",
-              "properties": {
-                  "error": {
-                      "type": "string",
-                      "description": "A message describing the error.",
-                      "examples": [
-                          "An unexpected error occurred on the server."
-                      ]
-                  },
-                  "code": {
-                      "type": "integer",
-                      "description": "HTTP status code for the error.",
-                      "examples": [
-                          500
-                      ]
-                  },
-                  "timestamp": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "The timestamp when the error occurred.",
-                      "examples": [
-                          "2023-01-01T12:00:00Z"
-                      ]
-                  }
-              },
-              "x-ds-definition-name": "Error"
-          },
-          "ResourceId": {
-              "description": "The unique identifier of the resource",
-              "$ref": "#/components/schemas/UUID",
-              "x-ds-definition-name": "ResourceId"
-          },
-          "ResourceMetadata": {
-              "type": "object",
-              "properties": {
-                  "created_at": {
-                      "description": "Timestamp when the agreement document was created.",
-                      "type": "string",
-                      "format": "date-time",
-                      "x-docusign-adm-model": "com.docusign.platform@1.1.0.{Metadata.createdAt}"
-                  },
-                  "created_by": {
-                      "description": "User ID of the person who created the agreement document.",
-                      "type": "string",
-                      "x-docusign-adm-model": "com.docusign.platform@1.1.0.{Metadata.createdBy}"
-                  },
-                  "modified_at": {
-                      "description": "Timestamp when the agreement document was last modified.",
-                      "type": "string",
-                      "format": "date-time",
-                      "x-docusign-adm-model": "com.docusign.platform@1.1.0.{Metadata.updatedAt}"
-                  },
-                  "modified_by": {
-                      "description": "User ID of the person who last modified the agreement document.",
-                      "type": "string",
-                      "x-docusign-adm-model": "com.docusign.platform@1.1.0.{Metadata.updatedBy}"
-                  }
-              },
-              "x-docusign-adm-model": "com.docusign.platform@1.1.0.{Metadata}",
-              "x-ds-definition-name": "ResourceMetadata"
-          },
-          "RequestId": {
-              "description": "Unique identifier for the request, useful for tracking and debugging.",
-              "type": "string",
-              "format": "uuid",
-              "examples": [
-                  "3f7c9e4b-851c-4f9b-89e7-123456789abc"
-              ],
-              "x-ds-definition-name": "RequestId"
-          },
-          "ResponseMetadata": {
-              "description": "Additional server-side metadata for a given response",
-              "type": "object",
-              "properties": {
-                  "response_timestamp": {
-                      "$ref": "#/components/schemas/ResponseTimestamp"
-                  },
-                  "response_duration_ms": {
-                      "$ref": "#/components/schemas/ResponseDurationMs"
-                  },
-                  "request_id": {
-                      "$ref": "#/components/schemas/RequestId"
-                  }
-              },
-              "x-ds-definition-name": "ResponseMetadata"
-          },
-          "ResponseTimestamp": {
-              "description": "The timestamp indicating when the response was generated.",
-              "type": "string",
-              "format": "date-time",
-              "examples": [
-                  "2024-10-17T14:30:00Z"
-              ],
-              "x-ds-definition-name": "ResponseTimestamp"
-          },
-          "ResponseDurationMs": {
-              "description": "The duration of time, in milliseconds, that the server took to process and respond \nto the request. This is measured from the time the server received the request \nuntil the time the response was sent.\n",
-              "type": "integer",
-              "format": "int32",
-              "examples": [
-                  150
-              ],
-              "minimum": 0,
-              "x-ds-definition-name": "ResponseDurationMs"
-          },
-          "URL": {
-              "type": "string",
-              "format": "uri",
-              "maxLength": 1024,
-              "x-docusign-adm-model": "com.docusign.scalars@1.1.0.{URL}",
-              "examples": [
-                  "https://example.com/resource/123"
-              ],
-              "x-ds-definition-name": "URL"
-          },
-          "UUID": {
-              "type": "string",
-              "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
-              "default": "00000000-0000-0000-0000-000000000000",
-              "examples": [
-                  "adf8c455-de2f-4119-b183-d952d649e87c"
-              ],
-              "x-docusign-adm-model": "concerto.platform.scalar@1.0.0.{UUID}",
-              "x-ds-definition-name": "UUID"
-          },
-          "TriggerWorkflow": {
-              "description": "The input information needed to trigger a new instance of a Maestro workflow.\nThis request body contains the metadata to describe the instance being created,\nalong with the input data required to trigger the workflow. \n\n- `instance_name` provides a user-defined name for the workflow instance.\n- `trigger_inputs` contains the key-value pairs corresponding to the inputs required by the workflow, as described in the `trigger_input_schema` from the workflow definition.\n",
-              "type": "object",
-              "properties": {
-                  "instance_name": {
-                      "type": "string",
-                      "description": "A descriptive name for the specific instance of the workflow being triggered. \nThis is typically used for identification and tracking purposes.\nExample: \"User Registration Workflow Instance\"\n",
-                      "examples": [
-                          "Sample Workflow Run"
-                      ]
-                  },
-                  "trigger_inputs": {
-                      "type": "object",
-                      "description": "Key-value pairs representing the input data required to trigger the workflow.\nThe keys correspond to the `field_name` values defined in the `trigger_input_schema` of the workflow definition.\nThe values should match the specified `field_data_type` (e.g., string, number, boolean).\nExample: {\"name\": \"John Doe\", \"email\": \"johndoe@example.com\"}\n",
-                      "additionalProperties": {
-                          "description": "A key-value pair where the key is the `field_name` defined in the `trigger_input_schema` of the workflow definition, \nand the value is the actual input data. Supported types include string, number, boolean, object, or array.\n",
-                          "oneOf": [
-                              {
-                                  "type": "string",
-                                  "description": "String input, e.g., names, emails, etc.",
-                                  "examples": [
-                                      "John Doe"
-                                  ]
-                              },
-                              {
-                                  "type": "number",
-                                  "description": "Numeric input, e.g., ages, IDs, etc.",
-                                  "examples": [
-                                      30
-                                  ]
-                              },
-                              {
-                                  "type": "boolean",
-                                  "description": "Boolean input for true/false values.",
-                                  "examples": [
-                                      true
-                                  ]
-                              },
-                              {
-                                  "type": "object",
-                                  "description": "Nested object input, if a complex structure is required.",
-                                  "additionalProperties": true,
-                                  "examples": [
-                                      {
-                                          "address": {
-                                              "street": "123 Main St",
-                                              "city": "Metropolis"
-                                          }
-                                      }
-                                  ]
-                              },
-                              {
-                                  "type": "array",
-                                  "description": "An array of values if the input expects multiple items.",
-                                  "items": {},
-                                  "examples": [
-                                      [
-                                          "item1",
-                                          "item2",
-                                          "item3"
-                                      ]
-                                  ]
-                              }
-                          ]
-                      }
-                  }
-              },
-              "required": [
-                  "instance_name",
-                  "trigger_inputs"
-              ],
-              "examples": [
-                  {
-                      "instance_name": "My Instance",
-                      "trigger_inputs": {
-                          "name": "Jon Doe",
-                          "email": "jdoe@example.com"
-                      }
-                  }
-              ],
-              "x-ds-definition-name": "TriggerWorkflow"
-          },
-          "WorkflowTriggerRequirements": {
-              "description": "Information about the input requirements and configuration necessary to trigger a specific workflow.\n",
-              "type": "object",
-              "properties": {
-                  "trigger_id": {
-                      "$ref": "#/components/schemas/UUID",
-                      "description": "The unique identifier for the trigger.\nExample: '000000-0000-000000'\n"
-                  },
-                  "trigger_event_type": {
-                      "type": "string",
-                      "const": "HTTP",
-                      "description": "The type of event that triggers the workflow. In this case, the workflow is initiated \nby an HTTP request. Future iterations may support additional event types beyond HTTP.\n",
-                      "examples": [
-                          "HTTP"
-                      ]
-                  },
-                  "trigger_http_config": {
-                      "type": "object",
-                      "description": "Configuration details specific to HTTP-triggered workflows. This object describes the \nHTTP method and URL that will trigger the workflow, providing the endpoint and method \nthat should be used to initiate the workflow.\n",
-                      "properties": {
-                          "method": {
-                              "type": "string",
-                              "enum": [
-                                  "GET",
-                                  "POST",
-                                  "PUT",
-                                  "PATCH",
-                                  "DELETE"
-                              ],
-                              "description": "The HTTP method used to trigger the workflow. This defines the type of request \nthat will initiate the workflow (e.g., GET, POST).\n",
-                              "examples": [
-                                  "GET"
-                              ]
-                          },
-                          "url": {
-                              "description": "The URL that is associated with the trigger event. This is the endpoint that must be \ncalled using the specified HTTP method to start the workflow.\n",
-                              "$ref": "#/components/schemas/URL"
-                          }
-                      }
-                  },
-                  "trigger_input_schema": {
-                      "type": "array",
-                      "description": "A list of input fields that define the structure of the data required to trigger the workflow. \nEach item describes a field that must be included in the request when the workflow is triggered. \nThe schema includes the field name, expected data type, and any default values for the input.\n",
-                      "items": {
-                          "type": "object",
-                          "description": "Array of fields required as inputs to trigger the workflow, including field names, data types, and default values.",
-                          "properties": {
-                              "field_name": {
-                                  "type": "string",
-                                  "description": "The name of the input field expected by the workflow. This key must match the name \nprovided in the `trigger_inputs` when triggering the workflow.\n",
-                                  "examples": [
-                                      "name"
-                                  ]
-                              },
-                              "field_data_type": {
-                                  "type": "object",
-                                  "description": "The data type expected for the input field. This indicates whether the input should \nbe a string, number, boolean, object, or array, ensuring the data is passed in the \ncorrect format.\n",
-                                  "examples": [
-                                      "string"
-                                  ]
-                              },
-                              "default_value": {
-                                  "oneOf": [
-                                      {
-                                          "type": "string"
-                                      },
-                                      {
-                                          "type": "number"
-                                      },
-                                      {
-                                          "type": "boolean"
-                                      },
-                                      {
-                                          "type": "object",
-                                          "additionalProperties": true
-                                      },
-                                      {
-                                          "type": "array",
-                                          "items": {}
-                                      }
-                                  ],
-                                  "description": "The default value for the input field if one is provided. This can be a string, number, \nboolean, object, or array. If no value is provided during the trigger, the workflow may \nuse this default value.\n",
-                                  "example": ""
-                              }
-                          }
-                      }
-                  },
-                  "metadata": {
-                      "$ref": "#/components/schemas/ResourceMetadata",
-                      "description": "Metadata related to the workflow definition, including details about when the workflow was \ncreated, who created it, when it was last modified, and by whom. This information is useful \nfor tracking changes to the workflow over time and identifying the user or system responsible \nfor creating or modifying the workflow.\n",
-                      "example": {
-                          "created_at": "2024-07-01T00:00:00+02:00",
-                          "created_by": "8ade6915-d04b-40d6-bb6f-9c6ba6aa1bb5",
-                          "modified_at": "",
-                          "modified_by": ""
-                      }
-                  }
-              },
-              "examples": [
-                  {
-                      "trigger_id": "00000000-0000-0000-0000-000000000001",
-                      "trigger_event_type": "HTTP",
-                      "trigger_http_config": {
-                          "method": "POST",
-                          "url": "http://www.example.com"
-                      },
-                      "trigger_input_schema": [
-                          {
-                              "field_name": "name",
-                              "field_data_type": "string"
-                          },
-                          {
-                              "field_name": "email",
-                              "field_data_type": "string"
-                          }
-                      ],
-                      "metadata": {
-                          "created_at": "2023-01-19T15:30:00+02:00",
-                          "created_by": "00000000-0000-0000-0000-000000000003",
-                          "modified_at": "",
-                          "modified_by": "",
-                          "request_id": "00000000-0000-0000-0000-000000000002",
-                          "response_timestamp": "2024-06-20T15:30:00+02:00",
-                          "response_duration_ms": 100
-                      }
-                  }
-              ],
-              "x-ds-definition-name": "WorkflowTriggerRequirements"
-          },
-          "Workflow": {
-              "type": "object",
-              "properties": {
-                  "id": {
-                      "description": "A unique ID for this workflow",
-                      "$ref": "#/components/schemas/UUID"
-                  },
-                  "name": {
-                      "description": "A user-provided name for this workflow",
-                      "type": "string"
-                  },
-                  "account_id": {
-                      "description": "A unique ID for the account associated with the workflow",
-                      "$ref": "#/components/schemas/UUID"
-                  },
-                  "status": {
-                      "description": "Indicates the readiness and deployment status of a workflow",
-                      "type": "string"
-                  },
-                  "metadata": {
-                      "$ref": "#/components/schemas/ResourceMetadata"
-                  }
-              },
-              "x-ds-definition-name": "Workflow"
-          },
-          "WorkflowList": {
-              "type": "object",
-              "description": "A list of workflows",
-              "properties": {
-                  "workflows": {
-                      "type": "array",
-                      "items": {
-                          "$ref": "#/components/schemas/Workflow"
-                      }
-                  }
-              },
-              "x-ds-definition-name": "WorkflowList"
-          },
-          "WorkflowId": {
-              "description": "The unique identifier of the workflow.",
-              "$ref": "#/components/schemas/ResourceId",
-              "example": "094db5ad-1b5d-4c20-82a9-1c987431b7d8",
-              "x-ds-definition-name": "WorkflowId"
-          },
-          "WorkflowInstanceInfo": {
-              "description": "Represents an instance of a Maestro workflow. This object contains details about a \nspecific workflow instance, including its unique identifier and a URL that allows \nusers to access or interact with the running instance.\n",
-              "type": "object",
-              "properties": {
-                  "instance_id": {
-                      "description": "A unique identifier for this specific instance of the workflow. This UUID \nis used to reference the running instance in other API calls (e.g., to \nretrieve its status or terminate the instance). \nExample: '1a46ccde-9db4-42d6-94fa-0ddd07a3d2ff'\n",
-                      "$ref": "#/components/schemas/UUID"
-                  },
-                  "instance_url": {
-                      "type": "string",
-                      "format": "url",
-                      "description": "A fully-qualified URL that can be used to access or interact with this \nworkflow instance while it is running. This URL may provide access to \nadditional details, actions, or logs related to the workflow execution.\n"
-                  }
-              },
-              "examples": [
-                  {
-                      "instance_id": "9bd95fba-60f7-4f74-a11b-af00c0617ad9",
-                      "instance_url": "https://apps-d.docusign.com/api/maestro/v1/accounts/97878f25-e391-4be4-a8f0-cf5f415f134e/instances/3695f629-e367-4243-abeb-5cb526b9559f/execution?mtid=34b2fb6c-cfd8-4084-9de6-94c111b17a9e&mtsec=U5OWGv7RQwmHgMX2UzhOWbTSdVoWYP8N-7qkE_ishaI"
-                  }
-              ],
-              "x-ds-definition-name": "WorkflowInstanceInfo"
-          },
-          "WorkflowTrigger": {
-              "x-ds-category": "WorkflowTrigger",
-              "x-ms-summary": "",
-              "description": ""
-          },
-          "WorkflowInstanceManagement": {
-              "x-ds-category": "WorkflowInstanceManagement",
-              "x-ms-summary": "",
-              "description": ""
-          },
-          "WorkflowManagement": {
-              "x-ds-category": "WorkflowManagement",
-              "x-ms-summary": "",
-              "description": ""
-          },
-          "Workflows": {
-              "x-ds-category": "Maestro",
-              "x-ms-summary": "",
-              "description": ""
-          }
-      },
-      "responses": {
-          "BadRequest": {
-              "description": "Bad Request - The request could not be understood or was missing required parameters.",
-              "content": {
-                  "application/json": {
-                      "schema": {
-                          "$ref": "#/components/schemas/Error"
-                      }
-                  }
-              }
-          },
-          "Forbidden": {
-              "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
-              "content": {
-                  "application/json": {
-                      "schema": {
-                          "$ref": "#/components/schemas/Error"
-                      }
-                  }
-              }
-          },
-          "InternalServerError": {
-              "description": "Internal Server Error",
-              "content": {
-                  "application/json": {
-                      "schema": {
-                          "$ref": "#/components/schemas/Error"
-                      }
-                  }
-              }
-          },
-          "NotFound": {
-              "description": "Not Found - The requested resource could not be found.",
-              "content": {
-                  "application/json": {
-                      "schema": {
-                          "$ref": "#/components/schemas/Error"
-                      }
-                  }
-              }
-          },
-          "Unauthorized": {
-              "description": "Unauthorized - Authentication is required and has failed or not been provided.",
-              "content": {
-                  "application/json": {
-                      "schema": {
-                          "$ref": "#/components/schemas/Error"
-                      }
-                  }
-              }
-          },
-          "WorkflowsListSuccess": {
-              "description": "A list of workflows has been successfully returned.",
-              "content": {
-                  "application/json": {
-                      "schema": {
-                          "type": "object",
-                          "properties": {
-                              "data": {
-                                  "$ref": "#/components/schemas/WorkflowList"
-                              },
-                              "response_metadata": {
-                                  "$ref": "#/components/schemas/ResponseMetadata"
-                              }
-                          }
-                      },
-                      "examples": {
-                          "WorkflowCollectionExample": {
-                              "value": {
-                                  "data": [
-                                      {
-                                          "id": "9fabc6d2-748b-41c9-8d5e-5fbf2f7e6e72",
-                                          "name": "Agreement Signature Collection",
-                                          "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                          "status": "active",
-                                          "metadata": {
-                                              "created_at": "2024-07-05T12:00:00+02:00",
-                                              "created_by": "e3d89a85-c7d4-4df9-b987-78f5fc45a482"
-                                          }
-                                      },
-                                      {
-                                          "id": "b3c1ff15-4f5e-42b0-b74e-96177fa0e92d",
-                                          "name": "Contract Review Reminder",
-                                          "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                          "status": "active",
-                                          "metadata": {
-                                              "created_at": "2024-06-20T15:30:00+02:00",
-                                              "created_by": "fbd89b4f-0ecf-47b7-b3fd-59e9e1c8fd17"
-                                          }
-                                      },
-                                      {
-                                          "id": "2fe67b39-1920-46d1-b0c1-3b9236b3e3ad",
-                                          "name": "Contract Expiration Notification",
-                                          "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                          "status": "active",
-                                          "metadata": {
-                                              "created_at": "2024-08-01T09:45:00+02:00",
-                                              "created_by": "c6e8a5b3-fb1b-4c6e-a02a-267f8490731d"
-                                          }
-                                      },
-                                      {
-                                          "id": "6f0e1d91-d8e5-4c7a-a00e-8b9d4f95d5b8",
-                                          "name": "Legal Agreement Archival",
-                                          "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                          "status": "active",
-                                          "metadata": {
-                                              "created_at": "2024-10-01T08:00:00+02:00",
-                                              "created_by": "d7c94ff2-9b30-4872-9b56-e3a8f781632b"
-                                          }
-                                      }
-                                  ],
-                                  "response_metadata": {
-                                      "total_items": 5,
-                                      "response_timestamp": "2024-11-10T11:30:00+02:00",
-                                      "response_duration_ms": 150
-                                  }
-                              }
-                          }
-                      }
-                  }
-              }
-          },
-          "TriggerWorkflowSuccess": {
-              "description": "Indicates a trigger has successfully launched a workflow instance",
-              "content": {
-                  "application/json": {
-                      "schema": {
-                          "allOf": [
-                              {
-                                  "$ref": "#/components/schemas/WorkflowInstanceInfo"
-                              },
-                              {
-                                  "$ref": "#/components/schemas/ResponseMetadata"
-                              }
-                          ]
-                      },
-                      "examples": {
-                          "WorkflowTriggerSuccessExample": {
-                              "value": {
-                                  "instance_id": "9bd95fba-60f7-4f74-a11b-af00c0617ad9",
-                                  "instance_url": "https://apps-d.docusign.com/api/maestro/v1/accounts/97878f25-e391-4be4-a8f0-cf5f415f134e/instances/3695f629-e367-4243-abeb-5cb526b9559f/execution?mtid=34b2fb6c-cfd8-4084-9de6-94c111b17a9e&mtsec=U5OWGv7RQwmHgMX2UzhOWbTSdVoWYP8N-7qkE_ishaI"
-                              }
-                          }
-                      }
-                  }
-              }
-          },
-          "WorkflowTriggerRequirementsSuccess": {
-              "description": "Describes the requirements for triggering a workflow",
-              "content": {
-                  "application/json": {
-                      "schema": {
-                          "allOf": [
-                              {
-                                  "$ref": "#/components/schemas/WorkflowTriggerRequirements"
-                              },
-                              {
-                                  "$ref": "#/components/schemas/ResponseMetadata"
-                              }
-                          ]
-                      }
-                  }
-              }
-          }
-      },
-      "requestBodies": {
-          "TriggerWorkflowRequest": {
-              "required": true,
-              "content": {
-                  "application/json": {
-                      "schema": {
-                          "description": "The input information needed to trigger a new instance of a Maestro workflow.\nThis request body contains the metadata to describe the instance being created,\nalong with the input data required to trigger the workflow. \n\n- `instance_name` provides a user-defined name for the workflow instance.\n- `trigger_inputs` contains the key-value pairs corresponding to the inputs required by the workflow, as described in the `trigger_input_schema` from the workflow definition.\n",
-                          "$ref": "#/components/schemas/TriggerWorkflow"
-                      }
-                  }
-              }
-          }
-      },
-      "examples": {
-          "WorkflowListExample": {
-              "value": {
-                  "data": [
-                      {
-                          "id": "9fabc6d2-748b-41c9-8d5e-5fbf2f7e6e72",
-                          "name": "Agreement Signature Collection",
-                          "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                          "status": "active",
-                          "metadata": {
-                              "created_at": "2024-07-05T12:00:00+02:00",
-                              "created_by": "e3d89a85-c7d4-4df9-b987-78f5fc45a482"
-                          }
-                      },
-                      {
-                          "id": "b3c1ff15-4f5e-42b0-b74e-96177fa0e92d",
-                          "name": "Contract Review Reminder",
-                          "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                          "status": "active",
-                          "metadata": {
-                              "created_at": "2024-06-20T15:30:00+02:00",
-                              "created_by": "fbd89b4f-0ecf-47b7-b3fd-59e9e1c8fd17"
-                          }
-                      },
-                      {
-                          "id": "2fe67b39-1920-46d1-b0c1-3b9236b3e3ad",
-                          "name": "Contract Expiration Notification",
-                          "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                          "status": "active",
-                          "metadata": {
-                              "created_at": "2024-08-01T09:45:00+02:00",
-                              "created_by": "c6e8a5b3-fb1b-4c6e-a02a-267f8490731d"
-                          }
-                      },
-                      {
-                          "id": "6f0e1d91-d8e5-4c7a-a00e-8b9d4f95d5b8",
-                          "name": "Legal Agreement Archival",
-                          "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                          "status": "active",
-                          "metadata": {
-                              "created_at": "2024-10-01T08:00:00+02:00",
-                              "created_by": "d7c94ff2-9b30-4872-9b56-e3a8f781632b"
-                          }
-                      }
-                  ],
-                  "response_metadata": {
-                      "total_items": 5,
-                      "response_timestamp": "2024-11-10T11:30:00+02:00",
-                      "response_duration_ms": 150
-                  }
-              }
-          },
-          "WorkflowInstanceInfoExample": {
-              "value": {
-                  "instance_id": "9bd95fba-60f7-4f74-a11b-af00c0617ad9",
-                  "instance_url": "https://apps-d.docusign.com/api/maestro/v1/accounts/97878f25-e391-4be4-a8f0-cf5f415f134e/instances/3695f629-e367-4243-abeb-5cb526b9559f/execution?mtid=34b2fb6c-cfd8-4084-9de6-94c111b17a9e&mtsec=U5OWGv7RQwmHgMX2UzhOWbTSdVoWYP8N-7qkE_ishaI"
-              }
-          }
-      },
-      "securitySchemes": {
-          "MaestroOAuth2": {
-              "type": "oauth2",
-              "flows": {
-                  "authorizationCode": {
-                      "authorizationUrl": "https://account-d.docusign.com/oauth/auth",
-                      "tokenUrl": "https://account-d.docusign.com/oauth/token",
-                      "scopes": {
-                          "adm_store_unified_repo_read": "Allows read access to the unified repository.",
-                          "aow_manage": "Allows management of advanced workflow operations.",
-                          "signature": "Allows requesting and managing signatures."
-                      }
-                  }
-              }
-          }
-      }
-  },
-  "tags": [
-      {
-          "name": "WorkflowTrigger",
-          "description": ""
-      },
-      {
-          "name": "WorkflowInstanceManagement",
-          "description": ""
-      },
-      {
-          "name": "WorkflowManagement",
-          "description": ""
-      },
-      {
-          "name": "Workflows",
-          "description": ""
-      }
-  ],
-  "x-ds-categories": [
-      {
-          "name": "Maestro",
-          "summary": "",
-          "description": ""
-      }
-  ]
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Maestro API",
+        "version": "1.0.7",
+        "description": "API for triggering and managing automated workflows",
+        "termsOfService": "https://www.docusign.com/legal/terms-and-conditions/developers",
+        "license": {
+            "name": "",
+            "url": "https://www.docusign.com/legal/terms-and-conditions/developers"
+        },
+        "contact": {
+            "name": "Docusign Developer Center",
+            "email": "devcenter@docusign.com",
+            "url": "https://developers.docusign.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://api.docusign.com",
+            "description": "Production server"
+        },
+        {
+            "url": "https://api-d.docusign.com",
+            "description": "Demo server"
+        },
+        {
+            "url": "https://api-s.docusign.com",
+            "description": "Staging server"
+        },
+        {
+            "url": "https://api.dev.docusign.net",
+            "description": "Dev server"
+        }
+    ],
+    "security": [
+        {
+            "MaestroOAuth2": [
+                "adm_store_unified_repo_read",
+                "aow_manage",
+                "signature"
+            ]
+        }
+    ],
+    "paths": {
+        "/v1/accounts/{accountId}/workflows": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "accountId",
+                    "required": true,
+                    "example": "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
+                    "schema": {
+                        "$ref": "#/components/schemas/UUID"
+                    },
+                    "description": "The unique identifier of the account."
+                },
+                {
+                    "in": "query",
+                    "name": "status",
+                    "required": false,
+                    "example": "active",
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "active",
+                            "inactive",
+                            "publishing",
+                            "unpublishing",
+                            "archived",
+                            "archiving"
+                        ]
+                    },
+                    "description": "Filter workflows by their status. If provided, only workflows with the specified status will be returned.\n- `active`: Returns only active workflows.\n- `inactive`: Returns only inactive workflows.\n- `publishing`: Returns workflows currently being published.\n- `unpublishing`: Returns workflows currently being unpublished.\n- `archived`: Returns workflows that have been archived.\n- `archiving`: Returns workflows currently being archived.        \n"
+                }
+            ],
+            "get": {
+                "operationId": "GetWorkflowsList",
+                "summary": "",
+                "description": "",
+                "x-ds-methodname": "getWorkflowsList",
+                "tags": [
+                    "Workflows"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/WorkflowsListSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                },
+                "x-ds-method": "getWorkflowsList",
+                "x-ds-service": "Maestro",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v1/accounts/{accountId}/workflows/{workflowId}/trigger-requirements": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "accountId",
+                    "required": true,
+                    "example": "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
+                    "schema": {
+                        "$ref": "#/components/schemas/UUID"
+                    },
+                    "description": "The unique identifier of the account."
+                }
+            ],
+            "get": {
+                "operationId": "GetWorkflowTriggerRequirements",
+                "summary": "",
+                "description": "",
+                "x-ds-methodname": "getWorkflowTriggerRequirements",
+                "tags": [
+                    "Workflows"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/WorkflowId",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/WorkflowTriggerRequirementsSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                },
+                "x-ds-method": "getWorkflowTriggerRequirements",
+                "x-ds-service": "Maestro",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v1/accounts/{accountId}/workflows/{workflowId}/actions/trigger": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "accountId",
+                    "required": true,
+                    "example": "ae232f1f-8efc-4b8c-bb08-626847fad8bb",
+                    "schema": {
+                        "$ref": "#/components/schemas/UUID"
+                    },
+                    "description": "The unique identifier of the account."
+                }
+            ],
+            "post": {
+                "operationId": "TriggerWorkflow",
+                "summary": "",
+                "description": "",
+                "x-ds-methodname": "triggerWorkflow",
+                "tags": [
+                    "Workflows"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/WorkflowId",
+                        "description": ""
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/TriggerWorkflowRequest"
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/TriggerWorkflowSuccess",
+                        "examples": {
+                            "BasicWorkflowSuccess": {
+                                "$ref": "#/components/examples/WorkflowInstanceInfoExample"
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                },
+                "x-ds-method": "triggerWorkflow",
+                "x-ds-service": "Maestro",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v1/accounts/{accountId}/workflows/{workflowId}/instances": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "accountId",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/components/schemas/UUID"
+                    },
+                    "description": "The unique identifier of the account."
+                }
+            ],
+            "get": {
+                "summary": "",
+                "description": "",
+                "operationId": "getWorkflowInstancesList",
+                "x-ds-methodname": "getWorkflowInstancesList",
+                "tags": [
+                    "WorkflowInstanceManagement"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/WorkflowId",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response containing a list of workflow instances",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WorkflowInstanceCollection"
+                                },
+                                "examples": {
+                                    "multipleWorkflowInstances": {
+                                        "$ref": "#/components/examples/WorkflowInstanceCollectionExample"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-method": "getWorkflowInstancesList",
+                "x-ds-service": "Maestro",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v1/accounts/{accountId}/workflows/{workflowId}/actions/pause": {
+            "post": {
+                "summary": "",
+                "description": "",
+                "operationId": "pauseNewWorkflowInstances",
+                "x-ds-methodname": "pauseNewWorkflowInstances",
+                "tags": [
+                    "Workflows"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/AccountId",
+                        "description": ""
+                    },
+                    {
+                        "$ref": "#/components/parameters/WorkflowId",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/PauseNewWorkflowInstancesSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/Conflict"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                },
+                "x-ds-method": "pauseNewWorkflowInstances",
+                "x-ds-service": "Maestro",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v1/accounts/{accountId}/workflows/{workflowId}/actions/resume": {
+            "post": {
+                "summary": "",
+                "description": "",
+                "operationId": "resumePausedWorkflow",
+                "x-ds-methodname": "resumePausedWorkflow",
+                "tags": [
+                    "Workflows"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/AccountId",
+                        "description": ""
+                    },
+                    {
+                        "$ref": "#/components/parameters/WorkflowId",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/ResumeNewWorkflowInstancesSuccess"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/Conflict"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                },
+                "x-ds-method": "resumePausedWorkflow",
+                "x-ds-service": "Maestro",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "accountId",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/components/schemas/UUID"
+                    },
+                    "description": "The unique identifier of the account."
+                }
+            ],
+            "get": {
+                "summary": "Gets the details for a specific instance for a deployed workflow definition.",
+                "description": "Gets the details for a specific instance for a deployed workflow definition.\n\n<!-- maestro beta notice -->\n\n<ds-inlinemessage>\n  The Maestro API is currently only available\n  as part of a beta program.\n  See <a href=\"/docs/maestro-api/get-access/\">Get access to Maestro API</a>\n  for details.\n</ds-inlinemessage>\n\n<!-- end maestro beta notice -->\n\n\n### Related topics\n\n- [How to get the status of a Maestro workflow instance][howto-status]\n\n[howto-status]: /docs/maestro-api/how-to/get-workflow-status/\n",
+                "operationId": "getWorkflowInstance",
+                "x-ds-methodname": "getWorkflowInstance",
+                "tags": [
+                    "WorkflowInstanceManagement"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/WorkflowId",
+                        "description": ""
+                    },
+                    {
+                        "$ref": "#/components/parameters/InstanceId",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response containing the workflow instance details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WorkflowInstance"
+                                },
+                                "examples": {
+                                    "workflowInstance": {
+                                        "$ref": "#/components/examples/WorkflowInstanceExample"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                },
+                "x-ds-method": "getWorkflowInstance",
+                "x-ds-service": "Maestro",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v1/accounts/{accountId}/workflows/{workflowId}/instances/{instanceId}/actions/cancel": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "accountId",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/components/schemas/UUID"
+                    },
+                    "description": "The unique identifier of the account."
+                }
+            ],
+            "post": {
+                "summary": "Cancels a running workflow instance.",
+                "description": "Cancels a running \n[workflow][workflows-concept]\ninstance.\n\n<!-- maestro beta notice -->\n\n<ds-inlinemessage>\n  The Maestro API is currently only available\n  as part of a beta program.\n  See <a href=\"/docs/maestro-api/get-access/\">Get access to Maestro API</a>\n  for details.\n</ds-inlinemessage>\n\n<!-- end maestro beta notice -->\n\n### Related topics\n\n- [How to cancel a Maestro workflow instance][howto-cancel]\n\n\n[howto-cancel]:       /docs/maestro-api/how-to/cancel-workflow/\n[workflows-concept]:  /docs/maestro-api/maestro101/workflows/",
+                "operationId": "cancelWorkflowInstance",
+                "x-ds-methodname": "cancelWorkflowInstance",
+                "tags": [
+                    "WorkflowInstanceManagement"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/WorkflowId",
+                        "description": ""
+                    },
+                    {
+                        "$ref": "#/components/parameters/InstanceId",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/CancelWorkflowInstanceResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/Conflict"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/InternalServerError"
+                    }
+                },
+                "x-ds-method": "cancelWorkflowInstance",
+                "x-ds-service": "Maestro",
+                "x-ds-in-sdk": true
+            }
+        }
+    },
+    "components": {
+        "parameters": {
+            "AccountId": {
+                "name": "accountId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "$ref": "#/components/schemas/UUID"
+                },
+                "description": "The unique identifier of the account."
+            },
+            "WorkflowId": {
+                "name": "workflowId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "$ref": "#/components/schemas/WorkflowId"
+                }
+            },
+            "InstanceId": {
+                "name": "instanceId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "description": "Unique identifier for the workflow instance"
+            }
+        },
+        "schemas": {
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "description": "A message describing the error.",
+                        "example": "An unexpected error occurred on the server."
+                    },
+                    "code": {
+                        "type": "integer",
+                        "description": "HTTP status code for the error.",
+                        "example": 500
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The timestamp when the error occurred.",
+                        "example": "2023-01-01T12:00:00Z"
+                    }
+                },
+                "x-ds-definition-name": "Error"
+            },
+            "ResourceId": {
+                "description": "The unique identifier of the resource",
+                "$ref": "#/components/schemas/UUID",
+                "x-ds-definition-name": "ResourceId"
+            },
+            "ResourceMetadata": {
+                "type": "object",
+                "properties": {
+                    "created_at": {
+                        "description": "Timestamp when the agreement document was created.",
+                        "type": "string",
+                        "format": "date-time",
+                        "x-docusign-adm-model": "com.docusign.platform@1.1.0.{Metadata.createdAt}"
+                    },
+                    "created_by": {
+                        "description": "User ID of the person who created the agreement document.",
+                        "type": "string",
+                        "x-docusign-adm-model": "com.docusign.platform@1.1.0.{Metadata.createdBy}"
+                    },
+                    "modified_at": {
+                        "description": "Timestamp when the agreement document was last modified.",
+                        "type": "string",
+                        "format": "date-time",
+                        "x-docusign-adm-model": "com.docusign.platform@1.1.0.{Metadata.updatedAt}"
+                    },
+                    "modified_by": {
+                        "description": "User ID of the person who last modified the agreement document.",
+                        "type": "string",
+                        "x-docusign-adm-model": "com.docusign.platform@1.1.0.{Metadata.updatedBy}"
+                    }
+                },
+                "x-docusign-adm-model": "com.docusign.platform@1.1.0.{Metadata}",
+                "x-ds-definition-name": "ResourceMetadata"
+            },
+            "RequestId": {
+                "description": "Unique identifier for the request, useful for tracking and debugging.",
+                "type": "string",
+                "format": "uuid",
+                "example": "3f7c9e4b-851c-4f9b-89e7-123456789abc",
+                "x-ds-definition-name": "RequestId"
+            },
+            "ResponseMetadata": {
+                "description": "Additional server-side metadata for a given response",
+                "type": "object",
+                "properties": {
+                    "response_timestamp": {
+                        "$ref": "#/components/schemas/ResponseTimestamp"
+                    },
+                    "response_duration_ms": {
+                        "$ref": "#/components/schemas/ResponseDurationMs"
+                    },
+                    "request_id": {
+                        "$ref": "#/components/schemas/RequestId"
+                    }
+                },
+                "x-ds-definition-name": "ResponseMetadata"
+            },
+            "ResponseTimestamp": {
+                "description": "The timestamp indicating when the response was generated.",
+                "type": "string",
+                "format": "date-time",
+                "example": "2024-10-17T14:30:00Z",
+                "x-ds-definition-name": "ResponseTimestamp"
+            },
+            "ResponseDurationMs": {
+                "description": "The duration of time, in milliseconds, that the server took to process and respond\nto the request. This is measured from the time the server received the request\nuntil the time the response was sent.\n",
+                "type": "integer",
+                "format": "int32",
+                "example": 150,
+                "minimum": 0,
+                "x-ds-definition-name": "ResponseDurationMs"
+            },
+            "URL": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 1024,
+                "x-docusign-adm-model": "com.docusign.scalars@1.1.0.{URL}",
+                "example": "https://example.com/resource/123",
+                "x-ds-definition-name": "URL"
+            },
+            "UUID": {
+                "type": "string",
+                "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
+                "default": "00000000-0000-0000-0000-000000000000",
+                "example": "adf8c455-de2f-4119-b183-d952d649e87c",
+                "x-docusign-adm-model": "concerto.platform.scalar@1.0.0.{UUID}",
+                "x-ds-definition-name": "UUID"
+            },
+            "TriggerInputs": {
+                "x-ds-custom-property": true,
+                "type": "object",
+                "description": "Key-value pairs representing the input data required to trigger the workflow.\nThe keys correspond to the `field_name` values defined in the `trigger_input_schema` of the workflow definition.\nThe values should match the specified `field_data_type` (e.g., string, number, boolean).\nExample: {\"name\": \"John Doe\", \"email\": \"johndoe@example.com\"}\n",
+                "additionalProperties": {
+                    "description": "A key-value pair where the key is the `field_name` defined in the `trigger_input_schema` of the workflow definition,\nand the value is the actual input data. Supported types include string, number, boolean, object, or array.\n",
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "description": "String input, e.g., names, emails, etc.",
+                            "example": "John Doe"
+                        },
+                        {
+                            "type": "number",
+                            "description": "Numeric input, e.g., ages, IDs, etc.",
+                            "example": 30
+                        },
+                        {
+                            "type": "boolean",
+                            "description": "Boolean input for true/false values.",
+                            "example": true
+                        },
+                        {
+                            "type": "object",
+                            "description": "Nested object input, if a complex structure is required.",
+                            "additionalProperties": true,
+                            "example": {
+                                "address": {
+                                    "street": "123 Main St",
+                                    "city": "Metropolis"
+                                }
+                            }
+                        },
+                        {
+                            "type": "array",
+                            "description": "An array of values if the input expects multiple items.",
+                            "items": {},
+                            "example": [
+                                "item1",
+                                "item2",
+                                "item3"
+                            ]
+                        }
+                    ]
+                },
+                "x-ds-definition-name": "TriggerInputs"
+            },
+            "TriggerWorkflow": {
+                "description": "The input information needed to trigger a new instance of a Maestro workflow.\nThis request body contains the metadata to describe the instance being created,\nalong with the input data required to trigger the workflow.\n\n- `instance_name` provides a user-defined name for the workflow instance.\n- `trigger_inputs` contains the key-value pairs corresponding to the inputs required by the workflow, as described in the `trigger_input_schema` from the workflow definition.\n",
+                "type": "object",
+                "properties": {
+                    "instance_name": {
+                        "type": "string",
+                        "description": "A descriptive name for the specific instance of the workflow being triggered.\nThis is typically used for identification and tracking purposes.\nExample: \"User Registration Workflow Instance\"\n",
+                        "example": "Sample Workflow Run"
+                    },
+                    "trigger_inputs": {
+                        "$ref": "#/components/schemas/TriggerInputs"
+                    }
+                },
+                "required": [
+                    "instance_name",
+                    "trigger_inputs"
+                ],
+                "example": {
+                    "instance_name": "My Instance",
+                    "trigger_inputs": {
+                        "name": "Jon Doe",
+                        "email": "jdoe@example.com"
+                    }
+                },
+                "x-ds-definition-name": "TriggerWorkflow"
+            },
+            "WorkflowTriggerRequirements": {
+                "description": "Information about the input requirements and configuration necessary to trigger a specific workflow.\n",
+                "type": "object",
+                "properties": {
+                    "trigger_id": {
+                        "$ref": "#/components/schemas/UUID",
+                        "description": "The unique identifier for the trigger.\nExample: '000000-0000-000000'\n"
+                    },
+                    "trigger_event_type": {
+                        "type": "string",
+                        "enum": [
+                            "HTTP"
+                        ],
+                        "x-enum-varnames": [
+                            "HTTP"
+                        ],
+                        "description": "The type of event that triggers the workflow. In this case, the workflow is initiated\nby an HTTP request. Future iterations may support additional event types beyond HTTP.\n",
+                        "example": "HTTP"
+                    },
+                    "trigger_http_config": {
+                        "type": "object",
+                        "description": "Configuration details specific to HTTP-triggered workflows. This object describes the\nHTTP method and URL that will trigger the workflow, providing the endpoint and method\nthat should be used to initiate the workflow.\n",
+                        "properties": {
+                            "method": {
+                                "type": "string",
+                                "enum": [
+                                    "GET",
+                                    "POST",
+                                    "PUT",
+                                    "PATCH",
+                                    "DELETE"
+                                ],
+                                "description": "The HTTP method used to trigger the workflow. This defines the type of request\nthat will initiate the workflow (e.g., GET, POST).\n",
+                                "example": "GET",
+                                "x-enum-varnames": [
+                                    "GET",
+                                    "POST",
+                                    "PUT",
+                                    "PATCH",
+                                    "DELETE"
+                                ]
+                            },
+                            "url": {
+                                "description": "The URL that is associated with the trigger event. This is the endpoint that must be\ncalled using the specified HTTP method to start the workflow.\n",
+                                "$ref": "#/components/schemas/URL"
+                            }
+                        }
+                    },
+                    "trigger_input_schema": {
+                        "type": "array",
+                        "description": "A list of input fields that define the structure of the data required to trigger the workflow.\nEach item describes a field that must be included in the request when the workflow is triggered.\nThe schema includes the field name, expected data type, and any default values for the input.\n",
+                        "items": {
+                            "type": "object",
+                            "description": "Array of fields required as inputs to trigger the workflow, including field names, data types, and default values.",
+                            "properties": {
+                                "field_name": {
+                                    "type": "string",
+                                    "description": "The name of the input field expected by the workflow. This key must match the name\nprovided in the `trigger_inputs` when triggering the workflow.\n",
+                                    "example": "name"
+                                },
+                                "field_data_type": {
+                                    "type": "string",
+                                    "description": "The data type expected for the input field. This indicates whether the input should\nbe a string, number, boolean, object, or array, ensuring the data is passed in the\ncorrect format.\n",
+                                    "example": "string"
+                                },
+                                "default_value": {
+                                    "x-ds-custom-node": true,
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "number"
+                                        },
+                                        {
+                                            "type": "boolean"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "additionalProperties": true
+                                        },
+                                        {
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    ],
+                                    "description": "The default value for the input field if one is provided. This can be a string, number,\nboolean, object, or array. If no value is provided during the trigger, the workflow may\nuse this default value.\n",
+                                    "example": ""
+                                }
+                            }
+                        }
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/ResourceMetadata",
+                        "description": "Metadata related to the workflow definition, including details about when the workflow was\ncreated, who created it, when it was last modified, and by whom. This information is useful\nfor tracking changes to the workflow over time and identifying the user or system responsible\nfor creating or modifying the workflow.\n",
+                        "example": {
+                            "created_at": "2024-07-01T00:00:00+02:00",
+                            "created_by": "8ade6915-d04b-40d6-bb6f-9c6ba6aa1bb5",
+                            "modified_at": "",
+                            "modified_by": ""
+                        }
+                    }
+                },
+                "example": {
+                    "trigger_id": "00000000-0000-0000-0000-000000000001",
+                    "trigger_event_type": "HTTP",
+                    "trigger_http_config": {
+                        "method": "POST",
+                        "url": "http://www.example.com"
+                    },
+                    "trigger_input_schema": [
+                        {
+                            "field_name": "name",
+                            "field_data_type": "string"
+                        },
+                        {
+                            "field_name": "email",
+                            "field_data_type": "string"
+                        }
+                    ],
+                    "metadata": {
+                        "created_at": "2023-01-19T15:30:00+02:00",
+                        "created_by": "00000000-0000-0000-0000-000000000003",
+                        "modified_at": "",
+                        "modified_by": "",
+                        "request_id": "00000000-0000-0000-0000-000000000002",
+                        "response_timestamp": "2024-06-20T15:30:00+02:00",
+                        "response_duration_ms": 100
+                    }
+                },
+                "x-ds-definition-name": "WorkflowTriggerRequirements"
+            },
+            "Workflow": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "A unique ID for this workflow",
+                        "$ref": "#/components/schemas/UUID"
+                    },
+                    "name": {
+                        "description": "A user-provided name for this workflow",
+                        "type": "string"
+                    },
+                    "account_id": {
+                        "description": "A unique ID for the account associated with the workflow",
+                        "$ref": "#/components/schemas/UUID"
+                    },
+                    "status": {
+                        "description": "Indicates the readiness and deployment status of a workflow",
+                        "type": "string"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/ResourceMetadata"
+                    }
+                },
+                "x-ds-definition-name": "Workflow"
+            },
+            "WorkflowList": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/Workflow"
+                },
+                "description": "A list of workflows",
+                "x-ds-definition-name": "WorkflowList"
+            },
+            "WorkflowId": {
+                "description": "The unique identifier of the workflow.",
+                "$ref": "#/components/schemas/ResourceId",
+                "example": "094db5ad-1b5d-4c20-82a9-1c987431b7d8",
+                "x-ds-definition-name": "WorkflowId"
+            },
+            "WorkflowInstance": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Unique identifier for the workflow instance"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Human-readable name for the workflow instance"
+                    },
+                    "workflow_status": {
+                        "type": "string",
+                        "description": "Current status of the workflow (e.g. In Progress, Completed, Canceled)"
+                    },
+                    "template_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Identifier linking this instance to a workflow template"
+                    },
+                    "account_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Account under which this workflow instance was initiated"
+                    },
+                    "started_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Date and time when the workflow was started"
+                    },
+                    "started_by": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "User or system identifier that started this workflow"
+                    },
+                    "started_by_name": {
+                        "type": "string",
+                        "description": "Display name of the user who started this workflow"
+                    },
+                    "started_by_role": {
+                        "type": "string",
+                        "description": "Role of the user who started this workflow (e.g. Preparer)"
+                    },
+                    "ended_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true,
+                        "description": "Date and time when the workflow completed"
+                    },
+                    "expires_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true,
+                        "description": "Date and time after which the workflow expires"
+                    },
+                    "last_modified_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Date and time when the workflow instance was last modified"
+                    },
+                    "canceled_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true,
+                        "description": "Date and time when the workflow was canceled (if applicable)"
+                    },
+                    "canceled_by": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "User or system identifier that canceled this workflow (if applicable)"
+                    },
+                    "trigger_inputs": {
+                        "$ref": "#/components/schemas/TriggerInputs"
+                    },
+                    "total_steps": {
+                        "type": "integer",
+                        "description": "Total number of steps configured in the workflow"
+                    },
+                    "last_completed_step": {
+                        "type": "integer",
+                        "description": "The index of the most recently completed step"
+                    },
+                    "last_completed_step_name": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "The name of the most recently completed step"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Custom tags for organization or filtering"
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "description": "Additional metadata related to this workflow instance",
+                        "properties": {
+                            "workflow_created_by": {
+                                "type": "string",
+                                "format": "uuid",
+                                "description": "Identifier of the user who originally created the workflow definition"
+                            },
+                            "workflow_version": {
+                                "type": "string",
+                                "description": "Version string of the deployed workflow"
+                            },
+                            "workflow_metadata_id": {
+                                "type": "string",
+                                "description": "Identifier for workflow definition metadata in the system"
+                            }
+                        }
+                    }
+                },
+                "x-ds-definition-name": "WorkflowInstance"
+            },
+            "WorkflowInstanceCollection": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "description": "Array of workflow instances",
+                        "items": {
+                            "$ref": "#/components/schemas/WorkflowInstance"
+                        }
+                    },
+                    "response_metadata": {
+                        "$ref": "#/components/schemas/ResponseMetadata"
+                    }
+                },
+                "x-ds-definition-name": "WorkflowInstanceCollection"
+            },
+            "WorkflowInstanceInfo": {
+                "description": "Represents an instance of a Maestro workflow. This object contains details about a\nspecific workflow instance, including its unique identifier and a URL that allows\nusers to access or interact with the running instance.\n",
+                "type": "object",
+                "properties": {
+                    "instance_id": {
+                        "description": "A unique identifier for this specific instance of the workflow. This UUID\nis used to reference the running instance in other API calls (e.g., to\nretrieve its status or terminate the instance).\nExample: '1a46ccde-9db4-42d6-94fa-0ddd07a3d2ff'\n",
+                        "$ref": "#/components/schemas/UUID"
+                    },
+                    "instance_url": {
+                        "type": "string",
+                        "format": "url",
+                        "description": "A fully-qualified URL that can be used to access or interact with this\nworkflow instance while it is running. This URL may provide access to\nadditional details, actions, or logs related to the workflow execution.\n"
+                    }
+                },
+                "example": {
+                    "instance_id": "9bd95fba-60f7-4f74-a11b-af00c0617ad9",
+                    "instance_url": "https://apps-d.docusign.com/api/maestro/v1/accounts/97878f25-e391-4be4-a8f0-cf5f415f134e/instances/3695f629-e367-4243-abeb-5cb526b9559f/execution?mtid=34b2fb6c-cfd8-4084-9de6-94c111b17a9e&mtsec=U5OWGv7RQwmHgMX2UzhOWbTSdVoWYP8N-7qkE_ishaI"
+                },
+                "x-ds-definition-name": "WorkflowInstanceInfo"
+            },
+            "WorkflowInstanceCreationState": {
+                "description": "Represents the new state of a workflow's mechanism to permit new workflow instances from being created.\nValid values include:\n  - active\n  - paused\n",
+                "type": "string",
+                "x-ds-definition-name": "WorkflowInstanceCreationState"
+            },
+            "WorkflowTrigger": {
+                "x-ds-category": "WorkflowTrigger",
+                "x-ms-summary": "",
+                "description": ""
+            },
+            "WorkflowInstanceManagement": {
+                "x-ds-category": "Maestro",
+                "x-ms-summary": "",
+                "description": ""
+            },
+            "WorkflowManagement": {
+                "x-ds-category": "WorkflowManagement",
+                "x-ms-summary": "",
+                "description": ""
+            },
+            "Workflows": {
+                "x-ds-category": "Maestro",
+                "x-ms-summary": "",
+                "description": ""
+            }
+        },
+        "responses": {
+            "BadRequest": {
+                "description": "Bad Request - The request could not be understood or was missing required parameters.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Internal Server Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "Not Found - The requested resource could not be found.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "Unauthorized": {
+                "description": "Unauthorized - Authentication is required and has failed or not been provided.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    },
+                    "text/plain": {
+                        "schema": {
+                            "type": "string",
+                            "example": "Unauthorized - Please provide a valid access token."
+                        }
+                    }
+                }
+            },
+            "Conflict": {
+                "description": "Bad Request - The request conflicts with the current state of the resource.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "CancelWorkflowInstanceResponse": {
+                "description": "A message confirming the instance was canceled, including the instance and workflow IDs",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "CancelWorkflowInstanceResponseExample": {
+                                "$ref": "#/components/examples/CancelWorkflowInstanceResponseExample"
+                            }
+                        }
+                    }
+                }
+            },
+            "PauseNewWorkflowInstancesSuccess": {
+                "description": "Indicates that a workflow has been successfully paused. New instances of this workflow will not be created.\nExisting workflow instances will be unaffected.\n",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "$ref": "#/components/schemas/WorkflowInstanceCreationState"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "PauseNewWorkflowInstancesExample": {
+                                "$ref": "#/components/examples/PauseNewWorkflowInstancesExample"
+                            }
+                        }
+                    }
+                }
+            },
+            "ResumeNewWorkflowInstancesSuccess": {
+                "description": "Indicates that the ability to create new workflow instances from this workflow has been resumed.\nExisting workflow instances will be unaffected.\n",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "$ref": "#/components/schemas/WorkflowInstanceCreationState"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "ResumeNewWorkflowInstancesExample": {
+                                "$ref": "#/components/examples/ResumeNewWorkflowInstancesExample"
+                            }
+                        }
+                    }
+                }
+            },
+            "WorkflowsListSuccess": {
+                "description": "A list of workflows has been successfully returned.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/components/schemas/WorkflowList"
+                                },
+                                "response_metadata": {
+                                    "$ref": "#/components/schemas/ResponseMetadata"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "WorkflowCollectionExample": {
+                                "$ref": "#/components/examples/WorkflowListExample"
+                            }
+                        }
+                    }
+                }
+            },
+            "TriggerWorkflowSuccess": {
+                "description": "Indicates a trigger has successfully launched a workflow instance",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/WorkflowInstanceInfo"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/ResponseMetadata"
+                                }
+                            ]
+                        },
+                        "examples": {
+                            "WorkflowTriggerSuccessExample": {
+                                "$ref": "#/components/examples/WorkflowInstanceInfoExample"
+                            }
+                        }
+                    }
+                }
+            },
+            "WorkflowTriggerRequirementsSuccess": {
+                "description": "Describes the requirements for triggering a workflow",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/WorkflowTriggerRequirements"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/ResponseMetadata"
+                                }
+                            ]
+                        },
+                        "examples": {
+                            "WorkflowTriggerRequirementsSuccessExample": {
+                                "$ref": "#/components/examples/GetWorkflowTriggerRequirementsExample"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "requestBodies": {
+            "TriggerWorkflowRequest": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "description": "The input information needed to trigger a new instance of a Maestro workflow.\nThis request body contains the metadata to describe the instance being created,\nalong with the input data required to trigger the workflow.\n\n- `instance_name` provides a user-defined name for the workflow instance.\n- `trigger_inputs` contains the key-value pairs corresponding to the inputs required by the workflow, as described in the `trigger_input_schema` from the workflow definition.\n",
+                            "$ref": "#/components/schemas/TriggerWorkflow"
+                        }
+                    }
+                }
+            }
+        },
+        "examples": {
+            "CancelWorkflowInstanceResponseExample": {
+                "summary": "A successful cancellation",
+                "value": {
+                    "message": "Successfully cancelled the workflow instance {instanceId} in {workflowId}"
+                }
+            },
+            "PauseNewWorkflowInstancesExample": {
+                "summary": "The workflow state has been successfully updated to resume creation of new instances",
+                "value": {
+                    "status": "paused"
+                }
+            },
+            "ResumeNewWorkflowInstancesExample": {
+                "summary": "The workflow state has been successfully updated to resume creation of new instances",
+                "value": {
+                    "status": "active"
+                }
+            },
+            "WorkflowInstanceExample": {
+                "summary": "Example of a workflow instance",
+                "value": {
+                    "id": "fa4b77cb-dc69-4960-bd5c-9e6bf3c182e7",
+                    "name": "latency again",
+                    "workflow_status": "In Progress",
+                    "template_id": "25b96463-4aad-4cae-bbf9-15fbd5205b72",
+                    "account_id": "3b4453f5-869f-4c6a-8f1d-bcc260357144",
+                    "started_at": "2024-10-24T17:32:20.260Z",
+                    "started_by": "0ccdbb0b-a72e-452f-95f0-9f19654cb620",
+                    "started_by_name": "Jane Doe",
+                    "started_by_role": "Preparer",
+                    "ended_at": "2024-10-24T19:54:11.345Z",
+                    "expires_at": "2024-10-25T17:32:20.261Z",
+                    "last_modified_at": "2024-10-24T17:32:20.610Z",
+                    "canceled_at": "2024-10-24T19:54:11.345Z",
+                    "canceled_by": "",
+                    "trigger_input": {},
+                    "total_steps": 3,
+                    "last_completed_step": 0,
+                    "last_completed_step_name": null,
+                    "tags": [],
+                    "metadata": {
+                        "workflow_created_by": "f6a8f4d2-b1b5-4fa4-b067-3de168907526",
+                        "workflow_version": "1.0.0",
+                        "workflow_metadata_id": "66df63a436871a9d22c63b9f"
+                    }
+                }
+            },
+            "WorkflowInstanceCollectionExample": {
+                "summary": "Example of multiple workflow instances",
+                "value": {
+                    "data": [
+                        {
+                            "id": "fa4b77cb-dc69-4960-bd5c-9e6bf3c182e7",
+                            "name": "latency again",
+                            "workflow_status": "In Progress",
+                            "template_id": "25b96463-4aad-4cae-bbf9-15fbd5205b72",
+                            "account_id": "3b4453f5-869f-4c6a-8f1d-bcc260357144",
+                            "started_at": "2024-10-24T17:32:20.260Z",
+                            "started_by": "0ccdbb0b-a72e-452f-95f0-9f19654cb620",
+                            "started_by_name": "Jane Doe",
+                            "started_by_role": "Preparer",
+                            "ended_at": "2024-10-24T19:54:11.345Z",
+                            "expires_at": "2024-10-25T17:32:20.261Z",
+                            "last_modified_at": "2024-10-24T17:32:20.610Z",
+                            "canceled_at": "2024-10-24T19:54:11.345Z",
+                            "canceled_by": "",
+                            "trigger_input": {},
+                            "total_steps": 3,
+                            "last_completed_step": 0,
+                            "last_completed_step_name": null,
+                            "tags": [],
+                            "metadata": {
+                                "workflow_created_by": "f6a8f4d2-b1b5-4fa4-b067-3de168907526",
+                                "workflow_version": "1.0.0",
+                                "workflow_metadata_id": "66df63a436871a9d22c63b9f"
+                            }
+                        }
+                    ],
+                    "response_metadata": {
+                        "request_id": "3f7c9e4b-851c-4f9b-89e7-123456789abc",
+                        "response_timestamp": "2024-10-17T14:30:00Z",
+                        "response_duration_ms": 100
+                    }
+                }
+            },
+            "GetWorkflowTriggerRequirementsExample": {
+                "summary": "Example of workflow trigger requirements",
+                "value": {
+                    "trigger_id": "c30c7afc-7d56-451c-b889-0a6488822fca",
+                    "trigger_event_type": "HTTP",
+                    "trigger_http_config": {
+                        "method": "POST",
+                        "url": "https://api-d.docusign.com/v1/accounts/7f09961a-a22e-4ea2-8395-d7648b81f20c/workflows/a4490cd8-d30d-454a-be13-f68578bb4235/actions/trigger"
+                    },
+                    "trigger_input_schema": [
+                        {
+                            "field_name": "Name",
+                            "field_data_type": "String"
+                        },
+                        {
+                            "field_name": "Email",
+                            "field_data_type": "String"
+                        },
+                        {
+                            "field_name": "Company",
+                            "field_data_type": "String"
+                        }
+                    ],
+                    "metadata": {
+                        "created_at": "2025-01-26T18:17:06.208+00:00",
+                        "created_by": "3d2ac2f5-4adb-4537-8f69-d9feb328052b",
+                        "modified_at": "2025-01-26T18:21:11.131+00:00",
+                        "response_timestamp": "2025-05-13T21:01:05.4823174Z",
+                        "response_duration_ms": 804
+                    }
+                }
+            },
+            "WorkflowListExample": {
+                "value": {
+                    "data": [
+                        {
+                            "id": "9fabc6d2-748b-41c9-8d5e-5fbf2f7e6e72",
+                            "name": "Agreement Signature Collection",
+                            "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
+                            "status": "active",
+                            "metadata": {
+                                "created_at": "2024-07-05T12:00:00+02:00",
+                                "created_by": "e3d89a85-c7d4-4df9-b987-78f5fc45a482"
+                            }
+                        },
+                        {
+                            "id": "b3c1ff15-4f5e-42b0-b74e-96177fa0e92d",
+                            "name": "Contract Review Reminder",
+                            "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
+                            "status": "active",
+                            "metadata": {
+                                "created_at": "2024-06-20T15:30:00+02:00",
+                                "created_by": "fbd89b4f-0ecf-47b7-b3fd-59e9e1c8fd17"
+                            }
+                        },
+                        {
+                            "id": "2fe67b39-1920-46d1-b0c1-3b9236b3e3ad",
+                            "name": "Contract Expiration Notification",
+                            "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
+                            "status": "active",
+                            "metadata": {
+                                "created_at": "2024-08-01T09:45:00+02:00",
+                                "created_by": "c6e8a5b3-fb1b-4c6e-a02a-267f8490731d"
+                            }
+                        },
+                        {
+                            "id": "6f0e1d91-d8e5-4c7a-a00e-8b9d4f95d5b8",
+                            "name": "Legal Agreement Archival",
+                            "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
+                            "status": "active",
+                            "metadata": {
+                                "created_at": "2024-10-01T08:00:00+02:00",
+                                "created_by": "d7c94ff2-9b30-4872-9b56-e3a8f781632b"
+                            }
+                        }
+                    ],
+                    "response_metadata": {
+                        "total_items": 4,
+                        "response_timestamp": "2024-11-10T11:30:00+02:00",
+                        "response_duration_ms": 150
+                    }
+                }
+            },
+            "WorkflowInstanceInfoExample": {
+                "value": {
+                    "instance_id": "9bd95fba-60f7-4f74-a11b-af00c0617ad9",
+                    "instance_url": "https://apps-d.docusign.com/api/maestro/v1/accounts/97878f25-e391-4be4-a8f0-cf5f415f134e/instances/3695f629-e367-4243-abeb-5cb526b9559f/execution?mtid=34b2fb6c-cfd8-4084-9de6-94c111b17a9e&mtsec=U5OWGv7RQwmHgMX2UzhOWbTSdVoWYP8N-7qkE_ishaI"
+                }
+            }
+        },
+        "securitySchemes": {
+            "MaestroOAuth2": {
+                "type": "oauth2",
+                "description": "OAuth2 authentication.\n- Demo:\n  - authorizationUrl: https://account-d.docusign.com/oauth/auth\n  - tokenUrl: https://account-d.docusign.com/oauth/token\n- Production:\n  - authorizationUrl: https://account.docusign.com/oauth/auth\n  - tokenUrl: https://account.docusign.com/oauth/token\n",
+                "flows": {
+                    "authorizationCode": {
+                        "authorizationUrl": "https://account-d.docusign.com/oauth/auth",
+                        "tokenUrl": "https://account-d.docusign.com/oauth/token",
+                        "scopes": {
+                            "adm_store_unified_repo_read": "Allows read access to the unified repository.",
+                            "aow_manage": "Allows management of advanced workflow operations.",
+                            "signature": "Allows requesting and managing signatures."
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "WorkflowTrigger",
+            "description": "Method to trigger a workflow."
+        },
+        {
+            "name": "WorkflowInstanceManagement",
+            "description": "Methods to get information about workflow instances."
+        },
+        {
+            "name": "WorkflowManagement",
+            "description": "Returns the history of the workflow instance steps."
+        },
+        {
+            "name": "Workflows",
+            "description": ""
+        }
+    ],
+    "x-ds-categories": [
+        {
+            "name": "WorkflowTrigger",
+            "summary": "Method to trigger a workflow.",
+            "description": "Method to trigger a workflow."
+        },
+        {
+            "name": "WorkflowInstanceManagement",
+            "summary": "Methods to get information about workflow instances.",
+            "description": "Methods to get information about workflow instances."
+        },
+        {
+            "name": "WorkflowManagement",
+            "summary": "Methods to create, retrieve, update, and delete workflow definitions.",
+            "description": "Methods to create, retrieve, update, and delete workflow definitions."
+        },
+        {
+            "name": "Maestro",
+            "summary": "",
+            "description": ""
+        }
+    ]
 }
