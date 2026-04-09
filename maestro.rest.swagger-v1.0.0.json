@@ -76,133 +76,22 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "A list of workflows has been successfully returned.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/components/schemas/WorkflowList"
-                                        },
-                                        "response_metadata": {
-                                            "$ref": "#/components/schemas/ResponseMetadata"
-                                        }
-                                    }
-                                },
-                                "examples": {
-                                    "WorkflowCollectionExample": {
-                                        "value": {
-                                            "data": [
-                                                {
-                                                    "id": "9fabc6d2-748b-41c9-8d5e-5fbf2f7e6e72",
-                                                    "name": "Agreement Signature Collection",
-                                                    "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                                    "status": "active",
-                                                    "metadata": {
-                                                        "created_at": "2024-07-05T12:00:00+02:00",
-                                                        "created_by": "e3d89a85-c7d4-4df9-b987-78f5fc45a482"
-                                                    }
-                                                },
-                                                {
-                                                    "id": "b3c1ff15-4f5e-42b0-b74e-96177fa0e92d",
-                                                    "name": "Contract Review Reminder",
-                                                    "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                                    "status": "active",
-                                                    "metadata": {
-                                                        "created_at": "2024-06-20T15:30:00+02:00",
-                                                        "created_by": "fbd89b4f-0ecf-47b7-b3fd-59e9e1c8fd17"
-                                                    }
-                                                },
-                                                {
-                                                    "id": "2fe67b39-1920-46d1-b0c1-3b9236b3e3ad",
-                                                    "name": "Contract Expiration Notification",
-                                                    "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                                    "status": "active",
-                                                    "metadata": {
-                                                        "created_at": "2024-08-01T09:45:00+02:00",
-                                                        "created_by": "c6e8a5b3-fb1b-4c6e-a02a-267f8490731d"
-                                                    }
-                                                },
-                                                {
-                                                    "id": "6f0e1d91-d8e5-4c7a-a00e-8b9d4f95d5b8",
-                                                    "name": "Legal Agreement Archival",
-                                                    "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
-                                                    "status": "active",
-                                                    "metadata": {
-                                                        "created_at": "2024-10-01T08:00:00+02:00",
-                                                        "created_by": "d7c94ff2-9b30-4872-9b56-e3a8f781632b"
-                                                    }
-                                                }
-                                            ],
-                                            "response_metadata": {
-                                                "total_items": 4,
-                                                "response_timestamp": "2024-11-10T11:30:00+02:00",
-                                                "response_duration_ms": 150
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/WorkflowsListSuccess"
                     },
                     "400": {
-                        "description": "Bad Request - The request could not be understood or was missing required parameters.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "401": {
-                        "description": "Unauthorized - Authentication is required and has failed or not been provided.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            },
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string",
-                                    "examples": [
-                                        "Unauthorized - Please provide a valid access token."
-                                    ]
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Unauthorized"
                     },
                     "403": {
-                        "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Forbidden"
                     },
                     "404": {
-                        "description": "Not Found - The requested resource could not be found.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/NotFound"
                     },
                     "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/InternalServerError"
                     }
                 },
                 "x-ds-method": "getWorkflowsList",
@@ -233,124 +122,28 @@
                 ],
                 "parameters": [
                     {
-                        "name": "workflowId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/UUID"
-                        },
+                        "$ref": "#/components/parameters/WorkflowId",
                         "description": ""
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Describes the requirements for triggering a workflow",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/components/schemas/WorkflowTriggerRequirements"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/ResponseMetadata"
-                                        }
-                                    ]
-                                },
-                                "examples": {
-                                    "WorkflowTriggerRequirementsSuccessExample": {
-                                        "summary": "Example of workflow trigger requirements",
-                                        "value": {
-                                            "trigger_id": "c30c7afc-7d56-451c-b889-0a6488822fca",
-                                            "trigger_event_type": "HTTP",
-                                            "trigger_http_config": {
-                                                "method": "POST",
-                                                "url": "https://api-d.docusign.com/v1/accounts/7f09961a-a22e-4ea2-8395-d7648b81f20c/workflows/a4490cd8-d30d-454a-be13-f68578bb4235/actions/trigger"
-                                            },
-                                            "trigger_input_schema": [
-                                                {
-                                                    "field_name": "Name",
-                                                    "field_data_type": "String"
-                                                },
-                                                {
-                                                    "field_name": "Email",
-                                                    "field_data_type": "String"
-                                                },
-                                                {
-                                                    "field_name": "Company",
-                                                    "field_data_type": "String"
-                                                }
-                                            ],
-                                            "metadata": {
-                                                "created_at": "2025-01-26T18:17:06.208+00:00",
-                                                "created_by": "3d2ac2f5-4adb-4537-8f69-d9feb328052b",
-                                                "modified_at": "2025-01-26T18:21:11.131+00:00",
-                                                "response_timestamp": "2025-05-13T21:01:05.4823174Z",
-                                                "response_duration_ms": 804
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/WorkflowTriggerRequirementsSuccess"
                     },
                     "400": {
-                        "description": "Bad Request - The request could not be understood or was missing required parameters.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "401": {
-                        "description": "Unauthorized - Authentication is required and has failed or not been provided.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            },
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string",
-                                    "examples": [
-                                        "Unauthorized - Please provide a valid access token."
-                                    ]
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Unauthorized"
                     },
                     "403": {
-                        "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Forbidden"
                     },
                     "404": {
-                        "description": "Not Found - The requested resource could not be found.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/NotFound"
                     },
                     "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/InternalServerError"
                     }
                 },
                 "x-ds-method": "getWorkflowTriggerRequirements",
@@ -381,113 +174,31 @@
                 ],
                 "parameters": [
                     {
-                        "name": "workflowId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/UUID"
-                        },
+                        "$ref": "#/components/parameters/WorkflowId",
                         "description": ""
                     }
                 ],
                 "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/TriggerWorkflow"
-                                    }
-                                ],
-                                "description": "The input information needed to trigger a new instance of a Maestro workflow.\nThis request body contains the metadata to describe the instance being created,\nalong with the input data required to trigger the workflow.\n\n- `instance_name` provides a user-defined name for the workflow instance.\n- `trigger_inputs` contains the key-value pairs corresponding to the inputs required by the workflow, as described in the `trigger_input_schema` from the workflow definition.\n"
-                            }
-                        }
-                    }
+                    "$ref": "#/components/requestBodies/TriggerWorkflowRequest"
                 },
                 "responses": {
                     "201": {
-                        "description": "Indicates a trigger has successfully launched a workflow instance",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/components/schemas/WorkflowInstanceInfo"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/ResponseMetadata"
-                                        }
-                                    ]
-                                },
-                                "examples": {
-                                    "WorkflowTriggerSuccessExample": {
-                                        "value": {
-                                            "instance_id": "9bd95fba-60f7-4f74-a11b-af00c0617ad9",
-                                            "instance_url": "https://apps-d.docusign.com/api/maestro/v1/accounts/97878f25-e391-4be4-a8f0-cf5f415f134e/instances/3695f629-e367-4243-abeb-5cb526b9559f/execution?mtid=34b2fb6c-cfd8-4084-9de6-94c111b17a9e&mtsec=U5OWGv7RQwmHgMX2UzhOWbTSdVoWYP8N-7qkE_ishaI"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/TriggerWorkflowSuccess"
                     },
                     "400": {
-                        "description": "Bad Request - The request could not be understood or was missing required parameters.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "401": {
-                        "description": "Unauthorized - Authentication is required and has failed or not been provided.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            },
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string",
-                                    "examples": [
-                                        "Unauthorized - Please provide a valid access token."
-                                    ]
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Unauthorized"
                     },
                     "403": {
-                        "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Forbidden"
                     },
                     "404": {
-                        "description": "Not Found - The requested resource could not be found.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/NotFound"
                     },
                     "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/InternalServerError"
                     }
                 },
                 "x-ds-method": "triggerWorkflow",
@@ -517,12 +228,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "workflowId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/UUID"
-                        },
+                        "$ref": "#/components/parameters/WorkflowId",
                         "description": ""
                     }
                 ],
@@ -536,42 +242,7 @@
                                 },
                                 "examples": {
                                     "multipleWorkflowInstances": {
-                                        "summary": "Example of multiple workflow instances",
-                                        "value": {
-                                            "data": [
-                                                {
-                                                    "id": "fa4b77cb-dc69-4960-bd5c-9e6bf3c182e7",
-                                                    "name": "latency again",
-                                                    "workflow_status": "In Progress",
-                                                    "template_id": "25b96463-4aad-4cae-bbf9-15fbd5205b72",
-                                                    "account_id": "3b4453f5-869f-4c6a-8f1d-bcc260357144",
-                                                    "started_at": "2024-10-24T17:32:20.260Z",
-                                                    "started_by": "0ccdbb0b-a72e-452f-95f0-9f19654cb620",
-                                                    "started_by_name": "Jane Doe",
-                                                    "started_by_role": "Preparer",
-                                                    "ended_at": "2024-10-24T19:54:11.345Z",
-                                                    "expires_at": "2024-10-25T17:32:20.261Z",
-                                                    "last_modified_at": "2024-10-24T17:32:20.610Z",
-                                                    "canceled_at": "2024-10-24T19:54:11.345Z",
-                                                    "canceled_by": "",
-                                                    "trigger_input": {},
-                                                    "total_steps": 3,
-                                                    "last_completed_step": 0,
-                                                    "last_completed_step_name": null,
-                                                    "tags": [],
-                                                    "metadata": {
-                                                        "workflow_created_by": "f6a8f4d2-b1b5-4fa4-b067-3de168907526",
-                                                        "workflow_version": "1.0.0",
-                                                        "workflow_metadata_id": "66df63a436871a9d22c63b9f"
-                                                    }
-                                                }
-                                            ],
-                                            "response_metadata": {
-                                                "request_id": "3f7c9e4b-851c-4f9b-89e7-123456789abc",
-                                                "response_timestamp": "2024-10-17T14:30:00Z",
-                                                "response_duration_ms": 100
-                                            }
-                                        }
+                                        "$ref": "#/components/examples/WorkflowInstanceCollectionExample"
                                     }
                                 }
                             }
@@ -594,115 +265,35 @@
                 ],
                 "parameters": [
                     {
-                        "name": "accountId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/UUID"
-                        },
-                        "description": "The account ID."
+                        "$ref": "#/components/parameters/AccountId",
+                        "description": ""
                     },
                     {
-                        "name": "workflowId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/UUID"
-                        },
+                        "$ref": "#/components/parameters/WorkflowId",
                         "description": ""
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Indicates that a workflow has been successfully paused. New instances of this workflow will not be created.\nExisting workflow instances will be unaffected.\n",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "status": {
-                                            "$ref": "#/components/schemas/WorkflowInstanceCreationState"
-                                        }
-                                    }
-                                },
-                                "examples": {
-                                    "PauseNewWorkflowInstancesExample": {
-                                        "summary": "The workflow state has been successfully updated to resume creation of new instances",
-                                        "value": {
-                                            "status": "paused"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/PauseNewWorkflowInstancesSuccess"
                     },
                     "400": {
-                        "description": "Bad Request - The request could not be understood or was missing required parameters.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "401": {
-                        "description": "Unauthorized - Authentication is required and has failed or not been provided.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            },
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string",
-                                    "examples": [
-                                        "Unauthorized - Please provide a valid access token."
-                                    ]
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Unauthorized"
                     },
                     "403": {
-                        "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Forbidden"
                     },
                     "404": {
-                        "description": "Not Found - The requested resource could not be found.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/NotFound"
                     },
                     "409": {
-                        "description": "Bad Request - The request conflicts with the current state of the resource.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Conflict"
                     },
                     "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/InternalServerError"
                     }
                 },
                 "x-ds-method": "pauseNewWorkflowInstances",
@@ -721,115 +312,35 @@
                 ],
                 "parameters": [
                     {
-                        "name": "accountId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/UUID"
-                        },
-                        "description": "The account ID."
+                        "$ref": "#/components/parameters/AccountId",
+                        "description": ""
                     },
                     {
-                        "name": "workflowId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/UUID"
-                        },
+                        "$ref": "#/components/parameters/WorkflowId",
                         "description": ""
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Indicates that the ability to create new workflow instances from this workflow has been resumed.\nExisting workflow instances will be unaffected.\n",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "status": {
-                                            "$ref": "#/components/schemas/WorkflowInstanceCreationState"
-                                        }
-                                    }
-                                },
-                                "examples": {
-                                    "ResumeNewWorkflowInstancesExample": {
-                                        "summary": "The workflow state has been successfully updated to resume creation of new instances",
-                                        "value": {
-                                            "status": "active"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/ResumeNewWorkflowInstancesSuccess"
                     },
                     "400": {
-                        "description": "Bad Request - The request could not be understood or was missing required parameters.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "401": {
-                        "description": "Unauthorized - Authentication is required and has failed or not been provided.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            },
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string",
-                                    "examples": [
-                                        "Unauthorized - Please provide a valid access token."
-                                    ]
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Unauthorized"
                     },
                     "403": {
-                        "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Forbidden"
                     },
                     "404": {
-                        "description": "Not Found - The requested resource could not be found.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/NotFound"
                     },
                     "409": {
-                        "description": "Bad Request - The request conflicts with the current state of the resource.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Conflict"
                     },
                     "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/InternalServerError"
                     }
                 },
                 "x-ds-method": "resumePausedWorkflow",
@@ -859,23 +370,12 @@
                 ],
                 "parameters": [
                     {
-                        "name": "workflowId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/UUID"
-                        },
+                        "$ref": "#/components/parameters/WorkflowId",
                         "description": ""
                     },
                     {
-                        "name": "instanceId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "Workflow instance ID. <!-- dacid -->\nA string in UUID format: 4a6d6a08-xxxx-xxxx-xxxx-bae4fecc99c8\n"
+                        "$ref": "#/components/parameters/InstanceId",
+                        "description": ""
                     }
                 ],
                 "responses": {
@@ -888,95 +388,26 @@
                                 },
                                 "examples": {
                                     "workflowInstance": {
-                                        "summary": "Example of a workflow instance",
-                                        "value": {
-                                            "id": "fa4b77cb-dc69-4960-bd5c-9e6bf3c182e7",
-                                            "name": "latency again",
-                                            "workflow_status": "In Progress",
-                                            "template_id": "25b96463-4aad-4cae-bbf9-15fbd5205b72",
-                                            "account_id": "3b4453f5-869f-4c6a-8f1d-bcc260357144",
-                                            "started_at": "2024-10-24T17:32:20.260Z",
-                                            "started_by": "0ccdbb0b-a72e-452f-95f0-9f19654cb620",
-                                            "started_by_name": "Jane Doe",
-                                            "started_by_role": "Preparer",
-                                            "ended_at": "2024-10-24T19:54:11.345Z",
-                                            "expires_at": "2024-10-25T17:32:20.261Z",
-                                            "last_modified_at": "2024-10-24T17:32:20.610Z",
-                                            "canceled_at": "2024-10-24T19:54:11.345Z",
-                                            "canceled_by": "",
-                                            "trigger_input": {},
-                                            "total_steps": 3,
-                                            "last_completed_step": 0,
-                                            "last_completed_step_name": null,
-                                            "tags": [],
-                                            "metadata": {
-                                                "workflow_created_by": "f6a8f4d2-b1b5-4fa4-b067-3de168907526",
-                                                "workflow_version": "1.0.0",
-                                                "workflow_metadata_id": "66df63a436871a9d22c63b9f"
-                                            }
-                                        }
+                                        "$ref": "#/components/examples/WorkflowInstanceExample"
                                     }
                                 }
                             }
                         }
                     },
                     "400": {
-                        "description": "Bad Request - The request could not be understood or was missing required parameters.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "401": {
-                        "description": "Unauthorized - Authentication is required and has failed or not been provided.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            },
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string",
-                                    "examples": [
-                                        "Unauthorized - Please provide a valid access token."
-                                    ]
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Unauthorized"
                     },
                     "403": {
-                        "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Forbidden"
                     },
                     "404": {
-                        "description": "Not Found - The requested resource could not be found.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/NotFound"
                     },
                     "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/InternalServerError"
                     }
                 },
                 "x-ds-method": "getWorkflowInstance",
@@ -1006,116 +437,35 @@
                 ],
                 "parameters": [
                     {
-                        "name": "workflowId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/UUID"
-                        },
+                        "$ref": "#/components/parameters/WorkflowId",
                         "description": ""
                     },
                     {
-                        "name": "instanceId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "description": "The instance ID of the workflow to cancel."
+                        "$ref": "#/components/parameters/InstanceId",
+                        "description": ""
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "A message confirming the instance was canceled, including the instance and workflow IDs",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "examples": {
-                                    "CancelWorkflowInstanceResponseExample": {
-                                        "summary": "A successful cancellation",
-                                        "value": {
-                                            "message": "Successfully cancelled the workflow instance {instanceId} in {workflowId}"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/CancelWorkflowInstanceResponse"
                     },
                     "400": {
-                        "description": "Bad Request - The request could not be understood or was missing required parameters.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "401": {
-                        "description": "Unauthorized - Authentication is required and has failed or not been provided.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            },
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string",
-                                    "examples": [
-                                        "Unauthorized - Please provide a valid access token."
-                                    ]
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Unauthorized"
                     },
                     "403": {
-                        "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Forbidden"
                     },
                     "404": {
-                        "description": "Not Found - The requested resource could not be found.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/NotFound"
                     },
                     "409": {
-                        "description": "Bad Request - The request conflicts with the current state of the resource.",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/Conflict"
                     },
                     "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/problem+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Error"
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/InternalServerError"
                     }
                 },
                 "x-ds-method": "cancelWorkflowInstance",
@@ -1125,6 +475,35 @@
         }
     },
     "components": {
+        "parameters": {
+            "AccountId": {
+                "name": "accountId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "$ref": "#/components/schemas/UUID"
+                },
+                "description": "The unique identifier of the account."
+            },
+            "WorkflowId": {
+                "name": "workflowId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "$ref": "#/components/schemas/UUID"
+                }
+            },
+            "InstanceId": {
+                "name": "instanceId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "description": "Unique identifier for the workflow instance"
+            }
+        },
         "schemas": {
             "Error": {
                 "type": "object",
@@ -1702,6 +1081,396 @@
                 "x-ds-category": "Maestro",
                 "x-ms-summary": "",
                 "description": ""
+            }
+        },
+        "responses": {
+            "BadRequest": {
+                "description": "Bad Request - The request could not be understood or was missing required parameters.",
+                "content": {
+                    "application/problem+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "Forbidden - The request was valid, but you do not have permission to perform the action.",
+                "content": {
+                    "application/problem+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Internal Server Error",
+                "content": {
+                    "application/problem+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "Not Found - The requested resource could not be found.",
+                "content": {
+                    "application/problem+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "Unauthorized": {
+                "description": "Unauthorized - Authentication is required and has failed or not been provided.",
+                "content": {
+                    "application/problem+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    },
+                    "text/plain": {
+                        "schema": {
+                            "type": "string",
+                            "examples": [
+                                "Unauthorized - Please provide a valid access token."
+                            ]
+                        }
+                    }
+                }
+            },
+            "Conflict": {
+                "description": "Bad Request - The request conflicts with the current state of the resource.",
+                "content": {
+                    "application/problem+json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "CancelWorkflowInstanceResponse": {
+                "description": "A message confirming the instance was canceled, including the instance and workflow IDs",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "CancelWorkflowInstanceResponseExample": {
+                                "$ref": "#/components/examples/CancelWorkflowInstanceResponseExample"
+                            }
+                        }
+                    }
+                }
+            },
+            "PauseNewWorkflowInstancesSuccess": {
+                "description": "Indicates that a workflow has been successfully paused. New instances of this workflow will not be created.\nExisting workflow instances will be unaffected.\n",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "$ref": "#/components/schemas/WorkflowInstanceCreationState"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "PauseNewWorkflowInstancesExample": {
+                                "$ref": "#/components/examples/PauseNewWorkflowInstancesExample"
+                            }
+                        }
+                    }
+                }
+            },
+            "ResumeNewWorkflowInstancesSuccess": {
+                "description": "Indicates that the ability to create new workflow instances from this workflow has been resumed.\nExisting workflow instances will be unaffected.\n",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "$ref": "#/components/schemas/WorkflowInstanceCreationState"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "ResumeNewWorkflowInstancesExample": {
+                                "$ref": "#/components/examples/ResumeNewWorkflowInstancesExample"
+                            }
+                        }
+                    }
+                }
+            },
+            "WorkflowsListSuccess": {
+                "description": "A list of workflows has been successfully returned.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/components/schemas/WorkflowList"
+                                },
+                                "response_metadata": {
+                                    "$ref": "#/components/schemas/ResponseMetadata"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "WorkflowCollectionExample": {
+                                "$ref": "#/components/examples/WorkflowListExample"
+                            }
+                        }
+                    }
+                }
+            },
+            "TriggerWorkflowSuccess": {
+                "description": "Indicates a trigger has successfully launched a workflow instance",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/WorkflowInstanceInfo"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/ResponseMetadata"
+                                }
+                            ]
+                        },
+                        "examples": {
+                            "WorkflowTriggerSuccessExample": {
+                                "$ref": "#/components/examples/WorkflowInstanceInfoExample"
+                            }
+                        }
+                    }
+                }
+            },
+            "WorkflowTriggerRequirementsSuccess": {
+                "description": "Describes the requirements for triggering a workflow",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/WorkflowTriggerRequirements"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/ResponseMetadata"
+                                }
+                            ]
+                        },
+                        "examples": {
+                            "WorkflowTriggerRequirementsSuccessExample": {
+                                "$ref": "#/components/examples/GetWorkflowTriggerRequirementsExample"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "requestBodies": {
+            "TriggerWorkflowRequest": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/TriggerWorkflow"
+                                }
+                            ],
+                            "description": "The input information needed to trigger a new instance of a Maestro workflow.\nThis request body contains the metadata to describe the instance being created,\nalong with the input data required to trigger the workflow.\n\n- `instance_name` provides a user-defined name for the workflow instance.\n- `trigger_inputs` contains the key-value pairs corresponding to the inputs required by the workflow, as described in the `trigger_input_schema` from the workflow definition.\n"
+                        }
+                    }
+                }
+            }
+        },
+        "examples": {
+            "CancelWorkflowInstanceResponseExample": {
+                "summary": "A successful cancellation",
+                "value": {
+                    "message": "Successfully cancelled the workflow instance {instanceId} in {workflowId}"
+                }
+            },
+            "PauseNewWorkflowInstancesExample": {
+                "summary": "The workflow state has been successfully updated to resume creation of new instances",
+                "value": {
+                    "status": "paused"
+                }
+            },
+            "ResumeNewWorkflowInstancesExample": {
+                "summary": "The workflow state has been successfully updated to resume creation of new instances",
+                "value": {
+                    "status": "active"
+                }
+            },
+            "WorkflowInstanceExample": {
+                "summary": "Example of a workflow instance",
+                "value": {
+                    "id": "fa4b77cb-dc69-4960-bd5c-9e6bf3c182e7",
+                    "name": "latency again",
+                    "workflow_status": "In Progress",
+                    "template_id": "25b96463-4aad-4cae-bbf9-15fbd5205b72",
+                    "account_id": "3b4453f5-869f-4c6a-8f1d-bcc260357144",
+                    "started_at": "2024-10-24T17:32:20.260Z",
+                    "started_by": "0ccdbb0b-a72e-452f-95f0-9f19654cb620",
+                    "started_by_name": "Jane Doe",
+                    "started_by_role": "Preparer",
+                    "ended_at": "2024-10-24T19:54:11.345Z",
+                    "expires_at": "2024-10-25T17:32:20.261Z",
+                    "last_modified_at": "2024-10-24T17:32:20.610Z",
+                    "canceled_at": "2024-10-24T19:54:11.345Z",
+                    "canceled_by": "",
+                    "trigger_input": {},
+                    "total_steps": 3,
+                    "last_completed_step": 0,
+                    "last_completed_step_name": null,
+                    "tags": [],
+                    "metadata": {
+                        "workflow_created_by": "f6a8f4d2-b1b5-4fa4-b067-3de168907526",
+                        "workflow_version": "1.0.0",
+                        "workflow_metadata_id": "66df63a436871a9d22c63b9f"
+                    }
+                }
+            },
+            "WorkflowInstanceCollectionExample": {
+                "summary": "Example of multiple workflow instances",
+                "value": {
+                    "data": [
+                        {
+                            "id": "fa4b77cb-dc69-4960-bd5c-9e6bf3c182e7",
+                            "name": "latency again",
+                            "workflow_status": "In Progress",
+                            "template_id": "25b96463-4aad-4cae-bbf9-15fbd5205b72",
+                            "account_id": "3b4453f5-869f-4c6a-8f1d-bcc260357144",
+                            "started_at": "2024-10-24T17:32:20.260Z",
+                            "started_by": "0ccdbb0b-a72e-452f-95f0-9f19654cb620",
+                            "started_by_name": "Jane Doe",
+                            "started_by_role": "Preparer",
+                            "ended_at": "2024-10-24T19:54:11.345Z",
+                            "expires_at": "2024-10-25T17:32:20.261Z",
+                            "last_modified_at": "2024-10-24T17:32:20.610Z",
+                            "canceled_at": "2024-10-24T19:54:11.345Z",
+                            "canceled_by": "",
+                            "trigger_input": {},
+                            "total_steps": 3,
+                            "last_completed_step": 0,
+                            "last_completed_step_name": null,
+                            "tags": [],
+                            "metadata": {
+                                "workflow_created_by": "f6a8f4d2-b1b5-4fa4-b067-3de168907526",
+                                "workflow_version": "1.0.0",
+                                "workflow_metadata_id": "66df63a436871a9d22c63b9f"
+                            }
+                        }
+                    ],
+                    "response_metadata": {
+                        "request_id": "3f7c9e4b-851c-4f9b-89e7-123456789abc",
+                        "response_timestamp": "2024-10-17T14:30:00Z",
+                        "response_duration_ms": 100
+                    }
+                }
+            },
+            "GetWorkflowTriggerRequirementsExample": {
+                "summary": "Example of workflow trigger requirements",
+                "value": {
+                    "trigger_id": "c30c7afc-7d56-451c-b889-0a6488822fca",
+                    "trigger_event_type": "HTTP",
+                    "trigger_http_config": {
+                        "method": "POST",
+                        "url": "https://api-d.docusign.com/v1/accounts/7f09961a-a22e-4ea2-8395-d7648b81f20c/workflows/a4490cd8-d30d-454a-be13-f68578bb4235/actions/trigger"
+                    },
+                    "trigger_input_schema": [
+                        {
+                            "field_name": "Name",
+                            "field_data_type": "String"
+                        },
+                        {
+                            "field_name": "Email",
+                            "field_data_type": "String"
+                        },
+                        {
+                            "field_name": "Company",
+                            "field_data_type": "String"
+                        }
+                    ],
+                    "metadata": {
+                        "created_at": "2025-01-26T18:17:06.208+00:00",
+                        "created_by": "3d2ac2f5-4adb-4537-8f69-d9feb328052b",
+                        "modified_at": "2025-01-26T18:21:11.131+00:00",
+                        "response_timestamp": "2025-05-13T21:01:05.4823174Z",
+                        "response_duration_ms": 804
+                    }
+                }
+            },
+            "WorkflowListExample": {
+                "value": {
+                    "data": [
+                        {
+                            "id": "9fabc6d2-748b-41c9-8d5e-5fbf2f7e6e72",
+                            "name": "Agreement Signature Collection",
+                            "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
+                            "status": "active",
+                            "metadata": {
+                                "created_at": "2024-07-05T12:00:00+02:00",
+                                "created_by": "e3d89a85-c7d4-4df9-b987-78f5fc45a482"
+                            }
+                        },
+                        {
+                            "id": "b3c1ff15-4f5e-42b0-b74e-96177fa0e92d",
+                            "name": "Contract Review Reminder",
+                            "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
+                            "status": "active",
+                            "metadata": {
+                                "created_at": "2024-06-20T15:30:00+02:00",
+                                "created_by": "fbd89b4f-0ecf-47b7-b3fd-59e9e1c8fd17"
+                            }
+                        },
+                        {
+                            "id": "2fe67b39-1920-46d1-b0c1-3b9236b3e3ad",
+                            "name": "Contract Expiration Notification",
+                            "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
+                            "status": "active",
+                            "metadata": {
+                                "created_at": "2024-08-01T09:45:00+02:00",
+                                "created_by": "c6e8a5b3-fb1b-4c6e-a02a-267f8490731d"
+                            }
+                        },
+                        {
+                            "id": "6f0e1d91-d8e5-4c7a-a00e-8b9d4f95d5b8",
+                            "name": "Legal Agreement Archival",
+                            "account_id": "6b5a8c4e-1f93-41b5-9279-8bc2ad365dd1",
+                            "status": "active",
+                            "metadata": {
+                                "created_at": "2024-10-01T08:00:00+02:00",
+                                "created_by": "d7c94ff2-9b30-4872-9b56-e3a8f781632b"
+                            }
+                        }
+                    ],
+                    "response_metadata": {
+                        "total_items": 4,
+                        "response_timestamp": "2024-11-10T11:30:00+02:00",
+                        "response_duration_ms": 150
+                    }
+                }
+            },
+            "WorkflowInstanceInfoExample": {
+                "value": {
+                    "instance_id": "9bd95fba-60f7-4f74-a11b-af00c0617ad9",
+                    "instance_url": "https://apps-d.docusign.com/api/maestro/v1/accounts/97878f25-e391-4be4-a8f0-cf5f415f134e/instances/3695f629-e367-4243-abeb-5cb526b9559f/execution?mtid=34b2fb6c-cfd8-4084-9de6-94c111b17a9e&mtsec=U5OWGv7RQwmHgMX2UzhOWbTSdVoWYP8N-7qkE_ishaI"
+                }
             }
         },
         "securitySchemes": {
