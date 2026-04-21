@@ -1,0 +1,468 @@
+{
+    "openapi": "3.0.4",
+    "info": {
+        "title": "Trust Records API",
+        "description": "Centralize access to all of Docusign's evidence, regardless of the data source.",
+        "termsOfService": "https://www.docusign.com/company/terms-and-conditions/web",
+        "contact": {
+            "name": "Docusign Developers",
+            "url": "https://developers.docusign.com",
+            "email": "developers@docusign.com"
+        },
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "https://api-d.docusign.com",
+            "description": "Demo"
+        },
+        {
+            "url": "https://api.docusign.com",
+            "description": "Production"
+        }
+    ],
+    "paths": {
+        "/v1/accounts/{accountId}/trust-records/{recordId}": {
+            "get": {
+                "tags": [
+                    "TrustRecords"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "GetTrustRecord",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "recordId",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns the trust record with filtered content based on include parameter",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetTrustRecordResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "If the request parameters are invalid (invalid accountId, recordId, or include values)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "If the authorization header is missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "If the caller does not have permission to access this resource",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "If the trust record is not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "If the rate limit has been exceeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "If an unexpected server error occurs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "GetTrustRecord",
+                "x-ds-method": "GetTrustRecord",
+                "x-ds-service": "TrustRecords",
+                "x-ds-in-sdk": true
+            }
+        },
+        "/v1/accounts/{accountId}/trust-records/{recordId}/files/{fileId}": {
+            "get": {
+                "tags": [
+                    "TrustRecords"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "GetFile",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "recordId",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "fileId",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "context",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns the file content",
+                        "content": {
+                            "application/octet-stream": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "If the request parameters are invalid (missing/invalid context, expired link, etc.)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "If the authorization header is missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "If the caller does not have permission to access this resource",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "If the file is not found in the specified source",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "If the rate limit has been exceeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "If an unexpected server error occurs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-ds-methodname": "GetFile",
+                "x-ds-method": "GetFile",
+                "x-ds-service": "TrustRecords",
+                "x-ds-in-sdk": true
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the problem type.",
+                        "nullable": true
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short, human-readable summary of the problem type.",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "integer",
+                        "description": "The HTTP status code.",
+                        "format": "int32"
+                    },
+                    "detail": {
+                        "type": "string",
+                        "description": "A human-readable explanation specific to this occurrence of the problem.",
+                        "nullable": true
+                    },
+                    "instance": {
+                        "type": "string",
+                        "description": "A URI reference that identifies the specific occurrence of the problem.",
+                        "nullable": true
+                    },
+                    "request_id": {
+                        "type": "string",
+                        "description": "A unique identifier for tracing the failed request. DocuSign extension to RFC 9457.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Standard error response model conforming to RFC 9457 extended with DocuSign-specific fields.",
+                "x-ds-definition-name": "ErrorResponse"
+            },
+            "GetTrustRecordFileResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The unique identifier of the file.",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the file.",
+                        "nullable": true
+                    },
+                    "mime_type": {
+                        "type": "string",
+                        "description": "The MIME type of the file (e.g., application/pdf).",
+                        "nullable": true
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "description": "The download URL for retrieving the file content.",
+                        "format": "uri",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetTrustRecordFileResponse"
+            },
+            "GetTrustRecordIdentityVerificationMediaResponse": {
+                "type": "object",
+                "properties": {
+                    "media_url": {
+                        "type": "string",
+                        "description": "The URL to download the media.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetTrustRecordIdentityVerificationMediaResponse"
+            },
+            "GetTrustRecordIdentityVerificationResponse": {
+                "type": "object",
+                "properties": {
+                    "proof_file_id": {
+                        "type": "string",
+                        "description": "The unique identifier of the proof file associated with this identity verification.",
+                        "format": "uuid"
+                    },
+                    "events": {
+                        "description": "The identity verification events containing the verification details.",
+                        "nullable": true
+                    },
+                    "pdf_url": {
+                        "type": "string",
+                        "description": "The URL to download the PDF document containing the identity verification details.",
+                        "nullable": true
+                    },
+                    "media": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/GetTrustRecordIdentityVerificationMediaResponse"
+                        },
+                        "description": "A dictionary of media files associated with the identity verification, keyed by their unique identifiers.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetTrustRecordIdentityVerificationResponse"
+            },
+            "GetTrustRecordResponse": {
+                "type": "object",
+                "properties": {
+                    "trusted_partners_files": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GetTrustRecordFileResponse"
+                        },
+                        "description": "The list of files associated with the trust record.",
+                        "nullable": true
+                    },
+                    "identity_verifications": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GetTrustRecordIdentityVerificationResponse"
+                        },
+                        "description": "The list of identity verification results associated with the trust record.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetTrustRecordResponse"
+            },
+            "TrustRecords": {
+                "type": "object",
+                "properties": {
+                    "trusted_partners_files": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GetTrustRecordFileResponse"
+                        },
+                        "description": "The list of files associated with the trust record.",
+                        "nullable": true
+                    },
+                    "identity_verifications": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GetTrustRecordIdentityVerificationResponse"
+                        },
+                        "description": "The list of identity verification results associated with the trust record.",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false,
+                "x-ds-definition-name": "GetTrustRecordResponse",
+                "description": "",
+                "x-ds-category": "TrustRecords",
+                "x-ds-order": "100",
+                "x-ms-summary": ""
+            }
+        },
+        "securitySchemes": {
+            "OAuth2": {
+                "type": "oauth2",
+                "description": "OAuth2 authentication. For Demo, authorizationUrl: https://account-d.docusign.com/oauth/auth and tokenUrl: https://account-d.docusign.com/oauth/token. For Prod, authorizationUrl: https://account.docusign.com/oauth/auth and tokenUrl: https://account.docusign.com/oauth/token",
+                "flows": {
+                    "authorizationCode": {
+                        "authorizationUrl": "https://account-d.docusign.com/oauth/auth",
+                        "tokenUrl": "https://account-d.docusign.com/oauth/token",
+                        "scopes": {
+                            "trust_records_read": "Access to Trust Records read-only APIs"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "OAuth2": [
+                "trust_records_read"
+            ]
+        }
+    ],
+    "tags": [
+        {
+            "name": "TrustRecords",
+            "description": ""
+        }
+    ],
+    "x-ds-categories": [
+        {
+            "name": "TrustRecords",
+            "summary": "",
+            "description": ""
+        }
+    ]
+}
