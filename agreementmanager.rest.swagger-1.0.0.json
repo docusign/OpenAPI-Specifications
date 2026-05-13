@@ -62,6 +62,10 @@
                         "description": ""
                     },
                     {
+                        "$ref": "#/components/parameters/ODataSearch",
+                        "description": ""
+                    },
+                    {
                         "$ref": "#/components/parameters/ODataFilter",
                         "description": ""
                     },
@@ -306,15 +310,8 @@
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "The agreement has been successfully updated via document ID. Returns the complete updated agreement.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Agreement"
-                                }
-                            }
-                        }
+                    "204": {
+                        "description": "The agreement has been successfully updated via document ID. No content is returned."
                     },
                     "400": {
                         "$ref": "#/components/responses/BadRequest"
@@ -658,15 +655,8 @@
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "The agreement has been successfully updated. Returns the complete updated agreement.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Agreement"
-                                }
-                            }
-                        }
+                    "204": {
+                        "description": "The agreement has been successfully updated. No content is returned."
                     },
                     "400": {
                         "$ref": "#/components/responses/BadRequest"
@@ -3308,9 +3298,9 @@
                     "type": "string"
                 },
                 "example": [
-                    "MasterServiceAgreementDocumentData",
-                    "NonDisclosureAgreementDocumentData",
-                    "AmendmentDocumentData"
+                    "Amendment",
+                    "MasterServiceAgreement",
+                    "NonDisclosureAgreement"
                 ],
                 "x-ds-definition-name": "AgreementTypeListResponse"
             },
@@ -3686,9 +3676,9 @@
                             "$ref": "#/components/schemas/AgreementTypeListResponse"
                         },
                         "example": [
-                            "MasterServiceAgreementDocumentData",
-                            "NonDisclosureAgreementDocumentData",
-                            "AmendmentDocumentData"
+                            "Amendment",
+                            "MasterServiceAgreement",
+                            "NonDisclosureAgreement"
                         ]
                     }
                 }
@@ -3763,6 +3753,16 @@
                         "renewal-type"
                     ]
                 }
+            },
+            "ODataSearch": {
+                "name": "$search",
+                "in": "query",
+                "description": "OData full-text search expression. Performs a case-insensitive search across agreement text fields including title, type, parties, and provisions.\n\nThe search term is matched as a substring against searchable fields. Enclose multi-word terms in double quotes for exact phrase matching.\n\nExamples:\n- `$search=Acme` — matches agreements mentioning \"Acme\" in any searchable field\n- `$search=\"Non-Disclosure Agreement\"` — exact phrase match\n- `$search=renewal` — matches agreements with \"renewal\" in title, type, or provisions\n\n**Note**: `$search` can be combined with `$filter` for more targeted results (e.g., `$search=Acme&$filter=status eq 'COMPLETE'`).\n",
+                "schema": {
+                    "type": "string",
+                    "maxLength": 500
+                },
+                "example": "/agreements?$search=Acme"
             },
             "ODataFilter": {
                 "name": "$filter",
