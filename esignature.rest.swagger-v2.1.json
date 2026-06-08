@@ -2356,7 +2356,9 @@
                 ],
                 "summary": "Initiate a new chunked upload.",
                 "operationId": "ChunkedUploads_PostChunkedUploads",
-                "consumes": [],
+                "consumes": [
+                    "multipart/form-data"
+                ],
                 "produces": [],
                 "parameters": [
                     {
@@ -9756,6 +9758,60 @@
             "parameters": []
         },
         "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/shares": {
+            "put": {
+                "tags": [
+                    "EnvelopeShares"
+                ],
+                "summary": "",
+                "operationId": "EnvelopesShares_PutEnvelopesShares",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeId",
+                        "in": "path",
+                        "description": "The envelope's GUID. \n\nExample: `93be49ab-xxxx-xxxx-xxxx-f752070d71ec`\n",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopesSharesRequest",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/envelopesSharesRequest"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/envelopesSharesResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "updateEnvelopesShares",
+                "x-ds-method": "updateEnvelopesShares",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
             "post": {
                 "tags": [
                     "EnvelopeShares"
@@ -9806,6 +9862,170 @@
                 "deprecated": false,
                 "x-ds-methodname": "createEnvelopesShares",
                 "x-ds-method": "createEnvelopesShares",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "delete": {
+                "tags": [
+                    "EnvelopeShares"
+                ],
+                "summary": "",
+                "operationId": "EnvelopesShares_DeleteEnvelopesShares",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeId",
+                        "in": "path",
+                        "description": "The envelope's GUID. \n\nExample: `93be49ab-xxxx-xxxx-xxxx-f752070d71ec`\n",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopesSharesRequest",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/envelopesSharesRequest"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response."
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "deleteEnvelopesShares",
+                "x-ds-method": "deleteEnvelopesShares",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/shares/{shareId}": {
+            "put": {
+                "tags": [
+                    "EnvelopeShares"
+                ],
+                "summary": "",
+                "operationId": "EnvelopesShares_PutEnvelopesShare",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeId",
+                        "in": "path",
+                        "description": "The envelope's GUID. \n\nExample: `93be49ab-xxxx-xxxx-xxxx-f752070d71ec`\n",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "shareId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": ""
+                    },
+                    {
+                        "name": "envelopesSharePermissionRequest",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/envelopesSharePermissionRequest"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/envelopesShareResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "updateEnvelopesShare",
+                "x-ds-method": "updateEnvelopesShare",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "delete": {
+                "tags": [
+                    "EnvelopeShares"
+                ],
+                "summary": "",
+                "operationId": "EnvelopesShares_DeleteEnvelopesShare",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeId",
+                        "in": "path",
+                        "description": "The envelope's GUID. \n\nExample: `93be49ab-xxxx-xxxx-xxxx-f752070d71ec`\n",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "shareId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response."
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "deleteEnvelopesShare",
+                "x-ds-method": "deleteEnvelopesShare",
                 "x-ds-service": "Uncategorized",
                 "description": "",
                 "x-ds-in-sdk": true
@@ -11098,6 +11318,110 @@
             },
             "parameters": []
         },
+        "/v2.1/accounts/{accountId}/envelopes/shared": {
+            "get": {
+                "tags": [
+                    "EnvelopeShares"
+                ],
+                "summary": "",
+                "operationId": "SharedEnvelopesList_GetSharedEnvelopes",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The maximum number of results to return."
+                    },
+                    {
+                        "name": "from_date",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The start date for a date range in UTC DateTime format.\n\n**Note:** If this property is null, no date filtering is applied."
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": ""
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The order in which to sort the results.\n\nValid values are: \n\n\n* `asc`: Ascending order.\n* `desc`: Descending order. "
+                    },
+                    {
+                        "name": "order_by",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The file attribute to use to sort the results.\n\nValid values are: \n\n* `modified`\n* `name`"
+                    },
+                    {
+                        "name": "search_text",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Use this parameter to search for specific text."
+                    },
+                    {
+                        "name": "start_position",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image."
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The status of the item."
+                    },
+                    {
+                        "name": "to_date",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The end of a search date range in UTC DateTime format. When you use this parameter, only templates created up to this date and time are returned.\n\n**Note:** If this property is null, the value defaults to the current date."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/envelopesInformation"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getSharedEnvelopes",
+                "x-ds-method": "getSharedEnvelopes",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
         "/v2.1/accounts/{accountId}/envelopes/status": {
             "put": {
                 "tags": [
@@ -12283,7 +12607,7 @@
                     "200": {
                         "description": "Successful response.",
                         "schema": {
-                            "$ref": "#/definitions/usersResponse"
+                            "$ref": "#/definitions/groupUsersResponse"
                         }
                     },
                     "400": {
@@ -25150,6 +25474,13 @@
                     "$ref": "#/definitions/accountUISettings",
                     "description": "An object that defines the settings to use in the UI."
                 },
+                "additionalSettings": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/additionalSetting"
+                    }
+                },
                 "adoptSigConfig": {
                     "description": "When **true,** [Signature Adoption Configuration](https://support.docusign.com/s/document-item?bundleId=pik1583277475390&topicId=dsz1583277358168.html) is enabled. \n\n**Note:** Only Admin users can change this setting.",
                     "type": "string"
@@ -25187,6 +25518,14 @@
                     "type": "string"
                 },
                 "advancedSearchEnableTemplateNameFieldMetadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
+                },
+                "aiAssistedWebFormCreationLevel": {
+                    "description": "",
+                    "type": "string"
+                },
+                "aiAssistedWebFormCreationLevelMetadata": {
                     "$ref": "#/definitions/settingsMetadata",
                     "description": ""
                 },
@@ -26926,6 +27265,14 @@
                     "$ref": "#/definitions/settingsMetadata",
                     "description": ""
                 },
+                "enableIAMforXEmbeddedUX": {
+                    "description": "",
+                    "type": "string"
+                },
+                "enableIAMforXEmbeddedUXMetadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
+                },
                 "enableIDFxAccountlessSMSAuthForPart11": {
                     "description": "",
                     "type": "string"
@@ -27193,6 +27540,14 @@
                 "enableResponsiveSigningMetadata": {
                     "$ref": "#/definitions/settingsMetadata",
                     "description": "Metadata that indicates whether the `enableResponsiveSigning` property is editable.\n"
+                },
+                "enableReviewerEventsSetting": {
+                    "description": "",
+                    "type": "string"
+                },
+                "enableReviewerEventsSettingMetadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
                 },
                 "enableSAPAribaExtension": {
                     "description": "",
@@ -29073,6 +29428,26 @@
             "x-ds-definition-name": "accountUISettings",
             "x-ms-summary": "An object that defines the options that are available to non-administrators in the UI."
         },
+        "additionalSetting": {
+            "type": "object",
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
+                },
+                "name": {
+                    "description": "",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Specifies the value of the tab. ",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "additionalSetting",
+            "description": "",
+            "x-ms-summary": ""
+        },
         "addOn": {
             "description": "Contains information about add ons.",
             "type": "object",
@@ -29629,6 +30004,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -31936,6 +32315,13 @@
                     "description": "The email subject line for this copy of the envelope.\n\nFor information about adding merge field information to the email subject,\nsee [Template Email Subject Merge Fields](/docs/esign-rest-api/reference/templates/templates/create/).\n\n**Note:** The subject line is limited to 100 characters, including any merged fields.It is not truncated. It is an error if the text is longer than 100 characters.",
                     "type": "string"
                 },
+                "prefillTabs": {
+                    "description": "Prefill tabs are tabs\nthat the sender can fill in\nbefore the envelope is sent.\nThey are sometimes called\nsender tags or pre-fill fields.\n\n\n[Pre-Fill Your Own Document Fields][app]\ndescribes how prefill tabs\nwork in the web application.\n\n\n[Customize your envelopes with pre-fill fields][catblog]\nshows how to use prefill tabs\nin your application using the eSignature\nSDKs.\n\n[app]:      https://support.docusign.com/s/document-item?bundleId=gbo1643332197980&topicId=nwo1611173513994.html\n[catblog]:  https://www.docusign.com/blog/developers/common-api-tasks-customize-your-envelopes-pre-fill-fields",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/bulkSendingCopyPrefillTab"
+                    }
+                },
                 "recipients": {
                     "description": "Information about the recipients associated with this copy of the envelope.",
                     "type": "array",
@@ -31999,6 +32385,22 @@
                 }
             },
             "x-ds-definition-name": "bulkSendingCopyDocGenFormFieldRowValue",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "bulkSendingCopyPrefillTab": {
+            "type": "object",
+            "properties": {
+                "initialValue": {
+                    "description": "The original value of the tab.",
+                    "type": "string"
+                },
+                "tabLabel": {
+                    "description": "The label associated with the tab. This value may be an empty string.\nIf no value is provided, the tab type is used as the value.\n\nMaximum Length: 500 characters.\n",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "bulkSendingCopyPrefillTab",
             "description": "",
             "x-ms-summary": ""
         },
@@ -33112,6 +33514,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -33855,6 +34261,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -34244,6 +34654,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -34688,6 +35102,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -35130,6 +35548,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -35574,6 +35996,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -36016,6 +36442,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -37902,6 +38332,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -38401,6 +38835,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -38823,6 +39261,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -39317,6 +39759,10 @@
                 "connectedObjectDetails": {
                     "$ref": "#/definitions/connectedObjectDetails",
                     "description": ""
+                },
+                "defaultValue": {
+                    "description": "",
+                    "type": "string"
                 },
                 "description": {
                     "description": "A description of the field. Displayed with the label.",
@@ -40208,6 +40654,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -40899,6 +41349,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -41397,6 +41851,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -42952,6 +43410,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -43505,53 +43967,43 @@
             "x-ds-definition-name": "envelopesInformation",
             "x-ms-summary": "Result set for the Envelopes: listStatusChanges method"
         },
-        "envelopesSharesRequest": {
+        "envelopesSharePermissionRequest": {
             "type": "object",
             "properties": {
-                "shares": {
+                "customMessage": {
                     "description": "",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/envelopesSharesRequestItem"
-                    }
-                }
-            },
-            "x-ds-definition-name": "envelopesSharesRequest",
-            "description": "",
-            "x-ms-summary": ""
-        },
-        "envelopesSharesRequestItem": {
-            "type": "object",
-            "properties": {
-                "agentUser": {
-                    "$ref": "#/definitions/authorizationUser",
-                    "description": ""
+                    "type": "string"
                 },
                 "permission": {
                     "description": "",
                     "type": "string"
                 }
             },
-            "x-ds-definition-name": "envelopesSharesRequestItem",
+            "x-ds-definition-name": "envelopesSharePermissionRequest",
             "description": "",
             "x-ms-summary": ""
         },
-        "envelopesSharesResponse": {
+        "envelopesShareRequest": {
             "type": "object",
             "properties": {
-                "shares": {
+                "agentUser": {
+                    "$ref": "#/definitions/authorizationUser",
+                    "description": ""
+                },
+                "customMessage": {
                     "description": "",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/envelopesSharesResponseItem"
-                    }
+                    "type": "string"
+                },
+                "permission": {
+                    "description": "",
+                    "type": "string"
                 }
             },
-            "x-ds-definition-name": "envelopesSharesResponse",
+            "x-ds-definition-name": "envelopesShareRequest",
             "description": "",
             "x-ms-summary": ""
         },
-        "envelopesSharesResponseItem": {
+        "envelopesShareResponse": {
             "type": "object",
             "properties": {
                 "agentUser": {
@@ -43591,7 +44043,37 @@
                     "type": "string"
                 }
             },
-            "x-ds-definition-name": "envelopesSharesResponseItem",
+            "x-ds-definition-name": "envelopesShareResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "envelopesSharesRequest": {
+            "type": "object",
+            "properties": {
+                "shares": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/envelopesShareRequest"
+                    }
+                }
+            },
+            "x-ds-definition-name": "envelopesSharesRequest",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "envelopesSharesResponse": {
+            "type": "object",
+            "properties": {
+                "shares": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/envelopesShareResponse"
+                    }
+                }
+            },
+            "x-ds-definition-name": "envelopesSharesResponse",
             "description": "",
             "x-ms-summary": ""
         },
@@ -45193,6 +45675,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -46045,6 +46531,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -46576,6 +47066,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -47022,6 +47516,93 @@
             "description": "This object is used for both requests and responses. Some properties (such as `endPosition`) only apply to the response of [Groups: list](/docs/esign-rest-api/reference/usergroups/groups/list/).\n",
             "x-ms-summary": "This object is used for both requests and responses. Some properties (such as `endPosition`) only apply to the response of [Groups: list](/docs/esign-rest-api/reference/usergroups/groups/list/).\n"
         },
+        "groupUserInfo": {
+            "type": "object",
+            "properties": {
+                "activationAccessCode": {
+                    "description": "Access code provided to the user to activate the account.",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "",
+                    "type": "string"
+                },
+                "errorDetails": {
+                    "$ref": "#/definitions/errorDetails",
+                    "description": "This object describes errors that occur. It is only valid for responses and ignored in requests."
+                },
+                "loginStatus": {
+                    "description": "Boolean value that indicates whether the user is currently logged in or not.",
+                    "type": "string"
+                },
+                "sendActivationEmail": {
+                    "description": "This field is no longer supported for most accounts. To create an eSignature user without sending an activation email, use the Admin API by following [these steps](/docs/admin-api/how-to/create-active-user/).",
+                    "type": "string"
+                },
+                "uri": {
+                    "description": "A URI containing the user ID.",
+                    "type": "string"
+                },
+                "userId": {
+                    "description": "The ID of the user to access.\n\n**Note:** Users can only access their own information. A user, even one with Admin rights, cannot access another user's settings.",
+                    "type": "string"
+                },
+                "userName": {
+                    "description": "The name of the user.",
+                    "type": "string"
+                },
+                "userStatus": {
+                    "description": "Status of the user's account. One of:\n\n- `ActivationRequired`\n- `ActivationSent`\n- `Active`\n- `Closed`\n- `Disabled`\n",
+                    "type": "string"
+                },
+                "userType": {
+                    "description": "The type of user, for example `CompanyUser`.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "groupUserInfo",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "groupUsersResponse": {
+            "type": "object",
+            "properties": {
+                "endPosition": {
+                    "description": "The last index position in the result set. ",
+                    "type": "string"
+                },
+                "nextUri": {
+                    "description": "The URI for the next chunk of records based on the search request. It is `null` if this is the last set of results for the search. ",
+                    "type": "string"
+                },
+                "previousUri": {
+                    "description": "The URI for the prior chunk of records based on the search request. It is `null` if this is the first set of results for the search. ",
+                    "type": "string"
+                },
+                "resultSetSize": {
+                    "description": "The number of results in this response. Because you can filter which entries are included in the response, this value is always less than or equal to the `totalSetSize`.",
+                    "type": "string"
+                },
+                "startPosition": {
+                    "description": "The starting index position of the current result set.",
+                    "type": "string"
+                },
+                "totalSetSize": {
+                    "description": "The total number of items in the result set. This value is always greater than or equal to the value of `resultSetSize`.",
+                    "type": "string"
+                },
+                "users": {
+                    "description": "User management information.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/groupUserInfo"
+                    }
+                }
+            },
+            "x-ds-definition-name": "groupUsersResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
         "idCheckConfiguration": {
             "type": "object",
             "properties": {
@@ -47175,6 +47756,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -48487,6 +49072,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -48937,6 +49526,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -50296,6 +50889,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -51657,6 +52254,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -52457,6 +53058,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -52911,6 +53516,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -53418,6 +54027,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -54865,6 +55478,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -55372,6 +55989,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -56285,6 +56906,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -58003,6 +58628,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -58504,6 +59133,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -59585,6 +60218,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -60011,6 +60648,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -60499,6 +61140,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -61047,6 +61692,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -61869,6 +62518,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -63706,6 +64359,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -64248,6 +64905,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -66456,6 +67117,10 @@
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
                 },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
+                },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
                     "type": "string"
@@ -67842,6 +68507,10 @@
                 "anchorTabProcessorVersionMetadata": {
                     "$ref": "#/definitions/propertyMetadata",
                     "description": "Reserved for Docusign."
+                },
+                "anchorTabScope": {
+                    "description": "",
+                    "type": "string"
                 },
                 "anchorUnits": {
                     "description": "Specifies units of the `anchorXOffset` and `anchorYOffset`. Valid units are:\n\n- `pixels` (default)\n- `inches`\n- `mms`\n- `cms`\n",
@@ -74768,7 +75437,7 @@
                     "description": "",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/envelopesSharesResponseItem"
+                        "$ref": "#/definitions/envelopesShareResponse"
                     }
                 }
             },
