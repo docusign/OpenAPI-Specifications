@@ -23,11 +23,19 @@
         {
             "url": "https://api-d.docusign.com",
             "description": "Demo server"
+        },
+        {
+            "url": "https://api-s.docusign.com",
+            "description": "Staging server"
+        },
+        {
+            "url": "https://api.dev.docusign.net",
+            "description": "Dev server"
         }
     ],
     "security": [
         {
-            "accessToken": [
+            "OAuth2Auth": [
                 "adm_store_unified_repo_read",
                 "adm_store_unified_repo_write",
                 "models_read",
@@ -1120,6 +1128,7 @@
                             "IN_PROGRESS",
                             "CANCELED",
                             "SUCCEEDED",
+                            "SUCCEEDED_WITH_WARNINGS",
                             "FAILED"
                         ]
                     },
@@ -1162,6 +1171,11 @@
                         "description": "The name of the uploaded file",
                         "example": "filename.pdf"
                     },
+                    "ai_extraction": {
+                        "type": "boolean",
+                        "description": "Whether AI extraction was performed on this document",
+                        "example": true
+                    },
                     "error_code": {
                         "type": "integer",
                         "format": "int32",
@@ -1170,6 +1184,13 @@
                     "error": {
                         "type": "string",
                         "description": "Error message if document processing failed"
+                    },
+                    "warnings": {
+                        "type": "array",
+                        "description": "List of warnings encountered during document processing. Present when status is SUCCEEDED_WITH_WARNINGS.",
+                        "items": {
+                            "$ref": "#/components/schemas/DocumentWarning"
+                        }
                     },
                     "_actions": {
                         "$ref": "#/components/schemas/BulkJobItemActions"
@@ -1189,6 +1210,18 @@
                                         "example": "https://s1.us.services.demo.docusign.net/document-public-dms/v1/accounts/{accountId}/documents/{documentId}"
                                     }
                                 }
+                            },
+                            "agreement": {
+                                "type": "object",
+                                "description": "Link to the associated agreement",
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "URL to the agreement resource",
+                                        "example": "/v1/accounts/{accountId}/agreements/{agreementId}"
+                                    }
+                                }
                             }
                         }
                     }
@@ -1197,6 +1230,7 @@
             },
             "BulkJobItemActions": {
                 "type": "object",
+                "description": "Available actions for this document. Actions vary based on document state - upload actions during initial upload, remediation actions after processing.",
                 "properties": {
                     "upload_document": {
                         "type": "string",
@@ -1204,21 +1238,52 @@
                         "description": "Azure Blob Store presigned URL to upload the document file (valid for ~8 hours)",
                         "example": "https://docupstoragewestwu3dsto.blob.core.windows.net/1d4dbfd5-6911-47a7-93fa-f597975f7d2d/8c566d26-e7fb-4b7e-870c-1d0fb8df9084?sv=2023-01-03&st=2025-10-27T19%3A11%3A42Z&se=2025-10-28T03%3A16%3A42Z&sr=b&sp=cw&sig=st%2Fot4COaU9icCNYbEfm7RdKJhjxgfi4Oo0HSEZ7EMQ%3D"
                     },
-                    "upload_metadata": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "Azure Blob Store url to upload metadata of the specific file"
+                    "update_metadata": {
+                        "$ref": "#/components/schemas/Affordance"
                     }
                 },
                 "x-ds-definition-name": "BulkJobItemActions"
+            },
+            "DocumentWarning": {
+                "type": "object",
+                "description": "A warning encountered during document processing that did not prevent overall success.",
+                "required": [
+                    "code",
+                    "message",
+                    "recoverable"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Machine-readable warning code",
+                        "example": "METADATA_APPLICATION_FAILED"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Human-readable warning summary",
+                        "example": "Applying metadata failed"
+                    },
+                    "detail": {
+                        "type": "string",
+                        "description": "Detailed diagnostic information about the warning"
+                    },
+                    "recoverable": {
+                        "type": "boolean",
+                        "description": "Whether this warning can be remediated by the client",
+                        "example": true
+                    },
+                    "remedy": {
+                        "type": "string",
+                        "description": "Key referencing an action in `_actions` that can resolve this warning",
+                        "example": "update_metadata"
+                    }
+                },
+                "x-ds-definition-name": "DocumentWarning"
             },
             "BulkJobActionTemplates": {
                 "type": "object",
                 "properties": {
                     "upload_document": {
-                        "$ref": "#/components/schemas/BulkJobActionTemplate"
-                    },
-                    "upload_metadata": {
                         "$ref": "#/components/schemas/BulkJobActionTemplate"
                     }
                 },
@@ -1339,13 +1404,14 @@
                 "x-ds-definition-name": "BulkJobMetadata"
             },
             "DocStatus": {
-                "description": "Document status. Last 3 are terminal statuses. Matches enum with similar name in the backend.",
+                "description": "Document status. Last 4 are terminal statuses. Matches enum with similar name in the backend.",
                 "type": "string",
                 "enum": [
                     "NOT_STARTED",
                     "IN_PROGRESS",
                     "CANCELED",
                     "SUCCEEDED",
+                    "SUCCEEDED_WITH_WARNINGS",
                     "FAILED"
                 ],
                 "example": "NOT_STARTED",
@@ -3864,6 +3930,7 @@
                             "IN_PROGRESS",
                             "CANCELED",
                             "SUCCEEDED",
+                            "SUCCEEDED_WITH_WARNINGS",
                             "FAILED"
                         ],
                         "documents": [
@@ -3878,9 +3945,44 @@
                                 "agreement_id": "e4c999b7-bdbd-42a1-99eb-c7569b65d7e7",
                                 "status": "SUCCEEDED",
                                 "file_name": "filename.pdf",
+                                "ai_extraction": true,
                                 "_links": {
                                     "document": {
                                         "href": "https://s1.us.services.demo.docusign.net/document-public-dms/v1/accounts/{accountId}/documents/{documentId}"
+                                    },
+                                    "agreement": {
+                                        "href": "/v1/accounts/{accountId}/agreements/e4c999b7-bdbd-42a1-99eb-c7569b65d7e7"
+                                    }
+                                }
+                            },
+                            {
+                                "id": "8d9e2654-62ac-40bd-9f34-76424ee8e968",
+                                "agreement_id": "09ecfcd6-783b-410b-a368-1e4e43fb1c17",
+                                "status": "SUCCEEDED_WITH_WARNINGS",
+                                "file_name": "1738567852650_Travelers Auto WC Binder.pdf",
+                                "ai_extraction": true,
+                                "warnings": [
+                                    {
+                                        "code": "METADATA_APPLICATION_FAILED",
+                                        "message": "Applying metadata failed",
+                                        "detail": "Data validation failed. $class may contain an incompatible value.",
+                                        "recoverable": true,
+                                        "remedy": "update_metadata"
+                                    }
+                                ],
+                                "_links": {
+                                    "document": {
+                                        "href": "https://s1.us.services.demo.docusign.net/document-public-dms/v1/accounts/{accountId}/documents/8d9e2654-62ac-40bd-9f34-76424ee8e968"
+                                    },
+                                    "agreement": {
+                                        "href": "/v1/accounts/{accountId}/agreements/09ecfcd6-783b-410b-a368-1e4e43fb1c17"
+                                    }
+                                },
+                                "_actions": {
+                                    "update_metadata": {
+                                        "href": "/v1/accounts/{accountId}/agreements/09ecfcd6-783b-410b-a368-1e4e43fb1c17",
+                                        "method": "PATCH",
+                                        "description": "Submit metadata for this agreement with valid payload"
                                     }
                                 }
                             }
@@ -9480,7 +9582,7 @@
             }
         },
         "securitySchemes": {
-            "accessToken": {
+            "OAuth2Auth": {
                 "description": "OAuth2 authentication.\n- Demo:\n  - authorizationUrl: https://account-d.docusign.com/oauth/auth\n  - tokenUrl: https://account-d.docusign.com/oauth/token\n- Production:\n  - authorizationUrl: https://account.docusign.com/oauth/auth\n  - tokenUrl: https://account.docusign.com/oauth/token\n",
                 "type": "oauth2",
                 "flows": {
