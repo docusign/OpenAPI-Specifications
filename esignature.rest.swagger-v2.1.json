@@ -8809,7 +8809,7 @@
                     "EnvelopeConsumerDisclosures"
                 ],
                 "summary": "Gets the Electronic Record and Signature Disclosure for a specific envelope recipient.",
-                "description": "Retrieves the HTML-formatted Electronic Record and Signature Disclosure (ERSD) for the envelope recipient that you specify. This disclosure might differ from the account-level disclosure, based on the signing brand applied to the envelope and the recipient's language settings.\n\nTo set the language of the disclosure that you want to retrieve, specify the `langCode` as either a path or query parameter.",
+                "description": "Retrieves the HTML-formatted Electronic Record and Signature Disclosure (ERSD) for the envelope recipient that you specify. This disclosure might differ from the account-level disclosure, based on the signing brand applied to the envelope and the recipient's language settings.\n\nTo set the language of the disclosure that you want to retrieve, specify the `langCode` as a query parameter.",
                 "operationId": "ConsumerDisclosure_GetConsumerDisclosureEnvelopeIdRecipientIdLangCode",
                 "consumes": [],
                 "produces": [],
@@ -8831,7 +8831,7 @@
                     {
                         "name": "langCode",
                         "in": "path",
-                        "description": "(Optional) The code for the signer language version of the disclosure that you want to retrieve, as a path parameter. The following languages are supported:\n\n- Arabic (`ar`)\n- Bulgarian (`bg`)\n- Czech (`cs`)\n- Chinese Simplified (`zh_CN`)\n- Chinese Traditional (`zh_TW`)\n- Croatian (`hr`)\n- Danish (`da`)\n- Dutch (`nl`)\n- English US (`en`)\n- English UK (`en_GB`)\n- Estonian (`et`)\n- Farsi (`fa`)\n- Finnish (`fi`)\n- French (`fr`)\n- French Canadian (`fr_CA`)\n- German (`de`)\n- Greek (`el`)\n- Hebrew (`he`)\n- Hindi (`hi`)\n- Hungarian (`hu`)\n- Bahasa Indonesian (`id`)\n- Italian (`it`)\n- Japanese (`ja`)\n- Korean (`ko`)\n- Latvian (`lv`)\n- Lithuanian (`lt`)\n- Bahasa Melayu (`ms`)\n- Norwegian (`no`)\n- Polish (`pl`)\n- Portuguese (`pt`)\n- Portuguese Brazil (`pt_BR`)\n- Romanian (`ro`)\n- Russian (`ru`)\n- Serbian (`sr`)\n- Slovak (`sk`)\n- Slovenian (`sl`)\n- Spanish (`es`)\n- Spanish Latin America (`es_MX`)\n- Swedish (`sv`)\n- Thai (`th`)\n- Turkish (`tr`)\n- Ukrainian (`uk`) \n- Vietnamese (`vi`)\n\nAdditionally, you can automatically detect the browser language being used by the viewer and display the disclosure in that language by setting the value to `browser`.",
+                        "description": "The code for the signer language version of the disclosure that you want to retrieve, as a path parameter. The following languages are supported:\n\n- Arabic (`ar`)\n- Bulgarian (`bg`)\n- Czech (`cs`)\n- Chinese Simplified (`zh_CN`)\n- Chinese Traditional (`zh_TW`)\n- Croatian (`hr`)\n- Danish (`da`)\n- Dutch (`nl`)\n- English US (`en`)\n- English UK (`en_GB`)\n- Estonian (`et`)\n- Farsi (`fa`)\n- Finnish (`fi`)\n- French (`fr`)\n- French Canadian (`fr_CA`)\n- German (`de`)\n- Greek (`el`)\n- Hebrew (`he`)\n- Hindi (`hi`)\n- Hungarian (`hu`)\n- Bahasa Indonesian (`id`)\n- Italian (`it`)\n- Japanese (`ja`)\n- Korean (`ko`)\n- Latvian (`lv`)\n- Lithuanian (`lt`)\n- Bahasa Melayu (`ms`)\n- Norwegian (`no`)\n- Polish (`pl`)\n- Portuguese (`pt`)\n- Portuguese Brazil (`pt_BR`)\n- Romanian (`ro`)\n- Russian (`ru`)\n- Serbian (`sr`)\n- Slovak (`sk`)\n- Slovenian (`sl`)\n- Spanish (`es`)\n- Spanish Latin America (`es_MX`)\n- Swedish (`sv`)\n- Thai (`th`)\n- Turkish (`tr`)\n- Ukrainian (`uk`) \n- Vietnamese (`vi`)\n\nAdditionally, you can automatically detect the browser language being used by the viewer and display the disclosure in that language by setting the value to `browser`.",
                         "required": true,
                         "type": "string"
                     },
@@ -8841,13 +8841,6 @@
                         "description": "A local reference used to map\nrecipients to other objects, such as specific\ndocument tabs.\n\nA `recipientId` must be\neither an integer or a GUID,\nand the `recipientId` must be\nunique within an envelope.\n\nFor example, many envelopes assign the first recipient\na `recipientId` of `1`.\n",
                         "required": true,
                         "type": "string"
-                    },
-                    {
-                        "name": "langCode",
-                        "in": "query",
-                        "required": false,
-                        "type": "string",
-                        "description": "(Optional) The code for the signer language version of the disclosure that you want to retrieve, as a query parameter. The following languages are supported:\n\n- Arabic (`ar`)\n- Bulgarian (`bg`)\n- Czech (`cs`)\n- Chinese Simplified (`zh_CN`)\n- Chinese Traditional (`zh_TW`)\n- Croatian (`hr`)\n- Danish (`da`)\n- Dutch (`nl`)\n- English US (`en`)\n- English UK (`en_GB`)\n- Estonian (`et`)\n- Farsi (`fa`)\n- Finnish (`fi`)\n- French (`fr`)\n- French Canadian (`fr_CA`)\n- German (`de`)\n- Greek (`el`)\n- Hebrew (`he`)\n- Hindi (`hi`)\n- Hungarian (`hu`)\n- Bahasa Indonesian (`id`)\n- Italian (`it`)\n- Japanese (`ja`)\n- Korean (`ko`)\n- Latvian (`lv`)\n- Lithuanian (`lt`)\n- Bahasa Melayu (`ms`)\n- Norwegian (`no`)\n- Polish (`pl`)\n- Portuguese (`pt`)\n- Portuguese Brazil (`pt_BR`)\n- Romanian (`ro`)\n- Russian (`ru`)\n- Serbian (`sr`)\n- Slovak (`sk`)\n- Slovenian (`sl`)\n- Spanish (`es`)\n- Spanish Latin America (`es_MX`)\n- Swedish (`sv`)\n- Thai (`th`)\n- Turkish (`tr`)\n- Ukrainian (`uk`) \n- Vietnamese (`vi`)\n\nAdditionally, you can automatically detect the browser language being used by the viewer and display the disclosure in that language by setting the value to `browser`."
                     }
                 ],
                 "responses": {
