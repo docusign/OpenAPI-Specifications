@@ -1,5 +1,5 @@
 {
-    "openapi": "3.0.3",
+    "openapi": "3.1.0",
     "info": {
         "title": "Agreement Manager API",
         "version": "1.0.0",
@@ -23,11 +23,19 @@
         {
             "url": "https://api-d.docusign.com",
             "description": "Demo server"
+        },
+        {
+            "url": "https://api-s.docusign.com",
+            "description": "Staging server"
+        },
+        {
+            "url": "https://api.dev.docusign.net",
+            "description": "Dev server"
         }
     ],
     "security": [
         {
-            "accessToken": [
+            "OAuth2Auth": [
                 "adm_store_unified_repo_read",
                 "adm_store_unified_repo_write",
                 "models_read",
@@ -997,7 +1005,9 @@
                         "description": "Name for the new job to be created. If empty, server will auto-create name for the job.",
                         "minLength": 1,
                         "maxLength": 256,
-                        "example": "Q4 2025 Contracts"
+                        "examples": [
+                            "Q4 2025 Contracts"
+                        ]
                     },
                     "expected_number_of_docs": {
                         "type": "integer",
@@ -1005,12 +1015,16 @@
                         "minimum": 1,
                         "maximum": 10000,
                         "description": "Number of docs this job will have. Will use provided document_requests size if there is a mismatch.",
-                        "example": 2
+                        "examples": [
+                            2
+                        ]
                     },
                     "language": {
                         "type": "string",
                         "description": "Language for the user, such as en-US, en-GB, if not provided will default to en-US.",
-                        "example": "en-US"
+                        "examples": [
+                            "en-US"
+                        ]
                     }
                 },
                 "x-ds-definition-name": "CreateBulkJob"
@@ -1032,7 +1046,9 @@
                         "type": "string",
                         "format": "uuid",
                         "description": "Id for job",
-                        "example": "1d4dbfd5-6911-47a7-93fa-f597975f7d2d"
+                        "examples": [
+                            "1d4dbfd5-6911-47a7-93fa-f597975f7d2d"
+                        ]
                     },
                     "external_job_id": {
                         "type": "string",
@@ -1042,7 +1058,9 @@
                     "name": {
                         "type": "string",
                         "description": "User provided name for this job",
-                        "example": "Q4 2025 Contracts"
+                        "examples": [
+                            "Q4 2025 Contracts"
+                        ]
                     },
                     "status": {
                         "$ref": "#/components/schemas/BulkJobStatus"
@@ -1052,34 +1070,44 @@
                         "items": {
                             "type": "string"
                         },
-                        "example": [
-                            "OPEN",
-                            "UPLOAD_COMPLETE",
-                            "IN_PROGRESS",
-                            "COMPLETE",
-                            "FAILED",
-                            "CANCELED"
+                        "examples": [
+                            [
+                                "OPEN",
+                                "UPLOAD_COMPLETE",
+                                "IN_PROGRESS",
+                                "COMPLETE",
+                                "FAILED",
+                                "CANCELED"
+                            ]
                         ]
                     },
                     "created_at": {
                         "type": "string",
                         "format": "date-time",
-                        "example": "2025-10-27T19:11:42Z"
+                        "examples": [
+                            "2025-10-27T19:11:42Z"
+                        ]
                     },
                     "modified_at": {
                         "type": "string",
                         "format": "date-time",
-                        "example": "2025-10-27T19:11:42Z"
+                        "examples": [
+                            "2025-10-27T19:11:42Z"
+                        ]
                     },
                     "expires_at": {
                         "type": "string",
                         "format": "date-time",
-                        "example": "2025-10-28T03:11:42Z"
+                        "examples": [
+                            "2025-10-28T03:11:42Z"
+                        ]
                     },
                     "ttl_period": {
                         "type": "string",
                         "description": "ISO 8601 duration for job validity",
-                        "example": "PT8H"
+                        "examples": [
+                            "PT8H"
+                        ]
                     },
                     "_embedded": {
                         "$ref": "#/components/schemas/BulkJobEmbedded"
@@ -1098,7 +1126,9 @@
                     },
                     "message": {
                         "type": "string",
-                        "example": "Files exceeding 100MB or more than 10,000 per job will be rejected."
+                        "examples": [
+                            "Files exceeding 100MB or more than 10,000 per job will be rejected."
+                        ]
                     }
                 },
                 "x-ds-definition-name": "BulkJob",
@@ -1115,12 +1145,15 @@
                         "items": {
                             "type": "string"
                         },
-                        "example": [
-                            "NOT_STARTED",
-                            "IN_PROGRESS",
-                            "CANCELED",
-                            "SUCCEEDED",
-                            "FAILED"
+                        "examples": [
+                            [
+                                "NOT_STARTED",
+                                "IN_PROGRESS",
+                                "CANCELED",
+                                "SUCCEEDED",
+                                "SUCCEEDED_WITH_WARNINGS",
+                                "FAILED"
+                            ]
                         ]
                     },
                     "documents": {
@@ -1140,19 +1173,25 @@
                         "type": "string",
                         "format": "uuid",
                         "description": "Id of the document",
-                        "example": "8c566d26-e7fb-4b7e-870c-1d0fb8df9084"
+                        "examples": [
+                            "8c566d26-e7fb-4b7e-870c-1d0fb8df9084"
+                        ]
                     },
                     "agreement_id": {
                         "type": "string",
                         "format": "uuid",
                         "description": "Agreement ID associated with this document, if created",
-                        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        "examples": [
+                            "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        ]
                     },
                     "sequence": {
                         "type": "integer",
                         "format": "int32",
                         "description": "Sequential order of the document",
-                        "example": 1
+                        "examples": [
+                            1
+                        ]
                     },
                     "status": {
                         "$ref": "#/components/schemas/DocStatus"
@@ -1160,7 +1199,16 @@
                     "file_name": {
                         "type": "string",
                         "description": "The name of the uploaded file",
-                        "example": "filename.pdf"
+                        "examples": [
+                            "filename.pdf"
+                        ]
+                    },
+                    "ai_extraction": {
+                        "type": "boolean",
+                        "description": "Whether AI extraction was performed on this document",
+                        "examples": [
+                            true
+                        ]
                     },
                     "error_code": {
                         "type": "integer",
@@ -1170,6 +1218,13 @@
                     "error": {
                         "type": "string",
                         "description": "Error message if document processing failed"
+                    },
+                    "warnings": {
+                        "type": "array",
+                        "description": "List of warnings encountered during document processing. Present when status is SUCCEEDED_WITH_WARNINGS.",
+                        "items": {
+                            "$ref": "#/components/schemas/DocumentWarning"
+                        }
                     },
                     "_actions": {
                         "$ref": "#/components/schemas/BulkJobItemActions"
@@ -1186,7 +1241,23 @@
                                         "type": "string",
                                         "format": "uri",
                                         "description": "URL to download the document",
-                                        "example": "https://s1.us.services.demo.docusign.net/document-public-dms/v1/accounts/{accountId}/documents/{documentId}"
+                                        "examples": [
+                                            "https://s1.us.services.demo.docusign.net/document-public-dms/v1/accounts/{accountId}/documents/{documentId}"
+                                        ]
+                                    }
+                                }
+                            },
+                            "agreement": {
+                                "type": "object",
+                                "description": "Link to the associated agreement",
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "URL to the agreement resource",
+                                        "examples": [
+                                            "/v1/accounts/{accountId}/agreements/{agreementId}"
+                                        ]
                                     }
                                 }
                             }
@@ -1197,28 +1268,70 @@
             },
             "BulkJobItemActions": {
                 "type": "object",
+                "description": "Available actions for this document. Actions vary based on document state - upload actions during initial upload, remediation actions after processing.",
                 "properties": {
                     "upload_document": {
                         "type": "string",
                         "format": "uri",
                         "description": "Azure Blob Store presigned URL to upload the document file (valid for ~8 hours)",
-                        "example": "https://docupstoragewestwu3dsto.blob.core.windows.net/1d4dbfd5-6911-47a7-93fa-f597975f7d2d/8c566d26-e7fb-4b7e-870c-1d0fb8df9084?sv=2023-01-03&st=2025-10-27T19%3A11%3A42Z&se=2025-10-28T03%3A16%3A42Z&sr=b&sp=cw&sig=st%2Fot4COaU9icCNYbEfm7RdKJhjxgfi4Oo0HSEZ7EMQ%3D"
+                        "examples": [
+                            "https://docupstoragewestwu3dsto.blob.core.windows.net/1d4dbfd5-6911-47a7-93fa-f597975f7d2d/8c566d26-e7fb-4b7e-870c-1d0fb8df9084?sv=2023-01-03&st=2025-10-27T19%3A11%3A42Z&se=2025-10-28T03%3A16%3A42Z&sr=b&sp=cw&sig=st%2Fot4COaU9icCNYbEfm7RdKJhjxgfi4Oo0HSEZ7EMQ%3D"
+                        ]
                     },
-                    "upload_metadata": {
-                        "type": "string",
-                        "format": "uri",
-                        "description": "Azure Blob Store url to upload metadata of the specific file"
+                    "update_metadata": {
+                        "$ref": "#/components/schemas/Affordance"
                     }
                 },
                 "x-ds-definition-name": "BulkJobItemActions"
+            },
+            "DocumentWarning": {
+                "type": "object",
+                "description": "A warning encountered during document processing that did not prevent overall success.",
+                "required": [
+                    "code",
+                    "message",
+                    "recoverable"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Machine-readable warning code",
+                        "examples": [
+                            "METADATA_APPLICATION_FAILED"
+                        ]
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Human-readable warning summary",
+                        "examples": [
+                            "Applying metadata failed"
+                        ]
+                    },
+                    "detail": {
+                        "type": "string",
+                        "description": "Detailed diagnostic information about the warning"
+                    },
+                    "recoverable": {
+                        "type": "boolean",
+                        "description": "Whether this warning can be remediated by the client",
+                        "examples": [
+                            true
+                        ]
+                    },
+                    "remedy": {
+                        "type": "string",
+                        "description": "Key referencing an action in `_actions` that can resolve this warning",
+                        "examples": [
+                            "update_metadata"
+                        ]
+                    }
+                },
+                "x-ds-definition-name": "DocumentWarning"
             },
             "BulkJobActionTemplates": {
                 "type": "object",
                 "properties": {
                     "upload_document": {
-                        "$ref": "#/components/schemas/BulkJobActionTemplate"
-                    },
-                    "upload_metadata": {
                         "$ref": "#/components/schemas/BulkJobActionTemplate"
                     }
                 },
@@ -1230,16 +1343,22 @@
                     "method": {
                         "type": "string",
                         "description": "HTTP method used for this template",
-                        "example": "PUT"
+                        "examples": [
+                            "PUT"
+                        ]
                     },
                     "required": {
                         "type": "boolean",
                         "description": "Whether this action is required",
-                        "example": true
+                        "examples": [
+                            true
+                        ]
                     },
                     "description": {
                         "type": "string",
-                        "example": "Upload document file to Azure Blob Storage"
+                        "examples": [
+                            "Upload document file to Azure Blob Storage"
+                        ]
                     },
                     "template_variables": {
                         "type": "object",
@@ -1248,18 +1367,22 @@
                     "headers": {
                         "type": "object",
                         "description": "Key value pairs of header names and example values",
-                        "example": {
-                            "x-ms-blob-type": "BlockBlob",
-                            "Content-Type": "application/pdf",
-                            "x-ms-meta-metadata": "{\"provisions\":{\"jurisdiction\":\"California\"},\"custom_provisions\":{\"c_ClientId\":\"value\"}}"
-                        }
+                        "examples": [
+                            {
+                                "x-ms-blob-type": "BlockBlob",
+                                "Content-Type": "application/pdf",
+                                "x-ms-meta-metadata": "{\"provisions\":{\"jurisdiction\":\"California\"},\"custom_provisions\":{\"c_ClientId\":\"value\"}}"
+                            }
+                        ]
                     },
                     "constraints": {
                         "$ref": "#/components/schemas/BulkJobConstraints"
                     },
                     "success_status_code": {
                         "type": "integer",
-                        "example": 201
+                        "examples": [
+                            201
+                        ]
                     },
                     "error_status_codes": {
                         "type": "object",
@@ -1274,7 +1397,9 @@
                     "self": {
                         "type": "string",
                         "format": "uri",
-                        "example": "https://api.docusign.com/v1/accounts/12345678-1234-1234-1234-123456789012/upload/jobs/1d4dbfd5-6911-47a7-93fa-f597975f7d2d"
+                        "examples": [
+                            "https://api.docusign.com/v1/accounts/12345678-1234-1234-1234-123456789012/upload/jobs/1d4dbfd5-6911-47a7-93fa-f597975f7d2d"
+                        ]
                     }
                 },
                 "x-ds-definition-name": "BulkJobLinks"
@@ -1286,21 +1411,27 @@
                     "max_size_mb": {
                         "type": "integer",
                         "format": "int32",
-                        "example": 100
+                        "examples": [
+                            100
+                        ]
                     },
                     "max_documents_per_job": {
                         "type": "integer",
                         "format": "int32",
                         "minimum": 1,
                         "maximum": 10000,
-                        "example": 10000
+                        "examples": [
+                            10000
+                        ]
                     },
                     "allowed_formats": {
                         "type": "array",
-                        "example": [
-                            "pdf",
-                            "docx",
-                            "txt"
+                        "examples": [
+                            [
+                                "pdf",
+                                "docx",
+                                "txt"
+                            ]
                         ],
                         "items": {
                             "type": "string"
@@ -1309,7 +1440,9 @@
                     "timeout_seconds": {
                         "type": "integer",
                         "format": "int32",
-                        "example": 300
+                        "examples": [
+                            300
+                        ]
                     }
                 },
                 "x-ds-definition-name": "BulkJobConstraints"
@@ -1321,34 +1454,43 @@
                     "request_id": {
                         "type": "string",
                         "format": "uuid",
-                        "example": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                        "examples": [
+                            "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                        ]
                     },
                     "response_timestamp": {
                         "type": "string",
                         "format": "date-time",
-                        "example": "2025-10-27T19:11:42Z",
+                        "examples": [
+                            "2025-10-27T19:11:42Z"
+                        ],
                         "description": "When this response was generated"
                     },
                     "response_duration": {
                         "type": "integer",
                         "format": "int32",
                         "description": "Time in ms to process this request",
-                        "example": 150
+                        "examples": [
+                            150
+                        ]
                     }
                 },
                 "x-ds-definition-name": "BulkJobMetadata"
             },
             "DocStatus": {
-                "description": "Document status. Last 3 are terminal statuses. Matches enum with similar name in the backend.",
+                "description": "Document status. Last 4 are terminal statuses. Matches enum with similar name in the backend.",
                 "type": "string",
                 "enum": [
                     "NOT_STARTED",
                     "IN_PROGRESS",
                     "CANCELED",
                     "SUCCEEDED",
+                    "SUCCEEDED_WITH_WARNINGS",
                     "FAILED"
                 ],
-                "example": "NOT_STARTED",
+                "examples": [
+                    "NOT_STARTED"
+                ],
                 "x-ds-definition-name": "DocStatus"
             },
             "BulkJobStatus": {
@@ -1362,7 +1504,9 @@
                     "FAILED",
                     "CANCELED"
                 ],
-                "example": "OPEN",
+                "examples": [
+                    "OPEN"
+                ],
                 "x-ds-definition-name": "BulkJobStatus"
             },
             "ErrDetails": {
@@ -1378,27 +1522,37 @@
                         "type": "string",
                         "format": "uri",
                         "description": "A URI reference that identifies the problem type. When dereferenced,\nit should provide human-readable documentation for the problem type.\nUse \"about:blank\" when no specific type documentation exists.\n",
-                        "example": "https://www.rfc-editor.org/rfc/rfc9110#status.400"
+                        "examples": [
+                            "https://www.rfc-editor.org/rfc/rfc9110#status.400"
+                        ]
                     },
                     "title": {
                         "type": "string",
                         "description": "A short, human-readable summary of the problem type. Should not change between occurrences.",
-                        "example": "Invalid Request"
+                        "examples": [
+                            "Invalid Request"
+                        ]
                     },
                     "status": {
                         "type": "integer",
                         "description": "The HTTP status code generated by the origin server for this occurrence of the problem.",
-                        "example": 400
+                        "examples": [
+                            400
+                        ]
                     },
                     "detail": {
                         "type": "string",
                         "description": "A human-readable explanation specific to this occurrence of the problem.",
-                        "example": "The provided 'email' parameter is not a valid email address."
+                        "examples": [
+                            "The provided 'email' parameter is not a valid email address."
+                        ]
                     },
                     "instance": {
                         "type": "string",
                         "description": "A URI reference that identifies the specific occurrence of the problem (typically the request path).",
-                        "example": "/v1/accounts/12345678-1234-1234-1234-123456789012/agreements"
+                        "examples": [
+                            "/v1/accounts/12345678-1234-1234-1234-123456789012/agreements"
+                        ]
                     },
                     "errors": {
                         "type": "array",
@@ -1411,13 +1565,17 @@
                         "type": "string",
                         "format": "uuid",
                         "description": "Unique identifier for the request, useful for tracing and debugging with support.",
-                        "example": "3f7c9e4b-851c-4f9b-89e7-123456789abc"
+                        "examples": [
+                            "3f7c9e4b-851c-4f9b-89e7-123456789abc"
+                        ]
                     },
                     "timestamp": {
                         "type": "string",
                         "format": "date-time",
                         "description": "The timestamp when the error occurred.",
-                        "example": "2025-10-17T18:43:08.321881525Z"
+                        "examples": [
+                            "2025-10-17T18:43:08.321881525Z"
+                        ]
                     }
                 },
                 "x-ds-definition-name": "ErrDetails"
@@ -1433,17 +1591,23 @@
                     "code": {
                         "type": "string",
                         "description": "A machine-readable error code identifying the specific validation failure.",
-                        "example": "invalid_email"
+                        "examples": [
+                            "invalid_email"
+                        ]
                     },
                     "message": {
                         "type": "string",
                         "description": "A human-readable description of the validation error.",
-                        "example": "The provided email format is incorrect."
+                        "examples": [
+                            "The provided email format is incorrect."
+                        ]
                     },
                     "target": {
                         "type": "string",
                         "description": "The name of the field, parameter, or path segment that caused the error.",
-                        "example": "email"
+                        "examples": [
+                            "email"
+                        ]
                     }
                 },
                 "x-ds-definition-name": "ValidationError"
@@ -1479,15 +1643,16 @@
             "ContinuationToken": {
                 "type": "string",
                 "description": "The continuation token used to retrieve a page in a paginated response.",
+                "examples": [
+                    "abc123"
+                ],
                 "nullable": true,
-                "example": "abc123",
                 "x-ds-definition-name": "ContinuationToken"
             },
             "CurrencyCode": {
                 "x-docusign-adm-class-mapping": "org.accordproject.money@0.3.0.{CurrencyCode}",
                 "type": "string",
                 "description": "'ISO 4217 codes. From https://en.wikipedia.org/wiki/ISO_4217\nhttps://www.currency-iso.org/en/home/tables/table-a1.html'\n",
-                "nullable": true,
                 "enum": [
                     "AED",
                     "AFN",
@@ -1668,13 +1833,13 @@
                     "ZMW",
                     "ZWL"
                 ],
+                "nullable": true,
                 "x-ds-definition-name": "CurrencyCode"
             },
             "CustomProperty": {
                 "x-ds-custom-property": true,
                 "type": "object",
                 "description": "A generic map/dict. The key is a string, and the value can be of any type, including strings, booleans, numbers, arrays, or objects",
-                "nullable": true,
                 "additionalProperties": {
                     "oneOf": [
                         {
@@ -1696,6 +1861,7 @@
                         }
                     ]
                 },
+                "nullable": true,
                 "x-ds-definition-name": "CustomProperty"
             },
             "SuccessStatusCode": {
@@ -1704,7 +1870,9 @@
                 "minimum": 200,
                 "maximum": 299,
                 "description": "Success status codes (2xx range) indicating the request was received,\nunderstood, and accepted.\nCommon codes:\n- 200: OK - Standard successful response\n- 201: Created - Resource successfully created\n- 202: Accepted - Request accepted for processing\n- 204: No Content - Successful with no response body\n- 206: Partial Content - Partial resource returned\n",
-                "example": 200,
+                "examples": [
+                    200
+                ],
                 "x-ds-definition-name": "SuccessStatusCode"
             },
             "Iso8601Duration": {
@@ -1712,25 +1880,31 @@
                 "pattern": "^P(-?[0-9]+Y)?(-?[0-9]+M)?(-?[0-9]+(\\.[0-9]+)?W)?(-?[0-9]+(\\.[0-9]+)?D)?(T-?[0-9]+(\\.[0-9]+)?(H(-?[0-9]+(\\.[0-9]+)?M)?(-?[0-9]+(\\.[0-9]+)?S)?|M(-?[0-9]+(\\.[0-9]+)?S)?|S))?$",
                 "minLength": 3,
                 "maxLength": 128,
-                "example": "P30D",
-                "nullable": true,
+                "examples": [
+                    "P30D"
+                ],
                 "x-docusign-adm-model": "com.docusign.platform.scalars@1.1.0.{Iso8601Duration}",
+                "nullable": true,
                 "x-ds-definition-name": "Iso8601Duration"
             },
             "LanguageCode": {
                 "description": "BCP47 language code",
                 "type": "string",
                 "pattern": "^[a-z]{2,8}(-[A-Za-z]{4})?(-[A-Za-z]{2}|-[0-9]{3})?$",
-                "nullable": true,
-                "example": "en-US",
+                "examples": [
+                    "en-US"
+                ],
                 "x-docusign-adm-model": "com.docusign.platform.scalars@1.1.0.{LanguageCode}",
+                "nullable": true,
                 "x-ds-definition-name": "LanguageCode"
             },
             "LocalDateTime": {
                 "type": "string",
                 "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:?\\d{2})?$",
                 "description": "ISO 8601 formatted date-time string. May be local (no timezone), UTC (Z suffix), or include an explicit offset (e.g., +05:30, -0800).",
-                "example": "2025-01-22T14:30:00-08:00",
+                "examples": [
+                    "2025-01-22T14:30:00-08:00"
+                ],
                 "x-ds-definition-name": "LocalDateTime"
             },
             "ResponseMetadata": {
@@ -1760,7 +1934,6 @@
             "PageLinks": {
                 "type": "object",
                 "description": "Hypermedia controls (HATEOAS) for navigating between pages in a paginated collection of results.\nLinks for the current page, next page, and previous page, with optional first and last page links.\n",
-                "nullable": true,
                 "properties": {
                     "first": {
                         "$ref": "#/components/schemas/PageLink"
@@ -1772,33 +1945,38 @@
                         "$ref": "#/components/schemas/PageLink"
                     }
                 },
+                "nullable": true,
                 "x-ds-definition-name": "PageLinks"
             },
             "PageLink": {
                 "type": "object",
                 "description": "A URL that references a specific page in the pagination process. This is typically used for navigation\nbetween paginated results.\n",
-                "nullable": true,
                 "properties": {
                     "href": {
                         "type": "string",
                         "format": "uri",
                         "description": "The URL for the referenced page.",
-                        "example": "https://api.docusign.com/v1/accounts/12345678/agreements?limit=10&ctoken=abc123"
+                        "examples": [
+                            "https://api.docusign.com/v1/accounts/12345678/agreements?limit=10&ctoken=abc123"
+                        ]
                     }
                 },
                 "required": [
                     "href"
                 ],
+                "nullable": true,
                 "x-ds-definition-name": "PageLink"
             },
             "PageLimit": {
                 "description": "The maximum number of items that can be returned in a single page.",
                 "type": "integer",
                 "format": "int32",
-                "example": 10,
+                "examples": [
+                    10
+                ],
                 "minimum": 1,
-                "nullable": true,
                 "default": 25,
+                "nullable": true,
                 "x-ds-definition-name": "PageLimit"
             },
             "PageTokenCurrent": {
@@ -1864,7 +2042,9 @@
                 "type": "string",
                 "minLength": 1,
                 "maxLength": 128,
-                "example": "faee2c10-cae6-4d90-ba66-6d6d117d92c5",
+                "examples": [
+                    "faee2c10-cae6-4d90-ba66-6d6d117d92c5"
+                ],
                 "nullable": true,
                 "x-ds-definition-name": "ResourceSourceAccountId"
             },
@@ -1872,7 +2052,9 @@
                 "description": "The ID of the entity in the source system that this entity is associated with. For example, it could be an ID of the envelope in eSign.",
                 "type": "string",
                 "maxLength": 128,
-                "example": "8ade6915-d04b-40d6-bb6f-9c6ba6aa1bb5",
+                "examples": [
+                    "8ade6915-d04b-40d6-bb6f-9c6ba6aa1bb5"
+                ],
                 "nullable": true,
                 "x-ds-definition-name": "ResourceSourceId"
             },
@@ -1880,7 +2062,9 @@
                 "description": "The name of the source system who creates this entity, e.g. eSign, CLM, or Salesforce.",
                 "type": "string",
                 "maxLength": 128,
-                "example": "Docusign eSign",
+                "examples": [
+                    "Docusign eSign"
+                ],
                 "nullable": true,
                 "x-ds-definition-name": "ResourceSourceName"
             },
@@ -1904,7 +2088,9 @@
                 "description": "Unique identifier for the request, useful for tracking and debugging.",
                 "type": "string",
                 "format": "uuid",
-                "example": "3f7c9e4b-851c-4f9b-89e7-123456789abc",
+                "examples": [
+                    "3f7c9e4b-851c-4f9b-89e7-123456789abc"
+                ],
                 "nullable": true,
                 "x-ds-definition-name": "RequestId"
             },
@@ -1912,7 +2098,9 @@
                 "description": "The timestamp indicating when the response was generated.",
                 "type": "string",
                 "format": "date-time",
-                "example": "2024-10-17T14:30:00Z",
+                "examples": [
+                    "2024-10-17T14:30:00Z"
+                ],
                 "nullable": true,
                 "x-ds-definition-name": "ResponseTimestamp"
             },
@@ -1920,7 +2108,9 @@
                 "description": "The duration of time, in milliseconds, that the server took to process and respond\nto the request. This is measured from the time the server received the request\nuntil the time the response was sent.\n",
                 "type": "integer",
                 "format": "int32",
-                "example": 150,
+                "examples": [
+                    150
+                ],
                 "minimum": 0,
                 "nullable": true,
                 "x-ds-definition-name": "ResponseDurationMs"
@@ -1929,7 +2119,9 @@
                 "type": "string",
                 "format": "uri",
                 "maxLength": 1024,
-                "example": "https://example.com/resource/123",
+                "examples": [
+                    "https://example.com/resource/123"
+                ],
                 "nullable": true,
                 "x-ds-definition-name": "URL"
             },
@@ -1951,7 +2143,7 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "$ref": "#/components/schemas/AgreementId",
+                        "$ref": "#/components/schemas/UUID",
                         "description": "The unique identifier for the agreement document."
                     },
                     "title": {
@@ -1975,20 +2167,26 @@
                     "type": {
                         "description": "The type of agreement.",
                         "type": "string",
-                        "example": "Master Service Agreement",
+                        "examples": [
+                            "Master Service Agreement"
+                        ],
                         "nullable": true
                     },
                     "category": {
                         "description": "Server-defined category based on the agreement type.",
                         "type": "string",
-                        "example": "BusinessServices",
+                        "examples": [
+                            "BusinessServices"
+                        ],
                         "nullable": true
                     },
                     "summary": {
                         "description": "A detailed summary of the agreement's key provisions and scope.",
                         "type": "string",
                         "maxLength": 135000,
-                        "example": "This Master Service Agreement between Alpha Corp and Beta Ltd. defines the terms for services provided by Alpha Corp, including project scope, payment terms, and dispute resolution.",
+                        "examples": [
+                            "This Master Service Agreement between Alpha Corp and Beta Ltd. defines the terms for services provided by Alpha Corp, including project scope, payment terms, and dispute resolution."
+                        ],
                         "x-docusign-adm-class-mapping": "com.docusign.platform@1.1.0.{AgreementDocument.summary}",
                         "nullable": true
                     },
@@ -2063,7 +2261,7 @@
                                 "description": "ID of the parent agreement document, if related.",
                                 "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/AgreementId"
+                                        "$ref": "#/components/schemas/UUID"
                                     }
                                 ],
                                 "x-docusign-adm-class-mapping": "com.docusign.platform@1.1.0.{AgreementDocument.parentAgreementId}"
@@ -2120,7 +2318,6 @@
             "AgreementActions": {
                 "type": "object",
                 "description": "Available actions on the agreement. Actions are conditionally present based on the current state of the resource.\n",
-                "nullable": true,
                 "properties": {
                     "change_type": {
                         "description": "Change the agreement type to a different configured type.\nOnly present when the agreement type is mutable.\n",
@@ -2129,27 +2326,33 @@
                             "href": {
                                 "type": "string",
                                 "description": "The URL for the change-type action.",
-                                "example": "/v1/accounts/{accountId}/agreements/{agreementId}/actions/change-type"
+                                "examples": [
+                                    "/v1/accounts/{accountId}/agreements/{agreementId}/actions/change-type"
+                                ]
                             },
                             "method": {
                                 "type": "string",
                                 "description": "The HTTP method for the action.",
-                                "example": "PATCH"
+                                "examples": [
+                                    "PATCH"
+                                ]
                             },
                             "description": {
                                 "type": "string",
                                 "description": "Human-readable description of the action.",
-                                "example": "Change the agreement type to a different configured type."
+                                "examples": [
+                                    "Change the agreement type to a different configured type."
+                                ]
                             }
                         }
                     }
                 },
+                "nullable": true,
                 "x-ds-definition-name": "AgreementActions"
             },
             "AgreementLinks": {
                 "type": "object",
                 "description": "Hypermedia controls (HATEOAS) for agreement specific links to resources.\n",
-                "nullable": true,
                 "properties": {
                     "document": {
                         "$ref": "#/components/schemas/Link",
@@ -2165,27 +2368,30 @@
                         "example": "/v1/accounts/{accountId}/agreement-types"
                     }
                 },
+                "nullable": true,
                 "x-ds-definition-name": "AgreementLinks"
             },
             "Link": {
                 "type": "object",
                 "description": "A URL that references a specific resource. \n",
-                "nullable": true,
                 "properties": {
                     "href": {
                         "type": "string",
                         "format": "uri",
                         "description": "The URL for the referenced page.",
-                        "example": "https://api.docusign.com/v1/accounts/12345678/agreements?limit=10&ctoken=abc123"
+                        "examples": [
+                            "https://api.docusign.com/v1/accounts/12345678/agreements?limit=10&ctoken=abc123"
+                        ]
                     }
                 },
                 "required": [
                     "href"
                 ],
+                "nullable": true,
                 "x-ds-definition-name": "Link"
             },
             "AgreementId": {
-                "$ref": "#/components/schemas/ResourceId",
+                "$ref": "#/components/schemas/UUID",
                 "x-ds-definition-name": "AgreementId"
             },
             "AgreementsList": {
@@ -2286,7 +2492,9 @@
                 "pattern": "^P(-?[0-9]+Y)?(-?[0-9]+M)?(-?[0-9]+(\\.[0-9]+)?W)?(-?[0-9]+(\\.[0-9]+)?D)?(T-?[0-9]+(\\.[0-9]+)?(H(-?[0-9]+(\\.[0-9]+)?M)?(-?[0-9]+(\\.[0-9]+)?S)?|M(-?[0-9]+(\\.[0-9]+)?S)?|S))?$",
                 "minLength": 3,
                 "maxLength": 128,
-                "example": "P30D",
+                "examples": [
+                    "P30D"
+                ],
                 "x-docusign-adm-model": "com.docusign.platform.scalars@1.1.0.{Iso8601Duration}",
                 "nullable": true,
                 "x-ds-definition-name": "ConfidentialityObligationPeriod"
@@ -2295,21 +2503,18 @@
                 "description": "The date when the terms of the agreement start to apply and become legally binding.",
                 "$ref": "#/components/schemas/LocalDateTime",
                 "x-docusign-adm-class-mapping": "com.docusign.platform.provisions.general@1.0.0.{EffectiveDate.value}",
-                "nullable": true,
                 "x-ds-definition-name": "EffectiveDate"
             },
             "ExecutionDate": {
                 "description": "The date when the agreement is signed by all parties, making it officially binding. This is not necessarily the same as the effective date.",
                 "$ref": "#/components/schemas/LocalDateTime",
                 "x-docusign-adm-class-mapping": "com.docusign.platform.provisions.general@1.0.0.{ExecutionDate.value}",
-                "nullable": true,
                 "x-ds-definition-name": "ExecutionDate"
             },
             "ExpirationDate": {
                 "description": "The date when the agreement ends and is no longer valid or enforceable.",
                 "$ref": "#/components/schemas/LocalDateTime",
                 "x-docusign-adm-class-mapping": "com.docusign.platform.provisions.general@1.0.0.{ExpirationDate.value}",
-                "nullable": true,
                 "x-ds-definition-name": "ExpirationDate"
             },
             "FinancialProvisions": {
@@ -2586,8 +2791,7 @@
                     "renewal_notice_date": {
                         "description": "Calculated field based on renewal notice period. (agreement expiration date - renewal notice period duration)",
                         "$ref": "#/components/schemas/LocalDateTime",
-                        "x-docusign-adm-class-mapping": "com.docusign.platform.provisions.lifecycle@1.0.0.{Renewal.noticeDate}",
-                        "nullable": true
+                        "x-docusign-adm-class-mapping": "com.docusign.platform.provisions.lifecycle@1.0.0.{Renewal.noticeDate}"
                     },
                     "auto_renewal_term_length": {
                         "allOf": [
@@ -2635,7 +2839,9 @@
                 "pattern": "^P(-?[0-9]+Y)?(-?[0-9]+M)?(-?[0-9]+(\\.[0-9]+)?W)?(-?[0-9]+(\\.[0-9]+)?D)?(T-?[0-9]+(\\.[0-9]+)?(H(-?[0-9]+(\\.[0-9]+)?M)?(-?[0-9]+(\\.[0-9]+)?S)?|M(-?[0-9]+(\\.[0-9]+)?S)?|S))?$",
                 "minLength": 3,
                 "maxLength": 128,
-                "example": "P30D",
+                "examples": [
+                    "P30D"
+                ],
                 "x-docusign-adm-class-mapping": "com.docusign.platform.provisions.general@1.0.0.{Term.value}",
                 "nullable": true,
                 "x-ds-definition-name": "TermLength"
@@ -2659,7 +2865,9 @@
                 "pattern": "^P(-?[0-9]+Y)?(-?[0-9]+M)?(-?[0-9]+(\\.[0-9]+)?W)?(-?[0-9]+(\\.[0-9]+)?D)?(T-?[0-9]+(\\.[0-9]+)?(H(-?[0-9]+(\\.[0-9]+)?M)?(-?[0-9]+(\\.[0-9]+)?S)?|M(-?[0-9]+(\\.[0-9]+)?S)?|S))?$",
                 "minLength": 3,
                 "maxLength": 128,
-                "example": "P6M",
+                "examples": [
+                    "P6M"
+                ],
                 "x-docusign-adm-class-mapping": "com.docusign.platform.provisions.lifecycle@1.0.0.{ForCauseTermination}",
                 "nullable": true,
                 "x-ds-definition-name": "TerminationForCause"
@@ -2670,7 +2878,9 @@
                 "pattern": "^P(-?[0-9]+Y)?(-?[0-9]+M)?(-?[0-9]+(\\.[0-9]+)?W)?(-?[0-9]+(\\.[0-9]+)?D)?(T-?[0-9]+(\\.[0-9]+)?(H(-?[0-9]+(\\.[0-9]+)?M)?(-?[0-9]+(\\.[0-9]+)?S)?|M(-?[0-9]+(\\.[0-9]+)?S)?|S))?$",
                 "minLength": 3,
                 "maxLength": 128,
-                "example": "P6M",
+                "examples": [
+                    "P6M"
+                ],
                 "x-docusign-adm-class-mapping": "com.docusign.platform.provisions.lifecycle@1.0.0.{ForConvenienceTermination}",
                 "nullable": true,
                 "x-ds-definition-name": "TerminationForConvenience"
@@ -3171,12 +3381,16 @@
                 "properties": {
                     "property_name": {
                         "type": "string",
-                        "example": "term_length"
+                        "examples": [
+                            "term_length"
+                        ]
                     },
                     "property_path": {
                         "type": "string",
                         "format": "json-pointer",
-                        "example": "/provisions/term_length"
+                        "examples": [
+                            "/provisions/term_length"
+                        ]
                     },
                     "current_value": {
                         "$ref": "#/components/schemas/Any"
@@ -3190,7 +3404,9 @@
                     },
                     "review_status": {
                         "type": "string",
-                        "example": "ACCEPTED"
+                        "examples": [
+                            "ACCEPTED"
+                        ]
                     },
                     "extractions": {
                         "type": "array",
@@ -3238,7 +3454,6 @@
             "Affordance": {
                 "description": "Affordances (aka 'actions') describe the available operations on a resource, including CRUD and RPC-like operations. It details the\nexpected input payload, http method, query parameters, and the resulting output.\n\nAffordances enable clients to dynamically adapt to the API's current state and available actions. Instead of\nhardcoding all possible endpoints and their associated logic, a client can inspect the affordances within a\nresource's representation to discover what actions are possible and how to perform them.\n",
                 "type": "object",
-                "nullable": true,
                 "properties": {
                     "href": {
                         "description": "A URI representing the location of the resource or operations.",
@@ -3289,6 +3504,7 @@
                         "$ref": "#/components/schemas/SuccessStatusCode"
                     }
                 },
+                "nullable": true,
                 "x-ds-definition-name": "Affordance"
             },
             "AgreementTypeListResponse": {
@@ -3297,10 +3513,12 @@
                 "items": {
                     "type": "string"
                 },
-                "example": [
-                    "Amendment",
-                    "MasterServiceAgreement",
-                    "NonDisclosureAgreement"
+                "examples": [
+                    [
+                        "Amendment",
+                        "MasterServiceAgreement",
+                        "NonDisclosureAgreement"
+                    ]
                 ],
                 "x-ds-definition-name": "AgreementTypeListResponse"
             },
@@ -3314,7 +3532,9 @@
                     "type": {
                         "type": "string",
                         "description": "The name of the target agreement type from the agreement-types collection.",
-                        "example": "MSA_DOCUMENT_DATA"
+                        "examples": [
+                            "MSA_DOCUMENT_DATA"
+                        ]
                     }
                 },
                 "x-ds-definition-name": "ChangeAgreementTypeRequest"
@@ -3716,7 +3936,7 @@
                 "in": "path",
                 "required": true,
                 "schema": {
-                    "$ref": "#/components/schemas/AgreementId"
+                    "$ref": "#/components/schemas/UUID"
                 }
             },
             "PageLimit": {
@@ -3757,7 +3977,7 @@
             "ODataSearch": {
                 "name": "$search",
                 "in": "query",
-                "description": "OData full-text search expression. Performs a case-insensitive search across agreement text fields including title, type, parties, and provisions.\n\nThe search term is matched as a substring against searchable fields. Enclose multi-word terms in double quotes for exact phrase matching.\n\nExamples:\n- `$search=Acme` — matches agreements mentioning \"Acme\" in any searchable field\n- `$search=\"Non-Disclosure Agreement\"` — exact phrase match\n- `$search=renewal` — matches agreements with \"renewal\" in title, type, or provisions\n\n**Note**: `$search` can be combined with `$filter` for more targeted results (e.g., `$search=Acme&$filter=status eq 'COMPLETE'`).\n",
+                "description": "OData full-text search expression. Performs a case-insensitive search across agreement text fields including title, type, parties, and provisions.\n\nThe search term is matched as a substring against searchable fields. Enclose multi-word terms in double quotes for exact phrase matching.\n\nExamples:\n- `$search=Acme` — matches agreements mentioning \"Acme\" in any searchable field\n- `$search=\"Non-Disclosure Agreement\"` — exact phrase match\n- `$search=renewal` — matches agreements with \"renewal\" in title, type, or provisions\n\n**Note**: `$search` and `$filter` are mutually exclusive and cannot be used together in the same request. Use `$search` for full-text keyword queries or `$filter` for structured field-level filtering, but not both simultaneously.\n",
                 "schema": {
                     "type": "string",
                     "maxLength": 500
@@ -3767,7 +3987,7 @@
             "ODataFilter": {
                 "name": "$filter",
                 "in": "query",
-                "description": "OData filter expression for complex queries. Supports:\n- Comparison operators: `eq`, `ne`, `gt`, `ge`, `lt`, `le`\n- Logical operators: `and`, `or`\n- In operator: `in` (e.g., `type in ('Msa','Sow')`)\n\n**Note**: Use forward slash `/` to navigate nested properties (e.g., `provisions/effective_date`), not dot notation.\n\nExamples:\n- `status eq 'COMPLETE' and provisions/effective_date ge 2025-01-01`\n- `parties/name_in_agreement eq 'Acme Corp' or parties/name_in_agreement eq 'Beta Ltd'`\n- `provisions/renewal_type in ('EVERGREEN','AUTO_RENEW')`\n",
+                "description": "OData filter expression for complex queries. Supports:\n- Comparison operators: `eq`, `ne`, `gt`, `ge`, `lt`, `le`\n- Logical operators: `and`, `or`\n- In operator: `in` (e.g., `type in ('Msa','Sow')`)\n\n**Note**: Use forward slash `/` to navigate nested properties (e.g., `provisions/effective_date`), not dot notation.\n\n**Note**: `$filter` and `$search` are mutually exclusive and cannot be used together in the same request. Use `$filter` for structured field-level filtering or `$search` for full-text keyword queries, but not both simultaneously.\n\nExamples:\n- `status eq 'COMPLETE' and provisions/effective_date ge 2025-01-01`\n- `parties/name_in_agreement eq 'Acme Corp' or parties/name_in_agreement eq 'Beta Ltd'`\n- `provisions/renewal_type in ('EVERGREEN','AUTO_RENEW')`\n",
                 "schema": {
                     "type": "string",
                     "maxLength": 2000
@@ -3864,6 +4084,7 @@
                             "IN_PROGRESS",
                             "CANCELED",
                             "SUCCEEDED",
+                            "SUCCEEDED_WITH_WARNINGS",
                             "FAILED"
                         ],
                         "documents": [
@@ -3878,9 +4099,44 @@
                                 "agreement_id": "e4c999b7-bdbd-42a1-99eb-c7569b65d7e7",
                                 "status": "SUCCEEDED",
                                 "file_name": "filename.pdf",
+                                "ai_extraction": true,
                                 "_links": {
                                     "document": {
                                         "href": "https://s1.us.services.demo.docusign.net/document-public-dms/v1/accounts/{accountId}/documents/{documentId}"
+                                    },
+                                    "agreement": {
+                                        "href": "/v1/accounts/{accountId}/agreements/e4c999b7-bdbd-42a1-99eb-c7569b65d7e7"
+                                    }
+                                }
+                            },
+                            {
+                                "id": "8d9e2654-62ac-40bd-9f34-76424ee8e968",
+                                "agreement_id": "09ecfcd6-783b-410b-a368-1e4e43fb1c17",
+                                "status": "SUCCEEDED_WITH_WARNINGS",
+                                "file_name": "1738567852650_Travelers Auto WC Binder.pdf",
+                                "ai_extraction": true,
+                                "warnings": [
+                                    {
+                                        "code": "METADATA_APPLICATION_FAILED",
+                                        "message": "Applying metadata failed",
+                                        "detail": "Data validation failed. $class may contain an incompatible value.",
+                                        "recoverable": true,
+                                        "remedy": "update_metadata"
+                                    }
+                                ],
+                                "_links": {
+                                    "document": {
+                                        "href": "https://s1.us.services.demo.docusign.net/document-public-dms/v1/accounts/{accountId}/documents/8d9e2654-62ac-40bd-9f34-76424ee8e968"
+                                    },
+                                    "agreement": {
+                                        "href": "/v1/accounts/{accountId}/agreements/09ecfcd6-783b-410b-a368-1e4e43fb1c17"
+                                    }
+                                },
+                                "_actions": {
+                                    "update_metadata": {
+                                        "href": "/v1/accounts/{accountId}/agreements/09ecfcd6-783b-410b-a368-1e4e43fb1c17",
+                                        "method": "PATCH",
+                                        "description": "Submit metadata for this agreement with valid payload"
                                     }
                                 }
                             }
@@ -9480,7 +9736,7 @@
             }
         },
         "securitySchemes": {
-            "accessToken": {
+            "OAuth2Auth": {
                 "description": "OAuth2 authentication.\n- Demo:\n  - authorizationUrl: https://account-d.docusign.com/oauth/auth\n  - tokenUrl: https://account-d.docusign.com/oauth/token\n- Production:\n  - authorizationUrl: https://account.docusign.com/oauth/auth\n  - tokenUrl: https://account.docusign.com/oauth/token\n",
                 "type": "oauth2",
                 "flows": {
