@@ -234,6 +234,56 @@
             },
             "parameters": []
         },
+        "/v2.1/accounts/{accountId}/archivedocuments/{documentId}": {
+            "get": {
+                "tags": [
+                    "EnvelopesPermissions"
+                ],
+                "summary": "",
+                "operationId": "GenAndSend_GetArchiveDocument",
+                "consumes": [],
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "documentId",
+                        "in": "path",
+                        "description": "The unique ID of the document within the envelope.\n\nUnlike other IDs in the eSignature API,\nyou specify the `documentId` yourself.\nTypically the first document has the ID\n`1`, the second document `2`, and so on,\nbut you can use any numbering scheme\nthat fits within a 32-bit signed integer\n(1 through 2147483647).\n\n\nTab objects have a `documentId` property\nthat specifies the document on which to place\nthe tab.\n",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getArchiveDocument",
+                "x-ds-method": "getArchiveDocument",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
         "/v2.1/accounts/{accountId}/billing_charges": {
             "get": {
                 "tags": [
@@ -1334,8 +1384,8 @@
                         "description": "Brand logo binary Stream. Supported formats: JPG, GIF, PNG. Maximum file size: 300 KB. Recommended dimensions: 296 x 76 pixels (larger images will be resized). Changes may take up to one hour to display in all places",
                         "required": true,
                         "schema": {
-                            "type": "string",
-                            "format": "binary"
+                            "format": "binary",
+                            "type": "string"
                         }
                     }
                 ],
@@ -2356,9 +2406,7 @@
                 ],
                 "summary": "Initiate a new chunked upload.",
                 "operationId": "ChunkedUploads_PostChunkedUploads",
-                "consumes": [
-                    "multipart/form-data"
-                ],
+                "consumes": [],
                 "produces": [],
                 "parameters": [
                     {
@@ -5254,6 +5302,63 @@
                 "x-ds-methodname": "update",
                 "x-ds-method": "update",
                 "x-ds-service": "Envelopes",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/archive_metadata": {
+            "post": {
+                "tags": [
+                    "EnvelopesPermissions"
+                ],
+                "summary": "",
+                "operationId": "GenAndSend_PostLinkMetadataEnvelopes",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeId",
+                        "in": "path",
+                        "description": "The envelope's GUID. \n\nExample: `93be49ab-xxxx-xxxx-xxxx-f752070d71ec`\n",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeGenAndSend",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/envelopeGenAndSend"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/envelopeSummary"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "createLinkMetadataEnvelopes",
+                "x-ds-method": "createLinkMetadataEnvelopes",
+                "x-ds-service": "Uncategorized",
+                "description": "",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -10129,6 +10234,54 @@
             },
             "parameters": []
         },
+        "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/shares/permission": {
+            "get": {
+                "tags": [
+                    "EnvelopesPermissions"
+                ],
+                "summary": "",
+                "operationId": "EnvelopePermission_GetEnvelopePermission",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeId",
+                        "in": "path",
+                        "description": "The envelope's GUID. \n\nExample: `93be49ab-xxxx-xxxx-xxxx-f752070d71ec`\n",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/envelopesSharePermissionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getEnvelopePermission",
+                "x-ds-method": "getEnvelopePermission",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
         "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/tabs_blob": {
             "get": {
                 "tags": [
@@ -11411,6 +11564,260 @@
                 "x-ds-method": "deleteEnvelopeDelayedRoutingDefinition",
                 "x-ds-service": "Uncategorized",
                 "description": "Delete the delayed routing object for an envelope's workflow step. You cannot call this endpoint once the delay is in progress. As a workaround, you can update the delay or send time to one minute in the future using the [updateEnvelopeDelayedRoutingDefinition](/docs/esign-rest-api/reference/envelopes/envelopeworkflowdefinition/updateEnvelopeDelayedRoutingDefinition/) endpoint. \n\n**Note:** After deleting the delayed routing object, the workflow step still contains the `pause_before` action. Once the workflow step is reached, you will need to [unpause the envelope](/docs/esign-rest-api/how-to/unpause-workflow/). If you want to delete the step entirely, use [deleteEnvelopeWorkflowStepDefinition](/docs/esign-rest-api/reference/envelopes/envelopeworkflowdefinition/deleteenvelopeworkflowstepdefinition/) instead.\n",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v2.1/accounts/{accountId}/envelopes/archive_metadata": {
+            "post": {
+                "tags": [
+                    "DocumentGeneration"
+                ],
+                "summary": "",
+                "operationId": "GenAndSend_PostArchiveMetadataEnvelopes",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeGenAndSend",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/envelopeGenAndSend"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/envelopeArchiveSummary"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "createArchiveMetadataEnvelopes",
+                "x-ds-method": "createArchiveMetadataEnvelopes",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v2.1/accounts/{accountId}/envelopes/generate_and_archive": {
+            "post": {
+                "tags": [
+                    "DocumentGeneration"
+                ],
+                "summary": "",
+                "operationId": "GenAndSend_PostGenAndArchiveEnvelopes",
+                "consumes": [],
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeGenAndSend",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/envelopeGenAndSend"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "createGenAndArchiveEnvelopes",
+                "x-ds-method": "createGenAndArchiveEnvelopes",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v2.1/accounts/{accountId}/envelopes/generate_and_convert": {
+            "post": {
+                "tags": [
+                    "DocumentGeneration"
+                ],
+                "summary": "",
+                "operationId": "GenAndSend_PostGenAndConvertEnvelopes",
+                "consumes": [],
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeGenAndSend",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/envelopeGenAndSend"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "createGenAndConvertEnvelopes",
+                "x-ds-method": "createGenAndConvertEnvelopes",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v2.1/accounts/{accountId}/envelopes/generate_and_convert_multi": {
+            "post": {
+                "tags": [
+                    "DocumentGeneration"
+                ],
+                "summary": "",
+                "operationId": "GenAndSend_PostGenAndConvertMultiEnvelopes",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeGenAndSend",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/envelopeGenAndSend"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/generatedDocumentsResult"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "createGenAndConvertMultiEnvelopes",
+                "x-ds-method": "createGenAndConvertMultiEnvelopes",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v2.1/accounts/{accountId}/envelopes/generate_and_send": {
+            "post": {
+                "tags": [
+                    "DocumentGeneration"
+                ],
+                "summary": "",
+                "operationId": "GenAndSend_PostGenAndSendEnvelopes",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeGenAndSend",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/envelopeGenAndSend"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/envelopeSummary"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "createGenAndSendEnvelopes",
+                "x-ds-method": "createGenAndSendEnvelopes",
+                "x-ds-service": "Uncategorized",
+                "description": "",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -13635,6 +14042,170 @@
                 "description": "This method returns a list of users who have sent PowerForms.",
                 "x-ds-method": "listSenders",
                 "x-ds-service": "PowerForms",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v2.1/accounts/{accountId}/recommendations/{type}": {
+            "get": {
+                "tags": [
+                    "Recommendations"
+                ],
+                "summary": "",
+                "operationId": "Insights_GetRecommendationsList",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The type of this tab. Values are:\n\n- `Approve`\n- `CheckBox`\n- `Company`\n- `Date`\n- `DateSigned`\n- `Decline`\n- `Email`\n- `EmailAddress`\n- `EnvelopeId`\n- `FirstName`\n- `Formula`\n- `FullName`\n- `InitialHere`\n- `InitialHereOptional`\n- `LastName`\n- `List`\n- `Note`\n- `Number`\n- `Radio`\n- `SignerAttachment`\n- `SignHere`\n- `SignHereOptional`\n- `Ssn`\n- `Text`\n- `Title`\n- `Zip5`\n- `Zip5Dash4`\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/recommendationsListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getRecommendationsList",
+                "x-ds-method": "getRecommendationsList",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v2.1/accounts/{accountId}/recommendations/{type}/{envelopeId}/intent": {
+            "get": {
+                "tags": [
+                    "Recommendations"
+                ],
+                "summary": "",
+                "operationId": "Insights_GetRecommendationsIntent",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeId",
+                        "in": "path",
+                        "description": "The envelope's GUID. \n\nExample: `93be49ab-xxxx-xxxx-xxxx-f752070d71ec`\n",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The type of this tab. Values are:\n\n- `Approve`\n- `CheckBox`\n- `Company`\n- `Date`\n- `DateSigned`\n- `Decline`\n- `Email`\n- `EmailAddress`\n- `EnvelopeId`\n- `FirstName`\n- `Formula`\n- `FullName`\n- `InitialHere`\n- `InitialHereOptional`\n- `LastName`\n- `List`\n- `Note`\n- `Number`\n- `Radio`\n- `SignerAttachment`\n- `SignHere`\n- `SignHereOptional`\n- `Ssn`\n- `Text`\n- `Title`\n- `Zip5`\n- `Zip5Dash4`\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/recommendationsListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getRecommendationsIntent",
+                "x-ds-method": "getRecommendationsIntent",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "post": {
+                "tags": [
+                    "Recommendations"
+                ],
+                "summary": "",
+                "operationId": "Insights_PostRecommendationsIntent",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "envelopeId",
+                        "in": "path",
+                        "description": "The envelope's GUID. \n\nExample: `93be49ab-xxxx-xxxx-xxxx-f752070d71ec`\n",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The type of this tab. Values are:\n\n- `Approve`\n- `CheckBox`\n- `Company`\n- `Date`\n- `DateSigned`\n- `Decline`\n- `Email`\n- `EmailAddress`\n- `EnvelopeId`\n- `FirstName`\n- `Formula`\n- `FullName`\n- `InitialHere`\n- `InitialHereOptional`\n- `LastName`\n- `List`\n- `Note`\n- `Number`\n- `Radio`\n- `SignerAttachment`\n- `SignHere`\n- `SignHereOptional`\n- `Ssn`\n- `Text`\n- `Title`\n- `Zip5`\n- `Zip5Dash4`\n"
+                    },
+                    {
+                        "name": "recommendationsListRequest",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/recommendationsListRequest"
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/recommendationsListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "createRecommendationsIntent",
+                "x-ds-method": "createRecommendationsIntent",
+                "x-ds-service": "Uncategorized",
+                "description": "",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -16320,6 +16891,13 @@
                         "required": false,
                         "type": "string",
                         "description": "A comma-separated list\nof additional template attributes\nto include in the response.\nValid values are:\n\n- `powerforms`: Includes information about PowerForms.\n- `tabs`: Includes information about tabs.\n- `documents`: Includes information about documents.\n- `favorite_template_status`: : Includes the template `favoritedByMe` property in the response. **Note:** You can mark a template as a favorite only in eSignature v2.1."
+                    },
+                    {
+                        "name": "link_configuration_id",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": ""
                     }
                 ],
                 "responses": {
@@ -18093,6 +18671,54 @@
                 "description": "",
                 "x-ds-method": "list",
                 "x-ds-service": "Uncategorized",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v2.1/accounts/{accountId}/templates/{templateId}/insights/completionRate": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "",
+                "operationId": "Insights_GetCompletionRateForTemplate",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "templateId",
+                        "in": "path",
+                        "description": "The ID of the template.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/templateCompletionRateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getCompletionRateForTemplate",
+                "x-ds-method": "getCompletionRateForTemplate",
+                "x-ds-service": "Uncategorized",
+                "description": "",
                 "x-ds-in-sdk": true
             },
             "parameters": []
@@ -20033,6 +20659,47 @@
                 "deprecated": false,
                 "x-ds-methodname": "updateTemplates",
                 "x-ds-method": "updateTemplates",
+                "x-ds-service": "Uncategorized",
+                "description": "",
+                "x-ds-in-sdk": true
+            },
+            "parameters": []
+        },
+        "/v2.1/accounts/{accountId}/templates/insights/completionRate": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "",
+                "operationId": "Insights_GetCompletionRateForTemplateOwner",
+                "consumes": [],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "The external account number (int) or account ID GUID.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response.",
+                        "schema": {
+                            "$ref": "#/definitions/userCompletionRateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error encountered.",
+                        "schema": {
+                            "$ref": "#/definitions/errorDetails"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "x-ds-methodname": "getCompletionRateForTemplateOwner",
+                "x-ds-method": "getCompletionRateForTemplateOwner",
                 "x-ds-service": "Uncategorized",
                 "description": "",
                 "x-ds-in-sdk": true
@@ -24868,6 +25535,10 @@
                 "allowViewUsers": {
                     "description": "",
                     "type": "string"
+                },
+                "viewOnlyAccountAdminPages": {
+                    "description": "",
+                    "type": "string"
                 }
             },
             "x-ds-definition-name": "accountManagementGranular",
@@ -26922,6 +27593,14 @@
                     "$ref": "#/definitions/settingsMetadata",
                     "description": "Metadata that indicates whether the `documentVisibility` property is editable.\n"
                 },
+                "docusignPDF": {
+                    "description": "",
+                    "type": "string"
+                },
+                "docusignPDFMetadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
+                },
                 "draftEnvelopeRetention": {
                     "description": "",
                     "type": "string"
@@ -27370,6 +28049,14 @@
                     "$ref": "#/definitions/settingsMetadata",
                     "description": ""
                 },
+                "enableGenAndAPI": {
+                    "description": "",
+                    "type": "string"
+                },
+                "enableGenAndAPIMetadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
+                },
                 "enableGenerationWith3PIntegration": {
                     "description": "",
                     "type": "string"
@@ -27399,6 +28086,14 @@
                     "type": "string"
                 },
                 "enableIAMClauseLibraryMetadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
+                },
+                "enableIAMDataConnector": {
+                    "description": "",
+                    "type": "string"
+                },
+                "enableIAMDataConnectorMetadata": {
                     "$ref": "#/definitions/settingsMetadata",
                     "description": ""
                 },
@@ -27586,6 +28281,10 @@
                     "$ref": "#/definitions/settingsMetadata",
                     "description": ""
                 },
+                "enableOwnerInsightsAndRecommendationsSettingMetadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
+                },
                 "enableParticipantRecipientSettingMetadata": {
                     "$ref": "#/definitions/settingsMetadata",
                     "description": ""
@@ -27715,6 +28414,10 @@
                     "type": "string"
                 },
                 "enableSearchSiteSpecificApiMetadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
+                },
+                "enableSenderInsightsAndRecommendationsSettingMetadata": {
                     "$ref": "#/definitions/settingsMetadata",
                     "description": ""
                 },
@@ -37703,6 +38406,10 @@
                     "description": "",
                     "type": "string"
                 },
+                "salesforceCodeVerifier": {
+                    "description": "",
+                    "type": "string"
+                },
                 "salesforceDocumentsAsContentFiles": {
                     "description": "When **true,** Docusign can use documents in your Salesforce account for sending and signing.\n\nThis property is not used for the `createHistoricalEnvelopePublishTransaction` endpoint.",
                     "type": "string"
@@ -40319,6 +41026,42 @@
             "x-ds-definition-name": "dobInformationInput",
             "x-ms-summary": "Complex type containing:\n\n* dateOfBirth\n* displayLevelCode\n* receiveInResponse"
         },
+        "docGenConditionalOperationBase": {
+            "type": "object",
+            "x-ds-definition-name": "docGenConditionalOperationBase",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "docGenConditionalRule": {
+            "type": "object",
+            "properties": {
+                "conditionalOperations": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/docGenConditionalOperationBase"
+                    }
+                },
+                "conditionalRuleEffect": {
+                    "description": "",
+                    "type": "string"
+                },
+                "conditionalRuleEffectFields": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "conditionalRuleOperator": {
+                    "description": "",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "docGenConditionalRule",
+            "description": "",
+            "x-ms-summary": ""
+        },
         "docGenFormat": {
             "type": "object",
             "properties": {
@@ -40338,6 +41081,13 @@
         "docGenFormField": {
             "type": "object",
             "properties": {
+                "children": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/docGenFormField"
+                    }
+                },
                 "connectedObjectDetails": {
                     "$ref": "#/definitions/connectedObjectDetails",
                     "description": ""
@@ -40352,7 +41102,7 @@
                 },
                 "filter": {
                     "description": "An object used to present a filtered view of the items in a folder.",
-                    "type": "string"
+                    "type": "object"
                 },
                 "format": {
                     "$ref": "#/definitions/docGenFormat",
@@ -40364,7 +41114,7 @@
                 },
                 "hidden": {
                     "description": "",
-                    "type": "string"
+                    "type": "boolean"
                 },
                 "label": {
                     "description": "A label displayed near the field.",
@@ -40391,7 +41141,7 @@
                 },
                 "readOnly": {
                     "description": "",
-                    "type": "string"
+                    "type": "boolean"
                 },
                 "required": {
                     "description": "When **true,** the field is required.",
@@ -40497,6 +41247,13 @@
         "docGenFormFields": {
             "type": "object",
             "properties": {
+                "docGenConditionalRules": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/docGenConditionalRule"
+                    }
+                },
                 "docGenDocumentStatus": {
                     "description": "The status of the document. This is a read-only property, and not used in [updateEnvelopeDocGenFormFields][docgen update].\nValid values:\n\n- `mergesucceeded`\n- `created`\n- `hassyntaxerror`\n\n[docgen update]:        /docs/esign-rest-api/reference/envelopes/documentgeneration/updateenvelopedocgenformfields/\n\n",
                     "type": "string"
@@ -42963,6 +43720,10 @@
                         "$ref": "#/definitions/attachment"
                     }
                 },
+                "envelopeClassification": {
+                    "description": "",
+                    "type": "string"
+                },
                 "envelopeCustomMetadata": {
                     "$ref": "#/definitions/envelopeCustomMetadata",
                     "description": ""
@@ -43153,12 +43914,56 @@
                     "description": "The reason the envelope or template was voided.\n\n**Note:** The string is truncated to the first 200 characters.\n",
                     "type": "string"
                 },
+                "watermarkLanguage": {
+                    "description": "",
+                    "type": "string"
+                },
                 "workflow": {
                     "$ref": "#/definitions/workflow",
                     "description": ""
                 }
             },
             "x-ds-definition-name": "envelope",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "envelopeArchiveSummary": {
+            "type": "object",
+            "properties": {
+                "bulkEnvelopeStatus": {
+                    "$ref": "#/definitions/bulkEnvelopeStatus",
+                    "description": "An object that describes the status of the bulk send envelopes."
+                },
+                "envelopeId": {
+                    "description": "The envelope's GUID. \n\nExample: `93be49ab-xxxx-xxxx-xxxx-f752070d71ec`\n",
+                    "type": "string"
+                },
+                "errorDetails": {
+                    "$ref": "#/definitions/errorDetails",
+                    "description": "This object describes errors that occur. It is only valid for responses and ignored in requests."
+                },
+                "recipientSigningUri": {
+                    "description": "",
+                    "type": "string"
+                },
+                "recipientSigningUriError": {
+                    "description": "",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The status of the item.",
+                    "type": "string"
+                },
+                "statusDateTime": {
+                    "description": "The DateTime that the envelope changed status (i.e. was created or sent.)",
+                    "type": "string"
+                },
+                "uri": {
+                    "description": "A URI containing the user ID.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "envelopeArchiveSummary",
             "description": "",
             "x-ms-summary": ""
         },
@@ -43247,6 +44052,13 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/envelopeAuditEvent"
+                    }
+                },
+                "paymentEvents": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/paymentAuditEvent"
                     }
                 }
             },
@@ -43435,6 +44247,10 @@
                     "items": {
                         "$ref": "#/definitions/attachment"
                     }
+                },
+                "envelopeClassification": {
+                    "description": "",
+                    "type": "string"
                 },
                 "envelopeCustomMetadata": {
                     "$ref": "#/definitions/envelopeCustomMetadata",
@@ -43647,6 +44463,10 @@
                 },
                 "voidedReason": {
                     "description": "The reason the envelope or template was voided.\n\n**Note:** The string is truncated to the first 200 characters.\n",
+                    "type": "string"
+                },
+                "watermarkLanguage": {
+                    "description": "",
                     "type": "string"
                 },
                 "workflow": {
@@ -43928,6 +44748,610 @@
             "description": "Describes the form data of the envelope.",
             "x-ds-definition-name": "envelopeFormData",
             "x-ms-summary": "Describes the form data of the envelope."
+        },
+        "envelopeGenAndSend": {
+            "type": "object",
+            "properties": {
+                "accessControlListBase64": {
+                    "description": "Reserved for Docusign.",
+                    "type": "string"
+                },
+                "accessibility": {
+                    "description": "Sets the document reading zones for screen reader applications.  This element can only be used if Document Accessibility is enabled for the account.\n\n**Note:** This information is currently generated from the Docusign web console by setting the reading zones when creating a template, exporting the reading zone string information, and adding it here.",
+                    "type": "string"
+                },
+                "allowComments": {
+                    "description": "When **true,** users can add comments to the documents in the envelope. For example, if a signer has a question about the text in the document, they can add a comment to the document.",
+                    "type": "string"
+                },
+                "allowMarkup": {
+                    "description": "When **true,** the Document Markup feature is enabled.\n\n**Note:**  To use this feature, Document Markup must be enabled at both the account and envelope levels. Only Admin users can change this setting at the account level.\n",
+                    "type": "string"
+                },
+                "allowReassign": {
+                    "description": "When **true,** the recipient can redirect an envelope to a more appropriate recipient.",
+                    "type": "string"
+                },
+                "allowRecipientRecursion": {
+                    "description": "When **true,** this enables the Recursive Recipients feature and allows a recipient to appear more than once in the routing order.",
+                    "type": "string"
+                },
+                "allowViewHistory": {
+                    "description": "When **true,** recipients can view the history of the envelope.",
+                    "type": "string"
+                },
+                "anySigner": {
+                    "description": "Deprecated. This feature has been replaced by signing groups.",
+                    "type": "string"
+                },
+                "archiveAction": {
+                    "description": "",
+                    "type": "string"
+                },
+                "asynchronous": {
+                    "description": "When **true,** the envelope is queued for\nprocessing and the value of the `status` property\nis set to `Processing`. Additionally, GET status\ncalls return `Processing` until completed.\n\n\n**Note:** A `transactionId` is required for this\ncall to work correctly. When the envelope is\ncreated, the status is `Processing` and an\n`envelopeId` is not returned in the response. To\nget the `envelopeId`, use a GET envelope query by\nusing the\n[transactionId](/docs/esign-rest-api/reference/envelopes/envelopes/create/) or by checking the\nConnect notification.",
+                    "type": "string"
+                },
+                "attachments": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/attachment"
+                    }
+                },
+                "attachmentsUri": {
+                    "description": "Contains a URL for retrieving the attachments that are associated with the envelope.",
+                    "type": "string"
+                },
+                "authoritativeCopy": {
+                    "description": "When **true,** marks all of the documents in the envelope as authoritative copies.\n\n**Note:** You can override this value for a specific document. For example, you can set the `authoritativeCopy` property to **true** at the envelope level, but turn it off for a single document by setting the `authoritativeCopy` property for the document to **false.**",
+                    "type": "string"
+                },
+                "authoritativeCopyDefault": {
+                    "description": "The default `authoritativeCopy` setting for documents in this envelope that do not have `authoritativeCopy` set.\nIf this property is not set, each document defaults to the envelope's `authoritativeCopy`.",
+                    "type": "string"
+                },
+                "autoNavigation": {
+                    "description": "When **true,** autonavigation is set for the recipient.\n",
+                    "type": "string"
+                },
+                "brandId": {
+                    "description": "The ID of the brand.",
+                    "type": "string"
+                },
+                "brandLock": {
+                    "description": "When **true,** the `brandId` for the envelope is locked and senders cannot change the brand used for the envelope.",
+                    "type": "string"
+                },
+                "burnDefaultTabData": {
+                    "description": "",
+                    "type": "string"
+                },
+                "certificateUri": {
+                    "description": "The URI for retrieving certificate information.",
+                    "type": "string"
+                },
+                "completedDateTime": {
+                    "description": "Specifies the date and time this item was completed.",
+                    "type": "string"
+                },
+                "compositeTemplates": {
+                    "description": "A complex type that can be added to create envelopes from a combination of Docusign templates and PDF forms. The basic envelope remains the same, while the Composite Template adds new document and template overlays into the envelope. There can be any number of Composite Template structures in the envelope.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/compositeTemplate"
+                    }
+                },
+                "copyRecipientData": {
+                    "description": "",
+                    "type": "string"
+                },
+                "createdDateTime": {
+                    "description": "The UTC DateTime when the item was created.",
+                    "type": "string"
+                },
+                "customFields": {
+                    "$ref": "#/definitions/AccountCustomFields",
+                    "description": "An optional array of strings that enables the sender to provide custom data about the recipient. This information is returned in the envelope status but otherwise not used by Docusign. Each `customField` string can be a maximum of 100 characters."
+                },
+                "customFieldsUri": {
+                    "description": "The URI for retrieving custom fields.",
+                    "type": "string"
+                },
+                "declinedDateTime": {
+                    "description": "The date and time the recipient declined the document. This property is read-only.",
+                    "type": "string"
+                },
+                "deletedDateTime": {
+                    "description": "Reserved for Docusign.",
+                    "type": "string"
+                },
+                "deliveredDateTime": {
+                    "description": "The date and time that the envelope was delivered to the recipient. This property is read-only.",
+                    "type": "string"
+                },
+                "disableResponsiveDocument": {
+                    "description": "When **true,** responsive documents are disabled for the envelope.",
+                    "type": "string"
+                },
+                "documentBase64": {
+                    "description": "The document's bytes. This field can be used to include a base64 version of the document bytes within an envelope definition instead of sending the document using a multi-part HTTP request. The maximum document size is smaller if this field is used due to the overhead of the base64 encoding.",
+                    "type": "string"
+                },
+                "documents": {
+                    "description": "A complex element that contains details about the documents associated with the envelope.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/document"
+                    }
+                },
+                "documentsCombinedUri": {
+                    "description": "The URI for retrieving all of the documents associated with the envelope as a single PDF file.",
+                    "type": "string"
+                },
+                "documentsUri": {
+                    "description": "The URI for retrieving all of the documents associated with the envelope as separate files.",
+                    "type": "string"
+                },
+                "emailBlurb": {
+                    "description": "This is the same as the email body. If the sender enters an email blurb, it is included in the email body for all envelope recipients.",
+                    "type": "string"
+                },
+                "emailSettings": {
+                    "$ref": "#/definitions/emailSettings",
+                    "description": "A complex type that contains email settings."
+                },
+                "emailSubject": {
+                    "description": "The subject line of the email message that is sent to all recipients.\n\nFor information about adding merge field information to the email subject, see [Template Email Subject Merge Fields](/docs/esign-rest-api/reference/templates/templates/create/#template-email-subject-merge-fields).\n\n**Note:** The subject line is limited to 100 characters, including any merged fields.It is not truncated. It is an error if the text is longer than 100 characters.\n",
+                    "type": "string"
+                },
+                "enableWetSign": {
+                    "description": "When **true,** the signer is allowed to print the document and sign it on paper.",
+                    "type": "string"
+                },
+                "enforceSignerVisibility": {
+                    "description": "When **true,** the option selected in the **Document Visibility** section in your account [Sending Settings][sendingsettings] will be enforced for the envelope. See [Fields and Properties][fieldsproperties] for details about document visibility options. Setting `enforceSignerVisibility` to **true** also enables you to omit documents from the specified recipients' envelopes by using the  [`excludedDocuments`](/docs/esign-rest-api/reference/envelopes/envelopes/create/#schema__envelopedefinition_recipients_signers_excludeddocuments) array. Recipients that have an administrative role (Agent, Editor, or Intermediaries) or informational role (Certified Deliveries or Carbon Copies) can always see all of the documents in an envelope, unless they are specifically excluded by using the `excludedDocuments` setting when an envelope is sent. Documents that do not have tabs are always visible to all recipients, unless they are excluded by using the `excludedDocuments` setting.\n\n**Note:** To use this functionality, [document visibility][docviz] must be enabled for the account. The document visibility feature is available in all developer accounts, but only in certain production account plans. Contact [Docusign Support][support] or your account manager to find out whether document visibility is available for your production account plan.\n\n[docviz]: /docs/esign-rest-api/reference/envelopes/envelopedocumentvisibility/\n[sendingsettings]: https://admindemo.docusign.com/authenticate?goTo=sending\n[fieldsproperties]: https://support.docusign.com/s/document-item?rsc_301&bundleId=pik1583277475390&topicId=xgg1583277350154.html\n[support]: https://support.docusign.com/en/contactSupport#",
+                    "type": "string"
+                },
+                "envelopeAttachments": {
+                    "description": "An array of attachment objects that provide information about the attachments that are associated with the envelope.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/attachment"
+                    }
+                },
+                "envelopeClassification": {
+                    "description": "",
+                    "type": "string"
+                },
+                "envelopeCustomMetadata": {
+                    "$ref": "#/definitions/envelopeCustomMetadata",
+                    "description": ""
+                },
+                "envelopeDocuments": {
+                    "description": "An array containing information about the documents that are included in the envelope.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/envelopeDocument"
+                    }
+                },
+                "envelopeId": {
+                    "description": "The envelope's GUID. \n\nExample: `93be49ab-xxxx-xxxx-xxxx-f752070d71ec`\n",
+                    "type": "string"
+                },
+                "envelopeIdStamping": {
+                    "description": "When **true,** [Envelope ID Stamping](https://support.docusign.com/s/document-item?bundleId=gbo1643332197980&topicId=tfm1578456367923.html) is enabled.\nAfter a document or attachment is stamped with an Envelope ID,\nthe ID is seen by all recipients\nand becomes a permanent part of the document\nand cannot be removed.",
+                    "type": "string"
+                },
+                "envelopeLocation": {
+                    "description": "Reserved for Docusign.",
+                    "type": "string"
+                },
+                "envelopeMetadata": {
+                    "$ref": "#/definitions/envelopeMetadata",
+                    "description": "Provides information about the features and services that are enabled for the envelope, including the Correct feature, the Advanced Correct feature, and Docusign eNotary service."
+                },
+                "envelopeUri": {
+                    "description": "The URI for retrieving the envelope or envelopes.",
+                    "type": "string"
+                },
+                "eventNotification": {
+                    "$ref": "#/definitions/eventNotification",
+                    "description": "This optional object is used to register a webhook that will receive status changes for this envelope."
+                },
+                "eventNotifications": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/eventNotification"
+                    }
+                },
+                "expireAfter": {
+                    "description": "Not used. Use the\n[`expirations`](/docs/esign-rest-api/reference/envelopes/envelopes/create/#definition__envelopedefinition_notification_expirations)\nproperty in the [`notification`](/docs/esign-rest-api/reference/envelopes/envelopes/create/#definition__envelopedefinition_notification) object instead.",
+                    "type": "string"
+                },
+                "expireDateTime": {
+                    "description": "Not used. Use the\n[`expirations`](/docs/esign-rest-api/reference/envelopes/envelopes/create/#definition__envelopedefinition_notification_expirations)\nproperty in the [`notification`](/docs/esign-rest-api/reference/envelopes/envelopes/create/#definition__envelopedefinition_notification) object instead.",
+                    "type": "string"
+                },
+                "expireEnabled": {
+                    "description": "Not used. Use the\n[`expirations`](/docs/esign-rest-api/reference/envelopes/envelopes/create/#definition__envelopedefinition_notification_expirations)\nproperty in the [`notification`](/docs/esign-rest-api/reference/envelopes/envelopes/create/#definition__envelopedefinition_notification) object instead.",
+                    "type": "string"
+                },
+                "externalEnvelopeId": {
+                    "description": "May contain an external identifier for the envelope.",
+                    "type": "string"
+                },
+                "folders": {
+                    "description": "A list of folder objects.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/folder"
+                    }
+                },
+                "generateDataSource": {
+                    "description": "",
+                    "type": "string"
+                },
+                "generateProperties": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/envelopeGenAndSendProperties"
+                    }
+                },
+                "generateSchemaId": {
+                    "description": "",
+                    "type": "string"
+                },
+                "hasComments": {
+                    "description": "When **true,** indicates that users have added comments to the envelope.",
+                    "type": "string"
+                },
+                "hasFormDataChanged": {
+                    "description": "When **true,** indicates that the data collected through form fields on a document has changed.",
+                    "type": "string"
+                },
+                "hasWavFile": {
+                    "description": "When **true,** indicates that a .wav file used for voice authentication is included in the envelope. ",
+                    "type": "string"
+                },
+                "holder": {
+                    "description": "Reserved for Docusign.",
+                    "type": "string"
+                },
+                "imageHandling": {
+                    "description": "",
+                    "type": "string"
+                },
+                "initialSentDateTime": {
+                    "description": "The date and time the envelope was initially sent.",
+                    "type": "string"
+                },
+                "is21CFRPart11": {
+                    "description": "When **true,** indicates compliance with United States Food and Drug Administration (FDA) regulations on electronic records and electronic signatures (ERES).",
+                    "type": "string"
+                },
+                "isDynamicEnvelope": {
+                    "description": "When **true,** indicates that the envelope is a dynamic envelope.",
+                    "type": "string"
+                },
+                "isSignatureProviderEnvelope": {
+                    "description": "When **true,** indicates that the envelope is a signature-provided envelope.",
+                    "type": "string"
+                },
+                "isTicketRelatedEnvelope": {
+                    "description": "",
+                    "type": "string"
+                },
+                "lastModifiedDateTime": {
+                    "description": "The date and time that the item was last modified.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "Reserved for Docusign.",
+                    "type": "string"
+                },
+                "lockInformation": {
+                    "$ref": "#/definitions/EnvelopeLocks",
+                    "description": "Provides lock information about an envelope that a user has locked."
+                },
+                "messageLock": {
+                    "description": "When **true,** prevents senders from changing the contents of `emailBlurb` and `emailSubject` properties for the envelope. \n\nAdditionally, this prevents users from making changes to the contents of `emailBlurb` and `emailSubject` properties when correcting envelopes. \n\nHowever, if the `messageLock` node is set to **true** and the `emailSubject` property is empty, senders and correctors are able to add a subject to the envelope.",
+                    "type": "string"
+                },
+                "notification": {
+                    "$ref": "#/definitions/notification",
+                    "description": ""
+                },
+                "notificationUri": {
+                    "description": "The URI for retrieving notifications.",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "The user's password.\n\nThis property is used only when adding a new user via a [Users: create](/docs/esign-rest-api/reference/users/users/create/) request. The value must conform to the password rules defined in the account [Security Settings](https://apps-d.docusign.com/admin/authenticate?goTo=securityInfo).\n\nThis property is not returned by `GET` requests and cannot be updated via `PUT` requests.",
+                    "type": "string"
+                },
+                "powerForm": {
+                    "$ref": "#/definitions/powerForm",
+                    "description": "Information about any PowerForms that are included in the envelope."
+                },
+                "purgeCompletedDate": {
+                    "description": "The date that a purge was completed.",
+                    "type": "string"
+                },
+                "purgeRequestDate": {
+                    "description": "The date that a purge was requested.",
+                    "type": "string"
+                },
+                "purgeState": {
+                    "description": "Shows the current purge state for the envelope. Valid values:\n\n- `unpurged`: There has been no successful request to purge documents.\n- `documents_queued`: The envelope documents have been added to the purge queue, but have not been purged.\n- `documents_dequeued`: The envelope documents have been taken out of the purge queue.\n- `documents_purged`: The envelope documents have been successfully purged.\n- `documents_and_metadata_queued`: The envelope documents and metadata have been added to the purge queue, but have not yet been purged.\n- `documents_and_metadata_purged`: The envelope documents and metadata have been successfully purged.\n- `documents_and_metadata_and_redact_queued`: The envelope documents and metadata have been added to the purge queue, but have not yet been purged, nor has personal information been redacted.\n- `documents_and_metadata_and_redact_purged`: The envelope documents and metadata have been successfully purged, and personal information has been redacted.\n\n**Related topics**\n\n- [Purging documents (eSingature Concepts)](/docs/esign-rest-api/esign101/concepts/documents/purging/)\n- [Purging documents in an envelope (blog post)](https://www.docusign.com/blog/developers/purging-documents-envelope)\n\n",
+                    "type": "string"
+                },
+                "recipients": {
+                    "$ref": "#/definitions/EnvelopeRecipients",
+                    "description": "An array of recipient objects that provides details about the recipients of the envelope."
+                },
+                "recipientsLock": {
+                    "description": "When **true,** prevents senders from changing, correcting, or deleting the recipient information for the envelope.",
+                    "type": "string"
+                },
+                "recipientsUri": {
+                    "description": "Contains a URI for an endpoint that you can use to retrieve the recipients.",
+                    "type": "string"
+                },
+                "recipientViewRequest": {
+                    "$ref": "#/definitions/recipientViewRequest",
+                    "description": ""
+                },
+                "saveDocumentsToArchive": {
+                    "description": "",
+                    "type": "string"
+                },
+                "sender": {
+                    "$ref": "#/definitions/userInfo",
+                    "description": "Information about the sender of the envelope."
+                },
+                "sentDateTime": {
+                    "description": "The UTC DateTime when the envelope was sent. This property is read-only.",
+                    "type": "string"
+                },
+                "signerCanSignOnMobile": {
+                    "description": "When **true,** recipients can sign on a mobile device.\n\n**Note:** Only Admin users can change this setting.\n",
+                    "type": "string"
+                },
+                "signingLocation": {
+                    "description": "Specifies the physical location where the signing takes place. It can have two enumeration values; `inPerson` and `online`. The default value is `online`.",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The status of the item.",
+                    "type": "string"
+                },
+                "statusChangedDateTime": {
+                    "description": "The data and time that the status changed.",
+                    "type": "string"
+                },
+                "templateId": {
+                    "description": "The ID of the template.",
+                    "type": "string"
+                },
+                "templateRoles": {
+                    "description": "This object specifies the template recipients. Each `roleName` in the template must have a recipient assigned to it. This object is comprised of the following elements:\n\n* `email`: The recipient's email address.\n* `name`: The recipient's name.\n* `roleName`: The template roleName associated with the recipient.\n* `clientUserId`: An optional property that specifies whether the recipient is embedded or remote. If the `clientUserId` is not null, then the recipient is embedded. Note that if a `clientUserId` is used and the account settings `signerMustHaveAccount` or `signerMustLoginToSign` are **true,** an error is generated on sending.\n* `defaultRecipient`: Optional, When **true,** this recipient is the default recipient and any tabs generated by the `transformPdfFields` option are mapped to this recipient.\n* `routingOrder`: This specifies the routing order of the recipient in the envelope.\n* `accessCode`: This optional element specifies the access code a recipient has to enter to validate the identity. Maximum Length: 50 characters.\n* `inPersonSignerName`: Optional. If the template role is an in-person signer, this is the full legal name of the signer. Maximum Length: 100 characters.\n* `emailNotification`: This is an optional complex element that has a role-specific `emailSubject`, `emailBody`, and `language`. It follows the same format as the `emailNotification` property for recipients.\n* `tabs`: This property enables the tab values to be specified for matching to tabs in the template.\n",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/templateRole"
+                    }
+                },
+                "templatesUri": {
+                    "description": "The URI for retrieving the templates.",
+                    "type": "string"
+                },
+                "transactionId": {
+                    "description": "Specifies the Transaction ID from the AppStore.",
+                    "type": "string"
+                },
+                "useDisclosure": {
+                    "description": "When **true,** the disclosure is shown to recipients in accordance with the account's Electronic Record and Signature Disclosure frequency setting. When **false,** the Electronic Record and Signature Disclosure is not shown to any envelope recipients. \n\nIf the `useDisclosure` property is not set, then the account's normal disclosure setting is used and the value of the `useDisclosure` property is not returned in responses when getting envelope information.",
+                    "type": "string"
+                },
+                "uSigState": {
+                    "description": "",
+                    "type": "string"
+                },
+                "voidedDateTime": {
+                    "description": "The date and time the envelope or template was voided.",
+                    "type": "string"
+                },
+                "voidedReason": {
+                    "description": "The reason the envelope or template was voided.\n\n**Note:** The string is truncated to the first 200 characters.\n",
+                    "type": "string"
+                },
+                "watermarkLanguage": {
+                    "description": "",
+                    "type": "string"
+                },
+                "workflow": {
+                    "$ref": "#/definitions/workflow",
+                    "description": ""
+                }
+            },
+            "x-ds-definition-name": "envelopeGenAndSend",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "envelopeGenAndSendProperties": {
+            "type": "object",
+            "properties": {
+                "applyAnchorTabs": {
+                    "description": "Reserved for Docusign.",
+                    "type": "string"
+                },
+                "archiveDocumentType": {
+                    "description": "",
+                    "type": "string"
+                },
+                "assignTabsToRecipientId": {
+                    "description": "",
+                    "type": "string"
+                },
+                "authoritativeCopy": {
+                    "description": "When **true,** marks all of the documents in the envelope as authoritative copies.\n\n**Note:** You can override this value for a specific document. For example, you can set the `authoritativeCopy` property to **true** at the envelope level, but turn it off for a single document by setting the `authoritativeCopy` property for the document to **false.**",
+                    "type": "string"
+                },
+                "base64DataJson": {
+                    "description": "",
+                    "type": "string"
+                },
+                "base64GenerateTemplateDocument": {
+                    "description": "",
+                    "type": "string"
+                },
+                "dataJson": {
+                    "description": "",
+                    "type": "string"
+                },
+                "display": {
+                    "description": "This string sets the display and behavior properties of\nthe document during signing. Valid values:\n\n* `modal`<br>\n  The document is shown as a supplement action strip\n  and can be viewed, downloaded, or printed in a modal window.\n  This is the recommended value for supplemental documents. \n\n* `inline`<br>\n  The document is shown in the normal signing window.\n  This value is not used with supplemental documents,\n  but is the default value for all other documents.\n",
+                    "type": "string"
+                },
+                "docGenDocumentStatus": {
+                    "description": "",
+                    "type": "string"
+                },
+                "docGenFormFields": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/docGenFormField"
+                    }
+                },
+                "documentBase64": {
+                    "description": "The document's bytes. This field can be used to include a base64 version of the document bytes within an envelope definition instead of sending the document using a multi-part HTTP request. The maximum document size is smaller if this field is used due to the overhead of the base64 encoding.",
+                    "type": "string"
+                },
+                "documentFields": {
+                    "description": "The array of name/value custom data strings to be added to a document. Custom document field information is returned in the status, but otherwise is not used by Docusign. The array contains the elements: \n\n* `name`: A string that can be a maximum of 50 characters. \n* `value`: A string that can be a maximum of 200 characters.\n\nIf you are using XML, the name/value pair is contained in a `nameValue` element. \n",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/nameValue"
+                    }
+                },
+                "documentId": {
+                    "description": "The unique ID of the document within the envelope.\n\nUnlike other IDs in the eSignature API,\nyou specify the `documentId` yourself.\nTypically the first document has the ID\n`1`, the second document `2`, and so on,\nbut you can use any numbering scheme\nthat fits within a 32-bit signed integer\n(1 through 2147483647).\n\n\nTab objects have a `documentId` property\nthat specifies the document on which to place\nthe tab.\n",
+                    "type": "string"
+                },
+                "documentName": {
+                    "description": "",
+                    "type": "string"
+                },
+                "documentSequence": {
+                    "description": "",
+                    "type": "string"
+                },
+                "documentTemplateId": {
+                    "description": "",
+                    "type": "string"
+                },
+                "encryptedWithKeyManager": {
+                    "description": "When **true,** the document has been encrypted by the sender for use with the Docusign Key Manager Security Appliance.\n ",
+                    "type": "string"
+                },
+                "fileExtension": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fileFormatHint": {
+                    "description": "",
+                    "type": "string"
+                },
+                "generateDocumentTemplateKind": {
+                    "description": "",
+                    "type": "string"
+                },
+                "generateDocumentTemplateSource": {
+                    "description": "",
+                    "type": "string"
+                },
+                "generateTemplateDocumentId": {
+                    "description": "",
+                    "type": "string"
+                },
+                "htmlDefinition": {
+                    "$ref": "#/definitions/documentHtmlDefinition",
+                    "description": "Defines how to generate the responsive-formatted HTML for the document."
+                },
+                "includeInDownload": {
+                    "description": "When **true,**\nthe document is included in the combined document download (`documentsCombinedUri`). This is only applied to [supplemental documents](/docs/esign-rest-api/esign101/concepts/documents/supplemental/).\nThe default value is **true.**\n",
+                    "type": "string"
+                },
+                "isDocGenDocument": {
+                    "description": "",
+                    "type": "string"
+                },
+                "matchBoxes": {
+                    "description": "Matchboxes define areas in a document for document matching when you are creating envelopes.\nThey are only used when you upload and edit a template.\n\n",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/matchBox"
+                    }
+                },
+                "name": {
+                    "description": "",
+                    "type": "string"
+                },
+                "order": {
+                    "description": "The order in which to sort the results.\n\nValid values are: \n\n\n* `asc`: Ascending order.\n* `desc`: Descending order. ",
+                    "type": "string"
+                },
+                "pages": {
+                    "description": "An array of page objects.",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "The user's password.\n\nThis property is used only when adding a new user via a [Users: create](/docs/esign-rest-api/reference/users/users/create/) request. The value must conform to the password rules defined in the account [Security Settings](https://apps-d.docusign.com/admin/authenticate?goTo=securityInfo).\n\nThis property is not returned by `GET` requests and cannot be updated via `PUT` requests.",
+                    "type": "string"
+                },
+                "pdfFormFieldOption": {
+                    "description": "",
+                    "type": "string"
+                },
+                "remoteUrl": {
+                    "description": "The URL of a previously staged chunked upload. Using a chunked upload enables you to stage a large, chunkable temp file. You then use the `remoteUrl` property to reference the chunked upload as the content in attachment and document-related requests. The `remoteUrl` property cannot be used for downloads.",
+                    "type": "string"
+                },
+                "signerMustAcknowledge": {
+                    "description": "Sets how the signer interacts with the supplemental document.\nValid values:\n\n* `no_interaction`<br>\n  No recipient action is required.\n\n* `view`<br>\n  The recipient is required to view the document.\n\n* `accept`<br>\n  The recipient is required to accept the document by selecting accept during signing, but is not required to view the document.\n\n* `view_accept`<br>\n  The recipient is required to view and accept the document.\n\n",
+                    "type": "string"
+                },
+                "signerMustAcknowledgeUseAccountDefault": {
+                    "description": "",
+                    "type": "boolean"
+                },
+                "tabs": {
+                    "$ref": "#/definitions/EnvelopeRecipientTabs",
+                    "description": "A list of tabs, which are represented graphically as symbols on documents at the time of signing. Tabs show recipients where to sign, initial, or enter data. They may also display data to the recipients."
+                },
+                "templateLocked": {
+                    "description": "When **true,** the sender cannot change any attributes of the recipient. Used only when working with template recipients. ",
+                    "type": "string"
+                },
+                "templateRequired": {
+                    "description": "When **true,** the sender may not remove the recipient. Used only when working with template recipients.",
+                    "type": "string"
+                },
+                "transformPdfFields": {
+                    "description": "When **true,** PDF form field data is transformed into document tab values when the PDF form field name matches the Docusign custom tab tabLabel. The resulting PDF form data is also returned in the PDF meta data when requesting the document PDF.\n",
+                    "type": "string"
+                },
+                "uri": {
+                    "description": "A URI containing the user ID.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "envelopeGenAndSendProperties",
+            "description": "",
+            "x-ms-summary": ""
         },
         "envelopeId": {
             "type": "object",
@@ -44467,12 +45891,24 @@
         "envelopePurgeConfiguration": {
             "type": "object",
             "properties": {
+                "applyPurgePolicyForUnaccountedRecipients": {
+                    "description": "",
+                    "type": "string"
+                },
                 "purgeEnvelopes": {
                     "description": "When **true,** purging is enabled.",
                     "type": "string"
                 },
+                "purgeEnvelopesReceived": {
+                    "description": "",
+                    "type": "string"
+                },
                 "redactPII": {
                     "description": "When **true,** the system also redacts personally identifiable information (PII).\n\n**Note:** To redact PII, you must also set the property `removeTabsAndEnvelopeAttachments` to **true.**",
+                    "type": "string"
+                },
+                "redactPIIReceived": {
+                    "description": "",
                     "type": "string"
                 },
                 "removeTabsAndEnvelopeAttachments": {
@@ -44569,6 +46005,18 @@
             "description": "",
             "x-ms-summary": ""
         },
+        "envelopesSharePermissionResponse": {
+            "type": "object",
+            "properties": {
+                "permission": {
+                    "description": "",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "envelopesSharePermissionResponse",
+            "description": "",
+            "x-ms-summary": ""
+        },
         "envelopesShareRequest": {
             "type": "object",
             "properties": {
@@ -44581,6 +46029,10 @@
                     "type": "string"
                 },
                 "permission": {
+                    "description": "",
+                    "type": "string"
+                },
+                "shareId": {
                     "description": "",
                     "type": "string"
                 }
@@ -44864,6 +46316,10 @@
                         "$ref": "#/definitions/attachment"
                     }
                 },
+                "envelopeClassification": {
+                    "description": "",
+                    "type": "string"
+                },
                 "envelopeCustomMetadata": {
                     "$ref": "#/definitions/envelopeCustomMetadata",
                     "description": ""
@@ -44936,6 +46392,10 @@
                     "items": {
                         "$ref": "#/definitions/folder"
                     }
+                },
+                "hasAuthorizedSignatoryRecipient": {
+                    "description": "",
+                    "type": "string"
                 },
                 "hasComments": {
                     "description": "When **true,** indicates that users have added comments to the envelope.",
@@ -45134,6 +46594,10 @@
                 },
                 "voidedReason": {
                     "description": "The reason the envelope or template was voided.\n\n**Note:** The string is truncated to the first 200 characters.\n",
+                    "type": "string"
+                },
+                "watermarkLanguage": {
+                    "description": "",
                     "type": "string"
                 },
                 "workflow": {
@@ -45745,6 +47209,103 @@
             },
             "x-ds-definition-name": "expirations",
             "x-ms-summary": "A complex element that specifies the expiration settings for the envelope. When an envelope expires, it is voided and no longer available for signing. **Note:** there is a short delay between when the envelope expires and when it is voided.\n"
+        },
+        "extendPaymentConfiguration": {
+            "type": "object",
+            "properties": {
+                "appId": {
+                    "description": "",
+                    "type": "string"
+                },
+                "connectionInstanceId": {
+                    "description": "",
+                    "type": "string"
+                },
+                "currency": {
+                    "description": "The three-letter\n[ISO 4217][ISO 4217] currency code for the payment.\n\nFor example:\n\n* AUD Australian dollar\n* CAD Canadian dollar\n* EUR Euro\n* GBP Great Britain pound\n* USD United States dollar\n\nThis is a read-only property.\n\n[ISO 4217]:          https://en.wikipedia.org/wiki/ISO_4217\n",
+                    "type": "string"
+                },
+                "durationEnd": {
+                    "description": "",
+                    "type": "string"
+                },
+                "durationStart": {
+                    "description": "",
+                    "type": "string"
+                },
+                "lineItems": {
+                    "description": "A payment formula can have\none or more line items\nthat provide detail about\nindividual items in a payment request.\n\nThe list of line items\nare returned as metadata\nto the payment gateway.\n",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/extendPaymentLineItem"
+                    }
+                },
+                "paymentDueDays": {
+                    "format": "int32",
+                    "description": "",
+                    "type": "string"
+                },
+                "paymentMethods": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "paymentMode": {
+                    "description": "",
+                    "type": "string"
+                },
+                "tabRole": {
+                    "description": "",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "extendPaymentConfiguration",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "extendPaymentLineItem": {
+            "type": "object",
+            "properties": {
+                "amountReference": {
+                    "description": "This is a the `tabLabel`\nthat specifies the amount paid\nfor the line items.\n\n",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A sender-defined description of the line item.\n",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "",
+                    "type": "string"
+                },
+                "priceId": {
+                    "description": "",
+                    "type": "string"
+                },
+                "productId": {
+                    "description": "The Product ID from the AppStore.",
+                    "type": "string"
+                },
+                "quantity": {
+                    "format": "int32",
+                    "description": "The quantity of envelopes to add to the account.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of this tab. Values are:\n\n- `Approve`\n- `CheckBox`\n- `Company`\n- `Date`\n- `DateSigned`\n- `Decline`\n- `Email`\n- `EmailAddress`\n- `EnvelopeId`\n- `FirstName`\n- `Formula`\n- `FullName`\n- `InitialHere`\n- `InitialHereOptional`\n- `LastName`\n- `List`\n- `Note`\n- `Number`\n- `Radio`\n- `SignerAttachment`\n- `SignHere`\n- `SignHereOptional`\n- `Ssn`\n- `Text`\n- `Title`\n- `Zip5`\n- `Zip5Dash4`\n",
+                    "type": "string"
+                },
+                "unitAmount": {
+                    "format": "int32",
+                    "description": "",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "extendPaymentLineItem",
+            "description": "",
+            "x-ms-summary": ""
         },
         "extensionData": {
             "type": "object",
@@ -47217,6 +48778,10 @@
                     "$ref": "#/definitions/errorDetails",
                     "description": "This object describes errors that occur. It is only valid for responses and ignored in requests."
                 },
+                "extendPaymentConfiguration": {
+                    "$ref": "#/definitions/extendPaymentConfiguration",
+                    "description": ""
+                },
                 "extensionData": {
                     "$ref": "#/definitions/extensionData",
                     "description": ""
@@ -47983,6 +49548,45 @@
             "description": "A tab that displays the recipient's full name.\n",
             "x-ds-definition-name": "fullName",
             "x-ms-summary": "A tab that displays the recipient's full name.\n"
+        },
+        "generatedDocument": {
+            "type": "object",
+            "properties": {
+                "documentAsBase64": {
+                    "description": "",
+                    "type": "string"
+                },
+                "documentId": {
+                    "description": "The unique ID of the document within the envelope.\n\nUnlike other IDs in the eSignature API,\nyou specify the `documentId` yourself.\nTypically the first document has the ID\n`1`, the second document `2`, and so on,\nbut you can use any numbering scheme\nthat fits within a 32-bit signed integer\n(1 through 2147483647).\n\n\nTab objects have a `documentId` property\nthat specifies the document on which to place\nthe tab.\n",
+                    "type": "string"
+                },
+                "documentName": {
+                    "description": "",
+                    "type": "string"
+                },
+                "fileExtension": {
+                    "description": "",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "generatedDocument",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "generatedDocumentsResult": {
+            "type": "object",
+            "properties": {
+                "generatedDocuments": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/generatedDocument"
+                    }
+                }
+            },
+            "x-ds-definition-name": "generatedDocumentsResult",
+            "description": "",
+            "x-ms-summary": ""
         },
         "graphicsContext": {
             "type": "object",
@@ -55632,6 +57236,46 @@
             "description": "",
             "x-ms-summary": ""
         },
+        "paymentAuditEvent": {
+            "type": "object",
+            "properties": {
+                "accountId": {
+                    "description": "The external account number (int) or account ID GUID.",
+                    "type": "string"
+                },
+                "action": {
+                    "description": "",
+                    "type": "string"
+                },
+                "actorDisplayName": {
+                    "description": "",
+                    "type": "string"
+                },
+                "eventDescription": {
+                    "description": "A description of the event.",
+                    "type": "string"
+                },
+                "eventType": {
+                    "description": "",
+                    "type": "string"
+                },
+                "responsibleActor": {
+                    "description": "",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The status of the item.",
+                    "type": "string"
+                },
+                "timestamp": {
+                    "description": "",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "paymentAuditEvent",
+            "description": "",
+            "x-ms-summary": ""
+        },
         "paymentDetails": {
             "type": "object",
             "properties": {
@@ -58089,6 +59733,10 @@
         "recipientIdentityVerification": {
             "type": "object",
             "properties": {
+                "hasAutoAttachedRiskAssessment": {
+                    "description": "",
+                    "type": "string"
+                },
                 "inputOptions": {
                     "description": "",
                     "type": "array",
@@ -58697,6 +60345,64 @@
             "description": "The request body for the [EnvelopeViews: createRecipient](/docs/esign-rest-api/reference/envelopes/envelopeviews/createrecipient/)\nand\n[EnvelopeViews: createSharedRecipient](/docs/esign-rest-api/reference/envelopes/envelopeviews/createsharedrecipient/) methods.",
             "x-ds-definition-name": "recipientViewRequest",
             "x-ms-summary": "The request body for the [EnvelopeViews: createRecipient](/docs/esign-rest-api/reference/envelopes/envelopeviews/createrecipient/)\nand\n[EnvelopeViews: createSharedRecipient](/docs/esign-rest-api/reference/envelopes/envelopeviews/createsharedrecipient/) methods."
+        },
+        "recommendationInfo": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "description": "A sender-defined description of the line item.\n",
+                    "type": "string"
+                },
+                "priority": {
+                    "description": "",
+                    "type": "string"
+                },
+                "recommendationId": {
+                    "description": "",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The status of the item.",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "The title of the user.",
+                    "type": "string"
+                }
+            },
+            "x-ds-definition-name": "recommendationInfo",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "recommendationsListRequest": {
+            "type": "object",
+            "properties": {
+                "recommendations": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/recommendationInfo"
+                    }
+                }
+            },
+            "x-ds-definition-name": "recommendationsListRequest",
+            "description": "",
+            "x-ms-summary": ""
+        },
+        "recommendationsListResponse": {
+            "type": "object",
+            "properties": {
+                "recommendations": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/recommendationInfo"
+                    }
+                }
+            },
+            "x-ds-definition-name": "recommendationsListResponse",
+            "description": "",
+            "x-ms-summary": ""
         },
         "referralInformation": {
             "description": "A complex type that contains the following information for entering referral and discount information. The following items are included in the referral information (all string content): enableSupport, includedSeats, saleDiscountPercent, saleDiscountAmount, saleDiscountFixedAmount, saleDiscountPeriods, saleDiscountSeatPriceOverride, planStartMonth, referralCode, referrerName, advertisementId, publisherId, shopperId, promoCode, groupMemberId, idType, and industry\n\n**Note:** saleDiscountPercent, saleDiscountAmount, saleDiscountFixedAmount, saleDiscountPeriods, and saleDiscountSeatPriceOverride are reserved for Docusign use only.",
@@ -66032,6 +67738,14 @@
                     "$ref": "#/definitions/settingsMetadata",
                     "description": "Metadata that indicates whether the `canManageUsers` property is editable.\n"
                 },
+                "canViewOnlyAccountAdminPages": {
+                    "description": "",
+                    "type": "string"
+                },
+                "canViewOnlyAccountAdminPagesMetadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
+                },
                 "canViewUsers": {
                     "description": "",
                     "type": "string"
@@ -66233,6 +67947,10 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "sendNotification": {
+                    "description": "",
+                    "type": "string"
                 }
             },
             "x-ds-definition-name": "userAuthorizationsDeleteRequest",
@@ -66263,6 +67981,10 @@
                     "items": {
                         "$ref": "#/definitions/userAuthorizationCreateRequestWithId"
                     }
+                },
+                "sendNotification": {
+                    "description": "",
+                    "type": "string"
                 }
             },
             "x-ds-definition-name": "userAuthorizationsRequest",
@@ -66561,6 +68283,13 @@
                 "licenseType": {
                     "description": "",
                     "type": "string"
+                },
+                "licenseTypes": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "loginStatus": {
                     "description": "Boolean value that indicates whether the user is currently logged in or not.",
@@ -67164,6 +68893,22 @@
                     "$ref": "#/definitions/settingsMetadata",
                     "description": ""
                 },
+                "isMembershipRedacted": {
+                    "description": "",
+                    "type": "string"
+                },
+                "isMembershipRedactedMetadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
+                },
+                "isUserRedacted": {
+                    "description": "",
+                    "type": "string"
+                },
+                "isUserRedactedMetadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
+                },
                 "locale": {
                     "description": "The user's locale code. Valid values are:\n- `zh_CN`\n- `zh_TW`\n- `nl`\n- `en`\n- `fr`\n- `de`\n- `it`\n- `ja`\n- `ko`\n- `pt`\n- `pt_BR`\n- `ru`\n- `es`",
                     "type": "string"
@@ -67231,6 +68976,14 @@
                 "recipientViewedNotificationMetadata": {
                     "$ref": "#/definitions/settingsMetadata",
                     "description": "Metadata about the `recipientViewedNotification` property."
+                },
+                "redactAtMetadata": {
+                    "$ref": "#/definitions/settingsMetadata",
+                    "description": ""
+                },
+                "redactMembershipAt": {
+                    "description": "",
+                    "type": "string"
                 },
                 "sealIdentifiers": {
                     "description": "Information about the seals associated with this user.",
@@ -71420,6 +73173,10 @@
                     "description": "",
                     "type": "string"
                 },
+                "salesforceCodeVerifier": {
+                    "description": "",
+                    "type": "string"
+                },
                 "salesforceDocumentsAsContentFiles": {
                     "description": "When **true,** Docusign can use documents in your Salesforce account for sending and signing.",
                     "type": "string"
@@ -72138,6 +73895,10 @@
                         "$ref": "#/definitions/attachment"
                     }
                 },
+                "envelopeClassification": {
+                    "description": "",
+                    "type": "string"
+                },
                 "envelopeCustomMetadata": {
                     "$ref": "#/definitions/envelopeCustomMetadata",
                     "description": ""
@@ -72326,6 +74087,10 @@
                 },
                 "voidedReason": {
                     "description": "The reason the envelope or template was voided.\n\n**Note:** The string is truncated to the first 200 characters.\n",
+                    "type": "string"
+                },
+                "watermarkLanguage": {
+                    "description": "",
                     "type": "string"
                 },
                 "workflow": {
@@ -72959,6 +74724,10 @@
                         "$ref": "#/definitions/attachment"
                     }
                 },
+                "envelopeClassification": {
+                    "description": "",
+                    "type": "string"
+                },
                 "envelopeCustomMetadata": {
                     "$ref": "#/definitions/envelopeCustomMetadata",
                     "description": ""
@@ -73031,6 +74800,10 @@
                     "items": {
                         "$ref": "#/definitions/folder"
                     }
+                },
+                "hasAuthorizedSignatoryRecipient": {
+                    "description": "",
+                    "type": "string"
                 },
                 "hasComments": {
                     "description": "When **true,** indicates that users have added comments to the envelope.",
@@ -73229,6 +75002,10 @@
                 },
                 "voidedReason": {
                     "description": "The reason the envelope or template was voided.\n\n**Note:** The string is truncated to the first 200 characters.\n",
+                    "type": "string"
+                },
+                "watermarkLanguage": {
+                    "description": "",
                     "type": "string"
                 },
                 "workflow": {
@@ -73729,6 +75506,13 @@
                 "licenseType": {
                     "description": "",
                     "type": "string"
+                },
+                "licenseTypes": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "loginStatus": {
                     "description": "Shows the current status of the user's password. Possible values are: \n\n* password_reset\n* password_active\n* password_expired\n* password_locked\n* password_reset_failed \n",
@@ -75729,6 +77513,11 @@
             "x-ds-order": "300",
             "x-ms-summary": "Describes the workflow for an envelope or template."
         },
+        "Reports": {
+            "x-ds-category": "Templates",
+            "x-ms-summary": "",
+            "description": ""
+        },
         "AccountSignatures": {
             "type": "object",
             "properties": {
@@ -76162,6 +77951,28 @@
             "x-ds-category": "Connect",
             "x-ms-summary": "",
             "description": ""
+        },
+        "EnvelopesPermissions": {
+            "x-ds-category": "Envelopes",
+            "x-ms-summary": "",
+            "description": ""
+        },
+        "Recommendations": {
+            "type": "object",
+            "properties": {
+                "recommendations": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/recommendationInfo"
+                    }
+                }
+            },
+            "x-ds-definition-name": "recommendationsListResponse",
+            "description": "",
+            "x-ds-category": "Insights",
+            "x-ds-order": "100",
+            "x-ms-summary": ""
         }
     },
     "parameters": {},
@@ -76506,6 +78317,10 @@
             "description": "Describes the workflow for an envelope or template. These methods enable you to use the [scheduled sending](/docs/esign-rest-api/esign101/concepts/recipients/scheduled-sending/) and [delayed routing](/docs/esign-rest-api/esign101/concepts/recipients/delayed-routing/) features.\n\n\n### Related topics\n\n- [How to schedule an envelope](/docs/esign-rest-api/how-to/schedule-an-envelope/)\n- [How to send an envelope with delayed routing](/docs/esign-rest-api/how-to/send-envelope-with-delayed-routing/)"
         },
         {
+            "name": "Reports",
+            "description": ""
+        },
+        {
             "name": "AccountSignatures",
             "description": "In certain countries, stamps are used to certify documents. This resource provides methods to manage stamps available in your account.\n\nTo use these endpoints, your account must have Managed Stamps enabled. Contact your Docusign account manager for more information.\n\n### Related topics\n- [Sending and Signing with eHanko](https://support.docusign.com/s/articles/Sending-and-Signing-with-eHanko)\n- [Docusign eSignature Admin Guide: Stamps](https://support.docusign.com/s/document-item?=&bundleId=pik1583277475390&topicId=cex1583277417267.html)"
         },
@@ -76543,6 +78358,14 @@
         },
         {
             "name": "ConnectConfiguration",
+            "description": ""
+        },
+        {
+            "name": "EnvelopesPermissions",
+            "description": ""
+        },
+        {
+            "name": "Recommendations",
             "description": ""
         }
     ],
@@ -76639,6 +78462,11 @@
         },
         {
             "name": "Envelope",
+            "summary": "",
+            "description": ""
+        },
+        {
+            "name": "Insights",
             "summary": "",
             "description": ""
         }
